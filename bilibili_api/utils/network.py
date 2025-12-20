@@ -1281,7 +1281,7 @@ class _BiliAPIClient:
                     elif flag == BiliFilterFlags.GOTO:
                         i = after_filter - 1
                     i += 1
-                ret = await coroutine(**res) # type: ignore
+                ret = await coroutine(**res)  # type: ignore
                 posts = await async_get_registered_post_filters(
                     client=self.__client__, func=key, in_priority=True
                 )
@@ -1325,7 +1325,7 @@ class _BiliAPIClient:
                     j += 1
                 return ret
 
-            return wrapped_amethod # type: ignore
+            return wrapped_amethod  # type: ignore
 
         if isfunction(obj):
             return method_wrapper(obj)
@@ -1471,7 +1471,7 @@ def get_client() -> BiliAPIClient:
                 raise e
         lazy_settings[selected_client][loop] = {}
     get_client_lock.release()
-    return session # type: ignore
+    return session  # type: ignore
 
 
 def get_session() -> object:
@@ -1496,7 +1496,9 @@ def set_session(session: object) -> None:
     if not pool:
         raise ArgsException("未找到用户指定的请求客户端。")
     loop = asyncio.get_event_loop()
-    session_pool[selected_client][loop] = _BiliAPIClient(selected_client, sessions[selected_client](session=session))
+    session_pool[selected_client][loop] = _BiliAPIClient(
+        selected_client, sessions[selected_client](session=session)
+    )
 
 
 def register_pre_filter(
@@ -1887,6 +1889,7 @@ class Credential:
         dedeuserid_ckmd5: str | None = None,
         sid: str | None = None,
         ac_time_value: str | None = None,
+        **kwargs,
     ) -> None:
         """
         各字段获取方式查看：https://nemo2011.github.io/bilibili-api/#/get-credential.md
@@ -1941,6 +1944,9 @@ class Credential:
             self.__blank = True
         else:
             self.__blank = False
+
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
     def gen_local_cookies(self) -> None:
         self.b_nut = str(int(time.time()))
@@ -2007,7 +2013,13 @@ class Credential:
             "opus-goback": "1",  # 确保需要旧版的时候可以跳转到旧版页面
         }
 
-        return {k: v for k, v in cookies.items() if v is not None}
+        cookies = {k: v for k, v in cookies.items() if v is not None}
+
+        for key, value in self.__dict__.items():
+            if key not in cookies and value is not None:
+                cookies[key] = value
+
+        return cookies
 
     def get_core_cookies(self) -> dict:
         """
@@ -2187,6 +2199,23 @@ class Credential:
             else None
         )
         c.buvid_fp = cookies.get("buvid_fp")
+
+        for key, value in cookies.items():
+            if key not in [
+                "SESSDATA",
+                "bili_jct",
+                "buvid3",
+                "buvid4",
+                "DedeUserID",
+                "DedeUserID__ckMd5",
+                "ac_time_value",
+                "b_lsid",
+                "b_nut,_uuid",
+                "bili_ticket",
+                "bili_ticket_expiresbuvid_fp",
+            ]:
+                setattr(c, key, value)
+
         return c
 
     def __str__(self):

@@ -9,6 +9,8 @@ dist/
 # Danmakus
 *.ass
 *.srt
+*.lrc
+*.json
 # Interactive Videos
 *.ivi
 # Videos
@@ -25,8 +27,9 @@ venv39/
 virtualenv/
 # IDE
 .idea/
-.vscode/settings.json
-.vscode/launch.json
+.vscode
 # Doc Generater
 .doc_cache/
 .mypy_cache/
+# sh
+env.sh

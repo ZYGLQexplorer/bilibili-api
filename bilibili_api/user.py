@@ -4,6 +4,7 @@ bilibili_api.user
 用户相关
 """
 
+from datetime import datetime
 from enum import Enum
 import json
 
@@ -641,6 +642,52 @@ class User:
             "x-bili-device-req-json": '{"platform":"web","device":"pc"}',
             "x-bili-web-req-json": '{"spm_id":"333.1387"}',
         }
+        data = (
+            await Api(**api, credential=self.credential).update_params(**params).result
+        )
+        return data
+
+    async def get_upower_qa_list(self, anchor: int = 0):
+        """
+        获取用户充电问答列表。
+
+        Args:
+            anchor (int, optional):     该值为第一次调用本方法时，数据中会有个 anchor 字段，指向下一动态列表第一条动态（类似单向链表）。根据上一次获取结果中的 anchor 字段值，循环填充该值即可获取到全部动态
+
+        Returns:
+            dict: 调用接口返回的内容。
+        """
+        api = API["info"]["upower_qa_list"]
+        params = {
+            "privilege_type": "0",
+            "fans_filter": "0",
+            "up_filter": "0",
+            "ps": "20",
+            "anchor": anchor,
+            "up_mid": self.__uid,
+            "t": int(datetime.now().timestamp() * 1000),
+        }
+
+        data = (
+            await Api(**api, credential=self.credential).update_params(**params).result
+        )
+        return data
+
+    async def get_upower_qa_detail(self, qa_id: int):
+        """
+        获取充电问答详情信息。
+
+        根据问答 ID 获取单条充电问答的详细内容
+
+        Args:
+            qa_id (int): 充电问答的唯一 ID，可从`get_upower_qa_list` 返回的数据中获取。
+        """
+        api = API["info"]["upower_qa_detail"]
+        params = {
+            "qa_id": qa_id,
+            "t": int(datetime.now().timestamp() * 1000),
+        }
+
         data = (
             await Api(**api, credential=self.credential).update_params(**params).result
         )

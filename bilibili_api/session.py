@@ -26,7 +26,10 @@ API = get_api("session")
 
 
 async def fetch_session_msgs(
-    talker_id: int, credential: Credential, session_type: int = 1, begin_seqno: int = 0,
+    talker_id: int,
+    credential: Credential,
+    session_type: int = 1,
+    begin_seqno: int = 0,
 ) -> dict:
     """
     获取指定用户的近三十条消息

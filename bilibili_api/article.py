@@ -391,7 +391,7 @@ class Article:
 
                                     if "video-card" in className:
                                         # 视频卡片，考虑有两列视频
-                                        for a in aid.split(","): # type: ignore
+                                        for a in aid.split(","):  # type: ignore
                                             node = VideoCardNode()
                                             node_list.append(node)
 
@@ -402,33 +402,33 @@ class Article:
                                         node = ArticleCardNode()
                                         node_list.append(node)
 
-                                        node.cvid = int(aid) # type: ignore
+                                        node.cvid = int(aid)  # type: ignore
 
                                     elif "fanju-card" in className:
                                         # 番剧卡片
                                         node = BangumiCardNode()
                                         node_list.append(node)
 
-                                        node.epid = int(aid[2:]) # type: ignore
+                                        node.epid = int(aid[2:])  # type: ignore
 
                                     elif "music-card" in className:
                                         # 音乐卡片
                                         node = MusicCardNode()
                                         node_list.append(node)
 
-                                        node.auid = int(aid[2:]) # type: ignore
+                                        node.auid = int(aid[2:])  # type: ignore
 
                                     elif "shop-card" in className:
                                         # 会员购卡片
                                         node = ShopCardNode()
                                         node_list.append(node)
 
-                                        node.pwid = int(aid[2:]) # type: ignore
+                                        node.pwid = int(aid[2:])  # type: ignore
 
                                     elif "caricature-card" in className:
                                         # 漫画卡片，考虑有两列
 
-                                        for i in aid.split(","): # type: ignore
+                                        for i in aid.split(","):  # type: ignore
                                             node = ComicCardNode()
                                             node_list.append(node)
 
@@ -439,7 +439,7 @@ class Article:
                                         node = LiveCardNode()
                                         node_list.append(node)
 
-                                        node.room_id = int(aid) # type: ignore
+                                        node.room_id = int(aid)  # type: ignore
 
                                 if "seamless" in className:
                                     # 图片节点
@@ -472,8 +472,8 @@ class Article:
                             node_list.append(node)
 
                             pre_el: BeautifulSoup = e.find("pre")  # type: ignore
-                            node.lang = pre_el.attrs["data-lang"].split("@")[0].lower() # type: ignore
-                            node.code = unquote(pre_el.attrs["codecontent"]) # type: ignore
+                            node.lang = pre_el.attrs["data-lang"].split("@")[0].lower()  # type: ignore
+                            node.code = unquote(pre_el.attrs["codecontent"])  # type: ignore
 
                 elif e.name == "ol":
                     # 有序列表
@@ -501,7 +501,7 @@ class Article:
                     if len(e.contents) == 0:
                         from .utils.parse_link import ResourceType, parse_link
 
-                        parse_link_res = await parse_link(e.attrs["href"]) # type: ignore
+                        parse_link_res = await parse_link(e.attrs["href"])  # type: ignore
                         if parse_link_res[1] == ResourceType.VIDEO:
                             node = VideoCardNode()
                             node.aid = parse_link_res[0].get_aid()
@@ -525,13 +525,13 @@ class Article:
                         node = AnchorNode()
                         node_list.append(node)
 
-                        node.url = e.attrs["href"] # type: ignore
+                        node.url = e.attrs["href"]  # type: ignore
                         node.text = e.contents[0]  # type: ignore
 
                 elif e.name == "img":
                     className = e.attrs.get("class")
 
-                    if "latex" in className: # type: ignore
+                    if "latex" in className:  # type: ignore
                         # 公式
                         node = LatexNode()
                         node.code = unquote(e["alt"])  # type: ignore
@@ -551,7 +551,7 @@ class Article:
         self.__meta = copy(resp["readInfo"])
         del self.__meta["content"]
 
-        self.__children = await parse(document.find("div")) # type: ignore
+        self.__children = await parse(document.find("div"))  # type: ignore
         self.__has_parsed = True
 
     async def get_info(self) -> dict:
