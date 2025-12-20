@@ -40,7 +40,7 @@ async def get_activity_info(url: str) -> dict:
     return (await get_initial_state(url))[0]
 
 
-async def get_activity_aid(url: str) -> dict:
+async def get_activity_aid(url: str) -> int:
     """
     获取部分活动存在的 aid，可用于获取评论
 

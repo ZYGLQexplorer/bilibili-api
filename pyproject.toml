@@ -115,6 +115,7 @@ extra-standard-library = ["typing_extensions"]
 pythonVersion = "3.10"
 pythonPlatform = "All"
 executionEnvironments = [{ root = "./" }]
+exclude = ["bilibili_api/utils/danmaku2ass.py"]
 
 typeCheckingMode = "standard"
 reportShadowedImports = false

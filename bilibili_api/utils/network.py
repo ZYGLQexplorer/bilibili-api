@@ -23,7 +23,7 @@ from inspect import iscoroutinefunction, isfunction
 import io
 import json
 from json import scanner
-from json.decoder import scanstring
+from json.decoder import scanstring  # type: ignore
 import logging
 import os
 import random
@@ -269,7 +269,7 @@ async def handle(desc: str, data: dict) -> None:
 
 
 sessions: dict[str, type["BiliAPIClient"]] = {}
-session_pool: dict[str, dict[asyncio.AbstractEventLoop, "BiliAPIClient"]] = {}
+session_pool: dict[str, dict[asyncio.AbstractEventLoop, "_BiliAPIClient"]] = {}
 lazy_settings: dict[str, dict[asyncio.AbstractEventLoop, dict[str, Any]]] = {}
 client_settings: dict[str, list] = {}
 selected_client: str = ""
@@ -1130,7 +1130,7 @@ class _BiliAPIClient:
     BiliAPIClient 包装，用于执行过滤器。
     """
 
-    def __init__(self, client_name, client, *args, **kwargs):
+    def __init__(self, client_name, client):
         self.client = client
         self.__client__ = client_name
         self.client.data = {}
@@ -1253,6 +1253,7 @@ class _BiliAPIClient:
                         "action": key,
                     }
                     request_log.dispatch("DO_PRE_FILTER", "执行前置过滤器", log)
+                    flag, after_filter = BiliFilterFlags.CONTINUE, None
                     if pre["function"]:
                         try:
                             flag, after_filter = pre["function"](
@@ -1267,8 +1268,6 @@ class _BiliAPIClient:
                             )
                         except Exception as e:
                             raise FilterException("pre", pre["name"], e)
-                    else:
-                        flag, after_filter = BiliFilterFlags.CONTINUE, None
                     if flag == BiliFilterFlags.SET_PARAMS:
                         res = after_filter
                     elif flag == BiliFilterFlags.EXECUTE_NOW:
@@ -1282,7 +1281,7 @@ class _BiliAPIClient:
                     elif flag == BiliFilterFlags.GOTO:
                         i = after_filter - 1
                     i += 1
-                ret = await coroutine(**res)
+                ret = await coroutine(**res) # type: ignore
                 posts = await async_get_registered_post_filters(
                     client=self.__client__, func=key, in_priority=True
                 )
@@ -1298,6 +1297,7 @@ class _BiliAPIClient:
                         "action": key,
                     }
                     request_log.dispatch("DO_POST_FILTER", "执行后置过滤器", log)
+                    flag, after_filter = BiliFilterFlags.CONTINUE, None
                     if post["function"]:
                         try:
                             flag, after_filter = post["function"](
@@ -1305,7 +1305,7 @@ class _BiliAPIClient:
                             )
                         except Exception as e:
                             raise FilterException("post", post["name"], e)
-                    if post["async_function"]:
+                    elif post["async_function"]:
                         try:
                             flag, after_filter = await post["async_function"](
                                 cnt, self.client, self.__client__, key, ret, kwargs
@@ -1325,7 +1325,7 @@ class _BiliAPIClient:
                     j += 1
                 return ret
 
-            return wrapped_amethod
+            return wrapped_amethod # type: ignore
 
         if isfunction(obj):
             return method_wrapper(obj)
@@ -1471,7 +1471,7 @@ def get_client() -> BiliAPIClient:
                 raise e
         lazy_settings[selected_client][loop] = {}
     get_client_lock.release()
-    return session
+    return session # type: ignore
 
 
 def get_session() -> object:
@@ -1496,7 +1496,7 @@ def set_session(session: object) -> None:
     if not pool:
         raise ArgsException("未找到用户指定的请求客户端。")
     loop = asyncio.get_event_loop()
-    session_pool[selected_client][loop] = sessions[selected_client](session=session)
+    session_pool[selected_client][loop] = _BiliAPIClient(selected_client, sessions[selected_client](session=session))
 
 
 def register_pre_filter(
@@ -1533,9 +1533,9 @@ def register_pre_filter(
     """
     global __registered_pre
     raise_for_statement(
-        (clients and on) or (trigger or async_trigger), "至少提供一种触发方式"
+        bool((clients and on) or (trigger or async_trigger)), "至少提供一种触发方式"
     )
-    raise_for_statement(func or async_func, "至少提供一个函数")
+    raise_for_statement(bool(func or async_func), "至少提供一个函数")
     filt = {
         "name": name,
         "function": func,
@@ -1587,9 +1587,9 @@ def register_post_filter(
     """
     global __registered_post
     raise_for_statement(
-        (clients and on) or (trigger or async_trigger), "至少提供一种触发方式"
+        bool((clients and on) or (trigger or async_trigger)), "至少提供一种触发方式"
     )
-    raise_for_statement(func or async_func, "至少提供一个函数")
+    raise_for_statement(bool(func or async_func), "至少提供一个函数")
     filt = {
         "name": name,
         "function": func,
@@ -1668,8 +1668,8 @@ def get_registered_pre_filters(
 
 
 def get_registered_post_filters(
-    client: list[str] = [],
-    func: list[str] = [],
+    client: str,
+    func: str,
     in_priority: bool = True,
 ) -> list[dict]:
     """
@@ -1731,8 +1731,8 @@ async def async_get_registered_pre_filters(
 
 
 async def async_get_registered_post_filters(
-    client: list[str] = [],
-    func: list[str] = [],
+    client: str,
+    func: str,
     in_priority: bool = True,
 ) -> list[dict]:
     """
@@ -1808,7 +1808,7 @@ def __clean() -> None:
                 task = loop.create_task(client.close())
                 tasks.add(task)
                 task.add_done_callback(tasks.discard)
-                task.add_done_callback(pool.pop(loop))
+                task.add_done_callback(lambda *args, **kwargs: pool.pop(loop))
 
 
 ################################################## END Session Management ##################################################
@@ -2245,7 +2245,7 @@ async def _get_refresh_csrf(credential: Credential) -> str:
         text = resp.utf8_text()
         refresh_csrf = re.findall('<div id="1-name">(.+?)</div>', text)[0]
         return refresh_csrf
-    elif resp.code != 200:
+    else:
         raise CookiesRefreshException("获取刷新 Cookies 的 csrf 失败。")
 
 
@@ -3394,7 +3394,7 @@ class Api:
 
     async def _request(
         self, raw: bool = False, byte: bool = False, bili_res: bool = False
-    ) -> int | str | dict | bytes | BiliAPIResponse | None:
+    ) -> Any:
         request_log.dispatch(
             "API_REQUEST",
             "Api 发起请求",
@@ -3404,7 +3404,7 @@ class Api:
         config: dict = await self._prepare_request()
         client: BiliAPIClient = get_client()
         resp: BiliAPIResponse = await client.request(**config)
-        ret: int | str | dict | bytes | None
+        ret: int | str | dict | bytes | BiliAPIResponse | None
 
         if byte:
             ret = resp.raw
@@ -3422,7 +3422,7 @@ class Api:
 
     async def request(
         self, raw: bool = False, byte: bool = False, bili_res: bool = False
-    ) -> int | str | dict | bytes | BiliAPIResponse | None:
+    ) -> Any:
         """
         向接口发送请求。
 
@@ -3458,7 +3458,7 @@ class Api:
         raise WbiRetryTimesExceedException()
 
     @property
-    async def result(self) -> int | str | dict | bytes | None:
+    async def result(self) -> Any:
         """
         获取请求结果
         """
