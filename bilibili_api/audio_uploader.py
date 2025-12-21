@@ -474,7 +474,7 @@ class AudioUploader(AsyncEvent):
 
     __song_id: int
     __upos_file: UposFile
-    __task: asyncio.Task
+    __task: asyncio.Task | None
 
     def _check_meta(self):
         raise_for_statement(self.meta.content_type is not None)
@@ -504,7 +504,7 @@ class AudioUploader(AsyncEvent):
 
         if isinstance(self.meta.tags, str):
             self.meta.tags = self.meta.tags.split(",")
-        raise_for_statement(len(self.meta.tags != 0))
+        raise_for_statement(len(self.meta.tags) != 0)
 
         raise_for_statement(self.meta.title is not None)
         raise_for_statement(self.meta.cover is not None)
@@ -517,13 +517,13 @@ class AudioUploader(AsyncEvent):
         Args:
             path (str): 文件路径
 
-            meta (AudioMeta): 元数据
+            meta (SongMeta): 元数据
 
             credential (Credential): 账号信息
         """
         super().__init__()
         self.path: str = path
-        self.meta: str = meta
+        self.meta: SongMeta = meta
         self.credential: Credential = credential
         self.__upos_file = UposFile(path)
 
@@ -605,7 +605,7 @@ class AudioUploader(AsyncEvent):
         self.__song_id = preupload["biz_id"]
         return preupload
 
-    async def _upload_cover(self, cover: str) -> str:
+    async def _upload_cover(self, cover: Picture) -> str:
         return await upload_cover(cover, self.credential)
 
     async def _main(self):
@@ -617,12 +617,13 @@ class AudioUploader(AsyncEvent):
             )
         else:
             lrc_url = ""
-        self.dispatch(AudioUploaderEvents.PRE_COVER)
+        self.dispatch(AudioUploaderEvents.PRE_COVER.value)
+        cover_url = ""
         if self.meta.cover:
             try:
                 cover_url = await self._upload_cover(self.meta.cover)
             except Exception as e:
-                self.dispatch(AudioUploaderEvents.COVER_FAILED, {"err": e})
+                self.dispatch(AudioUploaderEvents.COVER_FAILED.value, {"err": e})
                 raise e
             self.dispatch(AudioUploaderEvents.AFTER_COVER.value, cover_url)
         self.dispatch(AudioUploaderEvents.PRE_SUBMIT.value)
@@ -662,76 +663,76 @@ class AudioUploader(AsyncEvent):
                     "m_type": 1,  # 歌手
                     "members": [
                         {"name": singer.name, "mid": singer.uid}
-                        for singer in self.meta.singer
+                        for singer in (self.meta.singer if self.meta.singer else [])
                     ],
                 },
                 {
                     "m_type": 2,  # 作词
                     "members": [
                         {"name": lyricist.name, "mid": lyricist.uid}
-                        for lyricist in self.meta.lyricist
+                        for lyricist in (self.meta.lyricist if self.meta.lyricist else [])
                     ],
                 },
                 {
                     "m_type": 3,
                     "members": [
                         {"name": composer.name, "mid": composer.uid}
-                        for composer in self.meta.composer
+                        for composer in (self.meta.composer if self.meta.composer else [])
                     ],
                 },  # 作曲
                 {
                     "m_type": 4,
                     "members": [
                         {"name": arranger.name, "mid": arranger.uid}
-                        for arranger in self.meta.arranger
+                        for arranger in (self.meta.arranger if self.meta.arranger else [])
                     ],
                 },  # 编曲
                 {
                     "m_type": 5,
                     "members": [
                         {"name": mixer.name, "mid": mixer.uid}
-                        for mixer in self.meta.mixer
+                        for mixer in (self.meta.mixer if self.meta.mixer else [])
                     ],
                 },  # 混音只能填一个人，你问我为什么我不知道
                 {
                     "m_type": 6,
                     "members": [
                         {"name": cover_maker.name, "mid": cover_maker.uid}
-                        for cover_maker in self.meta.cover_maker
+                        for cover_maker in (self.meta.cover_maker if self.meta.cover_maker else [])
                     ],
                 },  # 本家作者
                 {
                     "m_type": 7,
                     "members": [
                         {"name": cover_maker.name, "mid": cover_maker.uid}
-                        for cover_maker in self.meta.cover_maker
-                    ],
+                        for cover_maker in (self.meta.cover_maker if self.meta.cover_maker else [])
+                    ], # FIXME: 显然不对
                 },  # 封面
                 {
                     "m_type": 8,
                     "members": [
                         {"name": sound_source.name, "mid": sound_source.uid}
-                        for sound_source in self.meta.sound_source
+                        for sound_source in (self.meta.sound_source if self.meta.sound_source else [])
                     ],
                 },  # 音源
                 {
                     "m_type": 9,
                     "members": [
                         {"name": tuning.name, "mid": tuning.uid}
-                        for tuning in self.meta.tuning
+                        for tuning in (self.meta.tuning if self.meta.tuning else [])
                     ],
                 },  # 调音
                 {
                     "m_type": 10,
                     "members": [
                         {"name": player.name, "mid": player.uid}
-                        for player in self.meta.player
+                        for player in (self.meta.player if self.meta.player else [])
                     ],
                 },  # 演奏
                 {
                     "m_type": 11,
                     "members": [
-                        {"name": instrument} for instrument in self.meta.instrument
+                        {"name": instrument} for instrument in (self.meta.instrument if self.meta.instrument else [])
                     ],
                 },  # 乐器
                 {
@@ -753,7 +754,7 @@ class AudioUploader(AsyncEvent):
             .result
         )
 
-    async def start(self) -> dict:
+    async def start(self) -> int | None:
         """
         开始上传
         """
