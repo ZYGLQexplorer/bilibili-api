@@ -708,9 +708,9 @@ async def del_comments(
         archive_type (ArchiveType): 稿件类型
     """
     data = {
-        "oid": ",".join(oid) if isinstance(oid, list) else oid,
+        "oid": ",".join([str(x) for x in oid]) if isinstance(oid, list) else oid,
         "type": archive_type.value,
-        "rpid": ",".join(rpid) if isinstance(rpid, list) else rpid,
+        "rpid": ",".join([str(x) for x in rpid]) if isinstance(rpid, list) else rpid,
         "jsonp": "jsonp",
         "csrf": credential.bili_jct,
     }
@@ -815,7 +815,7 @@ async def get_danmakus(
     params = {
         "oid": oid,
         "type": archive_type.value,
-        "mids": ",".join(mids) if isinstance(mids, list) else mids,
+        "mids": ",".join([str(x) for x in mids]) if isinstance(mids, list) else mids,
         "select_type": select_type.value,
         "keyword": keyword,
         "progress_from": progress_from,
@@ -828,7 +828,7 @@ async def get_danmakus(
         ),
         "modes": (
             (
-                ",".join([mode.value for mode in modes])
+                ",".join([str(mode.value) for mode in modes])
                 if isinstance(modes, list)
                 else modes.value
             )
@@ -837,7 +837,7 @@ async def get_danmakus(
         ),
         "pool": (
             (
-                ",".join([pool.value for pool in pools])
+                ",".join([str(pool.value) for pool in pools])
                 if isinstance(pools, list)
                 else pools.value
             )
@@ -893,7 +893,9 @@ async def edit_danmaku_state(
     data = {
         "type": 1,
         "oid": oid,
-        "dmids": ",".join(dmids) if isinstance(dmids, list) else dmids,
+        "dmids": ",".join([str(x) for x in dmids])
+        if isinstance(dmids, list)
+        else dmids,
         "state": state,
     }
 
@@ -923,7 +925,9 @@ async def edit_danmaku_pool(
     data = {
         "type": 1,
         "oid": oid,
-        "dmids": ",".join(dmids) if isinstance(dmids, list) else dmids,
+        "dmids": ",".join([str(x) for x in dmids])
+        if isinstance(dmids, list)
+        else dmids,
         "pool": 1 if is_subtitle else 0,
     }
 

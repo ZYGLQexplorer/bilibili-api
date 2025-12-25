@@ -13,8 +13,7 @@ import time
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from bilibili_api.exceptions import ApiException
-
+from .exceptions import ApiException
 from .user import get_self_info
 from .utils.AsyncEvent import AsyncEvent
 from .utils.network import Api, Credential

@@ -155,7 +155,7 @@ class FavoriteList:
         raise_for_statement(self.__media_id is not None, "视频收藏夹需要 media_id")
 
         return await get_video_favorite_list_content(
-            self.__media_id,
+            self.__media_id,  # type: ignore
             page=page,
             keyword=keyword,
             order=order,
@@ -181,7 +181,9 @@ class FavoriteList:
         elif self.__type == FavoriteListType.VIDEO:
             raise_for_statement(self.__media_id is not None, "视频收藏夹需要 media_id")
             return await get_video_favorite_list_content(
-                self.__media_id, page, credential=self.credential
+                self.__media_id,  # type: ignore
+                page,
+                credential=self.credential,
             )
         else:
             raise ArgsException("无法识别传入的类型")
@@ -226,6 +228,7 @@ async def get_video_favorite_list(
     Returns:
         dict: 调用 API 返回的结果
     """
+    credential = credential if credential else Credential()
     api = API["info"]["list_list"]
     params = {"up_mid": uid, "type": 2, "web_location": "333.1387"}
 
@@ -267,6 +270,7 @@ async def get_video_favorite_list_content(
     Returns:
         dict: 调用 API 返回的结果
     """
+    credential = credential if credential else Credential()
     api = API["info"]["list_content"]
     params = {
         "media_id": media_id,
@@ -625,6 +629,7 @@ async def get_favorite_collected(
 
         credential (Credential | None, optional)       : Credential. Defaults to None.
     """
+    credential = credential if credential else Credential()
     api = API["info"]["collected"]
     params = {"up_mid": uid, "platform": "web", "pn": pn, "ps": ps}
     return await Api(**api, credential=credential).update_params(**params).result

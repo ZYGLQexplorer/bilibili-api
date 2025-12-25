@@ -267,7 +267,7 @@ class BuildDynamic:
         if topic_id != -1:
             dyn.set_topic(topic_id)
         if vote_id != -1:
-            dyn.add_vote(vote.Vote(vote_id=vote_id))
+            dyn.add_vote(vote_id)
         if live_reserve_id != -1:
             dyn.set_attach_card(live_reserve_id)
         if send_time is not None:
@@ -735,7 +735,7 @@ class Dynamic:
             credential if credential is not None else Credential()
         )
 
-    def get_dynamic_id(self) -> None:
+    def get_dynamic_id(self) -> int:
         """
         获取 动态 ID。
 
@@ -852,6 +852,9 @@ class Dynamic:
         info = await self.get_info()
 
         def parse_module_dynamic(module: dict):
+            title = ""
+            nodes = []
+            pics = []
             if module["major"] is None:
                 # 转发动态
                 nodes = module["desc"]["rich_text_nodes"]

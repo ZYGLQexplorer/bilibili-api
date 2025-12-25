@@ -179,7 +179,7 @@ class CheeseVideo:
             self.__cid = meta["cid"]
         self.credential: Credential = credential if credential else Credential()
 
-    async def __fetch_meta(self) -> int:
+    async def __fetch_meta(self) -> None:
         api = API["info"]["meta"]
         params = {"ep_id": self.__epid}
         metadata = await Api(**api).update_params(**params).result
@@ -199,7 +199,7 @@ class CheeseVideo:
         """
         if not self.__aid:
             await self.__fetch_meta()
-        return self.__aid
+        return self.__aid  # type: ignore
 
     async def get_cid(self) -> int:
         """
@@ -210,7 +210,7 @@ class CheeseVideo:
         """
         if not self.__cid:
             await self.__fetch_meta()
-        return self.__cid
+        return self.__cid  # type: ignore
 
     async def get_meta(self) -> dict:
         """
@@ -221,7 +221,7 @@ class CheeseVideo:
         """
         if not self.__meta:
             await self.__fetch_meta()
-        return self.__meta
+        return self.__meta  # type: ignore
 
     async def get_cheese(self) -> "CheeseList":
         """
@@ -232,7 +232,7 @@ class CheeseVideo:
         """
         if not self.cheese:
             await self.__fetch_meta()
-        return self.cheese
+        return self.cheese  # type: ignore
 
     async def set_epid(self, epid: int) -> None:
         """
@@ -537,11 +537,11 @@ class CheeseVideo:
             if from_seg is None:
                 from_seg = 0
             if to_seg is None:
-                to_seg = self.get_meta()["duration"] // 360 + 1
+                to_seg = (await self.get_meta())["duration"] // 360 + 1
 
         danmakus = []
 
-        for seg in range(from_seg, to_seg + 1):
+        for seg in range(from_seg, to_seg + 1):  # type: ignore
             if date is None:
                 # 仅当获取当前弹幕时需要该参数
                 params["segment_index"] = seg + 1

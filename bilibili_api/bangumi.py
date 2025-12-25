@@ -754,7 +754,7 @@ class IndexFilterMeta:
             copyright: IndexFilter.Copyright = IndexFilter.Copyright.ALL,
             payment: IndexFilter.Payment = IndexFilter.Payment.ALL,
             season: IndexFilter.Season = IndexFilter.Season.ALL,
-            year: str = -1,
+            year: str = "-1",
             style: IndexFilter.Style.Anime = IndexFilter.Style.Anime.ALL,
         ) -> None:
             """
@@ -797,7 +797,7 @@ class IndexFilterMeta:
         def __init__(
             self,
             area: IndexFilter.Area = IndexFilter.Area.ALL,
-            release_date: str = -1,
+            release_date: str = "-1",
             style: IndexFilter.Style.Movie = IndexFilter.Style.Movie.ALL,
             payment: IndexFilter.Payment = IndexFilter.Payment.ALL,
         ) -> None:
@@ -827,7 +827,7 @@ class IndexFilterMeta:
 
         def __init__(
             self,
-            release_date: str = -1,
+            release_date: str = "-1",
             style: IndexFilter.Style.Documentary = IndexFilter.Style.Documentary.ALL,
             payment: IndexFilter.Payment = IndexFilter.Payment.ALL,
             producer: IndexFilter.Producer = IndexFilter.Producer.ALL,
@@ -857,7 +857,7 @@ class IndexFilterMeta:
         def __init__(
             self,
             area: IndexFilter.Area = IndexFilter.Area.ALL,
-            release_date: str = -1,
+            release_date: str = "-1",
             style: IndexFilter.Style.TV = IndexFilter.Style.TV.ALL,
             payment: IndexFilter.Payment = IndexFilter.Payment.ALL,
         ) -> None:
@@ -889,7 +889,7 @@ class IndexFilterMeta:
             finish_status: IndexFilter.Finish_Status = IndexFilter.Finish_Status.ALL,
             copyright: IndexFilter.Copyright = IndexFilter.Copyright.ALL,
             payment: IndexFilter.Payment = IndexFilter.Payment.ALL,
-            year: str = -1,
+            year: str = "-1",
             style: IndexFilter.Style.GuoChuang = IndexFilter.Style.GuoChuang.ALL,
         ) -> None:
             """
@@ -938,7 +938,7 @@ class IndexFilterMeta:
 
 
 async def get_index_info(
-    filters: IndexFilterMeta = IndexFilterMeta.Anime(),
+    filters: object = IndexFilterMeta.Anime(),
     order: IndexFilter.Order = IndexFilter.Order.SCORE,
     sort: IndexFilter.Sort = IndexFilter.Sort.DESC,
     pn: int = 1,
@@ -950,7 +950,7 @@ async def get_index_info(
     请先通过 `IndexFilterMeta` 构造 filters
 
     Args:
-        filters (Index_Filter_Meta, optional): 筛选条件元数据. Defaults to Anime.
+        filters (object, optional): 筛选条件元数据. Defaults to Anime.
 
         order (BANGUMI_INDEX.ORDER, optional): 排序字段. Defaults to SCORE.
 
@@ -1122,7 +1122,7 @@ class Bangumi:
         """
         if not self.__up_info:
             await self.__fetch_raw()
-        return self.__up_info
+        return self.__up_info  # type: ignore
 
     async def get_raw(self) -> tuple[dict, bool]:
         """
@@ -1187,7 +1187,11 @@ class Bangumi:
         credential = self.credential if self.credential is not None else Credential()
 
         api = API["info"]["short_comment"]
-        params = {"media_id": await self.get_media_id(), "ps": 20, "sort": order.value}
+        params: dict[str, object] = {
+            "media_id": await self.get_media_id(),
+            "ps": 20,
+            "sort": order.value,
+        }
         if next is not None:
             params["cursor"] = next
 
@@ -1212,7 +1216,11 @@ class Bangumi:
         credential = self.credential if self.credential is not None else Credential()
 
         api = API["info"]["long_comment"]
-        params = {"media_id": await self.get_media_id(), "ps": 20, "sort": order.value}
+        params: dict[str, object] = {
+            "media_id": await self.get_media_id(),
+            "ps": 20,
+            "sort": order.value,
+        }
         if next is not None:
             params["cursor"] = next
 
@@ -1391,8 +1399,8 @@ class Episode(Video):
             self.__ep_bvid = aid2bvid(self.__ep_aid)
 
         super().__init__(bvid="BV1Am411y7iK", credential=self.credential)
-        self.set_aid = self.__set_aid_e
-        self.set_bvid = self.__set_bvid_e
+        self.set_aid = self.__set_aid_e  # type: ignore
+        self.set_bvid = self.__set_bvid_e  # type: ignore
 
     async def turn_to_video(self) -> Video:
         """
@@ -1412,7 +1420,7 @@ class Episode(Video):
         self.__ep_bvid = content["episode_info"]["bvid"]
         self.__ep_aid = bvid2aid(self.__ep_bvid)
 
-    async def get_bvid(self) -> str:
+    async def get_bvid(self) -> str:  # type: ignore
         """
         获取 BVID。
 
@@ -1421,9 +1429,9 @@ class Episode(Video):
         """
         if not self.__ep_bvid:
             await self.__fetch_bangumi()
-        return self.__ep_bvid
+        return self.__ep_bvid  # type: ignore
 
-    async def get_aid(self) -> str:
+    async def get_aid(self) -> int:  # type: ignore
         """
         获取 AID。
 
@@ -1432,7 +1440,7 @@ class Episode(Video):
         """
         if not self.__ep_aid:
             await self.__fetch_bangumi()
-        return self.__ep_aid
+        return self.__ep_aid  # type: ignore
 
     async def __set_bvid_e(self) -> None:
         """
@@ -1452,7 +1460,7 @@ class Episode(Video):
         """
         return self.__epid
 
-    async def get_cid(self) -> int:
+    async def get_cid(self) -> int:  # type: ignore
         """
         获取稿件 cid
 
@@ -1505,7 +1513,7 @@ class Episode(Video):
         """
         if not self.bangumi:
             await self.__fetch_bangumi()
-        return self.bangumi
+        return self.bangumi  # type: ignore
 
     async def set_favorite(
         self, add_media_ids: list[int] = [], del_media_ids: list[int] = []
@@ -1538,7 +1546,7 @@ class Episode(Video):
         }
         return await Api(**api, credential=self.credential).update_data(**data).result
 
-    async def get_download_url(self) -> dict:
+    async def get_download_url(self) -> dict:  # type: ignore
         """
         获取番剧剧集下载信息。
 
@@ -1567,7 +1575,7 @@ class Episode(Video):
             )
         return self.__playurl
 
-    async def get_danmaku_xml(self) -> str:
+    async def get_danmaku_xml(self) -> str:  # type: ignore
         """
         获取所有弹幕的 xml 源文件（非装填）
 
@@ -1578,7 +1586,7 @@ class Episode(Video):
         url = f"https://comment.bilibili.com/{cid}.xml"
         return (await Api(url=url, method="GET").request(byte=True)).decode("utf-8")
 
-    async def get_danmaku_view(self) -> dict:
+    async def get_danmaku_view(self) -> dict:  # type: ignore
         """
         获取弹幕设置、特殊弹幕、弹幕数量、弹幕分段等信息。
 
@@ -1587,7 +1595,7 @@ class Episode(Video):
         """
         return await super().get_danmaku_view(0)
 
-    async def get_danmakus(
+    async def get_danmakus(  # type: ignore
         self,
         date: datetime.date | None = None,
         from_seg: int | None = None,
@@ -1608,7 +1616,7 @@ class Episode(Video):
         """
         return await super().get_danmakus(0, date, from_seg=from_seg, to_seg=to_seg)
 
-    async def get_history_danmaku_index(
+    async def get_history_danmaku_index(  # type: ignore
         self, date: datetime.date | None = None
     ) -> None | list[str]:
         """
@@ -1622,7 +1630,7 @@ class Episode(Video):
         """
         return await super().get_history_danmaku_index(0, date)
 
-    async def send_danmaku(self, danmaku: Danmaku):
+    async def send_danmaku(self, danmaku: Danmaku) -> dict:  # type: ignore
         """
         发送弹幕。
 
@@ -1634,7 +1642,7 @@ class Episode(Video):
         """
         return await super().send_danmaku(0, danmaku)
 
-    async def recall_danmaku(self, dmid: int):
+    async def recall_danmaku(self, dmid: int) -> dict:  # type: ignore
         """
         撤回弹幕。
 
@@ -1646,7 +1654,7 @@ class Episode(Video):
         """
         return await super().recall_danmaku(0, dmid)
 
-    async def get_player_info(self):
+    async def get_player_info(self) -> dict:  # type: ignore
         """
         获取视频上一次播放的记录，字幕和地区信息。需要分集的 cid, 返回数据中含有json字幕的链接
 
@@ -1655,16 +1663,18 @@ class Episode(Video):
         """
         return await super().get_player_info(await self.get_cid(), self.get_epid())
 
-    async def get_subtitle(self):
+    async def get_subtitle(self) -> dict:  # type: ignore
         """
         获取字幕信息
 
         Returns:
             dict: 调用 API 返回的结果
         """
-        return (await self.get_player_info()).get("subtitle")
+        return (await self.get_player_info()).get("subtitle")  # type: ignore
 
-    async def submit_subtitle(self, lan: str, data: dict, submit: bool, sign: bool):
+    async def submit_subtitle(  # type: ignore
+        self, lan: str, data: dict, submit: bool, sign: bool
+    ) -> dict:
         """
         上传字幕
 
@@ -1702,7 +1712,7 @@ class Episode(Video):
         """
         return await super().submit_subtitle(lan, data, submit, sign, 0)
 
-    async def get_pbp(self):
+    async def get_pbp(self) -> dict:  # type: ignore
         """
         获取高能进度条
 
@@ -1711,7 +1721,7 @@ class Episode(Video):
         """
         return await super().get_pbp(0)
 
-    async def get_ai_conclusion(self, up_mid: int | None = None):
+    async def get_ai_conclusion(self, up_mid: int | None = None) -> dict:  # type: ignore
         """
         获取稿件 AI 总结结果。
 

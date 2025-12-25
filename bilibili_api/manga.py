@@ -8,8 +8,8 @@ import datetime
 from enum import Enum
 from typing import ClassVar
 
-from bilibili_api.utils.network import Api, Credential
-from bilibili_api.utils.utils import get_api
+from .utils.network import Api, Credential
+from .utils.utils import get_api
 
 API = get_api("manga")
 

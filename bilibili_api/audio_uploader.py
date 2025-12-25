@@ -670,21 +670,27 @@ class AudioUploader(AsyncEvent):
                     "m_type": 2,  # 作词
                     "members": [
                         {"name": lyricist.name, "mid": lyricist.uid}
-                        for lyricist in (self.meta.lyricist if self.meta.lyricist else [])
+                        for lyricist in (
+                            self.meta.lyricist if self.meta.lyricist else []
+                        )
                     ],
                 },
                 {
                     "m_type": 3,
                     "members": [
                         {"name": composer.name, "mid": composer.uid}
-                        for composer in (self.meta.composer if self.meta.composer else [])
+                        for composer in (
+                            self.meta.composer if self.meta.composer else []
+                        )
                     ],
                 },  # 作曲
                 {
                     "m_type": 4,
                     "members": [
                         {"name": arranger.name, "mid": arranger.uid}
-                        for arranger in (self.meta.arranger if self.meta.arranger else [])
+                        for arranger in (
+                            self.meta.arranger if self.meta.arranger else []
+                        )
                     ],
                 },  # 编曲
                 {
@@ -698,21 +704,27 @@ class AudioUploader(AsyncEvent):
                     "m_type": 6,
                     "members": [
                         {"name": cover_maker.name, "mid": cover_maker.uid}
-                        for cover_maker in (self.meta.cover_maker if self.meta.cover_maker else [])
+                        for cover_maker in (
+                            self.meta.cover_maker if self.meta.cover_maker else []
+                        )
                     ],
                 },  # 本家作者
                 {
                     "m_type": 7,
                     "members": [
                         {"name": cover_maker.name, "mid": cover_maker.uid}
-                        for cover_maker in (self.meta.cover_maker if self.meta.cover_maker else [])
-                    ], # FIXME: 显然不对
+                        for cover_maker in (
+                            self.meta.cover_maker if self.meta.cover_maker else []
+                        )
+                    ],  # FIXME: 显然不对
                 },  # 封面
                 {
                     "m_type": 8,
                     "members": [
                         {"name": sound_source.name, "mid": sound_source.uid}
-                        for sound_source in (self.meta.sound_source if self.meta.sound_source else [])
+                        for sound_source in (
+                            self.meta.sound_source if self.meta.sound_source else []
+                        )
                     ],
                 },  # 音源
                 {
@@ -732,7 +744,10 @@ class AudioUploader(AsyncEvent):
                 {
                     "m_type": 11,
                     "members": [
-                        {"name": instrument} for instrument in (self.meta.instrument if self.meta.instrument else [])
+                        {"name": instrument}
+                        for instrument in (
+                            self.meta.instrument if self.meta.instrument else []
+                        )
                     ],
                 },  # 乐器
                 {
