@@ -117,4 +117,5 @@ executionEnvironments = [{ root = "./" }]
 
 typeCheckingMode = "standard"
 reportShadowedImports = false
+reportMissingImports = false
 disableBytesTypePromotions = true

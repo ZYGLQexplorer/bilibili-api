@@ -158,7 +158,8 @@ class Opus:
                         if node["word"].get("style"):
                             if node["word"]["style"].get("bold"):
                                 if node["word"]["style"]["bold"]:
-                                    raw = f"**{raw}**"
+                                    if raw.strip():
+                                        raw = f"**{raw}**"
                     para_raw += raw + " "
             elif para["para_type"] == 2:
                 for pic in para["pic"]["pics"]:

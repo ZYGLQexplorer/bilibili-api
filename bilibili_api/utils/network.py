@@ -1504,11 +1504,11 @@ def set_session(session: object) -> None:
 def register_pre_filter(
     name: str,
     func: Callable | None = None,
-    async_func: Coroutine | None = None,
+    async_func: Callable[..., Coroutine] | None = None,
     clients: list[str] | None = None,
     on: list[str] | None = None,
     trigger: Callable | None = None,
-    async_trigger: Coroutine | None = None,
+    async_trigger: Callable[..., Coroutine] | None = None,
     priority: int = 0,
 ) -> None:
     """
@@ -1526,11 +1526,11 @@ def register_pre_filter(
     Args:
         name          (str)                : 名称，若重复则为修改对应过滤器。
         func          (Callable, optional) : 执行的函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`
-        async_func    (Coroutine, optional): 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`
+        async_func    (Callable[..., Coroutine], optional): 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`
         clients       (List[str], optional): 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。
         on            (List[str], optional): 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。
         trigger       (Callable, optional) : 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
-        async_trigger (Coroutine, optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
+        async_trigger (Callable[..., Coroutine], optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
         priority      (int, optional)      : 优先级，数字越小越优先执行。Defaults to 0.
     """
     global __registered_pre
@@ -1558,11 +1558,11 @@ def register_pre_filter(
 def register_post_filter(
     name: str,
     func: Callable | None = None,
-    async_func: Coroutine | None = None,
+    async_func: Callable[..., Coroutine] | None = None,
     clients: list[str] | None = None,
     on: list[str] | None = None,
     trigger: Callable | None = None,
-    async_trigger: Coroutine | None = None,
+    async_trigger: Callable[..., Coroutine] | None = None,
     priority: int = 0,
 ) -> None:
     """
@@ -1580,11 +1580,11 @@ def register_post_filter(
     Args:
         name          (str)                : 名称，若重复则为修改对应过滤器。
         func          (Callable, optional) : 执行的函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`
-        async_func    (Coroutine, optional): 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`
+        async_func    (Callable[..., Coroutine], optional): 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`
         clients       (List[str], optional): 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。
         on            (List[str], optional): 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。
         trigger       (Callable, optional) : 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
-        async_trigger (Coroutine, optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
+        async_trigger (Callable[..., Coroutine], optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
         priority      (int, optional)      : 优先级，数字越小越优先执行。Defaults to 0.
     """
     global __registered_post
@@ -1945,8 +1945,7 @@ class Credential:
         else:
             self.__blank = False
 
-        for key, value in kwargs.items():
-            setattr(self, key, value)
+        self.extra_cookies = {k: str(v) for k, v in kwargs}
 
     def gen_local_cookies(self) -> None:
         self.b_nut = str(int(time.time()))
@@ -1993,7 +1992,7 @@ class Credential:
 
         browser_fingerprint = get_browser_fingerprint()
 
-        cookies: dict[str, str | None] = {
+        _cookies: dict[str, str | None] = {
             "buvid3": self.buvid3,
             "b_nut": self.b_nut,
             "b_lsid": self.b_lsid,
@@ -2013,11 +2012,8 @@ class Credential:
             "opus-goback": "1",  # 确保需要旧版的时候可以跳转到旧版页面
         }
 
-        cookies = {k: v for k, v in cookies.items() if v is not None}
-
-        for key, value in self.__dict__.items():
-            if key not in cookies and value is not None:
-                cookies[key] = value
+        cookies: dict[str, str] = {k: v for k, v in _cookies.items() if v is not None}
+        cookies.update(self.extra_cookies)
 
         return cookies
 
@@ -2421,7 +2417,7 @@ class _CookieJsonDecoder(json.JSONDecoder):
         return (val, end)
 
 
-async def _gen_buvid_fp(buvid3: str, buvid4: str, credential: Credential) -> None:
+async def _gen_buvid_fp(buvid3: str, buvid4: str, credential: Credential) -> tuple[str, str]:
     MOD = 1 << 64
 
     def rotate_left(x: int, k: int) -> int:
@@ -2710,7 +2706,6 @@ async def _gen_buvid_fp(buvid3: str, buvid4: str, credential: Credential) -> Non
         )
 
     client = get_client()
-    uuid = credential.uuid_infoc
     headers = get_bili_headers()
     homepage_html = await client.request(
         method="GET",
@@ -2724,13 +2719,13 @@ async def _gen_buvid_fp(buvid3: str, buvid4: str, credential: Credential) -> Non
             "_uuid": credential.uuid_infoc,
         },
     )
-    payload = get_payload(uuid, homepage_html.utf8_text())
+    payload = get_payload(credential.uuid_infoc, homepage_html.utf8_text()) # type: ignore
     return gen_buvid_fp(payload, 31), payload
 
 
 async def _active_buvid(
     buvid3: str, buvid4: str, buvid_fp: str, payload: str, credential: Credential
-) -> str:
+) -> None:
     api = API["operate"]["active"]
     client = get_client()
     headers = get_bili_headers()
@@ -2773,7 +2768,7 @@ async def _get_mixin_key(credential: Credential | None = None) -> str:
     wbi_img: dict[str, str] = data["wbi_img"]
 
     def split(key):
-        return wbi_img.get(key).split("/")[-1].split(".")[0]
+        return wbi_img.get(key).split("/")[-1].split(".")[0] # type: ignore
 
     ae = split("img_url") + split("sub_url")
     le = reduce(lambda s, i: s + (ae[i] if i < len(ae) else ""), OE, "")
@@ -2854,9 +2849,7 @@ def _enc_sign(paramsordata: dict) -> dict:
 
 async def _get_bili_ticket(credential: Credential) -> tuple[str, int] | None:
     def hmac_sha256(key: str, message: str) -> str:
-        key = key.encode("utf-8")
-        message = message.encode("utf-8")
-        hmac_obj = hmac.new(key, message, hashlib.sha256)
+        hmac_obj = hmac.new(key.encode("utf-8"), message.encode("utf-8"), hashlib.sha256)
         return hmac_obj.digest().hex()
 
     ts = int(time.time())
@@ -3077,7 +3070,7 @@ def recalculate_wbi() -> None:
     __wbi_mixin_key = None
 
 
-async def get_buvid(credential: Credential | None = None) -> tuple[str, str]:
+async def get_buvid(credential: Credential | None = None) -> tuple[str, str, str]:
     """
     获取 buvid3 和 buvid4，若提供凭据类将自动在 credential 中设置相关字段
 
@@ -3109,7 +3102,7 @@ async def get_buvid(credential: Credential | None = None) -> tuple[str, str]:
             _credential.b_lsid,
             _credential.uuid_infoc,
         )
-        return (credential.buvid3, credential.buvid4, credential.buvid_fp)
+        return (credential.buvid3, credential.buvid4, credential.buvid_fp) # type: ignore
     if request_settings.get_enable_buvid_global_persistence() and credential is None:
         return await get_buvid(_credential)
     if credential is None:
@@ -3137,7 +3130,7 @@ async def get_buvid(credential: Credential | None = None) -> tuple[str, str]:
                 "msg": f"激活 buvid3 / buvid4 成功: 3 [{credential.buvid3}] 4 [{credential.buvid4}] fp [{credential.buvid_fp}]"
             },
         )
-    return (credential.buvid3, credential.buvid4, credential.buvid_fp)
+    return (credential.buvid3, credential.buvid4, credential.buvid_fp) # type: ignore
 
 
 async def get_bili_ticket(
@@ -3163,7 +3156,7 @@ async def get_bili_ticket(
             _credential.bili_ticket,
             _credential.bili_ticket_expires,
         )
-        return credential.bili_ticket, str(credential.bili_ticket_expires)
+        return credential.bili_ticket, str(credential.bili_ticket_expires) # type: ignore
     if (
         request_settings.get_enable_bili_ticket_global_persistence()
         and credential is None
@@ -3264,7 +3257,7 @@ class Api:
         self.original_params = self.params.copy()
         self.data = dict.fromkeys(self.data.keys(), "")
         self.params = dict.fromkeys(self.params.keys(), "")
-        self.files = dict.fromkeys(self.files.keys(), "")
+        self.files = dict.fromkeys(self.files.keys(), BiliAPIFile(path="", mime_type=""))
         self.headers = dict.fromkeys(self.headers.keys(), "")
         self.credential = self.credential if self.credential else Credential()
 
@@ -3388,7 +3381,7 @@ class Api:
         if "callback" in self.params:
             # JSONP 请求
             resp_data: dict = json.loads(
-                re.match("^.*?({.*}).*$", resp_text, re.S).group(1)
+                re.match("^.*?({.*}).*$", resp_text, re.S).group(1) # type: ignore
             )
         else:
             # JSON
