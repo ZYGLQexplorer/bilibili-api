@@ -1205,7 +1205,7 @@ Variety Meta
 
 | name | type | description |
 | - | - | - |
-| `filters` | `Index_Filter_Meta, optional` | 筛选条件元数据. Defaults to Anime. |
+| `filters` | `object, optional` | 筛选条件元数据. Defaults to Anime. |
 | `order` | `BANGUMI_INDEX.ORDER, optional` | 排序字段. Defaults to SCORE. |
 | `sort` | `BANGUMI_INDEX.SORT, optional` | 排序方式. Defaults to DESC. |
 | `pn` | `int, optional` | 页数. Defaults to 1. |

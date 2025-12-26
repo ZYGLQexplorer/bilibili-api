@@ -56,7 +56,7 @@ from bilibili_api import audio_uploader
 | name | type | description |
 | - | - | - |
 | `path` | `str` | 文件路径 |
-| `meta` | `AudioMeta` | 元数据 |
+| `meta` | `SongMeta` | 元数据 |
 | `credential` | `Credential` | 账号信息 |
 
 

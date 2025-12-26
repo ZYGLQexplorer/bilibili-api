@@ -88,8 +88,10 @@ from bilibili_api import ...
 - [class NetworkException()](#class-NetworkException)
 - [class Picture()](#class-Picture)
   - [def convert\_format()](#def-convert\_format)
+  - [async def download()](#async-def-download)
   - [def from\_content()](#def-from\_content)
   - [def from\_file()](#def-from\_file)
+  - [async def load\_file()](#async-def-load\_file)
   - [async def load\_url()](#async-def-load\_url)
   - [def resize()](#def-resize)
   - [def to\_file()](#def-to\_file)
@@ -1313,6 +1315,20 @@ NOTE: `gt`, `challenge`, `token` 为验证码基本字段。`seccode`, `validate
 
 
 
+### async def download()
+
+异步下载图片至本地。
+
+
+| name | type | description |
+| - | - | - |
+| `path` | `str` | 下载地址。 |
+
+**Returns:** `Picture`:  `self`
+
+
+
+
 **@staticmethod** 
 
 ### def from_content()
@@ -1335,6 +1351,22 @@ NOTE: `gt`, `challenge`, `token` 为验证码基本字段。`seccode`, `validate
 ### def from_file()
 
 加载本地图片。
+
+
+| name | type | description |
+| - | - | - |
+| `path` | `str` | 图片地址 |
+
+**Returns:** `Picture`:  加载后的图片对象
+
+
+
+
+**@staticmethod** 
+
+### async def load_file()
+
+异步加在本地图片
 
 
 | name | type | description |
@@ -1877,11 +1909,11 @@ BiliAPIClient 对象存在 `data` 字段，可用于过滤器间数据传递，�
 | - | - | - |
 | `name` | `str` | 名称，若重复则为修改对应过滤器。 |
 | `func` | `Callable, optional` | 执行的函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)` |
-| `async_func` | `Coroutine, optional` | 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)` |
+| `async_func` | `Callable[..., Coroutine], optional` | 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)` |
 | `clients` | `List[str], optional` | 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。 |
 | `on` | `List[str], optional` | 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。 |
 | `trigger` | `Callable, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
-| `async_trigger` | `Coroutine, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
+| `async_trigger` | `Callable[..., Coroutine], optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
 | `priority` | `int, optional` | 优先级，数字越小越优先执行。Defaults to 0. |
 
 
@@ -1907,11 +1939,11 @@ BiliAPIClient 对象存在 `data` 字段，可用于过滤器间数据传递，�
 | - | - | - |
 | `name` | `str` | 名称，若重复则为修改对应过滤器。 |
 | `func` | `Callable, optional` | 执行的函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)` |
-| `async_func` | `Coroutine, optional` | 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)` |
+| `async_func` | `Callable[..., Coroutine], optional` | 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)` |
 | `clients` | `List[str], optional` | 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。 |
 | `on` | `List[str], optional` | 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。 |
 | `trigger` | `Callable, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
-| `async_trigger` | `Coroutine, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
+| `async_trigger` | `Callable[..., Coroutine], optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
 | `priority` | `int, optional` | 优先级，数字越小越优先执行。Defaults to 0. |
 
 

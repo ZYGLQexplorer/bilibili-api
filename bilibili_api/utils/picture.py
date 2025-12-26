@@ -9,6 +9,7 @@ import os
 import tempfile
 from typing import Any
 
+import anyio
 from PIL import Image
 from yarl import URL
 
@@ -94,6 +95,24 @@ class Picture:
         return obj
 
     @staticmethod
+    async def load_file(path: str) -> "Picture":
+        """
+        异步加在本地图片
+
+        Args:
+            path (str): 图片地址
+
+        Returns:
+            Picture: 加载后的图片对象
+        """
+        obj = Picture()
+        async with await anyio.open_file(path, "rb") as file:
+            obj.content = await file.read()
+        obj.url = "file://" + path
+        obj.__set_picture_meta_from_bytes(os.path.basename(path).split(".")[-1])
+        return obj
+
+    @staticmethod
     def from_file(path: str) -> "Picture":
         """
         加载本地图片。
@@ -137,7 +156,7 @@ class Picture:
             file.write(self.content)
         img = Image.open(img_path)
         mime_type = img.get_format_mimetype()
-        return BiliAPIFile(path=img_path, mime_type=mime_type)
+        return BiliAPIFile(path=img_path, mime_type=mime_type)  # type: ignore
 
     async def upload(self, credential: Credential) -> "Picture":
         """
@@ -152,11 +171,7 @@ class Picture:
         from ..dynamic import upload_image
 
         res = await upload_image(self, credential)
-        self.height = res["image_height"]
-        self.width = res["image_width"]
         self.url = res["image_url"]
-        self.size = res["img_size"]
-        self.content = (await self.load_url(self.url)).content
         return self
 
     async def upload_by_note(self, credential: Credential) -> "Picture":
@@ -172,7 +187,7 @@ class Picture:
         from ..note import upload_image
 
         res = await upload_image(self, credential)
-        self = await self.load_url("https:" + res["location"])
+        self.url = res["location"]
         return self
 
     def convert_format(self, new_format: str) -> "Picture":
@@ -187,7 +202,8 @@ class Picture:
         """
         tmp_dir = tempfile.gettempdir()
         img_path = os.path.join(tmp_dir, "test." + self.imageType)
-        open(img_path, "wb").write(self.content)
+        with open(img_path, "wb") as file:
+            file.write(self.content)
         img = Image.open(img_path)
         new_img_path = os.path.join(tmp_dir, "test." + new_format)
         img.save(new_img_path)
@@ -209,7 +225,8 @@ class Picture:
         """
         tmp_dir = tempfile.gettempdir()
         img_path = os.path.join(tmp_dir, "test." + self.imageType)
-        open(img_path, "wb").write(self.content)
+        with open(img_path, "wb") as file:
+            file.write(self.content)
         img = Image.open(img_path)
         img = img.resize((width, height))
         new_img_path = os.path.join(tmp_dir, "test." + self.imageType)
@@ -231,7 +248,27 @@ class Picture:
         """
         tmp_dir = tempfile.gettempdir()
         img_path = os.path.join(tmp_dir, "test." + self.imageType)
-        open(img_path, "wb").write(self.content)
+        with open(img_path, "wb") as file:
+            file.write(self.content)
+        img = Image.open(img_path)
+        img.save(path, save_all=(True if self.imageType in ["webp", "gif"] else False))
+        self.url = "file://" + path
+        return self
+
+    async def download(self, path: str) -> "Picture":
+        """
+        异步下载图片至本地。
+
+        Args:
+            path (str): 下载地址。
+
+        Returns:
+            Picture: `self`
+        """
+        tmp_dir = await anyio.gettempdir()
+        img_path = os.path.join(tmp_dir, "test." + self.imageType)
+        async with await anyio.open_file(img_path, "wb") as file:
+            await file.write(self.content)
         img = Image.open(img_path)
         img.save(path, save_all=(True if self.imageType in ["webp", "gif"] else False))
         self.url = "file://" + path
@@ -244,11 +281,9 @@ class Picture:
         Returns:
             dict: 图片链接/长宽/大小
         """
-        return [
-            {
-                "img_src": self.url,
-                "img_width": self.width,
-                "img_height": self.height,
-                "img_size": self.size,
-            }
-        ]
+        return {
+            "img_src": self.url,
+            "img_width": self.width,
+            "img_height": self.height,
+            "img_size": self.size,
+        }

@@ -248,7 +248,7 @@ from bilibili_api import garb
 | `ps` | `int` | 每页大小. Defaults to 20. |
 | `credential` | `Credential, optional` | 凭据类. Defaults to None. |
 
-**Returns:** `List[Tuple[dict, DLC | Garb]]`:  装扮/收藏集信息与装扮/收藏集对象列表
+**Returns:** `dict`:  调用 API 返回的结果
 
 
 
