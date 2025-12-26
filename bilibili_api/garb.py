@@ -5,7 +5,6 @@ bilibili_api.garb
 """
 
 from enum import Enum
-from typing import ClassVar
 
 from .utils.network import Api, Credential
 from .utils.utils import get_api
@@ -25,9 +24,9 @@ class GarbType(Enum):
     - CARD: 动态卡片
     """
 
-    GARB: ClassVar[dict[str, int]] = {"group_id": 0, "part_id": 6}
-    PENDANT: ClassVar[dict[str, int]] = {"group_id": 22, "part_id": 1}
-    CARD: ClassVar[dict[str, int]] = {"group_id": 5, "part_id": 2}
+    GARB = (0, 6)
+    PENDANT = (22, 1)
+    CARD = (5, 2)
 
 
 class GarbSortType(Enum):
@@ -100,7 +99,7 @@ class DLC:
         """
         return self.__act_id
 
-    def set_act_id(self, act_id: int) -> int:
+    def set_act_id(self, act_id: int) -> None:
         """
         设置 act_id
 
@@ -139,7 +138,7 @@ class DLC:
         """
         if not self.__lottery_id:
             await self.get_info()
-        return self.__lottery_id
+        return self.__lottery_id # type: ignore
 
     async def get_detail(self) -> dict:
         """
@@ -289,7 +288,7 @@ async def get_garb_dlc_items_raw(
         credential (Credential, optional): 凭据类. Defaults to None.
 
     Returns:
-        List[Tuple[dict, DLC | Garb]]: 装扮/收藏集信息与装扮/收藏集对象列表
+        dict: 调用 API 返回的结果
     """
     credential = credential if credential else Credential()
     api = API["common"]["list"]
@@ -298,8 +297,9 @@ async def get_garb_dlc_items_raw(
         "pn": pn,
         "ps": ps,
         "csrf": credential.get_core_cookies()["bili_jct"],
+        "group_id": type_.value[0],
+        "part_id": type_.value[1]
     }
-    params.update(type_.value)
     return await Api(**api, credential=credential).update_params(**params).result
 
 
@@ -309,7 +309,7 @@ async def get_garb_dlc_items_obj(
     pn: int = 1,
     ps: int = 20,
     credential: Credential | None = None,
-) -> dict:
+) -> list[DLC | Garb]:
     """
     装扮/收藏集列表
 
@@ -344,7 +344,7 @@ async def get_garb_dlc_items(
     pn: int = 1,
     ps: int = 20,
     credential: Credential | None = None,
-) -> dict:
+) -> list[tuple[dict, DLC | Garb]]:
     """
     装扮/收藏集列表
 

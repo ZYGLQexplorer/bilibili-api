@@ -663,12 +663,16 @@ class InteractiveVideo(Video):
             "Accept": "application/json, text/plain, */*",
         }
         data = parse.urlencode(form_data)
+        client = get_client()
         return (
-            await Api(**api, credential=credential, no_csrf=True)
-            .update_data(**data)
-            .update_headers(**headers)
-            .result
-        )
+            await client.request(
+                method="POST",
+                url=api["url"],
+                data=data,
+                cookies=await credential.get_cookies(),
+                headers=headers,
+            )
+        ).json()["data"]
 
     async def get_graph_version(self) -> int:
         """
@@ -747,7 +751,7 @@ class InteractiveVideo(Video):
         data = {"mark": score, "bvid": self.get_bvid()}
         return await Api(**api, credential=self.credential).update_data(**data).result
 
-    async def get_cid(self) -> int:
+    async def get_cid(self) -> int: # type: ignore
         """
         获取稿件 cid
         """
@@ -1190,7 +1194,9 @@ class InteractiveVideoDownloader(AsyncEvent):
             cid: int
             title: str
 
-            def __eq__(self, info: "node_info"):
+            def __eq__(self, info: object):
+                if not isinstance(info, node_info):
+                    return False
                 self.subs.sort()
                 info.subs.sort()
                 return (

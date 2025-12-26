@@ -150,7 +150,7 @@ async def get_list_by_area(
     """
     credential = credential if credential else Credential()
     api = API["info"]["list"]
-    parent_area_id = get_area_info_by_id(area_id)[0]["id"]
+    parent_area_id = get_area_info_by_id(area_id)[0]["id"] # type: ignore
     area_id = 0 if (get_area_info_by_id(area_id)[1] is None) else area_id
     params = {
         "platform": "web",

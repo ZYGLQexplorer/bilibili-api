@@ -243,3 +243,4 @@ async def game_name2id(game_name: str) -> str:
     for prop in wiki_page_template_content.split("|"):
         if prop.startswith("WIKI域名="):
             return prop.lstrip("WIKI域名=").rstrip()
+    return ""
