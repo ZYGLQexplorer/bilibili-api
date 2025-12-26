@@ -11,9 +11,20 @@ import os
 
 from .exceptions import ArgsException
 from .utils.network import Api, Credential
-from .utils.utils import get_api
+from .utils.utils import get_api, get_data
 
 API = get_api("video_zone")
+
+
+def get_zone_list_sub() -> dict:
+    """
+    获取所有分区的数据
+    含父子关系（即一层次只有主分区）
+
+    Returns:
+        dict: 所有分区的数据
+    """
+    return get_data("video_zone.json") # type: ignore
 
 
 def get_zone_info_by_tid(tid: int) -> tuple[dict | None, dict | None]:
@@ -26,10 +37,7 @@ def get_zone_info_by_tid(tid: int) -> tuple[dict | None, dict | None]:
     Returns:
         Tuple[dict | None, dict | None]: 第一个是主分区，第二个是子分区，没有时返回 None。
     """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/video_zone.json"), encoding="utf8"
-    ) as f:
-        channel = json.loads(f.read())
+    channel = get_zone_list_sub()
 
     for main_ch in channel:
         if "tid" not in main_ch:
@@ -58,10 +66,7 @@ def get_zone_info_by_name(name: str) -> tuple[dict | None, dict | None]:
     Returns:
         Tuple[dict | None, dict | None]: 第一个是主分区，第二个是子分区，没有时返回 None。
     """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/video_zone.json"), encoding="utf8"
-    ) as f:
-        channel = json.loads(f.read())
+    channel = get_zone_list_sub()
 
     for main_ch in channel:
         if name in main_ch["name"]:
@@ -107,10 +112,7 @@ def get_zone_list() -> list[dict]:
     Returns:
         List[dict]: 所有分区的数据
     """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/video_zone.json"), encoding="utf8"
-    ) as f:
-        channel = json.loads(f.read())
+    channel = get_zone_list_sub()
     channel_list = []
     for channel_big in channel:
         channel_big_copy = copy.copy(channel_big)
@@ -122,21 +124,6 @@ def get_zone_list() -> list[dict]:
                 channel_sub_copy["father"] = channel_big_copy
                 channel_list.append(channel_sub_copy)
     return channel_list
-
-
-def get_zone_list_sub() -> dict:
-    """
-    获取所有分区的数据
-    含父子关系（即一层次只有主分区）
-
-    Returns:
-        dict: 所有分区的数据
-    """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/video_zone.json"), encoding="utf8"
-    ) as f:
-        channel = json.loads(f.read())
-    return channel
 
 
 async def get_zone_videos_count_today(

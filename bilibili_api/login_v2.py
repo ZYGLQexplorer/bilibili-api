@@ -22,7 +22,7 @@ from .exceptions import GeetestException, LoginError
 from .utils.geetest import Geetest, GeetestType
 from .utils.network import Api, Credential, get_buvid, get_client
 from .utils.picture import Picture
-from .utils.utils import get_api, raise_for_statement, to_form_urlencoded
+from .utils.utils import get_api, get_data, raise_for_statement, to_form_urlencoded
 
 API = get_api("login")
 
@@ -110,11 +110,7 @@ def get_countries_list() -> list[dict]:
     Returns:
         List[dict]: 地区列表
     """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/countries_codes.json"),
-        encoding="utf8",
-    ) as f:
-        codes_list = json.loads(f.read())
+    codes_list = get_data("countries_codes.json")
     countries = []
     for country in codes_list:
         name = country["cname"]

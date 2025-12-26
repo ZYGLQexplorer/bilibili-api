@@ -6,11 +6,9 @@ bilibili_api.article_category
 
 import copy
 from enum import Enum
-import json
-import os
 
 from .utils.network import Api
-from .utils.utils import get_api
+from .utils.utils import get_api, get_data
 
 API = get_api("article-category")
 
@@ -33,6 +31,18 @@ class ArticleOrder(Enum):
     FAVORITES = 4
 
 
+def get_categories_list_sub() -> dict:
+    """
+    获取所有分区的数据
+
+    含父子关系（即一层次只有主分区）
+
+    Returns:
+        dict: 所有分区的数据
+    """
+    return get_data("article_category.json") # type: ignore
+
+
 def get_category_info_by_id(id: int) -> tuple[dict | None, dict | None]:
     """
     获取专栏分类信息
@@ -43,11 +53,7 @@ def get_category_info_by_id(id: int) -> tuple[dict | None, dict | None]:
     Returns:
         Tuple[dict | None, dict | None]: 第一个是主分区，第二个是字分区。没有找到则为 (None, None)
     """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/article_category.json"),
-        encoding="utf-8",
-    ) as f:
-        data = json.loads(f.read())
+    data = get_categories_list_sub()
 
     for main_category in data:
         if main_category["id"] == id:
@@ -69,11 +75,7 @@ def get_category_info_by_name(name: str) -> tuple[dict | None, dict | None]:
     Returns:
         Tuple[dict | None, dict | None]: 第一个是主分区，第二个是字分区。没有找到则为 (None, None)
     """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/article_category.json"),
-        encoding="utf-8",
-    ) as f:
-        data = json.loads(f.read())
+    data = get_categories_list_sub()
 
     for main_category in data:
         if main_category["name"] == name:
@@ -92,11 +94,8 @@ def get_categories_list() -> list[dict]:
     Returns:
         List[dict]: 所有分区的数据
     """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/article_category.json"),
-        encoding="utf-8",
-    ) as f:
-        data = json.loads(f.read())
+    data = get_categories_list_sub()
+
     categories_list = []
     for main_category in data:
         main_category_copy = copy.copy(main_category)
@@ -107,22 +106,6 @@ def get_categories_list() -> list[dict]:
             sub_category_copy["father"] = main_category_copy
             categories_list.append(sub_category_copy)
     return categories_list
-
-
-def get_categories_list_sub() -> dict:
-    """
-    获取所有分区的数据
-
-    含父子关系（即一层次只有主分区）
-
-    Returns:
-        dict: 所有分区的数据
-    """
-    with open(
-        os.path.join(os.path.dirname(__file__), "data/article_category.json"),
-        encoding="utf-8",
-    ) as f:
-        return json.loads(f.read())
 
 
 async def get_category_recommend_articles(

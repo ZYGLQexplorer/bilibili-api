@@ -27,7 +27,7 @@ from .utils.aid_bvid_transformer import bvid2aid
 from .utils.AsyncEvent import AsyncEvent
 from .utils.network import Api, Credential, get_client, request_settings
 from .utils.picture import Picture
-from .utils.utils import get_api
+from .utils.utils import get_api, get_data
 from .video import Video
 
 _API = get_api("video_uploader")
@@ -68,11 +68,7 @@ class Lines(Enum):
     BLDSA = "bldsa"
 
 
-with open(
-    os.path.join(os.path.dirname(__file__), "data/video_uploader_lines.json"),
-    encoding="utf8",
-) as f:
-    LINES_INFO = json.loads(f.read())
+LINES_INFO = get_data("video_uploader_lines.json")
 
 
 async def _probe() -> dict:
@@ -583,14 +579,8 @@ class VideoMeta:
         """
         检查 tid 是否合法
         """
-        with open(
-            os.path.join(
-                os.path.dirname(__file__), "data/video_uploader_meta_pre.json"
-            ),
-            encoding="utf8",
-        ) as f:
-            self.__pre_info = json.load(f)
-        type_list = self.__pre_info["tid_list"]
+        self.__pre_info = get_data("video_uploader_meta_pre.json")
+        type_list = self.__pre_info["tid_list"] # type: ignore
         for parent_type in type_list:
             for child_type in parent_type["children"]:
                 if child_type["id"] == self.tid:

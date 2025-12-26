@@ -39,6 +39,29 @@ def get_api(field: str, *args) -> dict:
         return {}
 
 
+def get_data(route: str) -> dict | list:
+    """
+    获取 data 目录下数据
+
+    Args:
+        route (str): 路径
+
+    Returns:
+        dict | list: 数据
+    """
+    path = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__), "..", "data", route
+        )
+    )
+    if os.path.exists(path):
+        with open(path, encoding="utf8") as f:
+            data = json.load(f)
+            return data
+    else:
+        return {}
+
+
 def crack_uid(crc32: str):
     """
     弹幕中的 CRC32 ID 转换成用户 UID。
