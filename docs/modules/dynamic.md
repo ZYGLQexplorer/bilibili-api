@@ -750,6 +750,7 @@ scene 参数
 | name | type | description |
 | - | - | - |
 | `info` | `BuildDynamic` | 动态内容 |
+| `web_repost_src` | `str \| None` | 动态转发源. Defaults to None. |
 | `credential` | `Credential` | 凭据 |
 
 **Returns:** `dict`:  调用 API 返回的结果

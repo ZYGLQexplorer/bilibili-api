@@ -18,7 +18,7 @@ class Audio:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, auid: int, credential: Credential | None = None):
+    def __init__(self, auid: int, credential: Credential | None = None) -> None:
         """
         Args:
             auid       (int)                        : 音频 AU 号
@@ -107,7 +107,7 @@ class AudioList:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, amid: int, credential: Credential | None = None):
+    def __init__(self, amid: int, credential: Credential | None = None) -> None:
         """
         Args:
             amid       (int)                        : 歌单 ID

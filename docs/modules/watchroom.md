@@ -48,7 +48,9 @@ from bilibili_api import watchroom
 ### def \_\_init\_\_()
 
 
-
+| name | type | description |
+| - | - | - |
+| `messages` | `MessageSegment \| str` | 消息片段。请按 *args 传入。 |
 
 
 ---
@@ -285,7 +287,7 @@ from bilibili_api import watchroom
 | name | type | description |
 | - | - | - |
 | `season_id` | `int` | 每季度的 ID |
-| `ep_id` | `int` | 剧集 ID |
+| `episode_id` | `int` | 剧集 ID |
 | `is_open` | `bool` | 是否公开 |
 | `credential` | `Credential` | 凭据 |
 
@@ -304,7 +306,8 @@ from bilibili_api import watchroom
 | name | type | description |
 | - | - | - |
 | `season_id` | `int` | 季度 ID |
-| `season_type` | `str` | 季度类型 |
+| `season_type` | `SeasonType` | 季度类型 |
+| `credential` | `Credential` | 凭据类 |
 
 **Returns:** `Watchroom`:  放映室
 

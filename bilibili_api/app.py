@@ -20,7 +20,7 @@ async def get_loading_images(
     build: int = 999999999,
     birth: str = "",
     credential: Credential | None = None,
-):
+) -> dict:
     """
     获取开屏启动画面
 
@@ -62,7 +62,7 @@ async def get_loading_images_special(
     height: int = 1920,
     width: int = 1080,
     credential: Credential | None = None,
-):
+) -> dict:
     """
     获取特殊开屏启动画面
 

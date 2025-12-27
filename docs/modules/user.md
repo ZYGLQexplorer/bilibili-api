@@ -405,8 +405,8 @@ medialist排序顺序。
 | - | - | - |
 | `sid` | `int` | 频道的 season_id |
 | `sort` | `ChannelOrder` | 排序方式 |
-| `pn` | `int` | 页数，默认为 1 |
-| `ps` | `int` | 每一页显示的视频数量 |
+| `pn` | `int` | 页数. Defaults to 1. |
+| `ps` | `int` | 每一页显示的视频数量. Defaults to 100. |
 
 **Returns:** `dict`:  调用接口返回的内容
 
@@ -421,8 +421,9 @@ medialist排序顺序。
 | name | type | description |
 | - | - | - |
 | `sid` | `int` | 频道的 series_id |
-| `pn` | `int` | 页数，默认为 1 |
-| `ps` | `int` | 每一页显示的视频数量 |
+| `sort` | `ChannelOrder` | 排序方式. Defaults to ChannelOrder.DEFAULT. |
+| `pn` | `int` | 页数. Defaults to 1. |
+| `ps` | `int` | 每一页显示的视频数量. Defaults to 100. |
 
 **Returns:** `dict`:  调用接口返回的内容
 
@@ -725,6 +726,8 @@ medialist排序顺序。
 | - | - | - |
 | `qa_id` | `int` | 充电问答的唯一 ID，可从`get_upower_qa_list` 返回的数据中获取。 |
 
+**Returns:** `dict`:  调用接口返回的内容。
+
 
 
 
@@ -978,6 +981,9 @@ medialist排序顺序。
 获取自己的硬币数量。
 
 
+| name | type | description |
+| - | - | - |
+| `credential` | `Credential` | 凭据类。 |
 
 **Returns:** `int`:  硬币数量
 
@@ -1046,10 +1052,11 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | Credential |
-| `_type` | `HistroyType` | 历史记录分类, 默认为 HistroyType.ALL |
-| `ps` | `int` | 每页多少条历史记录, 默认为 20 |
+| `_type` | `HistroyType` | 历史记录分类. Defaults to HistroyType.ALL. |
+| `ps` | `int` | 每页多少条历史记录. Defaults to 20. |
 | `view_at` | `int` | 时间戳，获取此时间戳之前的历史记录 |
 | `max` | `int` | 历史记录截止目标 oid |
+| `business` | `HistoryBusinessType \| None` | 历史记录分类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -1077,6 +1084,11 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 获取自己风纪委员信息
 
 
+| name | type | description |
+| - | - | - |
+| `credential` | `Credential` | 凭证。 |
+
+**Returns:** `dict`:  调用 API 返回的结果
 
 
 

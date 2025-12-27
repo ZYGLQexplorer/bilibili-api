@@ -220,7 +220,7 @@ class PhoneNumber:
     手机号类
     """
 
-    def __init__(self, number: str, country: str | int = "+86"):
+    def __init__(self, number: str, country: str | int = "+86") -> None:
         """
         Args:
             number(str): 手机号
@@ -531,7 +531,7 @@ class LoginCheck:
     验证类，如果密码登录需要验证会返回此类
     """
 
-    def __init__(self, check_url: str):
+    def __init__(self, check_url: str) -> None:
         """
         Args:
             check_url (str): 验证链接

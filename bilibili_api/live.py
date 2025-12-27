@@ -112,7 +112,9 @@ class LiveRoom:
         room_display_id (int)       : 房间展示 id
     """
 
-    def __init__(self, room_display_id: int, credential: Credential | None = None):
+    def __init__(
+        self, room_display_id: int, credential: Credential | None = None
+    ) -> None:
         """
         Args:
             room_display_id (int)                 : 房间展示 ID（即 URL 中的 ID）
@@ -423,6 +425,9 @@ class LiveRoom:
         """
         获取黑名单列表
 
+        Args:
+            page (int): 页码. Defaults to 1.
+
         Returns:
             dict: 调用 API 返回的结果
         """
@@ -536,7 +541,7 @@ class LiveRoom:
         return await Api(**api, credential=self.credential).update_data(**data).result
 
     async def send_danmaku(
-        self, danmaku: Danmaku, room_id: int | None = None, reply_mid: int | None = None
+        self, danmaku: Danmaku, reply_mid: int | None = None
     ) -> dict:
         """
         直播间发送弹幕
@@ -552,8 +557,7 @@ class LiveRoom:
         self.credential.raise_for_no_sessdata()
 
         api = API["operate"]["send_danmaku"]
-        if not room_id:
-            room_id = (await self.get_room_play_info())["room_id"]
+        room_id = await self.get_room_id()
 
         data = {
             "mode": danmaku.mode,
@@ -568,9 +572,7 @@ class LiveRoom:
             data["reply_mid"] = reply_mid
         return await Api(**api, credential=self.credential).update_data(**data).result
 
-    async def send_emoticon(
-        self, emoticon: Danmaku, room_id: int | None = None
-    ) -> dict:
+    async def send_emoticon(self, emoticon: Danmaku) -> dict:
         """
         直播间发送表情包
 
@@ -583,8 +585,7 @@ class LiveRoom:
         self.credential.raise_for_no_sessdata()
 
         api = API["operate"]["send_emoticon"]
-        if not room_id:
-            room_id = (await self.get_room_play_info())["room_id"]
+        room_id = await self.get_room_id()
 
         data = {
             "mode": emoticon.mode,
@@ -1360,7 +1361,7 @@ class LiveDanmaku(AsyncEvent):
         max_retry: int = 5,
         retry_after: float = 1,
         max_retry_for_credential: int = 5,
-    ):
+    ) -> None:
         """
         Args:
             room_display_id (int)                        : 房间展示 ID
@@ -1827,6 +1828,9 @@ async def get_self_info(credential: Credential) -> dict:
     """
     获取自己直播等级、排行等信息
 
+    Args:
+        credential (Credential): 凭据类
+
     Returns:
         dict: 调用 API 返回的结果
     """
@@ -1839,6 +1843,9 @@ async def get_self_info(credential: Credential) -> dict:
 async def get_self_live_info(credential: Credential) -> dict:
     """
     获取自己的粉丝牌、大航海等信息
+
+    Args:
+        credential (Credential): 凭据类
 
     Returns:
         dict: 调用 API 返回的结果
@@ -1889,6 +1896,9 @@ async def get_self_bag(credential: Credential) -> dict:
     """
     获取自己的直播礼物包裹信息
 
+    Args:
+        credential (Credential): 凭据类。
+
     Returns:
         dict: 调用 API 返回的结果
     """
@@ -1903,7 +1913,7 @@ async def get_gift_config(
     room_id: int | None = None,
     area_id: int | None = None,
     area_parent_id: int | None = None,
-):
+) -> dict:
     """
     获取所有礼物的信息，包括礼物 id、名称、价格、等级等。
 
@@ -2004,6 +2014,8 @@ async def create_live_reserve(
         title (str)         : 直播间标题
 
         start_time (int)    : 开播时间戳
+
+        credential (Credential): 凭据类
 
     Returns:
         dict: 调用 API 返回的结果

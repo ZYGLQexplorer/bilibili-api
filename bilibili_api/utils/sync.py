@@ -29,7 +29,7 @@ def sync(
     同步执行异步函数，使用可参考 [同步执行异步代码](https://nemo2011.github.io/bilibili-api/#/sync-executor)
 
     Args:
-        obj (Coroutine | Future): 异步函数
+        coroutine (Coroutine | Future): 异步函数
 
     Returns:
         Any: 该异步函数的返回值

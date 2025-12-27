@@ -447,6 +447,10 @@ page_index 和 cid 至少提供其中一个，其中 cid 优先级最高
 获取实时在线人数
 
 
+| name | type | description |
+| - | - | - |
+| `page_index` | `int \| None, optional` | 分 P 号，从 0 开始。Defaults to None |
+| `cid` | `int \| None, optional` | 分 P 的 ID。Defaults to None |
 
 **Returns:** `dict`:  调用 API 返回的结果。
 
@@ -1237,6 +1241,9 @@ CONNECTED:  成功连接。 CallbackData: None。
 获取 cid 信息 (对应的视频，具体分 P 序号，up 等)
 
 
+| name | type | description |
+| - | - | - |
+| `cid` | `int` | CID |
 
 **Returns:** `dict`:  调用 https//hd.biliplus.com 的 API 返回的结果
 

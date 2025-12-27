@@ -67,6 +67,9 @@ async def get_timeline(type_: BangumiType, before: int = 7, after: int = 0) -> d
         type_(BangumiType): 番剧类型
         before(int)       : 几天前开始(0~7), defaults to 7
         after(int)        : 几天后结束(0~7), defaults to 0
+
+    Returns:
+        dict: 调用 API 返回的结果
     """
     api = API["info"]["timeline"]
     params = {"types": type_.value, "before": before, "after": after}
@@ -189,9 +192,9 @@ class IndexFilter:
 
             end   (datetime, str, int): 结束时间. 如果是 None 则不设置结尾.
 
-            include_start (bool): 是否包含开始时间. 默认为 True.
+            include_start (bool): 是否包含开始时间. Defaults to True.
 
-            include_end   (bool): 是否包含结束时间. 默认为 False.
+            include_end   (bool): 是否包含结束时间. Defaults to False.
 
         Returns:
             str: 年代条件
@@ -808,8 +811,6 @@ class IndexFilterMeta:
 
                 payment (Index_Filter.Payment): 付费门槛
 
-                season (Index_Filter.Season): 季度
-
                 release_date (str): 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取
 
                 style (Index_Filter.Style.Movie): 风格
@@ -835,11 +836,11 @@ class IndexFilterMeta:
             """
             Documentary Meta
             Args:
-                area (Index_Filter.Area): 地区
-
                 release_date (str): 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取
 
                 style (Index_Filter.Style.Documentary): 风格
+
+                payment (Index_Filter.Payment.ALL): 观看条件
 
                 producer (Index_Filter.Producer): 制作方
             """
@@ -1270,6 +1271,9 @@ class Bangumi:
     async def get_episodes(self) -> list["Episode"]:
         """
         获取番剧所有的剧集，自动生成类。
+
+        Returns:
+            list[Episode]: 剧集类列表
         """
         global episode_data_cache
         episode_list = await self.get_episode_list()
@@ -1377,7 +1381,7 @@ class Episode(Video):
         self,
         epid: int,
         credential: Credential | None = None,
-    ):
+    ) -> None:
         """
         Args:
             epid       (int)                 : 番剧 epid
@@ -1457,6 +1461,9 @@ class Episode(Video):
     def get_epid(self) -> int:
         """
         获取 epid
+
+        Returns:
+            int: epid
         """
         return self.__epid
 

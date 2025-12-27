@@ -63,7 +63,7 @@ class Note:
         note_id: int | None = None,
         note_type: NoteType = NoteType.PUBLIC,
         credential: Credential | None = None,
-    ):
+    ) -> None:
         """
         Args:
             cvid       (int)                  : 公开笔记 ID (对应专栏的 cvid) (公开笔记必要)

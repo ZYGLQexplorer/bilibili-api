@@ -61,7 +61,7 @@ class MessageSegment:
         is_emoji (bool): 是否为表情包
     """
 
-    def __init__(self, msg: str, is_emoji: bool = False):
+    def __init__(self, msg: str, is_emoji: bool = False) -> None:
         """
         Args:
             msg (str): 信息
@@ -81,10 +81,11 @@ class Message:
     消息集合
     """
 
-    def __init__(self, *messages: MessageSegment | str):
+    def __init__(self, *messages: MessageSegment | str) -> None:
         """
+        Args:
+            messages (MessageSegment | str): 消息片段。请按 *args 传入。
         """
-        # don't remove this empty docstring
         self.msg_list: list[MessageSegment] = []
         for msg in messages:
             if isinstance(msg, str):
@@ -376,7 +377,7 @@ async def create(
 
         season_id (int): 每季度的 ID
 
-        ep_id (int): 剧集 ID
+        episode_id (int): 剧集 ID
 
         is_open (bool): 是否公开
 
@@ -417,7 +418,9 @@ async def match(
 
         season_id (int): 季度 ID
 
-        season_type (str): 季度类型
+        season_type (SeasonType): 季度类型
+
+        credential (Credential): 凭据类
 
     Returns:
         Watchroom: 放映室

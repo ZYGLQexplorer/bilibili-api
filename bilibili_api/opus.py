@@ -26,7 +26,7 @@ class Opus:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, opus_id: int, credential: Credential | None = None):
+    def __init__(self, opus_id: int, credential: Credential | None = None) -> None:
         """
         Args:
             opus_id (int): 图文 id
@@ -87,7 +87,7 @@ class Opus:
         """
         return dynamic.Dynamic(dynamic_id=self.__id, credential=self.credential)
 
-    async def get_info(self):
+    async def get_info(self) -> None:
         """
         获取图文基本信息
 

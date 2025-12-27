@@ -59,7 +59,7 @@ class ChannelSeries:
         type_: ChannelSeriesType = ChannelSeriesType.SERIES,
         id_: int = -1,
         credential: Credential | None = None,
-    ):
+    ) -> None:
         """
         Args:
             uid (int)                       : 用户 uid. Defaults to -1.
@@ -152,9 +152,9 @@ class ChannelSeries:
         Args:
             sort(ChannelOrder): 排序方式
 
-            pn(int)           : 页数，默认为 1
+            pn(int)           : 页数. Defaults to 1.
 
-            ps(int)           : 每一页显示的视频数量
+            ps(int)           : 每一页显示的视频数量. Defaults to 100.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -319,6 +319,9 @@ async def set_follow_channel_season(
         status    (bool): 是否订阅状态. Defaults to True.
 
         credential (Credential | None): 凭据类。 Defaults to None.
+
+    Returns:
+        dict: 调用 API 返回的结果
     """
     credential = credential if credential else Credential()
     api = API["operate"]["fav"] if status else API["operate"]["unfav"]

@@ -310,6 +310,9 @@ Events:
 获取黑名单列表
 
 
+| name | type | description |
+| - | - | - |
+| `page` | `int` | 页码. Defaults to 1. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -753,6 +756,7 @@ Events:
 | - | - | - |
 | `title` | `str` | 直播间标题 |
 | `start_time` | `int` | 开播时间戳 |
+| `credential` | `Credential` | 凭据类 |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -818,6 +822,9 @@ Events:
 获取自己的直播礼物包裹信息
 
 
+| name | type | description |
+| - | - | - |
+| `credential` | `Credential` | 凭据类。 |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -858,6 +865,9 @@ pages = math.ceil(info['data']['guards'] / 10)
 获取自己直播等级、排行等信息
 
 
+| name | type | description |
+| - | - | - |
+| `credential` | `Credential` | 凭据类 |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -871,6 +881,9 @@ pages = math.ceil(info['data']['guards'] / 10)
 获取自己的粉丝牌、大航海等信息
 
 
+| name | type | description |
+| - | - | - |
+| `credential` | `Credential` | 凭据类 |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

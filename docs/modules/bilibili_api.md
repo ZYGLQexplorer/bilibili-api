@@ -229,7 +229,8 @@ API 基类异常。
 | name | type | description |
 | - | - | - |
 | `name` | `str` | 事件名。 |
-| `*args, **kwargs` | `Any` | 要传递给函数的参数。 |
+| `args` | `Any` | 要传递给函数的参数。 *args 传递。 |
+| `kwargs` | `Any` | 要传递给函数的参数。 **kwargs 传递。 |
 
 
 
@@ -681,6 +682,7 @@ Cookies 刷新错误。
 | `dedeuserid_ckmd5` | `str \| None, optional` | 浏览器 Cookies 中的 DedeUserID__ckMd5 字段值. Defaults to None. |
 | `sid` | `str \| None, optional` | 浏览器 Cookies 中的 sid 字段值. Defaults to None. |
 | `ac_time_value` | `str \| None, optional` | 浏览器 localStorage 中的 ac_time_value 字段值. Defaults to None. |
+| `kwargs` | `Any, optional` | 其他用户可自行添加的 cookies。通过 **kwargs 传入。 |
 
 
 ### async def check_refresh()
@@ -822,7 +824,7 @@ Cookies 刷新错误。
 
 ### def raise_for_no_buvid4()
 
-没有提供 buvid3 时抛出异常。
+没有提供 buvid4 时抛出异常。
 
 
 
@@ -2125,7 +2127,7 @@ async def handle(desc: str, data: dict) -> None:
 
 
 
-**Returns:** `bool`:  是否使用全局可持久化 bili_ticket. Defalts to False.
+**Returns:** `bool`:  是否使用全局可持久化 bili_ticket. Defaults to False.
 
 
 
@@ -2136,7 +2138,7 @@ async def handle(desc: str, data: dict) -> None:
 
 
 
-**Returns:** `bool`:  是否使用全局可持久化 buvid. Defalts to False.
+**Returns:** `bool`:  是否使用全局可持久化 buvid. Defaults to False.
 
 
 
@@ -2361,7 +2363,7 @@ async def handle(desc: str, data: dict) -> None:
 
 | name | type | description |
 | - | - | - |
-| `verify_ssl` | `bool` | `trust_env` |
+| `trust_env` | `bool` | `trust_env` |
 
 
 
@@ -2427,7 +2429,7 @@ async def handle(desc: str, data: dict) -> None:
 
 | name | type | description |
 | - | - | - |
-| `obj` | `Coroutine \| Future` | 异步函数 |
+| `coroutine` | `Coroutine \| Future` | 异步函数 |
 
 **Returns:** `Any`:  该异步函数的返回值
 

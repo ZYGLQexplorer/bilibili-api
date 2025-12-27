@@ -191,7 +191,7 @@ async def search_by_type(
         order_type       (OrderUser | OrderLiveRoom | OrderArticle | OrderVideo | None, optional): 排序分类类型
         time_range       (int, optional)                                                         : 指定时间，自动转换到指定区间，只在视频类型下生效 有四种：10分钟以下，10-30分钟，30-60分钟，60分钟以上
         video_zone_type  (int | ZoneTypes | None, optional)                                      : 话题类型，指定 tid (可使用 video_zone 模块查询)
-        order_sort       (int | None, optional)                                                  : 用户粉丝数及等级排序顺序 默认为0 由高到低：0 由低到高：1
+        order_sort       (int | None, optional)                                                  : 用户粉丝数及等级排序顺序 由高到低：0 由低到高：1 Defaults to 0.
         category_id      (CategoryTypeArticle | CategoryTypePhoto | int | None, optional)        : 专栏/相簿分区筛选，指定分类，只在相册和专栏类型下生效
         time_start       (str, optional)                                                         : 指定开始时间，与结束时间搭配使用，格式为："YYYY-MM-DD"
         time_end         (str, optional)                                                         : 指定结束时间，与开始时间搭配使用，格式为："YYYY-MM-DD"
@@ -310,8 +310,11 @@ async def search_games(keyword: str) -> dict:
 
 
 async def search_manga(
-    keyword: str, page_num: int = 1, page_size: int = 9, credential: Credential | None = None
-):
+    keyword: str,
+    page_num: int = 1,
+    page_size: int = 9,
+    credential: Credential | None = None,
+) -> dict:
     """
     搜索漫画特用函数
 
@@ -340,7 +343,7 @@ async def search_cheese(
     page_num: int = 1,
     page_size: int = 30,
     order: OrderCheese = OrderCheese.RECOMMEND,
-):
+) -> dict:
     """
     搜索课程特用函数
 

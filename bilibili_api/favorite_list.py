@@ -108,7 +108,7 @@ class FavoriteList:
         """
         return self.__type
 
-    async def get_info(self):
+    async def get_info(self) -> dict:
         """
         获取收藏夹信息。
 
@@ -130,7 +130,7 @@ class FavoriteList:
         keyword: str | None = None,
         order: FavoriteListContentOrder = FavoriteListContentOrder.MTIME,
         mode: SearchFavoriteListMode = SearchFavoriteListMode.ONLY,
-        tid=0,
+        tid: int = 0,
     ) -> dict:
         """
         获取视频收藏夹内容。
@@ -628,6 +628,9 @@ async def get_favorite_collected(
         ps         (int, optional)                     : 每页数据大小. Defaults to 20.
 
         credential (Credential | None, optional)       : Credential. Defaults to None.
+
+    Returns:
+        dict: 调用 API 返回的结果。
     """
     credential = credential if credential else Credential()
     api = API["info"]["collected"]

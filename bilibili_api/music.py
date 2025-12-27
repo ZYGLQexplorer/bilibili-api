@@ -3,7 +3,9 @@ bilibili_api.music
 
 音乐相关 API
 
-注意: 目前 B 站的音频并不和 B 站的音乐相关信息互通。这里的 Music 类的数据来源于视频下面的 bgm 标签和全站音乐榜中的每一个 bgm/音乐。get_homepage_recommend 和 get_music_index_info 来源于 https://www.bilibili.com/v/musicplus/
+注意: 目前 B 站的音频并不和 B 站的音乐相关信息互通。
+这里的 Music 类的数据来源于视频下面的 bgm 标签和全站音乐榜中的每一个 bgm/音乐。
+get_homepage_recommend 和 get_music_index_info 来源于 https://www.bilibili.com/v/musicplus/
 """
 
 from enum import Enum
@@ -104,7 +106,7 @@ class MusicIndexTags:
         OTHER = 23
 
 
-async def get_homepage_recommend(credential: Credential | None = None):
+async def get_homepage_recommend(credential: Credential | None = None) -> dict:
     """
     获取音频首页推荐
 
@@ -142,6 +144,9 @@ async def get_music_index_info(
         page_num  (int)                 : 页码. Defaults to 1.
 
         page_size (int)                 : 每页的数据大小. Defaults to 10.
+
+    Returns:
+        dict: 调用 API 返回的结果
     """
     api = API_audio["audio_info"]["audio_list"]
     params = {
@@ -164,7 +169,7 @@ class Music:
     其中音乐的 ID 为 `video.get_tags` 返回值数据中的 `music_id` 键值
     """
 
-    def __init__(self, music_id: str):
+    def __init__(self, music_id: str) -> None:
         """
         Args:
             music_id (str): 音乐 id，例如 MA436038343856245020
@@ -180,7 +185,7 @@ class Music:
         """
         return self.__music_id
 
-    async def get_info(self):
+    async def get_info(self) -> dict:
         """
         获取音乐信息
 
@@ -191,7 +196,7 @@ class Music:
         params = {"music_id": self.__music_id}
         return await Api(**api).update_params(**params).result
 
-    async def get_music_videos(self):
+    async def get_music_videos(self) -> dict:
         """
         获取音乐的音乐视频
 

@@ -478,6 +478,7 @@ lrc (Optional[str]): 歌词
 | name | type | description |
 | - | - | - |
 | `lrc` | `str` | 歌词 |
+| `song_id` | `int` | 音频 id |
 | `credential` | `Credential` | 凭据 |
 
 

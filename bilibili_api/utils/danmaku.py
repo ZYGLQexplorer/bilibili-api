@@ -76,7 +76,7 @@ class Danmaku:
         pool: int = 0,
         attr: int = -1,
         uid: int = -1,
-    ):
+    ) -> None:
         """
         大会员专属颜色文字填充：http://i0.hdslb.com/bfs/dm/9dcd329e617035b45d2041ac889c49cb5edd3e44.png
 
@@ -139,7 +139,7 @@ class Danmaku:
         return len(self.text)
 
     @staticmethod
-    def crack_uid(crc32_id: str):
+    def crack_uid(crc32_id: str) -> int:
         """
         (@staticmethod)
 
@@ -155,7 +155,7 @@ class Danmaku:
         """
         return int(_crack_uid(crc32_id))
 
-    def to_xml(self):
+    def to_xml(self) -> str:
         """
         将弹幕转换为 xml 格式弹幕
 
@@ -171,6 +171,7 @@ class SpecialDanmaku:
     """
     特殊弹幕，含 BAS / 代码弹幕等。
     """
+
     def __init__(
         self,
         content: str,
@@ -178,7 +179,7 @@ class SpecialDanmaku:
         id_str: str = "",
         mode: DmMode | int = DmMode.SPECIAL,
         pool: int = 2,
-    ):
+    ) -> None:
         """
         Args:
             content (str)               : 弹幕内容

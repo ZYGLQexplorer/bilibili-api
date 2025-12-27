@@ -142,7 +142,7 @@ class Manga:
         credential (Credential): 凭据类。
     """
 
-    def __init__(self, manga_id: int, credential: Credential | None = None):
+    def __init__(self, manga_id: int, credential: Credential | None = None) -> None:
         """
         Args:
             manga_id   (int)              : 漫画 id
@@ -379,6 +379,9 @@ async def set_follow_manga(
         status     (bool)      : 设置是否追漫。是为 True，否为 False。Defaults to True.
 
         credential (Credential | None): 凭据类。
+
+    Returns:
+        dict: 调用 API 返回的结果
     """
     if credential is None:
         if manga.credential.has_sessdata() and manga.credential.has_bili_jct():
@@ -543,7 +546,7 @@ async def get_manga_update(
     获取更新推荐的漫画
 
     Args:
-        date (Union[str, datetime.datetime]): 日期，默认为今日。
+        date (Union[str, datetime.datetime]): 日期。Defaults to datetime.datetime.now()
 
         pn   (int)                          : 页码。Defaults to 1.
 

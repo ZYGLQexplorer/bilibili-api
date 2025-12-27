@@ -230,9 +230,12 @@ class BuildDynamic:
         self.time: datetime | None = None
 
     @staticmethod
-    def empty():
+    def empty() -> "BuildDynamic":
         """
         新建空的动态以链式逐步构建
+
+        Returns:
+            BuildDynamic: `self`
         """
         return BuildDynamic()
 
@@ -244,7 +247,7 @@ class BuildDynamic:
         vote_id: int = -1,
         live_reserve_id: int = -1,
         send_time: datetime | None = None,
-    ):
+    ) -> "BuildDynamic":
         """
         通过参数构建动态
 
@@ -260,6 +263,9 @@ class BuildDynamic:
             live_reserve_id (int            , optional): 直播预约 oid. 通过 `live.create_live_reserve` 获取. Defaults to -1.
 
             send_time       (datetime | None, optional): 发送时间. Defaults to None.
+
+        Returns:
+            BuildDynamic: `self`
         """
         dyn = BuildDynamic()
         dyn.add_text(text)
@@ -280,6 +286,9 @@ class BuildDynamic:
 
         Args:
             text (str): 文本内容
+
+        Returns:
+            BuildDynamic: `self`
         """
         self.contents.append(
             {"biz_id": "", "type": DynamicContentType.TEXT.value, "raw_text": text}
@@ -293,6 +302,9 @@ class BuildDynamic:
         Args:
             uid   (int): 用户ID
             uname (str): 用户名称. Defaults to "".
+
+        Returns:
+            BuildDynamic: `self`
         """
         self.contents.append(
             {
@@ -309,6 +321,9 @@ class BuildDynamic:
 
         Args:
             emoji (str): 表情文字
+
+        Returns:
+            BuildDynamic: `self`
         """
         self.contents.append(
             {
@@ -325,6 +340,9 @@ class BuildDynamic:
 
         Args:
             vote_id (int): 投票对象
+
+        Returns:
+            BuildDynamic: `self`
         """
         self.contents.append(
             {
@@ -341,6 +359,9 @@ class BuildDynamic:
 
         Args:
             image (Picture | List[Picture]): 图片类
+
+        Returns:
+            BuildDynamic: `self`
         """
         if isinstance(image, Picture):
             image = [image]
@@ -353,6 +374,9 @@ class BuildDynamic:
 
         Args:
             text (str): 文本内容
+
+        Returns:
+            BuildDynamic: `self`
         """
 
         def _get_ats(text: str) -> list:
@@ -462,6 +486,9 @@ class BuildDynamic:
 
         Args:
             oid (int): 卡片oid
+
+        Returns:
+            BuildDynamic: `self`
         """
         self.attach_card = {
             "type": 14,
@@ -477,6 +504,9 @@ class BuildDynamic:
 
         Args:
             topic_id (int): 话题ID
+
+        Returns:
+            BuildDynamic: `self`
         """
         self.topic = {"id": topic_id}
         return self
@@ -491,6 +521,9 @@ class BuildDynamic:
             up_choose_comment	(bool): 	精选评论flag
 
             close_comment	    (bool): 	关闭评论flag
+
+        Returns:
+            BuildDynamic: `self`
         """
         if up_choose_comment:
             self.options["up_choose_comment"] = 1
@@ -498,12 +531,15 @@ class BuildDynamic:
             self.options["close_comment"] = 1
         return self
 
-    def set_send_time(self, time: datetime):
+    def set_send_time(self, time: datetime) -> "BuildDynamic":
         """
         设置发送时间
 
         Args:
             time (datetime): 发送时间
+
+        Returns:
+            BuildDynamic: `self`
         """
         self.time = time
         return self
@@ -598,12 +634,16 @@ class BuildDynamic:
         return self.options
 
 
-async def send_dynamic(info: BuildDynamic, credential: Credential, web_repost_src=None):
+async def send_dynamic(
+    info: BuildDynamic, credential: Credential, web_repost_src: str | None = None
+) -> dict:
     """
     发送动态
 
     Args:
         info (BuildDynamic): 动态内容
+
+        web_repost_src (str | None): 动态转发源. Defaults to None.
 
         credential (Credential): 凭据
 
@@ -620,7 +660,7 @@ async def send_dynamic(info: BuildDynamic, credential: Credential, web_repost_sr
         )
 
     api = API["send"]["instant"]
-    data = {
+    data: dict = {
         "dyn_req": {
             "content": {
                 "contents": await info.get_contents(credential=credential)

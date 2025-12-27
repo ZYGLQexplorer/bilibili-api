@@ -169,7 +169,7 @@ class Garb:
     def __init__(self, item_id: int, credential: Credential | None = None) -> None:
         """
         Args:
-            act_id (int): 装扮的 item_id。(可通过 garb.search_garb_dlc_raw 获取)
+            item_id (int): 装扮的 item_id。(可通过 garb.search_garb_dlc_raw 获取)
             credential (Credential | None, optional): 凭据类。Defaults to None.
         """
         self.__item_id = item_id

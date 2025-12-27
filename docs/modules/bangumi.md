@@ -1055,8 +1055,8 @@ start 或 end 为 None 时则表示不设置开始或结尾
 | - | - | - |
 | `start` | `datetime, str, int` | 开始时间. 如果是 None 则不设置开头. |
 | `end` | `datetime, str, int` | 结束时间. 如果是 None 则不设置结尾. |
-| `include_start` | `bool` | 是否包含开始时间. 默认为 True. |
-| `include_end` | `bool` | 是否包含结束时间. 默认为 False. |
+| `include_start` | `bool` | 是否包含开始时间. Defaults to True. |
+| `include_end` | `bool` | 是否包含结束时间. Defaults to False. |
 
 **Returns:** `str`:  年代条件
 
@@ -1111,9 +1111,9 @@ Documentary Meta
 
 | name | type | description |
 | - | - | - |
-| `area` | `Index_Filter.Area` | 地区 |
 | `release_date` | `str` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取 |
 | `style` | `Index_Filter.Style.Documentary` | 风格 |
+| `payment` | `Index_Filter.Payment.ALL` | 观看条件 |
 | `producer` | `Index_Filter.Producer` | 制作方 |
 
 
@@ -1153,7 +1153,6 @@ Movie Meta
 | - | - | - |
 | `area` | `Index_Filter.Area` | 地区 |
 | `payment` | `Index_Filter.Payment` | 付费门槛 |
-| `season` | `Index_Filter.Season` | 季度 |
 | `release_date` | `str` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取 |
 | `style` | `Index_Filter.Style.Movie` | 风格 |
 

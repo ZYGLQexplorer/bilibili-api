@@ -39,9 +39,12 @@ from .utils.utils import get_api, raise_for_statement
 API = get_api("video")
 
 
-async def get_cid_info(cid: int):
+async def get_cid_info(cid: int) -> dict:
     """
     获取 cid 信息 (对应的视频，具体分 P 序号，up 等)
+
+    Args:
+        cid (int): CID
 
     Returns:
         dict: 调用 https://hd.biliplus.com 的 API 返回的结果
@@ -168,22 +171,28 @@ class VideoAppealReasonType:
         return 10025
 
     @staticmethod
-    def PLAGIARISM(bvid: str):
+    def PLAGIARISM(bvid: str) -> dict:
         """
         与站内其他视频撞车
 
         Args:
             bvid (str): 撞车对象
+
+        Returns:
+            dict: 传入函数的参数字典
         """
         return {"tid": 8, "撞车对象": bvid}
 
     @staticmethod
-    def UNREAL_COPYRIGHT(source: str):
+    def UNREAL_COPYRIGHT(source: str) -> dict:
         """
         转载/自制类型错误
 
         Args:
             source (str): 原创视频出处
+
+        Returns:
+            dict: 传入函数的参数字典
         """
         return {"tid": 52, "出处": source}
 
@@ -198,7 +207,7 @@ class Video:
         bvid: None | str = None,
         aid: None | int = None,
         credential: None | Credential = None,
-    ):
+    ) -> None:
         """
         Args:
             bvid       (str | None, optional)       : BV 号. bvid 和 aid 必须提供其中之一。
@@ -1340,6 +1349,11 @@ class Video:
         """
         获取实时在线人数
 
+        Args:
+            page_index (int | None, optional)      : 分 P 号，从 0 开始。Defaults to None
+
+            cid        (int | None, optional)      : 分 P 的 ID。Defaults to None
+
         Returns:
             dict: 调用 API 返回的结果。
         """
@@ -1517,7 +1531,7 @@ class Video:
         }
         return await Api(**api, credential=self.credential).update_data(**data).result
 
-    async def appeal(self, reason: Any, detail: str):
+    async def appeal(self, reason: Any, detail: str) -> dict:
         """
         投诉稿件
 
@@ -1950,7 +1964,7 @@ class VideoOnlineMonitor(AsyncEvent):
         page_index: int = 0,
         credential: Credential | None = None,
         debug: bool = False,
-    ):
+    ) -> None:
         """
         Args:
             bvid       (str | None, optional)       : BVID. Defaults to None.
@@ -1989,13 +2003,13 @@ class VideoOnlineMonitor(AsyncEvent):
             self.__page_index = page_index
             self.__tasks = []
 
-    async def connect(self):
+    async def connect(self) -> None:
         """
         连接服务器
         """
         await self.__main()
 
-    async def disconnect(self):
+    async def disconnect(self) -> None:
         """
         断开服务器
         """
@@ -2344,7 +2358,7 @@ class VideoDownloadURLDataDetecter:
       - 番剧/课程试看视频流
     """
 
-    def __init__(self, data: dict):
+    def __init__(self, data: dict) -> None:
         """
         Args:
             data (dict): `Video.get_download_url` 返回的结果
@@ -2375,7 +2389,14 @@ class VideoDownloadURLDataDetecter:
             return True
         return False
 
-    def detect_all(self):
+    def detect_all(
+        self,
+    ) -> list[
+        VideoStreamDownloadURL
+        | AudioStreamDownloadURL
+        | FLVStreamDownloadURL
+        | MP4StreamDownloadURL
+    ]:
         """
         解析并返回所有数据
 

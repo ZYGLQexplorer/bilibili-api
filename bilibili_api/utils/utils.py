@@ -201,9 +201,9 @@ def get_deviceid(separator: str = "-", is_lowercase: bool = False) -> str:
     获取随机 deviceid (dev_id)
 
     Args:
-        separator (str)  : 分隔符 默认为 "-"
+        separator (str)  : 分隔符. Defaults to "-".
 
-        is_lowercase (bool) : 是否以小写形式 默认为False
+        is_lowercase (bool) : 是否以小写形式. Defaults to False.
 
     参考: https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/message/private_msg.md#发送私信web端
 

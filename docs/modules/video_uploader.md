@@ -202,6 +202,11 @@ meta 参数示例: (保留 video, cover, tid, aid 字段)
 验证失败会抛出异常
 
 
+| name | type | description |
+| - | - | - |
+| `credential` | `Credential` | 凭据类。 |
+
+**Returns:** `bool`:  是否可以使用 (False 则抛出异常)
 
 
 
@@ -438,6 +443,12 @@ Events:
 获取可用 topic 列表
 
 
+| name | type | description |
+| - | - | - |
+| `tid` | `int` | 分区 id. |
+| `credential` | `Credential` | 凭据类。 |
+
+**Returns:** `list[dict]`:  调用 API 返回的结果。
 
 
 
@@ -466,6 +477,10 @@ Events:
 上传封面
 
 
+| name | type | description |
+| - | - | - |
+| `cover` | `Picture` | 图片类。 |
+| `credential` | `Credential` | 凭据类。 |
 
 **Returns:** `str`:  封面 URL
 

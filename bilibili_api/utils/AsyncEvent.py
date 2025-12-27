@@ -6,6 +6,7 @@ bilibili_api.utils.AsyncEvent
 
 import asyncio
 from collections.abc import Callable, Coroutine
+from typing import Any
 
 tasks = set()
 
@@ -17,9 +18,8 @@ class AsyncEvent:
     特殊事件：__ALL__ 所有事件均触发
     """
 
-    def __init__(self):
-        """
-        """
+    def __init__(self) -> None:
+        """ """
         # don't remove this empty docstring
         self.__handlers = {}
         self.__ignore_events = []
@@ -43,6 +43,9 @@ class AsyncEvent:
 
         Args:
             event_name (str): 事件名。
+
+        Returns:
+            dict: 传入函数的参数字典
         """
 
         def decorator(func: Callable | Coroutine):
@@ -91,13 +94,14 @@ class AsyncEvent:
         """
         self.__ignore_events = []
 
-    def dispatch(self, name: str, *args, **kwargs) -> None:
+    def dispatch(self, name: str, *args: Any, **kwargs: Any) -> None:
         """
         异步发布事件。
 
         Args:
             name (str):       事件名。
-            *args, **kwargs (Any):  要传递给函数的参数。
+            args (Any):  要传递给函数的参数。 *args 传递。
+            kwargs (Any): 要传递给函数的参数。 **kwargs 传递。
         """
         if len(args) == 0 and len(kwargs.keys()) == 0:
             args = [{}]

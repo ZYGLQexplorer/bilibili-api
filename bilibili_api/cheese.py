@@ -43,7 +43,7 @@ class CheeseList:
         season_id: int = -1,
         ep_id: int = -1,
         credential: Credential | None = None,
-    ):
+    ) -> None:
         """
         Args:
             season_id  (int)              : ssid
@@ -113,7 +113,7 @@ class CheeseList:
             await Api(**api, credential=self.credential).update_params(**params).result
         )
 
-    async def get_list_raw(self):
+    async def get_list_raw(self) -> dict:
         """
         获取教程所有视频 (返回原始数据)
 
@@ -158,7 +158,7 @@ class CheeseVideo:
         cheese     (CheeseList): 所属的课程
     """
 
-    def __init__(self, epid, credential: Credential | None = None):
+    def __init__(self, epid: int, credential: Credential | None = None) -> None:
         """
         Args:
             epid      (int)               : 单集 ep_id
@@ -650,7 +650,7 @@ class CheeseVideo:
             .request(raw=True)
         )
 
-    async def send_danmaku(self, danmaku: Danmaku | None = None):
+    async def send_danmaku(self, danmaku: Danmaku | None = None) -> dict:
         """
         发送弹幕。
 
@@ -686,7 +686,7 @@ class CheeseVideo:
         }
         return await Api(**api, credential=self.credential).update_data(**data).result
 
-    async def has_liked(self):
+    async def has_liked(self) -> bool:
         """
         视频是否点赞过。
 
@@ -702,7 +702,7 @@ class CheeseVideo:
             == 1
         )
 
-    async def get_pay_coins(self):
+    async def get_pay_coins(self) -> int:
         """
         获取视频已投币数量。
 
@@ -717,7 +717,7 @@ class CheeseVideo:
             await Api(**api, credential=self.credential).update_params(**params).result
         )["multiply"]
 
-    async def has_favoured(self):
+    async def has_favoured(self) -> bool:
         """
         是否已收藏。
 
@@ -732,7 +732,7 @@ class CheeseVideo:
             await Api(**api, credential=self.credential).update_params(**params).result
         )["favoured"]
 
-    async def like(self, status: bool = True):
+    async def like(self, status: bool = True) -> dict:
         """
         点赞视频。
 
@@ -749,7 +749,7 @@ class CheeseVideo:
         data = {"aid": await self.get_aid(), "like": 1 if status else 2}
         return await Api(**api, credential=self.credential).update_data(**data).result
 
-    async def pay_coin(self, num: int = 1, like: bool = False):
+    async def pay_coin(self, num: int = 1, like: bool = False) -> dict:
         """
         投币。
 
@@ -777,7 +777,7 @@ class CheeseVideo:
 
     async def set_favorite(
         self, add_media_ids: list[int] = [], del_media_ids: list[int] = []
-    ):
+    ) -> dict:
         """
         设置视频收藏状况。
 

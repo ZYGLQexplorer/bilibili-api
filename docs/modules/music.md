@@ -5,7 +5,9 @@ bilibili_api.music
 
 音乐相关 API
 
-注意: 目前 B 站的音频并不和 B 站的音乐相关信息互通。这里的 Music 类的数据来源于视频下面的 bgm 标签和全站音乐榜中的每一个 bgm/音乐。get_homepage_recommend 和 get_music_index_info 来源于 https://www.bilibili.com/v/musicplus/
+注意: 目前 B 站的音频并不和 B 站的音乐相关信息互通。
+这里的 Music 类的数据来源于视频下面的 bgm 标签和全站音乐榜中的每一个 bgm/音乐。
+get_homepage_recommend 和 get_music_index_info 来源于 https://www.bilibili.com/v/musicplus/
 
 
 ``` python

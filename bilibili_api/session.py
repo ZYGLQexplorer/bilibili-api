@@ -5,6 +5,7 @@ bilibili_api.session
 """
 
 import asyncio
+from collections.abc import Callable
 import datetime
 from enum import Enum
 import json
@@ -177,9 +178,8 @@ async def get_likes(
 
 async def get_at(
     credential: Credential,
-    last_uid: int | None = None,
-    at_time: int | None = None,
     last_id: int | None = None,
+    at_time: int | None = None,
 ) -> dict:
     """
     获取收到的 AT
@@ -195,8 +195,6 @@ async def get_at(
         dict: 调用 API 返回的结果
     """
     api = API["session"]["at"]
-    if last_id is None:
-        last_id = last_uid
     params = {"id": last_id, "at_time": at_time}
     return await Api(**api, credential=credential).update_params(**params).result
 
@@ -291,7 +289,7 @@ class Event:
     timestamp: int
     content: str | int | Picture | Video
 
-    def __init__(self, data: dict, self_uid: int):
+    def __init__(self, data: dict, self_uid: int) -> None:
         """
         信息事件类型
 
@@ -447,7 +445,7 @@ class Session(AsyncEvent):
     会话类，用来开启消息监听。
     """
 
-    def __init__(self, credential: Credential, debug=False):
+    def __init__(self, credential: Credential, debug: bool = False) -> None:
         """
         Args:
             credential (Credential): 凭据类。
@@ -484,12 +482,15 @@ class Session(AsyncEvent):
             )
             self.logger.addHandler(handler)
 
-    def on(self, event_type: EventType):
+    def on(self, event_type: EventType) -> Callable:
         """
         重载装饰器注册事件监听器
 
         Args:
             event_type (EventType): 事件类型
+
+        Returns:
+            Callable: 装饰后的函数
         """
         return super().on(event_name=str(event_type.value))
 

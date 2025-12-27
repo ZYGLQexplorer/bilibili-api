@@ -22,7 +22,7 @@ class Tag:
         tag_name: str | None = None,
         tag_id: int | None = None,
         credential: Credential | None = None,
-    ):
+    ) -> None:
         """
         Args:
             tag_name   (str | None): 标签名. Defaults to None.

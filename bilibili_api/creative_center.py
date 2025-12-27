@@ -8,6 +8,7 @@ bilibili_api.creative_center
 
 from datetime import datetime
 from enum import Enum
+from typing import Any
 
 from .utils.network import Api, Credential
 from .utils.utils import get_api
@@ -302,7 +303,7 @@ async def get_compare(credential: Credential) -> dict:
     获取对比数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
     Returns:
         dict: 视频对比数据。
@@ -320,7 +321,7 @@ async def get_graph(
     获取统计图表数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         period      (GraphPeriod): 时间段。
 
@@ -345,7 +346,7 @@ async def get_overview(
     获取概览数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         period      (GraphPeriod): 时间段。
 
@@ -363,7 +364,7 @@ async def get_video_survey(credential: Credential) -> dict:
     获取视频各分区中占比排行。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
     Returns:
         dict: 视频分区排行数据。
@@ -380,7 +381,7 @@ async def get_video_playanalysis(
     获取稿件播放完成率对比。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         copyright   (Copyright):   版权类型。
 
@@ -397,7 +398,7 @@ async def get_video_source(credential: Credential) -> dict:
     获取稿件播放来源分布。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
     Returns:
         dict: 视频来源分布数据。
@@ -414,7 +415,7 @@ async def get_fan_overview(
     获取粉丝概览数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         period      (FanGraphPeriod): 时间段。
 
@@ -435,7 +436,7 @@ async def get_fan_graph(
     获取粉丝图表数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         period      (FanGraphPeriod): 时间段。
 
@@ -454,7 +455,7 @@ async def get_article_overview(credential: Credential) -> dict:
     获取文章概览数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
     Returns:
         dict: 文章概览数据。
@@ -470,7 +471,7 @@ async def get_article_graph(
     获取文章图表数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         graph_type  (ArticleInfoType):   图表类型。
 
@@ -490,7 +491,7 @@ async def get_article_rank(
     获取文章排行数据。
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         rank_type  (ArticleInfoType):   排行依据。
 
@@ -508,7 +509,7 @@ async def get_article_source(credential: Credential) -> dict:
     获取文章阅读终端数据
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
     Returns:
         dict: 文章阅读终端数据。
@@ -530,7 +531,7 @@ async def get_video_draft_upload_manager_info(credential: Credential) -> dict:
     获取内容管理视频草稿信息
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
     Returns:
         dict: 内容管理视频草稿信息。
@@ -553,7 +554,7 @@ async def get_video_upload_manager_info(
     获取内容管理视频信息
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         is_interative (bool): 是否为互动视频
 
@@ -593,7 +594,7 @@ async def get_article_upload_manager_info(
     获取内容管理文章信息
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         pn (int): 页码
 
@@ -615,7 +616,7 @@ async def get_article_list_upload_manager_info(credential: Credential) -> dict:
     获取内容管理文章信息
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
     Returns:
         dict: 内容管理文集信息。
@@ -647,7 +648,7 @@ async def get_comments(
     获取评论
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         oid (Optional, int): 指定稿件
 
@@ -692,14 +693,14 @@ async def del_comments(
     oid: int | list[int],
     rpid: int | list[int],
     archive_type: ArchiveType = ArchiveType.VIDEO,
-):
+) -> None:
     """
     删除评论
 
     每个评论对应一个 oid
 
     Args:
-        credentials (Credential): Credential 凭据。
+        credential (Credential): Credential 凭据。
 
         oid (int, lsit): 指定稿件
 
@@ -762,7 +763,7 @@ async def get_danmakus(
     ctime_to: datetime | None = None,
     modes: DanmakuMode | list[DanmakuMode] | None = None,
     pools: DanmakuPool | list[DanmakuPool] | None = None,
-    attrs=None,  # 未知参数，我在高级筛选里面找不到
+    attrs: Any = None,  # 未知参数，我在高级筛选里面找不到
     order: DanmakuOrder = DanmakuOrder.CTIME,
     sort: DanmakuSort = DanmakuSort.DESC,
     pn: int = 1,
@@ -795,7 +796,7 @@ async def get_danmakus(
 
         modes (DanmakuMode): 弹幕模式。
 
-        pool (DanmakuPool): 弹幕池
+        pools (DanmakuPool): 弹幕池
 
         attrs (Unknown): 弹幕属性，未知参数
 
@@ -807,7 +808,7 @@ async def get_danmakus(
 
         ps (int): 每页项数。
 
-        cp_filter (bool): 是否过滤CP弹幕。未知参数，默认为 False
+        cp_filter (bool): 是否过滤CP弹幕。未知参数. Defaults to False.
 
     Returns:
         dict: 弹幕搜索结果
@@ -864,6 +865,11 @@ async def del_danmaku(credential: Credential, oid: int, dmids: int | list[int]) 
         oid (int): 稿件 oid
 
         dmids (list[int], int): 弹幕 id，可以传入列表和 int
+
+        credential (Credential): 凭据类。
+
+    Returns:
+        dict: 调用 API 返回的结果
     """
 
     return await edit_danmaku_state(
@@ -886,6 +892,8 @@ async def edit_danmaku_state(
         dmids (list[int], int): 弹幕 id，可以传入列表和 int
 
         state (int, Optional): 弹幕状态 1 删除 2 保护 3 取消保护
+
+        credential (Credential): 凭据类。
 
     Returns:
         dict: API 返回信息
@@ -918,6 +926,8 @@ async def edit_danmaku_pool(
         dmids (list[int], int): 弹幕 id，可以传入列表和 int
 
         is_subtitle (bool): 是否为字幕
+
+        credential (Credential): 凭据类。
 
     Returns:
         dict: API 返回信息

@@ -116,8 +116,8 @@ from bilibili_api import channel_series
 | name | type | description |
 | - | - | - |
 | `sort` | `ChannelOrder` | 排序方式 |
-| `pn` | `int` | 页数，默认为 1 |
-| `ps` | `int` | 每一页显示的视频数量 |
+| `pn` | `int` | 页数. Defaults to 1. |
+| `ps` | `int` | 每一页显示的视频数量. Defaults to 100. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

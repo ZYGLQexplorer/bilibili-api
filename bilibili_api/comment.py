@@ -126,7 +126,7 @@ class Comment:
         type_: CommentResourceType,
         rpid: int,
         credential: Credential | None = None,
-    ):
+    ) -> None:
         """
         Args:
             oid        (int)         : 评论所在资源 ID。

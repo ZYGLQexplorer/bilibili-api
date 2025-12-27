@@ -37,6 +37,11 @@ async def upload_cover(cover: Picture, credential: Credential) -> str:
     """
     上传封面
 
+    Args:
+        cover (Picture): 图片类。
+
+        credential (Credential): 凭据类。
+
     Returns:
         str: 封面 URL
     """
@@ -117,7 +122,7 @@ class VideoUploaderPage:
     分 P 对象
     """
 
-    def __init__(self, path: str, title: str, description: str = ""):
+    def __init__(self, path: str, title: str, description: str = "") -> None:
         """
         Args:
             path (str): 视频文件路径
@@ -212,6 +217,14 @@ class VideoUploaderEvents(Enum):
 async def get_available_topics(tid: int, credential: Credential) -> list[dict]:
     """
     获取可用 topic 列表
+
+    Args:
+        tid (int): 分区 id.
+
+        credential (Credential): 凭据类。
+
+    Returns:
+        list[dict]: 调用 API 返回的结果。
     """
     credential.raise_for_no_sessdata()
     api = _API["available_topics"]
@@ -318,7 +331,7 @@ class VideoPorderMeta:
         industry_type: VideoPorderIndustry | None = None,
         brand_name: str | None = None,
         show_types: list[VideoPorderShowType] = [],
-    ):
+    ) -> None:
         """
         Args:
             porder_type (VideoPorderType, optional): 商业平台类型. Defaults to VideoPorderType.FIREWORK.
@@ -642,6 +655,12 @@ class VideoMeta:
         检测 tags、delay_time、topic -> mission、cover 和 tid
 
         验证失败会抛出异常
+
+        Args:
+            credential (Credential): 凭据类。
+
+        Returns:
+            bool: 是否可以使用 (False 则抛出异常)
         """
         credential.raise_for_no_sessdata()
         self.__credential = credential
@@ -696,7 +715,7 @@ class VideoUploader(AsyncEvent):
         credential: Credential,
         cover: str | Picture | None = "",
         line: Lines | None = None,
-    ):
+    ) -> None:
         """
         Args:
             pages        (List[VideoUploaderPage]): 分 P 列表
@@ -1301,7 +1320,7 @@ class VideoUploader(AsyncEvent):
             self.dispatch(VideoUploaderEvents.SUBMIT_FAILED.value, {"err": err})
             raise err
 
-    async def abort(self):
+    async def abort(self) -> None:
         """
         中断上传
         """
@@ -1385,7 +1404,7 @@ class VideoEditor(AsyncEvent):
         meta: dict,
         cover: str | Picture = "",
         credential: Credential | None = None,
-    ):
+    ) -> None:
         """
         meta 参数示例: (保留 video, cover, tid, aid 字段)
 
@@ -1538,7 +1557,7 @@ class VideoEditor(AsyncEvent):
             self.dispatch(VideoEditorEvents.FAILED.value, {"err": e})
             raise e
 
-    async def abort(self):
+    async def abort(self) -> None:
         """
         中断更改
         """

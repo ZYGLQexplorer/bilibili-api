@@ -134,8 +134,7 @@ class Geetest:
     """
 
     def __init__(self) -> None:
-        """
-        """
+        """ """
         # don't remove this empty docstring
         self.gt = ""
         self.validate = ""

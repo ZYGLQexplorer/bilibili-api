@@ -71,7 +71,7 @@ class Topic:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, topic_id: int, credential: Credential | None = None):
+    def __init__(self, topic_id: int, credential: Credential | None = None) -> None:
         """
         Args:
             topic_id   (int)       : 话题 id

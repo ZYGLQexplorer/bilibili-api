@@ -510,7 +510,7 @@ class AudioUploader(AsyncEvent):
         raise_for_statement(self.meta.cover is not None)
         raise_for_statement(self.meta.desc is not None)
 
-    def __init__(self, path: str, meta: SongMeta, credential: Credential):
+    def __init__(self, path: str, meta: SongMeta, credential: Credential) -> None:
         """
         初始化
 
@@ -772,6 +772,9 @@ class AudioUploader(AsyncEvent):
     async def start(self) -> int | None:
         """
         开始上传
+
+        Returns:
+            int | None: 歌曲 auid
         """
         task = asyncio.create_task(self._main())
         self.__task = task
@@ -787,7 +790,7 @@ class AudioUploader(AsyncEvent):
             self.dispatch(AudioUploaderEvents.FAILED.value, {"err": e})
             raise e
 
-    async def abort(self):
+    async def abort(self) -> None:
         """
         中断更改
         """
@@ -804,7 +807,12 @@ async def upload_lrc(lrc: str, song_id: int, credential: Credential) -> str:
     Args:
         lrc (str): 歌词
 
+        song_id (int): 音频 id
+
         credential (Credential): 凭据
+
+    Returns:
+        str: 调用 API 获得的结果
     """
     api = _API["lrc"]
     data = {"song_id": song_id, "lrc": lrc}
@@ -819,6 +827,9 @@ async def get_upinfo(param: int | str, credential: Credential) -> list[dict]:
         param (Union[int, str]): UP 主 ID 或者用户名
 
         credential (Credential): 凭据
+
+    Returns:
+        list[dict]: 调用 API 获得的结果
     """
     api = _API["upinfo"]
     data = {"param": param}

@@ -78,7 +78,7 @@ ArticleT = TypeVar("ArticleT", bound="Article")
 
 async def get_article_rank(
     rank_type: ArticleRankingType = ArticleRankingType.YESTERDAY,
-):
+) -> dict:
     """
     获取专栏排行榜
 
@@ -101,7 +101,7 @@ class ArticleList:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, rlid: int, credential: Credential | None = None):
+    def __init__(self, rlid: int, credential: Credential | None = None) -> None:
         """
         Args:
             rlid       (int)                        : 文集 id
@@ -142,7 +142,7 @@ class Article:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, cvid: int, credential: Credential | None = None):
+    def __init__(self, cvid: int, credential: Credential | None = None) -> None:
         """
         Args:
             cvid       (int)                        : cv 号

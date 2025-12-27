@@ -89,9 +89,9 @@ class BuyerInfo:
 
     accountId (int): 用户 ID
 
-    isBuyerInfoVerified (bool): 默认为 True
+    isBuyerInfoVerified (bool): 信息是否确认。Defaults to True.
 
-    isBuyerValid (bool): 默认为 True
+    isBuyerValid (bool): 购买人是否合法。Defaults to True.
     """
 
     id: int
@@ -263,7 +263,7 @@ class OrderTicket:
         )
         return header
 
-    async def get_token(self):
+    async def get_token(self) -> dict:
         """
         获取购票Token
 
@@ -283,7 +283,7 @@ class OrderTicket:
             await Api(**api, credential=self.credential).update_data(**payload).result
         )
 
-    async def create_order(self):
+    async def create_order(self) -> dict:
         """
         创建购买订单
 

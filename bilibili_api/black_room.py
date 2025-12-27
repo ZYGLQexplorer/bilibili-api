@@ -171,6 +171,9 @@ async def get_blocked_list(
         pn         (int)              : 页数. Defaults to 1.
 
         credential (Credential | None): 凭据. Defaults to None.
+
+    Returns:
+        dict: 调用 API 返回的结果
     """
     credential = credential if credential else Credential()
     api = API["black_room"]["info"]
@@ -188,7 +191,9 @@ class BlackRoom:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, black_room_id: int, credential: Credential | None = None):
+    def __init__(
+        self, black_room_id: int, credential: Credential | None = None
+    ) -> None:
         """
         Args:
             black_room_id (int)                        : 小黑屋 id
@@ -244,7 +249,7 @@ class JuryCase:
     案件仲裁
     """
 
-    def __init__(self, case_id: str, credential: Credential):
+    def __init__(self, case_id: str, credential: Credential) -> None:
         """
         Args:
             case_id (str)                              : 案件 id

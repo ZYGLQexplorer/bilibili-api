@@ -89,7 +89,7 @@ class InteractiveVariable:
         var_value: int,
         show: bool = False,
         random: bool = False,
-    ):
+    ) -> None:
         """
         Args:
             name      (str)  : 变量名
@@ -175,7 +175,7 @@ class InteractiveButton:
         x: int,
         y: int,
         align: InteractiveButtonAlign | int = InteractiveButtonAlign.DEFAULT,
-    ):
+    ) -> None:
         """
         Args:
             text  (str)                         : 文字
@@ -228,7 +228,9 @@ class InteractiveJumpingCondition:
     节点跳转的公式，只有公式成立才会跳转
     """
 
-    def __init__(self, var: list[InteractiveVariable] = [], condition: str = "True"):
+    def __init__(
+        self, var: list[InteractiveVariable] = [], condition: str = "True"
+    ) -> None:
         """
         Args:
             var       (List[InteractiveVariable]): 所有变量
@@ -288,7 +290,7 @@ class InteractiveJumpingCommand:
     节点跳转对变量的操作
     """
 
-    def __init__(self, var: list[InteractiveVariable] = [], command: str = ""):
+    def __init__(self, var: list[InteractiveVariable] = [], command: str = "") -> None:
         """
         Args:
             var       (List[InteractiveVariable]): 所有变量
@@ -360,7 +362,7 @@ class InteractiveNode:
         condition: InteractiveJumpingCondition = InteractiveJumpingCondition(),
         native_command: InteractiveJumpingCommand = InteractiveJumpingCommand(),
         is_default: bool = False,
-    ):
+    ) -> None:
         """
         Args:
             video          (InteractiveVideo)           : 视频类
@@ -474,6 +476,9 @@ class InteractiveNode:
     async def get_jumping_type(self) -> int:
         """
         获取子节点跳转方式 (参考 InteractiveNodeJumpingType)
+
+        Returns:
+            int: 子节点跳转方式
         """
         edge_info = await self.__get_cached_edge_info()
         return edge_info["edges"]["questions"][0]["type"]
@@ -543,7 +548,7 @@ class InteractiveGraph:
     情节树类
     """
 
-    def __init__(self, video: "InteractiveVideo", skin: dict, root_cid: int):
+    def __init__(self, video: "InteractiveVideo", skin: dict, root_cid: int) -> None:
         """
         Args:
             video    (InteractiveVideo): 互动视频类
@@ -708,7 +713,7 @@ class InteractiveVideo(Video):
             self.__version = resp["interaction"]["graph_version"]
         return self.__version
 
-    async def get_edge_info(self, edge_id: int | None = None):
+    async def get_edge_info(self, edge_id: int | None = None) -> dict:
         """
         获取剧情图节点信息
 
@@ -746,7 +751,7 @@ class InteractiveVideo(Video):
         self.__edge_infos[edge_id] = ret
         return ret
 
-    async def mark_score(self, score: int = 5):
+    async def mark_score(self, score: int = 5) -> int:
         """
         为互动视频打分
 
@@ -765,10 +770,13 @@ class InteractiveVideo(Video):
     async def get_cid(self) -> int:  # type: ignore
         """
         获取稿件 cid
+
+        Returns:
+            int: cid
         """
         return await super().get_cid(0)
 
-    async def get_graph(self):
+    async def get_graph(self) -> InteractiveGraph:
         """
         获取稿件情节树
 
@@ -840,7 +848,7 @@ class InteractiveVideoDownloader(AsyncEvent):
         downloader_mode: InteractiveVideoDownloaderMode = InteractiveVideoDownloaderMode.IVI,
         stream_detecting_params: dict = {},
         fetching_nodes_retry_times: int = 3,
-    ):
+    ) -> None:
         """
         Args:
             video              (InteractiveVideo)              : 互动视频类

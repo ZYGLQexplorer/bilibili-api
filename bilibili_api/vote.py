@@ -33,8 +33,7 @@ class VoteChoices:
     """
 
     def __init__(self) -> None:
-        """
-        """
+        """ """
         # don't remove this empty docstring
         self.choices = []
 
@@ -48,6 +47,9 @@ class VoteChoices:
             desc (str): 选项描述
 
             image (str, Picture, optional): 选项的图片链接，用于图片投票。支持 Picture 类. Defaults to None.
+
+        Returns:
+            VoteChoices: `self`
         """
         if isinstance(image, Picture):
             image = image.url
@@ -60,6 +62,9 @@ class VoteChoices:
 
         Args:
             index (int): 选项索引
+
+        Returns:
+            VoteChoices: `self`
         """
         self.choices.remove(index)
         return self

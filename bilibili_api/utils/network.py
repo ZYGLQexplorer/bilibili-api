@@ -337,7 +337,7 @@ class RequestSettings:
         """
         return self.get("proxy")
 
-    def set_proxy(self, proxy: str):
+    def set_proxy(self, proxy: str) -> None:
         """
         修改设置的代理
 
@@ -355,7 +355,7 @@ class RequestSettings:
         """
         return self.get("timeout")
 
-    def set_timeout(self, timeout: float):
+    def set_timeout(self, timeout: float) -> None:
         """
         修改设置的 web 请求超时时间
 
@@ -373,7 +373,7 @@ class RequestSettings:
         """
         return self.get("verify_ssl")
 
-    def set_verify_ssl(self, verify_ssl: bool):
+    def set_verify_ssl(self, verify_ssl: bool) -> None:
         """
         修改设置的是否验证 SSL
 
@@ -391,12 +391,12 @@ class RequestSettings:
         """
         return self.get("trust_env")
 
-    def set_trust_env(self, trust_env: bool):
+    def set_trust_env(self, trust_env: bool) -> None:
         """
         修改设置的 `trust_env`
 
         Args:
-            verify_ssl (bool): `trust_env`
+            trust_env (bool): `trust_env`
         """
         self.set("trust_env", trust_env)
 
@@ -459,7 +459,7 @@ class RequestSettings:
         获取设置的是否使用全局可持久化 buvid
 
         Returns:
-            bool: 是否使用全局可持久化 buvid. Defalts to False.
+            bool: 是否使用全局可持久化 buvid. Defaults to False.
         """
         return self.__enable_buvid_global_persistence
 
@@ -479,7 +479,7 @@ class RequestSettings:
         获取设置的是否使用全局可持久化 bili_ticket
 
         Returns:
-            bool: 是否使用全局可持久化 bili_ticket. Defalts to False.
+            bool: 是否使用全局可持久化 bili_ticket. Defaults to False.
         """
         return self.__enable_bili_ticket_global_persistence
 
@@ -1889,7 +1889,7 @@ class Credential:
         dedeuserid_ckmd5: str | None = None,
         sid: str | None = None,
         ac_time_value: str | None = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         """
         各字段获取方式查看：https://nemo2011.github.io/bilibili-api/#/get-credential.md
@@ -1910,6 +1910,8 @@ class Credential:
             sid (str | None, optional)             : 浏览器 Cookies 中的 sid 字段值. Defaults to None.
 
             ac_time_value (str | None, optional)   : 浏览器 localStorage 中的 ac_time_value 字段值. Defaults to None.
+
+            kwargs (Any, optional): 其他用户可自行添加的 cookies。通过 **kwargs 传入。
         """
         if (buvid3 or buvid4) and not (buvid3 and buvid4):
             raise ValueError("Buvid3 and buvid4 should be provided at the same time.")
@@ -2022,6 +2024,9 @@ class Credential:
         返回部分核心 cookies，需要登录获取，可用于复制 Credential 对象
 
         包含 SESSDATA, bili_jct, sid, DedeUserID, ac_time_value
+
+        Returns:
+            dict: 核心 cookies
         """
         return {
             "SESSDATA": self.sessdata,
@@ -2086,49 +2091,49 @@ class Credential:
         """
         return self.ac_time_value is not None and self.ac_time_value != ""
 
-    def raise_for_no_sessdata(self):
+    def raise_for_no_sessdata(self) -> None:
         """
         没有提供 sessdata 则抛出异常。
         """
         if not self.has_sessdata():
             raise CredentialNoSessdataException()
 
-    def raise_for_no_bili_jct(self):
+    def raise_for_no_bili_jct(self) -> None:
         """
         没有提供 bili_jct 则抛出异常。
         """
         if not self.has_bili_jct():
             raise CredentialNoBiliJctException()
 
-    def raise_for_no_buvid3(self):
+    def raise_for_no_buvid3(self) -> None:
         """
         没有提供 buvid3 时抛出异常。
         """
         if not self.has_buvid3():
             raise CredentialNoBuvid3Exception()
 
-    def raise_for_no_buvid4(self):
+    def raise_for_no_buvid4(self) -> None:
         """
-        没有提供 buvid3 时抛出异常。
+        没有提供 buvid4 时抛出异常。
         """
         if not self.has_buvid4():
             raise CredentialNoBuvid4Exception()
 
-    def raise_for_no_dedeuserid(self):
+    def raise_for_no_dedeuserid(self) -> None:
         """
         没有提供 DedeUserID 时抛出异常。
         """
         if not self.has_dedeuserid():
             raise CredentialNoDedeUserIDException()
 
-    def raise_for_no_ac_time_value(self):
+    def raise_for_no_ac_time_value(self) -> None:
         """
         没有提供 ac_time_value 时抛出异常。
         """
         if not self.has_ac_time_value():
             raise CredentialNoAcTimeValueException()
 
-    async def check_valid(self):
+    async def check_valid(self) -> bool:
         """
         检查 cookies 是否有效
 
@@ -3497,7 +3502,9 @@ class Api:
         return await self.request()
 
 
-async def bili_simple_download(url: str, out: str, intro: str = "bili-simple-download"):
+async def bili_simple_download(
+    url: str, out: str, intro: str = "bili-simple-download"
+) -> None:
     """
     适用于下载 bilibili 链接的简易终端下载函数
 

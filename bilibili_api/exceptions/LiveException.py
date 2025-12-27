@@ -10,6 +10,7 @@ class LiveException(ApiException):
     """
     直播异常。
     """
+
     def __init__(self, msg: str):
         """
         Args:

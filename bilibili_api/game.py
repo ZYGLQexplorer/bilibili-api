@@ -22,7 +22,7 @@ class Game:
         credential (Credential): 凭据类
     """
 
-    def __init__(self, game_id: int, credential: None | Credential = None):
+    def __init__(self, game_id: int, credential: None | Credential = None) -> None:
         """
         Args:
             game_id    (int)       : 游戏 id

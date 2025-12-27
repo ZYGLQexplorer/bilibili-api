@@ -475,6 +475,9 @@ async def subscribe_music_rank(
         status     (bool)      : 关注状态. Defaults to True.
 
         credential (Credential | None): 凭据类. Defaults to None.
+
+    Returns:
+        dict: 调用 API 返回的结果
     """
     credential = credential if credential else Credential()
     credential.raise_for_no_sessdata()
