@@ -67,7 +67,10 @@ from bilibili_api import watchroom
 ### def \_\_init\_\_()
 
 
-
+| name | type | description |
+| - | - | - |
+| `msg` | `str` | 信息 |
+| `is_emoji` | `bool, optional` | 是否为表情包. Defaults to False. |
 
 
 ---

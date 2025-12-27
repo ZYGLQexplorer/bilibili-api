@@ -623,7 +623,18 @@ class InteractiveVideo(Video):
     互动视频类
     """
 
-    def __init__(self, bvid=None, aid=None, credential=None):
+    def __init__(
+        self,
+        bvid: str | None = None,
+        aid: int | None = None,
+        credential: Credential | None = None,
+    ) -> None:
+        """
+        Args:
+            bvid (str | None, optional): bvid. Defaults to None.
+            aid (int | None, optional): aid. Defaults to None.
+            credential (Credential | None, optional): 凭据类. Defaults to None.
+        """
         super().__init__(bvid, aid, credential)
         self.__graph = None
         self.__version = None

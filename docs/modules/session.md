@@ -96,7 +96,10 @@ from bilibili_api import session
 ### def \_\_init\_\_()
 
 
-
+| name | type | description |
+| - | - | - |
+| `credential` | `Credential` | 凭据类。 |
+| `debug` | `bool, optional` | 调试模式，将输出更多信息。Defaults to False. |
 
 
 ### def close()

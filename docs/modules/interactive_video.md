@@ -578,7 +578,11 @@ o----|xxx| (TEXT_RIGHT)
 ### def \_\_init\_\_()
 
 
-
+| name | type | description |
+| - | - | - |
+| `bvid` | `str \| None, optional` | bvid. Defaults to None. |
+| `aid` | `int \| None, optional` | aid. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 
 ### async def get_cid()

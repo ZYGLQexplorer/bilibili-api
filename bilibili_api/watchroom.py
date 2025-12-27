@@ -62,6 +62,11 @@ class MessageSegment:
     """
 
     def __init__(self, msg: str, is_emoji: bool = False):
+        """
+        Args:
+            msg (str): 信息
+            is_emoji (bool, optional): 是否为表情包. Defaults to False.
+        """
         self.msg = msg
         self.msg_type = MessageType.EMOJI if is_emoji else MessageType.PLAIN
 
@@ -77,6 +82,9 @@ class Message:
     """
 
     def __init__(self, *messages: MessageSegment | str):
+        """
+        """
+        # don't remove this empty docstring
         self.msg_list: list[MessageSegment] = []
         for msg in messages:
             if isinstance(msg, str):

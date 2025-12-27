@@ -168,6 +168,9 @@ class Danmaku:
 
 
 class SpecialDanmaku:
+    """
+    特殊弹幕，含 BAS / 代码弹幕等。
+    """
     def __init__(
         self,
         content: str,

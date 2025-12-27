@@ -35,7 +35,6 @@ from bilibili_api import ...
   - [def \_\_init\_\_()](#def-\_\_init\_\_)
   - [async def check\_refresh()](#async-def-check\_refresh)
   - [async def check\_valid()](#async-def-check\_valid)
-  - [def gen\_local\_cookies()](#def-gen\_local\_cookies)
   - [async def get\_cookies()](#async-def-get\_cookies)
   - [def get\_core\_cookies()](#def-get\_core\_cookies)
   - [def has\_ac\_time\_value()](#def-has\_ac\_time\_value)
@@ -81,7 +80,6 @@ from bilibili_api import ...
 - [class GeetestException()](#class-GeetestException)
 - [class GeetestMeta()](#class-GeetestMeta)
 - [class GeetestType()](#class-GeetestType)
-- [var HEADERS](#var-HEADERS)
 - [class InitialStateException()](#class-InitialStateException)
 - [class LiveException()](#class-LiveException)
 - [class LoginError()](#class-LoginError)
@@ -707,14 +705,6 @@ Cookies 刷新错误。
 
 
 
-### def gen_local_cookies()
-
-
-
-
-
-
-
 ### async def get_cookies()
 
 获取请求 Cookies 字典
@@ -1233,10 +1223,6 @@ NOTE: `gt`, `challenge`, `token` 为验证码基本字段。`seccode`, `validate
 
 ---
 
-## var HEADERS
-
----
-
 ## class InitialStateException()
 
 **Extend: bilibili_api.exceptions.ApiException.ApiException**
@@ -1252,6 +1238,7 @@ NOTE: `gt`, `challenge`, `token` 为验证码基本字段。`seccode`, `validate
 
 **Extend: bilibili_api.exceptions.ApiException.ApiException**
 
+直播异常。
 
 
 
@@ -1262,7 +1249,7 @@ NOTE: `gt`, `challenge`, `token` 为验证码基本字段。`seccode`, `validate
 
 **Extend: bilibili_api.exceptions.ApiException.ApiException**
 
-参数错误。
+登录错误。
 
 
 
@@ -1520,6 +1507,7 @@ API 响应异常。
 
 ## class SpecialDanmaku()
 
+特殊弹幕，含 BAS / 代码弹幕等。
 
 
 
@@ -1689,6 +1677,9 @@ BV 号转 AV 号。
 部分请求头取自 fpgen 生成的浏览器指纹信息。
 
 
+| name | type | description |
+| - | - | - |
+| `fpgen_fp` | `bool` | 是否使用 fpgen 生成的浏览器指纹信息。Defaults to True. |
 
 **Returns:** `dict`:  请求头
 

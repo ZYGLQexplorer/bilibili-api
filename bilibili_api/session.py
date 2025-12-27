@@ -448,6 +448,11 @@ class Session(AsyncEvent):
     """
 
     def __init__(self, credential: Credential, debug=False):
+        """
+        Args:
+            credential (Credential): 凭据类。
+            debug (bool, optional): 调试模式，将输出更多信息。Defaults to False.
+        """
         super().__init__()
         # 会话状态
         self.__status = 0

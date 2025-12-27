@@ -33,6 +33,9 @@ class VoteChoices:
     """
 
     def __init__(self) -> None:
+        """
+        """
+        # don't remove this empty docstring
         self.choices = []
 
     def add_choice(

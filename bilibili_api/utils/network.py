@@ -1924,7 +1924,7 @@ class Credential:
         self.bili_jct = bili_jct
         self.buvid3 = buvid3
         if self.buvid3 or not request_settings.get_enable_auto_buvid():
-            self.gen_local_cookies()
+            self._gen_local_cookies()
         self.buvid4 = buvid4
         self.dedeuserid = dedeuserid
         self.dedeuserid_ckmd5 = dedeuserid_ckmd5
@@ -1947,7 +1947,7 @@ class Credential:
 
         self.extra_cookies = {k: str(v) for k, v in kwargs}
 
-    def gen_local_cookies(self) -> None:
+    def _gen_local_cookies(self) -> None:
         self.b_nut = str(int(time.time()))
         self.b_lsid = _gen_b_lsid()
         self.uuid_infoc = _gen_uuid_infoc()
@@ -2359,20 +2359,24 @@ def get_browser_fingerprint() -> dict:
     return browser_fingerprint
 
 
-def get_bili_headers() -> dict:
+def get_bili_headers(fpgen_fp: bool = True) -> dict:
     """
     获取可供访问 bilibili 链接的伪装请求头。
 
     部分请求头取自 fpgen 生成的浏览器指纹信息。
+
+    Args:
+        fpgen_fp (bool): 是否使用 fpgen 生成的浏览器指纹信息。Defaults to True.
 
     Returns:
         dict: 请求头
     """
     fp = get_browser_fingerprint()
     headers = HEADERS.copy()
-    for k, v in fp["headers"].items():
-        if v:
-            headers[k.title()] = v[0] if v and isinstance(v, list) else str(v)
+    if fpgen_fp:
+        for k, v in fp["headers"].items():
+            if v:
+                headers[k.title()] = v[0] if v and isinstance(v, list) else str(v)
     return headers
 
 
@@ -3112,7 +3116,7 @@ async def get_buvid(credential: Credential | None = None) -> tuple[str, str, str
     if credential is None:
         credential = Credential()
     if credential.buvid3 is None or credential.buvid4 is None:
-        credential.gen_local_cookies()
+        credential._gen_local_cookies()
         spi, b_nut = await _get_spi_buvid()
         credential.b_nut = b_nut
         credential.buvid3 = spi["b_3"]

@@ -18,6 +18,9 @@ class AsyncEvent:
     """
 
     def __init__(self):
+        """
+        """
+        # don't remove this empty docstring
         self.__handlers = {}
         self.__ignore_events = []
 

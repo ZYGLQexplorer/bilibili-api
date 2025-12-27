@@ -79,7 +79,6 @@ from .utils.danmaku import Danmaku, DmFontSize, DmMode, SpecialDanmaku
 from .utils.geetest import Geetest, GeetestMeta, GeetestType
 from .utils.network import (
     # api
-    HEADERS,
     BiliAPIClient,
     BiliAPIFile,
     # session
@@ -148,7 +147,6 @@ __register_all_clients()
 
 
 __all__ = [
-    "HEADERS",
     "ApiException",
     "ArgsException",
     "AsyncEvent",
