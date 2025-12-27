@@ -143,14 +143,14 @@ async def get_list_by_area(
 
         order      (LiveRoomOrder)       : 直播间排序方式. 访问接口后查询 `new_tags` 字段对应 `sort_type`。Defaults to "" (综合).
 
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
     """
     credential = credential if credential else Credential()
     api = API["info"]["list"]
-    parent_area_id = get_area_info_by_id(area_id)[0]["id"] # type: ignore
+    parent_area_id = get_area_info_by_id(area_id)[0]["id"]  # type: ignore
     area_id = 0 if (get_area_info_by_id(area_id)[1] is None) else area_id
     params = {
         "platform": "web",

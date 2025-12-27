@@ -310,7 +310,7 @@ async def search_games(keyword: str) -> dict:
 
 
 async def search_manga(
-    keyword: str, page_num: int = 1, page_size: int = 9, credential: Credential = None
+    keyword: str, page_num: int = 1, page_size: int = 9, credential: Credential | None = None
 ):
     """
     搜索漫画特用函数
@@ -322,7 +322,7 @@ async def search_manga(
 
         page_size (int): 每一页的数据大小. Defaults to 9.
 
-        credential (Credential): 凭据类. Defaults to None.
+        credential (Credential | None): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果

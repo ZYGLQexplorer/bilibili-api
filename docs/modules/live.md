@@ -287,7 +287,7 @@ Events:
 | name | type | description |
 | - | - | - |
 | `room_display_id` | `int` | 房间展示 ID（即 URL 中的 ID） |
-| `credential` | `Credential, optional` | 凭据. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 
 
 ### async def ban_user()
@@ -804,6 +804,7 @@ Events:
 | name | type | description |
 | - | - | - |
 | `need_recommend` | `bool, optional` | 是否接受推荐直播间，Defaults to True |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -834,6 +835,7 @@ Events:
 | - | - | - |
 | `page` | `int, optional` | 页数. Defaults to 1. |
 | `page_size` | `int, optional` | 每页数量. Defaults to 10. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -902,6 +904,7 @@ pages = math.ceil(info['data']['guards'] / 10)
 | - | - | - |
 | `page` | `int, optional` | 页码, Defaults to 1. |
 | `page_size` | `int, optional` | 每页数量 Defaults to 30. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

@@ -21,7 +21,7 @@ class Festival:
         """
         Args:
             fes_id (str): 节日专门页编号
-            credential (Credential, optional): 凭据类. Defaults to None.
+            credential (Credential | None, optional): 凭据类. Defaults to None.
         """
         self.fes_id = fes_id
         self.credential: Credential = credential if credential else Credential()

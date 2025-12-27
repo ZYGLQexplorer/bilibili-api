@@ -290,7 +290,7 @@ Ps: Api 中 的 order_sort 字段决定顺序还是倒序
 | `keyword` | `str` | 搜索关键词 |
 | `page_num` | `int` | 页码. Defaults to 1. |
 | `page_size` | `int` | 每一页的数据大小. Defaults to 9. |
-| `credential` | `Credential` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

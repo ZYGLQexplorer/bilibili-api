@@ -580,7 +580,7 @@ class VideoMeta:
         检查 tid 是否合法
         """
         self.__pre_info = get_data("video_uploader_meta_pre.json")
-        type_list = self.__pre_info["tid_list"] # type: ignore
+        type_list = self.__pre_info["tid_list"]  # type: ignore
         for parent_type in type_list:
             for child_type in parent_type["children"]:
                 if child_type["id"] == self.tid:

@@ -27,7 +27,7 @@ from .utils.network import (
     get_buvid,
     get_client,
 )
-from .utils.utils import get_api, raise_for_statement
+from .utils.utils import get_api
 
 API = get_api("live")
 
@@ -117,7 +117,7 @@ class LiveRoom:
         Args:
             room_display_id (int)                 : 房间展示 ID（即 URL 中的 ID）
 
-            credential      (Credential, optional): 凭据. Defaults to None.
+            credential      (Credential | None, optional): 凭据. Defaults to None.
         """
         self.room_display_id = room_display_id
 
@@ -212,7 +212,7 @@ class LiveRoom:
         if self.__real_id is None:
             await self.get_room_play_info()
 
-        return self.__real_id
+        return self.__real_id  # type: ignore
 
     async def __get_ruid(self) -> int:
         """
@@ -1381,13 +1381,14 @@ class LiveDanmaku(AsyncEvent):
         self.max_retry_for_credential: int = max_retry_for_credential
         self.__room_real_id = None
         self.__status = 0
-        self.__ws = None
+        self.__ws: int = 0
         self.__tasks = []
-        self.__debug = debug
         self.__heartbeat_timer = 60.0
         self.__heartbeat_timer_web = 60.0
         self.err_reason: str = ""
-        self.room = None
+        self.room = LiveRoom(
+            room_display_id=self.room_display_id, credential=self.credential
+        )
 
         # logging
         self.logger = logging.getLogger(f"LiveDanmaku_{self.room_display_id}")
@@ -1460,10 +1461,6 @@ class LiveDanmaku(AsyncEvent):
         入口
         """
         self.__status = self.STATUS_CONNECTING
-
-        self.room = LiveRoom(
-            room_display_id=self.room_display_id, credential=self.credential
-        )
 
         self.logger.info(f"准备连接直播间 {self.room_display_id}")
         # 获取真实房间号
@@ -1666,7 +1663,7 @@ class LiveDanmaku(AsyncEvent):
         if not self.credential.has_dedeuserid():
             if not self.credential.has_sessdata():
                 self.logger.warning("未提供登录凭据，使用匿名身份连接")
-                self.credential.dedeuserid = 0
+                self.credential.dedeuserid = "0"
             else:
                 for attempt in range(self.max_retry_for_credential):
                     if self.credential.has_dedeuserid():
@@ -1682,11 +1679,11 @@ class LiveDanmaku(AsyncEvent):
                         )
                         await asyncio.sleep(self.retry_after)
                 if not self.credential.has_dedeuserid():
-                    self.credential.dedeuserid = 0
+                    self.credential.dedeuserid = "0"
                     self.logger.warning("获取用户信息失败，使用匿名身份连接")
 
         verifyData = {
-            "uid": int(self.credential.dedeuserid),
+            "uid": int(self.credential.dedeuserid),  # type: ignore
             "roomid": self.__room_real_id,
             "protover": 3,
             "platform": "web",
@@ -1765,13 +1762,11 @@ class LiveDanmaku(AsyncEvent):
         """
         sendData = bytearray()
         sendData += struct.pack(">H", 16)
-        raise_for_statement(
-            0 <= protocol_version <= 2, LiveException("数据包协议版本错误，范围 0~2")
-        )
+        if not 0 <= protocol_version <= 2:
+            raise LiveException("数据包协议版本错误，范围 0~2")
         sendData += struct.pack(">H", protocol_version)
-        raise_for_statement(
-            datapack_type in [2, 7], LiveException("数据包类型错误，可用类型：2, 7")
-        )
+        if datapack_type not in [2, 7]:
+            LiveException("数据包类型错误，可用类型：2, 7")
         sendData += struct.pack(">I", datapack_type)
         sendData += struct.pack(">I", 1)
         sendData += data
@@ -1866,6 +1861,8 @@ async def get_self_dahanghai_info(
 
         page_size (int, optional): 每页数量. Defaults to 10.
 
+        credential (Credential | None, optional): 凭据类. Defaults to None.
+
     Returns:
         dict: 调用 API 返回的结果
 
@@ -1953,6 +1950,8 @@ async def get_live_followers_info(
     Args:
         need_recommend (bool, optional): 是否接受推荐直播间，Defaults to True
 
+        credential (Credential | None, optional): 凭据类. Defaults to None.
+
     Returns:
         dict: 调用 API 返回的结果
     """
@@ -1976,6 +1975,8 @@ async def get_unlive_followers_info(
         page      (int, optional): 页码, Defaults to 1.
 
         page_size (int, optional): 每页数量 Defaults to 30.
+
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果

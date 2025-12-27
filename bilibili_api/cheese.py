@@ -46,11 +46,11 @@ class CheeseList:
     ):
         """
         Args:
-            season_id  (int)       : ssid
+            season_id  (int)              : ssid
 
-            ep_id      (int)       : 单集 ep_id
+            ep_id      (int)              : 单集 ep_id
 
-            credential (Credential): 凭据类
+            credential (Credential | None): 凭据类
 
         注意：season_id 和 ep_id 任选一个即可，两个都选的话
         以 season_id 为主
@@ -161,9 +161,9 @@ class CheeseVideo:
     def __init__(self, epid, credential: Credential | None = None):
         """
         Args:
-            epid      (int)       : 单集 ep_id
+            epid      (int)               : 单集 ep_id
 
-            credential (Credential): 凭据类
+            credential (Credential | None): 凭据类
         """
         global cheese_video_meta_cache
         self.__epid = epid

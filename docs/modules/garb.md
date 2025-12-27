@@ -206,7 +206,7 @@ from bilibili_api import garb
 | `sort` | `GarbSortType` | 装扮/收藏集排序方式 |
 | `pn` | `int` | 页码. Defaults to 1. |
 | `ps` | `int` | 每页大小. Defaults to 20. |
-| `credential` | `Credential, optional` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `List[Tuple[dict, DLC | Garb]]`:  装扮/收藏集信息与装扮/收藏集对象列表
 
@@ -226,7 +226,7 @@ from bilibili_api import garb
 | `sort` | `GarbSortType` | 装扮/收藏集排序方式 |
 | `pn` | `int` | 页码. Defaults to 1. |
 | `ps` | `int` | 每页大小. Defaults to 20. |
-| `credential` | `Credential, optional` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `List[DLC | Garb]`:  装扮/收藏集对象列表
 
@@ -246,7 +246,7 @@ from bilibili_api import garb
 | `sort` | `GarbSortType` | 装扮/收藏集排序方式 |
 | `pn` | `int` | 页码. Defaults to 1. |
 | `ps` | `int` | 每页大小. Defaults to 20. |
-| `credential` | `Credential, optional` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -265,7 +265,7 @@ from bilibili_api import garb
 | `keyword` | `str` | 关键词 |
 | `pn` | `int` | 页码. Defaults to 1. |
 | `ps` | `int` | 每页大小. Defaults to 20. |
-| `credential` | `Credential, optional` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `List[Tuple[dict, DLC | Garb]]`:  装扮/收藏集信息与装扮/收藏集对象列表
 
@@ -284,7 +284,7 @@ from bilibili_api import garb
 | `keyword` | `str` | 关键词 |
 | `pn` | `int` | 页码. Defaults to 1. |
 | `ps` | `int` | 每页大小. Defaults to 20. |
-| `credential` | `Credential, optional` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `List[DLC | Garb]`:  装扮/收藏集对象列表
 
@@ -303,7 +303,7 @@ from bilibili_api import garb
 | `keyword` | `str` | 关键词 |
 | `pn` | `int` | 页码. Defaults to 1. |
 | `ps` | `int` | 每页大小. Defaults to 20. |
-| `credential` | `Credential, optional` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果。
 

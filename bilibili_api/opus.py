@@ -27,6 +27,11 @@ class Opus:
     """
 
     def __init__(self, opus_id: int, credential: Credential | None = None):
+        """
+        Args:
+            opus_id (int): 图文 id
+            credential (Credential | None, optional): 凭据类. Defaults to None.
+        """
         self.__id = opus_id
         self.__info = None
         self.credential: Credential = credential if credential else Credential()
@@ -128,7 +133,7 @@ class Opus:
         title = {"module_title": {"text": ""}}
         content = {"module_content": {"paragraphs": []}}
 
-        for module in self.__info["item"]["modules"]:
+        for module in self.__info["item"]["modules"]:  # type: ignore
             if module.get("module_title"):
                 title = module
             if module.get("module_content"):
@@ -140,6 +145,7 @@ class Opus:
             para_raw = ""
             if para["para_type"] == 1:
                 for node in para["text"]["nodes"]:
+                    raw = ""
                     if node.get("rich"):
                         url = node["rich"].get("jump_url")
                         if url is None:
@@ -190,7 +196,7 @@ class Opus:
         result = []
         content = {"module_content": {"paragraphs": []}}
 
-        for module in self.__info["item"]["modules"]:
+        for module in self.__info["item"]["modules"]:  # type: ignore
             if module.get("module_content"):
                 content = module
 

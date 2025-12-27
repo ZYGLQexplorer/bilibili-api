@@ -176,7 +176,7 @@ from bilibili_api import manga
 | `pn` | `int` | 页码。Defaults to 1. |
 | `ps` | `int` | 每页数量。Defaults to 18. |
 | `order` | `MangaOrderType` | 排序方式。Defaults to MangaOrderType.FOLLOW. |
-| `credential` | `Credential` | 凭据类. |
+| `credential` | `Credential \| None` | 凭据类. |
 
 **Returns:** `List[Manga]`:  追漫列表
 
@@ -194,7 +194,7 @@ from bilibili_api import manga
 | - | - | - |
 | `pn` | `int` | 页码。Defaults to 1. |
 | `seed` | `Optional, str` | Unknown param，无需传入. |
-| `credential` | `Credential` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None` | 凭据类. Defaults to None. |
 
 **Returns:** `List[Manga]`:  漫画列表
 
@@ -213,7 +213,7 @@ from bilibili_api import manga
 | `date` | `Union[str, datetime.datetime]` | 日期，默认为今日。 |
 | `pn` | `int` | 页码。Defaults to 1. |
 | `ps` | `int` | 每页数量。Defaults to 8. |
-| `credential` | `Credential` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None` | 凭据类. Defaults to None. |
 
 **Returns:** `List[Manga]`:  漫画列表
 
@@ -231,7 +231,7 @@ from bilibili_api import manga
 | - | - | - |
 | `manga` | `Manga` | 漫画类。 |
 | `status` | `bool` | 设置是否追漫。是为 True，否为 False。Defaults to True. |
-| `credential` | `Credential` | 凭据类。 |
+| `credential` | `Credential \| None` | 凭据类。 |
 
 
 

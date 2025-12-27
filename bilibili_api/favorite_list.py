@@ -73,9 +73,9 @@ class FavoriteList:
         Args:
             type_      (FavoriteListType, optional): 收藏夹类型. Defaults to FavoriteListType.VIDEO.
 
-            media_id   (int, optional)             : 收藏夹号（仅为视频收藏夹时提供）. Defaults to None.
+            media_id   (int | None, optional)             : 收藏夹号（仅为视频收藏夹时提供）. Defaults to None.
 
-            credential (Credential, optional)      : 凭据类. Defaults to Credential().
+            credential (Credential | None, optional)      : 凭据类. Defaults to Credential().
         """
         self.__type = type_
         self.__media_id = media_id
@@ -257,7 +257,7 @@ async def get_video_favorite_list_content(
 
         page       (int, optional)                     : 页码. Defaults to 1.
 
-        keyword    (str, optional)                     : 搜索关键词. Defaults to None.
+        keyword    (str | None, optional)                     : 搜索关键词. Defaults to None.
 
         order      (FavoriteListContentOrder, optional): 排序方式. Defaults to FavoriteListContentOrder.MTIME.
 
@@ -265,7 +265,7 @@ async def get_video_favorite_list_content(
 
         mode       (SearchFavoriteListMode, optional)  : 搜索模式，默认仅当前收藏夹.
 
-        credential (Credential, optional)              : Credential. Defaults to None.
+        credential (Credential | None, optional)              : Credential. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果

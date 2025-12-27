@@ -40,7 +40,7 @@ def get_categories_list_sub() -> dict:
     Returns:
         dict: 所有分区的数据
     """
-    return get_data("article_category.json") # type: ignore
+    return get_data("article_category.json")  # type: ignore
 
 
 def get_category_info_by_id(id: int) -> tuple[dict | None, dict | None]:

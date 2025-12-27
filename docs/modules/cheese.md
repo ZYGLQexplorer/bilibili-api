@@ -71,7 +71,7 @@ from bilibili_api import cheese
 | - | - | - |
 | `season_id` | `int` | ssid |
 | `ep_id` | `int` | 单集 ep_id |
-| `credential` | `Credential` | 凭据类 |
+| `credential` | `Credential \| None` | 凭据类 |
 
 
 ### async def get_list()
@@ -162,7 +162,7 @@ from bilibili_api import cheese
 | name | type | description |
 | - | - | - |
 | `epid` | `int` | 单集 ep_id |
-| `credential` | `Credential` | 凭据类 |
+| `credential` | `Credential \| None` | 凭据类 |
 
 
 ### async def get_aid()

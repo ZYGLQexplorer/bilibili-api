@@ -751,7 +751,7 @@ class InteractiveVideo(Video):
         data = {"mark": score, "bvid": self.get_bvid()}
         return await Api(**api, credential=self.credential).update_data(**data).result
 
-    async def get_cid(self) -> int: # type: ignore
+    async def get_cid(self) -> int:  # type: ignore
         """
         获取稿件 cid
         """

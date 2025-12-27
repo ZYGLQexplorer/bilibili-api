@@ -11,3 +11,4 @@ pycryptodomex
 qrcode_terminal
 PyJWT
 anyio
+frozendict

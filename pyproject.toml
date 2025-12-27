@@ -33,6 +33,7 @@ dependencies = [
   "qrcode_terminal",
   "PyJWT",
   "anyio",
+  "frozendict",
 ]
 
 [project.optional-dependencies]

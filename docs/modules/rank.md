@@ -255,7 +255,8 @@ RankAPIType.PGC 排行榜时间类型
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential` | 凭据类 |
+| `type_` | `MangaRankType` | 排行榜类型 |
+| `credential` | `Credential \| None` | 凭据类 |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -381,7 +382,7 @@ https://www.bilibili.com/v/popular/drama/
 | name | type | description |
 | - | - | - |
 | `status` | `bool` | 关注状态. Defaults to True. |
-| `credential` | `Credential` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None` | 凭据类. Defaults to None. |
 
 
 

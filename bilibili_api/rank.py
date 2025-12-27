@@ -5,7 +5,8 @@ bilibili_api.rank
 """
 
 from enum import Enum
-from typing import ClassVar
+
+from frozendict import frozendict
 
 from .utils.network import Api, Credential
 from .utils.utils import get_api
@@ -68,86 +69,123 @@ class RankType(Enum):
     - Rookie: 新人
     """
 
-    All: ClassVar[dict[str, str | int]] = {"api_type": "x", "rid": 0, "type": "all"}
-    Bangumi: ClassVar[dict[str, str | int]] = {"api_type": "pgc", "season_type": 1}
-    GuochuangAnime: ClassVar[dict[str, str | int]] = {
-        "api_type": "pgc",
-        "season_type": 4,
-    }
-    Guochuang: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 168,
-        "type": "all",
-    }
-    Documentary: ClassVar[dict[str, str | int]] = {"api_type": "pgc", "season_type": 3}
-    Douga: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1005,
-        "type": "all",
-    }
-    Music: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1003,
-        "type": "all",
-    }
-    Dance: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1004,
-        "type": "all",
-    }
-    Game: ClassVar[dict[str, str | int]] = {"api_type": "x", "rid": 1008, "type": "all"}
-    Knowledge: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1010,
-        "type": "all",
-    }
-    Technology: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1012,
-        "type": "all",
-    }
-    Sports: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1018,
-        "type": "all",
-    }
-    Car: ClassVar[dict[str, str | int]] = {"api_type": "x", "rid": 1013, "type": "all"}
-    Life: ClassVar[dict[str, str | int]] = {"api_type": "x", "rid": 160, "type": "all"}
-    Food: ClassVar[dict[str, str | int]] = {"api_type": "x", "rid": 1020, "type": "all"}
-    Animal: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1024,
-        "type": "all",
-    }
-    Kichiku: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1007,
-        "type": "all",
-    }
-    Fashion: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1014,
-        "type": "all",
-    }
-    Ent: ClassVar[dict[str, str | int]] = {"api_type": "x", "rid": 1002, "type": "all"}
-    Cinephile: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 1001,
-        "type": "all",
-    }
-    Movie: ClassVar[dict[str, str | int]] = {"api_type": "pgc", "season_type": 2}
-    TV: ClassVar[dict[str, str | int]] = {"api_type": "pgc", "season_type": 5}
-    Variety: ClassVar[dict[str, str | int]] = {"api_type": "pgc", "season_type": 7}
-    Original: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 0,
-        "type": "origin",
-    }
-    Rookie: ClassVar[dict[str, str | int]] = {
-        "api_type": "x",
-        "rid": 0,
-        "type": "rookie",
-    }
+    All = frozendict({"api_type": "x", "rid": 0, "type": "all"})
+    Bangumi = frozendict({"api_type": "pgc", "season_type": 1})
+
+    GuochuangAnime = frozendict(
+        {
+            "api_type": "pgc",
+            "season_type": 4,
+        }
+    )
+    Guochuang = frozendict(
+        {
+            "api_type": "x",
+            "rid": 168,
+            "type": "all",
+        }
+    )
+    Documentary = frozendict({"api_type": "pgc", "season_type": 3})
+
+    Douga = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1005,
+            "type": "all",
+        }
+    )
+    Music = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1003,
+            "type": "all",
+        }
+    )
+    Dance = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1004,
+            "type": "all",
+        }
+    )
+    Game = frozendict({"api_type": "x", "rid": 1008, "type": "all"})
+    Knowledge = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1010,
+            "type": "all",
+        }
+    )
+    Technology = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1012,
+            "type": "all",
+        }
+    )
+    Sports = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1018,
+            "type": "all",
+        }
+    )
+    Car = frozendict({"api_type": "x", "rid": 1013, "type": "all"})
+
+    Life = frozendict({"api_type": "x", "rid": 160, "type": "all"})
+
+    Food = frozendict({"api_type": "x", "rid": 1020, "type": "all"})
+
+    Animal = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1024,
+            "type": "all",
+        }
+    )
+    Kichiku = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1007,
+            "type": "all",
+        }
+    )
+    Fashion = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1014,
+            "type": "all",
+        }
+    )
+    Ent = frozendict({"api_type": "x", "rid": 1002, "type": "all"})
+
+    Cinephile = frozendict(
+        {
+            "api_type": "x",
+            "rid": 1001,
+            "type": "all",
+        }
+    )
+    Movie = frozendict({"api_type": "pgc", "season_type": 2})
+
+    TV = frozendict({"api_type": "pgc", "season_type": 5})
+
+    Variety = frozendict({"api_type": "pgc", "season_type": 7})
+
+    Original = frozendict(
+        {
+            "api_type": "x",
+            "rid": 0,
+            "type": "origin",
+        }
+    )
+    Rookie = frozendict(
+        {
+            "api_type": "x",
+            "rid": 0,
+            "type": "rookie",
+        }
+    )
 
 
 class VIPRankType(Enum):
@@ -240,7 +278,7 @@ async def get_rank(
     Returns:
         dict: 调用 API 返回的结果
     """
-    params = {"web_location": "333.934"}
+    params: dict[str, str | int] = {"web_location": "333.934"}
 
     # 确定 API 接口类型
     if type_.value["api_type"] == RankAPIType.V2.value:
@@ -314,13 +352,14 @@ async def get_vip_rank(type_: VIPRankType = VIPRankType.VIP) -> dict:
 
 
 async def get_manga_rank(
-    type_: MangeRankType = MangeRankType.NEW, credential: Credential = None
+    type_: MangeRankType = MangeRankType.NEW, credential: Credential | None = None
 ) -> dict:
     """
     获取漫画专属排行榜
 
     Args:
-        credential (Credential): 凭据类
+        type_ (MangaRankType): 排行榜类型
+        credential (Credential | None): 凭据类
 
     Returns:
         dict: 调用 API 返回的结果
@@ -435,7 +474,7 @@ async def subscribe_music_rank(
     Args:
         status     (bool)      : 关注状态. Defaults to True.
 
-        credential (Credential): 凭据类. Defaults to None.
+        credential (Credential | None): 凭据类. Defaults to None.
     """
     credential = credential if credential else Credential()
     credential.raise_for_no_sessdata()

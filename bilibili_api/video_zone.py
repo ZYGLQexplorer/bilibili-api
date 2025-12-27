@@ -6,8 +6,6 @@ bilibili_api.video_zone
 
 import copy
 import enum
-import json
-import os
 
 from .exceptions import ArgsException
 from .utils.network import Api, Credential
@@ -24,7 +22,7 @@ def get_zone_list_sub() -> dict:
     Returns:
         dict: 所有分区的数据
     """
-    return get_data("video_zone.json") # type: ignore
+    return get_data("video_zone.json")  # type: ignore
 
 
 def get_zone_info_by_tid(tid: int) -> tuple[dict | None, dict | None]:

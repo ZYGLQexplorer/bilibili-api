@@ -248,7 +248,9 @@ class Note:
             dict: 调用 API 返回的结果
         """
         raise_for_statement(self.__type == NoteType.PUBLIC)
-        return await get_initial_state(f"https://www.bilibili.com/read/cv{self.__cvid}")
+        return (
+            await get_initial_state(f"https://www.bilibili.com/read/cv{self.__cvid}")
+        )[0]
 
     async def set_like(self, status: bool = True) -> dict:
         """

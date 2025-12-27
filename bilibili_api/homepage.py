@@ -99,7 +99,7 @@ async def get_favorite_list_content(
 
     Args:
         media_id   (int)       : 收藏夹 id
-        credential (Credential): 凭据类
+        credential (Credential | None): 凭据类
 
     Returns:
         dict: 调用 API 返回的结果

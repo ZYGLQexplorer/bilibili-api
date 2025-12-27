@@ -49,11 +49,7 @@ def get_data(route: str) -> dict | list:
     Returns:
         dict | list: 数据
     """
-    path = os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__), "..", "data", route
-        )
-    )
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", route))
     if os.path.exists(path):
         with open(path, encoding="utf8") as f:
             data = json.load(f)

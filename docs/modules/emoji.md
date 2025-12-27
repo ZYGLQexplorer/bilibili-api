@@ -25,7 +25,7 @@ from bilibili_api import emoji
 | name | type | description |
 | - | - | - |
 | `package_id` | `Union[int, List[int]]` | 表情包 id，可通过 `get_emoji_list` 或 `get_all_emoji` 查询。 |
-| `credential` | `Credential` | 登录凭证. Defaults to None. |
+| `credential` | `Credential \| None` | 登录凭证. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -42,7 +42,7 @@ from bilibili_api import emoji
 | name | type | description |
 | - | - | - |
 | `business` | `str` | 使用场景, reply / dynamic |
-| `credential` | `Credential` | 登录凭证. Defaults to None. |
+| `credential` | `Credential \| None` | 登录凭证. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -76,7 +76,7 @@ from bilibili_api import emoji
 | name | type | description |
 | - | - | - |
 | `business` | `str` | 使用场景, reply / dynamic |
-| `credential` | `Credential` | 登录凭证. Defaults to None. |
+| `credential` | `Credential \| None` | 登录凭证. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

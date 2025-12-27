@@ -1279,7 +1279,7 @@ class _BiliAPIClient:
                     elif flag == BiliFilterFlags.SKIP:
                         i += 1
                     elif flag == BiliFilterFlags.GOTO:
-                        i = after_filter - 1
+                        i = after_filter - 1  # type: ignore
                     i += 1
                 ret = await coroutine(**res)  # type: ignore
                 posts = await async_get_registered_post_filters(
@@ -1321,7 +1321,7 @@ class _BiliAPIClient:
                     elif flag == BiliFilterFlags.SKIP:
                         j += 1
                     elif flag == BiliFilterFlags.GOTO:
-                        j = after_filter - 1
+                        j = after_filter - 1  # type: ignore
                     j += 1
                 return ret
 
@@ -2417,7 +2417,9 @@ class _CookieJsonDecoder(json.JSONDecoder):
         return (val, end)
 
 
-async def _gen_buvid_fp(buvid3: str, buvid4: str, credential: Credential) -> tuple[str, str]:
+async def _gen_buvid_fp(
+    buvid3: str, buvid4: str, credential: Credential
+) -> tuple[str, str]:
     MOD = 1 << 64
 
     def rotate_left(x: int, k: int) -> int:
@@ -2719,7 +2721,7 @@ async def _gen_buvid_fp(buvid3: str, buvid4: str, credential: Credential) -> tup
             "_uuid": credential.uuid_infoc,
         },
     )
-    payload = get_payload(credential.uuid_infoc, homepage_html.utf8_text()) # type: ignore
+    payload = get_payload(credential.uuid_infoc, homepage_html.utf8_text())  # type: ignore
     return gen_buvid_fp(payload, 31), payload
 
 
@@ -2768,7 +2770,7 @@ async def _get_mixin_key(credential: Credential | None = None) -> str:
     wbi_img: dict[str, str] = data["wbi_img"]
 
     def split(key):
-        return wbi_img.get(key).split("/")[-1].split(".")[0] # type: ignore
+        return wbi_img.get(key).split("/")[-1].split(".")[0]  # type: ignore
 
     ae = split("img_url") + split("sub_url")
     le = reduce(lambda s, i: s + (ae[i] if i < len(ae) else ""), OE, "")
@@ -2849,7 +2851,9 @@ def _enc_sign(paramsordata: dict) -> dict:
 
 async def _get_bili_ticket(credential: Credential) -> tuple[str, int] | None:
     def hmac_sha256(key: str, message: str) -> str:
-        hmac_obj = hmac.new(key.encode("utf-8"), message.encode("utf-8"), hashlib.sha256)
+        hmac_obj = hmac.new(
+            key.encode("utf-8"), message.encode("utf-8"), hashlib.sha256
+        )
         return hmac_obj.digest().hex()
 
     ts = int(time.time())
@@ -3102,7 +3106,7 @@ async def get_buvid(credential: Credential | None = None) -> tuple[str, str, str
             _credential.b_lsid,
             _credential.uuid_infoc,
         )
-        return (credential.buvid3, credential.buvid4, credential.buvid_fp) # type: ignore
+        return (credential.buvid3, credential.buvid4, credential.buvid_fp)  # type: ignore
     if request_settings.get_enable_buvid_global_persistence() and credential is None:
         return await get_buvid(_credential)
     if credential is None:
@@ -3130,7 +3134,7 @@ async def get_buvid(credential: Credential | None = None) -> tuple[str, str, str
                 "msg": f"激活 buvid3 / buvid4 成功: 3 [{credential.buvid3}] 4 [{credential.buvid4}] fp [{credential.buvid_fp}]"
             },
         )
-    return (credential.buvid3, credential.buvid4, credential.buvid_fp) # type: ignore
+    return (credential.buvid3, credential.buvid4, credential.buvid_fp)  # type: ignore
 
 
 async def get_bili_ticket(
@@ -3156,7 +3160,7 @@ async def get_bili_ticket(
             _credential.bili_ticket,
             _credential.bili_ticket_expires,
         )
-        return credential.bili_ticket, str(credential.bili_ticket_expires) # type: ignore
+        return credential.bili_ticket, str(credential.bili_ticket_expires)  # type: ignore
     if (
         request_settings.get_enable_bili_ticket_global_persistence()
         and credential is None
@@ -3257,7 +3261,9 @@ class Api:
         self.original_params = self.params.copy()
         self.data = dict.fromkeys(self.data.keys(), "")
         self.params = dict.fromkeys(self.params.keys(), "")
-        self.files = dict.fromkeys(self.files.keys(), BiliAPIFile(path="", mime_type=""))
+        self.files = dict.fromkeys(
+            self.files.keys(), BiliAPIFile(path="", mime_type="")
+        )
         self.headers = dict.fromkeys(self.headers.keys(), "")
         self.credential = self.credential if self.credential else Credential()
 
@@ -3381,7 +3387,7 @@ class Api:
         if "callback" in self.params:
             # JSONP 请求
             resp_data: dict = json.loads(
-                re.match("^.*?({.*}).*$", resp_text, re.S).group(1) # type: ignore
+                re.match("^.*?({.*}).*$", resp_text, re.S).group(1)  # type: ignore
             )
         else:
             # JSON

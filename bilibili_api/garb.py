@@ -53,7 +53,7 @@ async def search_garb_dlc_raw(
         keyword    (str)                 : 关键词
         pn         (int)                 : 页码. Defaults to 1.
         ps         (int)                 : 每页大小. Defaults to 20.
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果。
@@ -138,7 +138,7 @@ class DLC:
         """
         if not self.__lottery_id:
             await self.get_info()
-        return self.__lottery_id # type: ignore
+        return self.__lottery_id  # type: ignore
 
     async def get_detail(self) -> dict:
         """
@@ -220,7 +220,7 @@ async def search_garb_dlc_obj(
         keyword    (str)                 : 关键词
         pn         (int)                 : 页码. Defaults to 1.
         ps         (int)                 : 每页大小. Defaults to 20.
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         List[DLC | Garb]: 装扮/收藏集对象列表
@@ -250,7 +250,7 @@ async def search_garb_dlc(
         keyword    (str)                 : 关键词
         pn         (int)                 : 页码. Defaults to 1.
         ps         (int)                 : 每页大小. Defaults to 20.
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         List[Tuple[dict, DLC | Garb]]: 装扮/收藏集信息与装扮/收藏集对象列表
@@ -285,7 +285,7 @@ async def get_garb_dlc_items_raw(
         sort       (GarbSortType)        : 装扮/收藏集排序方式
         pn         (int)                 : 页码. Defaults to 1.
         ps         (int)                 : 每页大小. Defaults to 20.
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -298,7 +298,7 @@ async def get_garb_dlc_items_raw(
         "ps": ps,
         "csrf": credential.get_core_cookies()["bili_jct"],
         "group_id": type_.value[0],
-        "part_id": type_.value[1]
+        "part_id": type_.value[1],
     }
     return await Api(**api, credential=credential).update_params(**params).result
 
@@ -318,7 +318,7 @@ async def get_garb_dlc_items_obj(
         sort       (GarbSortType)        : 装扮/收藏集排序方式
         pn         (int)                 : 页码. Defaults to 1.
         ps         (int)                 : 每页大小. Defaults to 20.
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         List[DLC | Garb]: 装扮/收藏集对象列表
@@ -353,7 +353,7 @@ async def get_garb_dlc_items(
         sort       (GarbSortType)        : 装扮/收藏集排序方式
         pn         (int)                 : 页码. Defaults to 1.
         ps         (int)                 : 每页大小. Defaults to 20.
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         List[Tuple[dict, DLC | Garb]]: 装扮/收藏集信息与装扮/收藏集对象列表

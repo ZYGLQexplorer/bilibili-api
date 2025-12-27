@@ -6,7 +6,6 @@ bilibili_api.login_v2
 
 import base64
 import enum
-import json
 import os
 import tempfile
 import time
@@ -383,12 +382,12 @@ class QrCodeLogin:
         Args:
             platform (QrCodeLoginChannel, optional): 平台. (web/tv) Defaults to QrCodeLoginChannel.WEB.
         """
-        self.__platform: str = platform
-        self.__qr_link: str = ""
-        self.__qr_terminal: str = ""
-        self.__qr_picture: Picture = None
-        self.__qr_key: str = ""
-        self.__credential: Credential = None
+        self.__platform: QrCodeLoginChannel = platform
+        self.__qr_link: str | None = None
+        self.__qr_terminal: str | None = None
+        self.__qr_picture: Picture | None = None
+        self.__qr_key: str | None = None
+        self.__credential: Credential | None = None
 
     def has_qrcode(self) -> bool:
         """
@@ -416,7 +415,7 @@ class QrCodeLogin:
             Credential: 凭据
         """
         raise_for_statement(self.has_done())
-        return self.__credential
+        return self.__credential  # type: ignore
 
     def get_qrcode_picture(self) -> Picture:
         """
@@ -425,7 +424,16 @@ class QrCodeLogin:
         Returns:
             Picture: 二维码
         """
-        return self.__qr_picture
+        raise_for_statement(self.__qr_link is not None, "未生成二维码。")
+        if not self.__qr_picture:
+            qr = qrcode.QRCode()
+            qr.add_data(self.__qr_link)  # type: ignore
+            img = qr.make_image()
+            img_dir = os.path.join(tempfile.gettempdir(), "qrcode.png")
+            img = qrcode.make(self.__qr_link)  # type: ignore
+            img.save(img_dir)  # type: ignore
+            self.__qr_picture = Picture.from_file(img_dir)
+        return self.__qr_picture  # type: ignore
 
     def get_qrcode_terminal(self) -> str:
         """
@@ -434,6 +442,9 @@ class QrCodeLogin:
         Returns:
             str: 二维码的终端字符串
         """
+        raise_for_statement(self.__qr_link is not None, "未生成二维码。")
+        if not self.__qr_terminal:
+            self.__qr_terminal = qrcode_terminal.qr_terminal_str(self.__qr_link)
         return self.__qr_terminal
 
     async def generate_qrcode(self) -> None:
@@ -455,13 +466,8 @@ class QrCodeLogin:
             data = await Api(credential=Credential(), **api).result
             self.__qr_link = data["url"]
             self.__qr_key = data["qrcode_key"]
-        qr = qrcode.QRCode()
-        qr.add_data(self.__qr_link)
-        img = qr.make_image()
-        img_dir = os.path.join(tempfile.gettempdir(), "qrcode.png")
-        img.save(img_dir)
-        self.__qr_picture = Picture.from_file(img_dir)
-        self.__qr_terminal = qrcode_terminal.qr_terminal_str(self.__qr_link)
+        self.__qr_picture = None
+        self.__qr_terminal = None
 
     async def check_state(self) -> QrCodeLoginEvents:
         """

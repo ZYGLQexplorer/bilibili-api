@@ -60,7 +60,7 @@ from bilibili_api import comment
 | `oid` | `int` | 评论所在资源 ID。 |
 | `type_` | `ResourceType` | 评论所在资源类型枚举。 |
 | `rpid` | `int` | 评论 ID。 |
-| `credential` | `Credential` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None` | 凭据类. Defaults to None. |
 
 
 ### async def delete()
@@ -277,7 +277,7 @@ Error Code:
 | `type_` | `CommentsResourceType` | 资源类枚举。 |
 | `page_index` | `int, optional` | 页码. Defaults to 1. |
 | `order` | `OrderType, optional` | 排序方式枚举. Defaults to OrderType.TIME. |
-| `credential` | `Credential, optional` | 凭据。Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据。Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -299,7 +299,7 @@ Error Code:
 | `type_` | `CommentsResourceType` | 资源类枚举。 |
 | `offset` | `str, optional` | 偏移量。每次请求可获取下次请求对应的偏移量，类似单向链表。对应返回结果的 `["cursor"]["pagination_reply"]["next_offset"]` |
 | `order` | `OrderType, optional` | 排序方式枚举. Defaults to OrderType.TIME. |
-| `credential` | `Credential, optional` | 凭据。Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据。Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

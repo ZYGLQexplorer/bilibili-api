@@ -41,7 +41,10 @@ from bilibili_api import opus
 ### def \_\_init\_\_()
 
 
-
+| name | type | description |
+| - | - | - |
+| `opus_id` | `int` | 图文 id |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 
 ### async def add_coins()

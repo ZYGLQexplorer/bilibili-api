@@ -62,13 +62,13 @@ class ChannelSeries:
     ):
         """
         Args:
-            uid(int)                : 用户 uid. Defaults to -1.
+            uid (int)                       : 用户 uid. Defaults to -1.
 
-            type_(ChannelSeriesType): 合集与列表类型. Defaults to ChannelSeriesType.SERIES.
+            type_ (ChannelSeriesType).      : 合集与列表类型. Defaults to ChannelSeriesType.SERIES.
 
-            id_(int)                : season_id 或 series_id. Defaults to -1.
+            id_ (int)                       : season_id 或 series_id. Defaults to -1.
 
-            credential(Credential)  : 凭证. Defaults to None.
+            credential (Credential | None)  : 凭证. Defaults to None.
         """
         global channel_meta_cache
         raise_for_statement(id_ != -1)
@@ -317,6 +317,8 @@ async def set_follow_channel_season(
         season_id (int) : 合集 id
 
         status    (bool): 是否订阅状态. Defaults to True.
+
+        credential (Credential | None): 凭据类。 Defaults to None.
     """
     credential = credential if credential else Credential()
     api = API["operate"]["fav"] if status else API["operate"]["unfav"]

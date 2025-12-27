@@ -135,7 +135,7 @@ class Comment:
 
             rpid       (int)         : 评论 ID。
 
-            credential (Credential)  : 凭据类. Defaults to None.
+            credential (Credential | None)  : 凭据类. Defaults to None.
         """
         self.__oid = oid
         self.__rpid = rpid
@@ -450,7 +450,7 @@ async def get_comments(
 
         order      (OrderType, optional) : 排序方式枚举. Defaults to OrderType.TIME.
 
-        credential (Credential, optional): 凭据。Defaults to None.
+        credential (Credential | None, optional): 凭据。Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -485,7 +485,7 @@ async def get_comments_lazy(
 
         order      (OrderType, optional) : 排序方式枚举. Defaults to OrderType.TIME.
 
-        credential (Credential, optional): 凭据。Defaults to None.
+        credential (Credential | None, optional): 凭据。Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
