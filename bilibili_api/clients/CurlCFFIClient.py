@@ -54,7 +54,7 @@ class CurlCFFIClient(BiliAPIClient):
                 proxies={"all": proxy},
                 verify=verify_ssl,
                 trust_env=trust_env,
-                impersonate=impersonate,
+                impersonate=impersonate,  # type: ignore
                 http_version=(curl_cffi.CurlHttpVersion.V2_0 if http2 else None),
             )
         self.__ws: dict[int, requests.AsyncWebSocket] = {}
@@ -128,7 +128,7 @@ class CurlCFFIClient(BiliAPIClient):
         else:
             multipart = None
         resp = await self.__session.request(
-            method=method,
+            method=method,  # type: ignore
             url=url,
             params=params,
             data=data,

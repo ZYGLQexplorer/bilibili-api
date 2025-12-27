@@ -47,7 +47,7 @@ class InteractiveVariable:
         刷新变量数值
         """
         if self.is_random():
-            self.__var_value = int(rand(0, 100))
+            self.__var_value = int(rand() * 100)
 
     def get_value(self) -> int:
         return self.__var_value
@@ -243,7 +243,7 @@ class Button:
 
 
 class ButtonLabel(QtWidgets.QLabel):
-    def __init__(self, parent: QtWidgets.QWidget = None):
+    def __init__(self, parent: QtWidgets.QWidget = None):  # type: ignore
         super().__init__(parent=parent)
         self.setObjectName(str(time.time()))
 
@@ -347,7 +347,7 @@ class MPlayer:
         self.pp.setEnabled(False)
         self.pushButton.setEnabled(False)
         self.retranslateUi(Form)
-        self.win.closeEvent = self.on_close_check
+        self.win.closeEvent = self.on_close_check  # type: ignore
         self.pushButton_2.clicked.connect(self.open_ivi)
         self.pushButton_3.clicked.connect(self.close_ivi)
         self.pushButton_4.clicked.connect(self.sound_on_off_event)
@@ -382,14 +382,14 @@ class MPlayer:
                         lbl.raise_()
                     self.player.lower()
                 else:
-                    children = self.graph[str(self.current_node)]["sub"]
+                    children = self.graph[str(self.current_node)]["sub"]  # type: ignore
                     if len(children) == 0:
                         # 已结束
                         pass
                     else:
                         # 跳转类型
                         if (
-                            self.graph[str(self.current_node)]["sub"][0]["jump_type"]
+                            self.graph[str(self.current_node)]["sub"][0]["jump_type"]  # type: ignore
                             == InteractiveNodeJumpingType.DEFAULT.value
                         ):
                             # 直接跳转
@@ -411,10 +411,10 @@ class MPlayer:
                                     )
                                     self.variables = native_command.run_command()
                                     btn_id = btn.node_id
-                                    self.set_source(self.graph[str(btn_id)]["cid"])
+                                    self.set_source(self.graph[str(btn_id)]["cid"])  # type: ignore
                                     self.current_node = btn.node_id
                                     self.volume_change_event()
-                                    title = self.graph[str(btn_id)]["title"]
+                                    title = self.graph[str(btn_id)]["title"]  # type: ignore
                                     self.node.setText(f"(当前节点: {title})")
                                     break
                         else:
@@ -550,7 +550,6 @@ class MPlayer:
                 for lbl in self.choice_labels:
                     lbl.hide()
                 self.choice_labels = []
-            self.last_position = self.mediaplayer.position()
             self.slider.setValue(
                 int(self.mediaplayer.position() / self.mediaplayer.duration() * 100)
             )
@@ -583,7 +582,7 @@ class MPlayer:
             pos = [pos.x(), pos.y()]
             for var in self.variables:
                 if var.is_random():
-                    var._InteractiveVariable__var_value = random.random() * 100
+                    var._InteractiveVariable__var_value = random.random() * 100  # type: ignore
             for btn in self.choice_buttons:
                 if (
                     (pos[0] - btn.pos[0] <= 200)
@@ -601,14 +600,14 @@ class MPlayer:
                         )
                         self.variables = native_command.run_command()
                         btn_id = btn.node_id
-                        self.set_source(self.graph[str(btn_id)]["cid"])
+                        self.set_source(self.graph[str(btn_id)]["cid"])  # type: ignore
                         self.current_node = btn.node_id
                         self.volume_change_event()
-                        title = self.graph[str(btn.node_id)]["title"]
+                        title = self.graph[str(btn.node_id)]["title"]  # type: ignore
                         self.node.setText(f"(当前节点: {title})")
                         break
 
-        self.win.mouseReleaseEvent = mouseReleaseEvent
+        self.win.mouseReleaseEvent = mouseReleaseEvent  # type: ignore
 
     def start_playing(self):
         self.videoplayer.play()
@@ -870,14 +869,14 @@ class MPlayer:
         new_cid = copy.deepcopy(self.state_log[-2]["cid"])
         new_vars = copy.deepcopy(self.state_log[-2]["vars"])
         self.state_log.pop()
-        for key in self.graph.keys():
-            if self.graph[key]["cid"] == new_cid:
+        for key in self.graph.keys():  # type: ignore
+            if self.graph[key]["cid"] == new_cid:  # type: ignore
                 new_node_id = int(key)
                 self.current_node = new_node_id
                 self.variables = new_vars
                 self.set_source(new_cid)
                 self.state_log.pop()
-                title = self.graph[str(new_node_id)]["title"]
+                title = self.graph[str(new_node_id)]["title"]  # type: ignore
                 self.node.setText(f"(当前节点: {title})")
                 self.volume_change_event()
                 return

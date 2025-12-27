@@ -2163,6 +2163,7 @@ class Credential:
             self.dedeuserid = new_cred.dedeuserid
             self.dedeuserid_ckmd5 = new_cred.dedeuserid_ckmd5
             self.ac_time_value = new_cred.ac_time_value
+            self.sid = new_cred.sid
 
     @classmethod
     def from_cookies(

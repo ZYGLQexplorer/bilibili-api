@@ -83,7 +83,7 @@ class HTTPXClient(BiliAPIClient):
 
     def set_trust_env(self, trust_env: bool = True) -> None:
         self.__trust_env = trust_env
-        self.__session.trust_env = trust_env
+        self.__need_update_session = True
 
     async def __auto_update_session(self) -> None:
         await self.__session_update_lock.acquire()
@@ -141,8 +141,8 @@ class HTTPXClient(BiliAPIClient):
             method=method,
             url=url,
             params=params,
-            data=data,
-            files=files,
+            data=data,  # type: ignore
+            files=files,  # type: ignore
             headers=headers,
             cookies=cookies,
             follow_redirects=allow_redirects,
@@ -159,7 +159,7 @@ class HTTPXClient(BiliAPIClient):
             headers=resp_headers,
             cookies=resp_cookies,
             raw=resp.content,
-            url=resp.url,
+            url=str(resp.url),
         )
         return bili_api_resp
 
@@ -177,7 +177,7 @@ class HTTPXClient(BiliAPIClient):
         self.__downloads[cnt] = await self.__session.send(
             req, stream=True, follow_redirects=True
         )
-        self.__download_iter[cnt] = self.__downloads[cnt].aiter_bytes(4096)
+        self.__download_iter[cnt] = self.__downloads[cnt].aiter_bytes(4096)  # type: ignore
         return cnt
 
     async def download_chunk(self, cnt: int) -> bytes:
@@ -195,7 +195,7 @@ class HTTPXClient(BiliAPIClient):
         del self.__downloads[cnt]
         del self.__download_iter[cnt]
 
-    async def ws_create(self, *args, **kwargs) -> None:
+    async def ws_create(self, *args, **kwargs) -> None:  # type: ignore
         """
         httpx 库暂未实现 WebSocket。相关讨论：<https://github.com/encode/httpx/issues/304>
         """
@@ -211,7 +211,7 @@ class HTTPXClient(BiliAPIClient):
             "httpx 库暂未实现 WebSocket。相关讨论：<https://github.com/encode/httpx/issues/304>"
         )
 
-    async def ws_recv(self, *args, **kwargs) -> None:
+    async def ws_recv(self, *args, **kwargs) -> None:  # type: ignore
         """
         httpx 库暂未实现 WebSocket。相关讨论：<https://github.com/encode/httpx/issues/304>
         """

@@ -19,7 +19,7 @@ from .user import get_self_info
 from .utils.AsyncEvent import AsyncEvent
 from .utils.network import Api, Credential
 from .utils.picture import Picture
-from .utils.utils import get_api, raise_for_statement
+from .utils.utils import get_api
 from .video import Video
 
 API = get_api("session")
@@ -386,7 +386,7 @@ async def send_msg(
     credential.raise_for_no_bili_jct()
 
     api = API["operate"]["send_msg"]
-    if credential.has_dedeuserid() and int(credential.dedeuserid) != 0:
+    if credential.dedeuserid and int(credential.dedeuserid) != 0:
         sender_uid = int(credential.dedeuserid)
     else:
         self_info = await get_self_info(credential)
@@ -397,7 +397,8 @@ async def send_msg(
     elif msg_type == EventType.WITHDRAW:
         real_content = str(content)
     elif msg_type == EventType.PICTURE or msg_type == EventType.GROUPS_PICTURE:
-        raise_for_statement(isinstance(content, Picture), "TypeError")
+        if not isinstance(content, Picture):
+            raise ApiException("发送信息类型不属于图片 (Picture)。")
         if content.url.startswith("file://") or content.url.startswith("bytes://"):
             await content.upload(credential=credential)
         real_content = json.dumps(
@@ -482,7 +483,7 @@ class Session(AsyncEvent):
             )
             self.logger.addHandler(handler)
 
-    def on(self, event_type: EventType) -> Callable:
+    def on(self, event_type: EventType) -> Callable:  # type: ignore
         """
         重载装饰器注册事件监听器
 

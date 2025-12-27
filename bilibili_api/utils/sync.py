@@ -37,7 +37,7 @@ def sync(
     try:
         asyncio.get_running_loop()
     except RuntimeError:
-        return __ensure_event_loop().run_until_complete(coroutine)
+        return __ensure_event_loop().run_until_complete(coroutine)  # type: ignore
     else:
         with ThreadPoolExecutor() as executor:
             return executor.submit(

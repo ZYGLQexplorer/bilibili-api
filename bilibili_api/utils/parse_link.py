@@ -153,7 +153,7 @@ async def parse_link(
                 return (User(info["mid"], credential=credential), ResourceType.USER)
 
         channel = parse_season_series(
-            url,
+            url,  # type: ignore
             credential,  # type: ignore
         )  # 不需要 real_url，提前处理
         if channel != -1:
@@ -224,7 +224,7 @@ async def parse_link(
         opus_dynamic = parse_opus_dynamic(url, credential)  # type: ignore
         if not opus_dynamic == -1:
             obj = (opus_dynamic, ResourceType.OPUS)
-        garb = parse_garb(url, credential)
+        garb = parse_garb(url, credential)  # type: ignore
         if not garb == -1:
             obj = (garb, ResourceType.DLC)
 
@@ -634,7 +634,8 @@ async def parse_festival(url: URL, credential: Credential) -> Video | int:
             url=str(url), credential=credential
         )
         return Video(
-            content["videoSections"][0]["episodes"][0]["bvid"], credential=credential
+            content["videoSections"][0]["episodes"][0]["bvid"],
+            credential=credential,  # type: ignore
         )  # 返回当前第一个视频
     return -1
 
@@ -645,7 +646,7 @@ def parse_note(url: URL, credential: Credential) -> Note | int:
         if url.query.get("cvid") is None:
             return -1
         return Note(
-            cvid=int(url.query.get("cvid")),
+            cvid=int(url.query.get("cvid")),  # type: ignore
             note_type=NoteType.PUBLIC,
             credential=credential,
         )  # type: ignore
@@ -658,7 +659,7 @@ def parse_nianshizhiwang(url: URL) -> None:
     # 貌似 parse_bnj 已经可以判断了
 
 
-def parse_opus_dynamic(url: URL, credential: Credential) -> Dynamic | int:
+def parse_opus_dynamic(url: URL, credential: Credential) -> Opus | int:
     # https://www.bilibili.com/opus/767674573455884292
     if url.host == "www.bilibili.com" and url.parts[:2] == ("/", "opus"):
         return Opus(opus_id=int(url.parts[-1]), credential=credential)

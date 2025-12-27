@@ -101,73 +101,73 @@ class VideoAppealReasonType:
     - ILLEGAL_URL(): 违法信息外链
     """
 
-    def ILLEGAL():
+    def ILLEGAL():  # pyright: ignore[reportSelfClsParameterName]
         return 2
 
-    def PRON():
+    def PRON():  # pyright: ignore[reportSelfClsParameterName]
         return 3
 
-    def VULGAR():
+    def VULGAR():  # pyright: ignore[reportSelfClsParameterName]
         return 4
 
-    def GAMBLED_SCAMS():
+    def GAMBLED_SCAMS():  # pyright: ignore[reportSelfClsParameterName]
         return 5
 
-    def VIOLENT():
+    def VIOLENT():  # pyright: ignore[reportSelfClsParameterName]
         return 6
 
-    def PERSONAL_ATTACK():
+    def PERSONAL_ATTACK():  # pyright: ignore[reportSelfClsParameterName]
         return 7
 
-    def BAD_FOR_YOUNGS():
+    def BAD_FOR_YOUNGS():  # pyright: ignore[reportSelfClsParameterName]
         return 10000
 
-    def CLICKBAIT():
+    def CLICKBAIT():  # pyright: ignore[reportSelfClsParameterName]
         return 10013
 
-    def POLITICAL_RUMORS():
+    def POLITICAL_RUMORS():  # pyright: ignore[reportSelfClsParameterName]
         return 10014
 
-    def SOCIAL_RUMORS():
+    def SOCIAL_RUMORS():  # pyright: ignore[reportSelfClsParameterName]
         return 10015
 
-    def UNREAL_EVENT():
+    def UNREAL_EVENT():  # pyright: ignore[reportSelfClsParameterName]
         return 10017
 
-    def OTHER():
+    def OTHER():  # pyright: ignore[reportSelfClsParameterName]
         return 1
 
-    def LEAD_WAR():
+    def LEAD_WAR():  # pyright: ignore[reportSelfClsParameterName]
         return 9
 
-    def CANNOT_CHARGE():
+    def CANNOT_CHARGE():  # pyright: ignore[reportSelfClsParameterName]
         return 10
 
-    def ILLEGAL_POPULARIZE():
+    def ILLEGAL_POPULARIZE():  # pyright: ignore[reportSelfClsParameterName]
         return 10018
 
-    def ILLEGAL_OTHER():
+    def ILLEGAL_OTHER():  # pyright: ignore[reportSelfClsParameterName]
         return 10019
 
-    def DANGEROUS():
+    def DANGEROUS():  # pyright: ignore[reportSelfClsParameterName]
         return 10020
 
-    def OTHER_NEW():
+    def OTHER_NEW():  # pyright: ignore[reportSelfClsParameterName]
         return 10022
 
-    def COOPERATE_INFRINGEMENT():
+    def COOPERATE_INFRINGEMENT():  # pyright: ignore[reportSelfClsParameterName]
         return 10023
 
-    def INFRINGEMENT():
+    def INFRINGEMENT():  # pyright: ignore[reportSelfClsParameterName]
         return 10024
 
-    def VIDEO_INFRINGEMENT():
+    def VIDEO_INFRINGEMENT():  # pyright: ignore[reportSelfClsParameterName]
         return 10026
 
-    def DISCOMFORT():
+    def DISCOMFORT():  # pyright: ignore[reportSelfClsParameterName]
         return 10021
 
-    def ILLEGAL_URL():
+    def ILLEGAL_URL():  # pyright: ignore[reportSelfClsParameterName]
         return 10025
 
     @staticmethod
@@ -280,13 +280,13 @@ class Video:
     async def __get_bvid(self) -> str:
         res = self.get_bvid()
         if iscoroutine(res):
-            return await res
+            return await res  # type: ignore
         return res
 
-    async def __get_aid(self) -> str:
+    async def __get_aid(self) -> int:
         res = self.get_aid()
         if iscoroutine(res):
-            return await res
+            return await res  # type: ignore
         return res
 
     async def get_info(self) -> dict:
@@ -315,7 +315,7 @@ class Video:
         info = await self.__get_info_cached()
         if not info.get("redirect_url"):
             return False
-        url = URL(info.get("redirect_url"))
+        url = URL(info.get("redirect_url", ""))
         if url.host == "www.bilibili.com" and len(url.parts) >= 3:
             if url.parts[1] == "bangumi" and url.parts[2] == "play":
                 return True
@@ -333,7 +333,7 @@ class Video:
         raise_for_statement(await self.is_episode(), "视频不属于番剧")
 
         info = await self.__get_info_cached()
-        url = URL(info.get("redirect_url"))
+        url = URL(info.get("redirect_url", ""))
         epid = int(url.parts[3][2:])
         return bangumi.Episode(epid=epid)
 
@@ -980,25 +980,28 @@ class Video:
 
         aid = await self.__get_aid()
         params: dict[str, Any] = {"oid": cid, "type": 1, "pid": aid}
+        start_seg = 0
+        end_seg = 0
         if date is not None:
             # 获取历史弹幕
             api = API["danmaku"]["get_history_danmaku"]
             params["date"] = date.strftime("%Y-%m-%d")
             params["type"] = 1
-            from_seg = to_seg = 0
         else:
             api = API["danmaku"]["get_danmaku"]
-            if from_seg is None:
-                from_seg = 0
-            if to_seg is None:
+            if from_seg:
+                start_seg = from_seg
+            if to_seg:
+                end_seg = to_seg
+            else:
                 info = await self.__get_info_cached()
                 for p in info["pages"]:
                     if p["cid"] == cid:
-                        to_seg = p["duration"] // 360 + 1
+                        end_seg = p["duration"] // 360 + 1
 
         danmakus = []
 
-        for seg in range(from_seg, to_seg + 1):
+        for seg in range(start_seg, end_seg + 1):
             if date is None:
                 # 仅当获取当前弹幕时需要该参数
                 params["segment_index"] = seg + 1
@@ -1362,7 +1365,7 @@ class Video:
             "aid": await self.__get_aid(),
             "bvid": await self.__get_bvid(),
             "cid": (
-                cid if cid is not None else await self.get_cid(page_index=page_index)
+                cid if cid is not None else await self.get_cid(page_index=page_index)  # type: ignore
             ),
         }
         return (
@@ -1602,7 +1605,7 @@ class Video:
         if cid is None:
             raise ArgsException("需要 cid")
 
-        return (await self.get_player_info(cid=cid)).get("subtitle")
+        return (await self.get_player_info(cid=cid)).get("subtitle", {})
 
     async def get_player_info(
         self,
@@ -2030,7 +2033,7 @@ class VideoOnlineMonitor(AsyncEvent):
 
         # 获取服务器信息
         bvid = self.__video.get_bvid()
-        self.__bvid = await bvid if iscoroutine(bvid) else bvid
+        self.__bvid = await bvid if iscoroutine(bvid) else bvid  # type: ignore
         self.logger.debug(f"准备连接：{self.__bvid}")
         self.logger.debug("获取服务器信息中...")
 
@@ -2069,6 +2072,7 @@ class VideoOnlineMonitor(AsyncEvent):
                 self.logger.warning("连接被异常断开")
                 await self.__cancel_all_tasks()
                 self.dispatch("ERROR", "")
+                continue
             if flag == BiliWsMsgType.BINARY:
                 data = self.__unpack(data)
                 self.logger.debug(f"收到消息：{data}")
@@ -2581,6 +2585,7 @@ class VideoDownloadURLDataDetecter:
         | AudioStreamDownloadURL
         | FLVStreamDownloadURL
         | MP4StreamDownloadURL
+        | None
     ]:
         """
         提取出分辨率、音质等信息最好的音视频流。
@@ -2614,7 +2619,7 @@ class VideoDownloadURLDataDetecter:
         **以上参数仅能在音视频流分离的情况下产生作用，flv / mp4 试看流 / html5 mp4 流下以下参数均没有作用**
         """
         if self.check_flv_mp4_stream():
-            return self.detect_all()
+            return self.detect_all()  # type: ignore
         else:
             data = self.detect(
                 video_max_quality=video_max_quality,

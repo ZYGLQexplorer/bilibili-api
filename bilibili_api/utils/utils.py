@@ -84,7 +84,7 @@ def crack_uid(crc32: str):
                     crcreg = __CRCPOLYNOMIAL ^ (crcreg >> 1)
                 else:
                     crcreg >>= 1
-            __crctable[i] = crcreg
+            __crctable[i] = crcreg  # type: ignore
 
     __create_table()
 
@@ -95,7 +95,7 @@ def crack_uid(crc32: str):
         len_ = len(input_)
         for i in range(len_):
             index = (crcstart ^ ord(input_[i])) & 0xFF
-            crcstart = (crcstart >> 8) ^ __crctable[index]
+            crcstart = (crcstart >> 8) ^ __crctable[index]  # type: ignore
         return crcstart
 
     def __crc32lastindex(input_):
@@ -106,12 +106,12 @@ def crack_uid(crc32: str):
         index = None
         for i in range(len_):
             index = (crcstart ^ ord(input_[i])) & 0xFF
-            crcstart = (crcstart >> 8) ^ __crctable[index]
+            crcstart = (crcstart >> 8) ^ __crctable[index]  # type: ignore
         return index
 
     def __getcrcindex(t):
         for i in range(256):
-            if __crctable[i] >> 24 == t:
+            if __crctable[i] >> 24 == t:  # type: ignore
                 return i
         return -1
 
@@ -142,9 +142,9 @@ def crack_uid(crc32: str):
     ht = int(crc32, 16) ^ 0xFFFFFFFF
     i = 3
     while i >= 0:
-        __index[3 - i] = __getcrcindex(ht >> (i * 8))
+        __index[3 - i] = __getcrcindex(ht >> (i * 8))  # type: ignore
         # pylint: disable=invalid-sequence-index
-        snum = __crctable[__index[3 - i]]
+        snum = __crctable[__index[3 - i]]  # type: ignore
         ht ^= snum >> ((3 - i) * 8)
         i -= 1
     for i in range(10000000):
@@ -155,7 +155,7 @@ def crack_uid(crc32: str):
                 break
     if i == 10000000:
         return -1
-    return str(i) + deepCheckData[1]
+    return str(i) + deepCheckData[1]  # type: ignore
 
 
 def join(seperator: str, array: list):

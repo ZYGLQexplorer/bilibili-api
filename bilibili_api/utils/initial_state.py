@@ -19,9 +19,10 @@ class InitialDataType(Enum):
     INITIAL_STATE = "window.__INITIAL_STATE__"
     NEXT_DATA = "__NEXT_DATA__"
     RENDER_DATA = "__RENDER_DATA__"
+    NONE = "None"
 
 
-def find_json(content: str) -> str:
+def find_json(content: str) -> tuple[int, InitialDataType]:
     patterns = [
         ("window.__INITIAL_STATE__=", InitialDataType.INITIAL_STATE),
         ('window.__initialState = JSON.parse("', InitialDataType.INITIAL_STATE),
@@ -41,7 +42,7 @@ def find_json(content: str) -> str:
         if pos != -1:
             pos += len(pattern)
             return pos, content_type
-    return -1, None
+    return -1, InitialDataType.NONE
 
 
 async def get_initial_state(
@@ -69,7 +70,7 @@ async def get_initial_state(
         if pos == -1:
             if strict:
                 raise InitialStateException("未找到相关信息")
-            return None, None
+            return {}, InitialDataType.NONE
         try:
             detected_content = content[pos:].strip().strip("\n").strip("\r")
             if detected_content.startswith('{\\"'):  # 暂时都是字典

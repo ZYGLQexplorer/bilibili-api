@@ -15,9 +15,9 @@ import json
 import os
 import re
 import time
-from typing import Any, ClassVar
 
 import anyio
+from frozendict import frozendict
 
 from .exceptions.ApiException import ApiException
 from .exceptions.NetworkException import NetworkException
@@ -73,7 +73,7 @@ class Lines(Enum):
     BLDSA = "bldsa"
 
 
-LINES_INFO = get_data("video_uploader_lines.json")
+LINES_INFO: dict[str, dict] = get_data("video_uploader_lines.json")  # type: ignore
 
 
 async def _probe() -> dict:
@@ -87,6 +87,7 @@ async def _probe() -> dict:
     min_cost, fastest_line = 30, None
     legacy_timeout = request_settings.get_timeout()
     request_settings.set_timeout(30)  # 测试时设置为 30
+    min_cost, fastest_line = 432432432, {}
     for line in LINES_INFO.values():
         start = time.perf_counter()
         data = bytes(int(1024 * 0.1 * 1024))  # post 0.1MB
@@ -106,7 +107,7 @@ async def _probe() -> dict:
     return fastest_line
 
 
-async def _choose_line(line: Lines) -> dict:
+async def _choose_line(line: Lines | None) -> dict:
     """
     选择线路，不存在则直接测速自动选择
     """
@@ -242,14 +243,16 @@ class VideoPorderType(Enum):
     + OTHER: 其他
     """
 
-    FIREWORK: ClassVar[dict[str, Any]] = {"flow_id": 1}
-    OTHER: ClassVar[dict[str, Any]] = {
-        "flow_id": 1,
-        "industry_id": None,
-        "official": None,
-        "brand_name": None,
-        "show_type": [],
-    }
+    FIREWORK = frozendict({"flow_id": 1})
+    OTHER = frozendict(
+        {
+            "flow_id": 1,
+            "industry_id": None,
+            "official": None,
+            "brand_name": None,
+            "show_type": [],
+        }
+    )
 
 
 class VideoPorderIndustry(Enum):
@@ -323,8 +326,6 @@ class VideoPorderMeta:
     视频商业相关参数
     """
 
-    __info: dict = None
-
     def __init__(
         self,
         porder_type: VideoPorderType = VideoPorderType.FIREWORK,
@@ -339,15 +340,19 @@ class VideoPorderMeta:
             brand_name (str | None, optional): 品牌名，非花火填写. Defaults to None.
             show_types (list[VideoPorderShowType], optional): 商单形式，非花火填写. Defaults to [].
         """
-        self.__info = porder_type.value
+        self.__info: dict = dict(porder_type.value)
         if porder_type == VideoPorderType.OTHER:
+            if not industry_type:
+                raise ApiException("未提供商单行业")
+            if not brand_name:
+                raise ApiException("未提供品牌名")
             self.__info["industry"] = industry_type.value
             self.__info["brand_name"] = brand_name
             self.__info["show_types"] = ",".join(
-                [show_type.value for show_type in show_types]
+                [str(show_type.value) for show_type in show_types]
             )
 
-    def __dict__(self) -> dict:
+    def __dict__(self) -> dict:  # type: ignore
         return self.__info
 
 
@@ -532,7 +537,7 @@ class VideoMeta:
         self.porder = porder if isinstance(porder, dict) else None
         self.watermark = watermark
 
-    def __dict__(self) -> dict:
+    def __dict__(self) -> dict:  # type: ignore
         meta = {
             "title": self.title,
             "copyright": 1 if self.original else 2,
@@ -685,9 +690,14 @@ class VideoMeta:
             raise ValueError(f"封面不合法 {self.cover.__repr__()}")
 
         if self.delay_time is not None:
-            if self.delay_time < int(time.time()) + 7200:
+            delay_time = (
+                self.delay_time
+                if isinstance(self.delay_time, int)
+                else self.delay_time.timestamp()
+            )
+            if delay_time < int(time.time()) + 7200:
                 raise ValueError("delay_time 不能小于两小时")
-            if self.delay_time > int(time.time()) + 3600 * 24 * 15:
+            if delay_time > int(time.time()) + 3600 * 24 * 15:
                 raise ValueError("delay_time 不能大于十五天")
         return True
 
@@ -767,9 +777,10 @@ class VideoUploader(AsyncEvent):
             if isinstance(self.meta, VideoMeta)
             else cover
             if isinstance(cover, Picture)
-            else Picture().from_file(cover)
+            else Picture().from_file(cover)  # type: ignore
         )
-        self.line = line
+        self.line_choice = line
+        self.line: dict = {}
         self.__task: Task | None = None
 
     async def _preupload(self, page: VideoUploaderPage) -> dict:
@@ -997,7 +1008,7 @@ class VideoUploader(AsyncEvent):
             dict: 返回带有 bvid 和 aid 的字典。
         """
 
-        self.line = await _choose_line(self.line)
+        self.line = await _choose_line(self.line_choice)
         task = create_task(self._main())
         self.__task = task
 
@@ -1342,10 +1353,9 @@ async def get_missions(tid: int = 0, credential: Credential | None = None) -> di
     Returns:
         dict: API 调用返回结果
     """
+    credential = credential if credential else Credential()
     api = _API["missions"]
-
     params = {"tid": tid}
-
     return await Api(**api, credential=credential).update_params(**params).result
 
 
@@ -1485,9 +1495,9 @@ class VideoEditor(AsyncEvent):
                 else Picture().from_file(self.cover_path)
             )
             resp = await upload_cover(pic, self.credential)
-            self.dispatch(VideoEditorEvents.AFTER_COVER.value, {"url": resp["url"]})
+            self.dispatch(VideoEditorEvents.AFTER_COVER.value, {"url": resp})
             # not sure if this key changed to "url" as well
-            self.meta["cover"] = resp["image_url"]
+            self.meta["cover"] = resp
         except Exception as e:
             self.dispatch(VideoEditorEvents.COVER_FAILED.value, {"err": e})
             raise e

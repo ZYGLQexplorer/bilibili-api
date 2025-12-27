@@ -104,7 +104,7 @@ class AioHTTPClient(BiliAPIClient):
         await self.__auto_update_session()
         if files:
             form = aiohttp.FormData()
-            if isinstance(data, str):
+            if isinstance(data, str) or isinstance(data, bytes):
                 raise NotImplementedError
             for key, value in data.items():
                 form.add_field(name=key, value=value)
@@ -117,7 +117,7 @@ class AioHTTPClient(BiliAPIClient):
                     content_type=value.mime_type,
                     filename=value.path.split("/")[-1],
                 )
-            data = form
+            data = form  # type: ignore
         if self.__use_args:
             resp = await self.__session.request(
                 method=method,

@@ -1054,14 +1054,16 @@ class InteractiveVideoDownloader(AsyncEvent):
                 streams = VideoDownloadURLDataDetecter(url).detect_best_streams(
                     **self.__detect_params
                 )
-                await self.__download_func(
-                    streams[0].url,
-                    tmp_dir_name + "/" + str(cid) + ".video.mp4",
-                )  # type: ignore
-                await self.__download_func(
-                    streams[1].url,
-                    tmp_dir_name + "/" + str(cid) + ".audio.mp4",
-                )  # type: ignore
+                if streams[0]:
+                    await self.__download_func(
+                        streams[0].url,
+                        tmp_dir_name + "/" + str(cid) + ".video.mp4",
+                    )  # type: ignore
+                if streams[1]:
+                    await self.__download_func(
+                        streams[1].url,
+                        tmp_dir_name + "/" + str(cid) + ".audio.mp4",
+                    )  # type: ignore
 
         self.dispatch("PACKAGING")
 
@@ -1191,14 +1193,16 @@ class InteractiveVideoDownloader(AsyncEvent):
                 streams = VideoDownloadURLDataDetecter(url).detect_best_streams(
                     **self.__detect_params
                 )
-                await self.__download_func(
-                    streams[0].url,
-                    tmp_dir_name + "/" + str(cid) + " " + item["title"] + ".video.mp4",
-                )  # type: ignore
-                await self.__download_func(
-                    streams[1].url,
-                    tmp_dir_name + "/" + str(cid) + " " + item["title"] + ".audio.mp4",
-                )  # type: ignore
+                if streams[0]:
+                    await self.__download_func(
+                        streams[0].url,
+                        tmp_dir_name + "/" + str(cid) + ".video.mp4",
+                    )  # type: ignore
+                if streams[1]:
+                    await self.__download_func(
+                        streams[1].url,
+                        tmp_dir_name + "/" + str(cid) + ".audio.mp4",
+                    )  # type: ignore
 
         self.dispatch("SUCCESS")
 
@@ -1458,14 +1462,16 @@ class InteractiveVideoDownloader(AsyncEvent):
                 streams = VideoDownloadURLDataDetecter(url).detect_best_streams(
                     **self.__detect_params
                 )
-                await self.__download_func(
-                    streams[0].url,
-                    tmp_dir_name + "/" + str(cid) + ".video.mp4",
-                )  # type: ignore
-                await self.__download_func(
-                    streams[1].url,
-                    tmp_dir_name + "/" + str(cid) + ".audio.mp4",
-                )  # type: ignore
+                if streams[0]:
+                    await self.__download_func(
+                        streams[0].url,
+                        tmp_dir_name + "/" + str(cid) + ".video.mp4",
+                    )  # type: ignore
+                if streams[1]:
+                    await self.__download_func(
+                        streams[1].url,
+                        tmp_dir_name + "/" + str(cid) + ".audio.mp4",
+                    )  # type: ignore
 
         self.dispatch("SUCCESS")
 

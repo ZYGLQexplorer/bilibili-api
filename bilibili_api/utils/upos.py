@@ -6,6 +6,7 @@ import asyncio
 from asyncio.tasks import create_task
 import json
 import os
+from typing import Any
 
 import anyio
 
@@ -131,7 +132,7 @@ class UposFileUploader:
         Returns:
             dict: 上传结果和分块信息。
         """
-        chunk_event_callback_data = {
+        chunk_event_callback_data: dict[str, Any] = {
             "offset": offset,
             "chunk_number": chunk_number,
             "total_chunk_count": total_chunk_count,
@@ -232,3 +233,5 @@ class UposFileUploader:
         if data["OK"] != 1:
             err = ResponseCodeException(-1, f"提交分 P 失败，原因: {data['message']}")
             raise err
+
+        return data

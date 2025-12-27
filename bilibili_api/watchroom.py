@@ -112,21 +112,18 @@ class WatchRoom:
     放映室类
     """
 
-    __season_id: int
-    __episode_id: int
-
-    def __init__(self, room_id: int, credential: Credential = None) -> None:
+    def __init__(self, room_id: int, credential: Credential | None = None) -> None:
         """
         Args:
 
-            credential      (Credential): 凭据类 (大部分用户操作都需要与之匹配的 buvid3 值，务必在 credential 传入)
+            credential      (Credential | None): 凭据类 (大部分用户操作都需要与之匹配的 buvid3 值，务必在 credential 传入)
 
             room_id         (int)       : 放映室 id
         """
         credential = credential if credential else Credential()
         self.__room_id = room_id
-        self.__season_id = None
-        self.__episode_id = None
+        self.__season_id: int | None = None
+        self.__episode_id: int | None = None
         self.credential: Credential = credential
         self.credential.raise_for_no_sessdata()
         self.credential.raise_for_no_bili_jct()
@@ -171,7 +168,7 @@ class WatchRoom:
         """
         if not self.__season_id:
             await self.__fetch_meta()
-        return self.__season_id
+        return self.__season_id  # type: ignore
 
     async def get_episode_id(self) -> int:
         """
@@ -182,7 +179,7 @@ class WatchRoom:
         """
         if not self.__episode_id:
             await self.__fetch_meta()
-        return self.__episode_id
+        return self.__episode_id  # type: ignore
 
     def get_room_id(self) -> int:
         """
@@ -368,7 +365,7 @@ async def create(
     season_id: int,
     episode_id: int,
     is_open: bool = False,
-    credential: Credential = None,
+    credential: Credential | None = None,
 ) -> WatchRoom:
     """
     创建放映室
@@ -381,7 +378,7 @@ async def create(
 
         is_open (bool): 是否公开
 
-        credential (Credential): 凭据
+        credential (Credential | None): 凭据
 
     Returns:
         Watchroom: 放映室
@@ -409,7 +406,7 @@ async def create(
 async def match(
     season_id: int,
     season_type: SeasonType = SeasonType.ANIME,
-    credential: Credential = None,
+    credential: Credential | None = None,
 ) -> WatchRoom:
     """
     匹配放映室
@@ -420,7 +417,7 @@ async def match(
 
         season_type (SeasonType): 季度类型
 
-        credential (Credential): 凭据类
+        credential (Credential | None): 凭据类
 
     Returns:
         Watchroom: 放映室

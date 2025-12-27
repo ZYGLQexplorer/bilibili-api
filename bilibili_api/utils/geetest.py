@@ -42,8 +42,8 @@ class GeetestMeta:
     gt: str
     challenge: str
     token: str
-    seccode: str = ""
-    validate: str = ""
+    seccode: str | None = ""
+    validate: str | None = ""
 
 
 class DocHandler(http.server.BaseHTTPRequestHandler):
@@ -62,7 +62,7 @@ class DocHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(self.urlhandler(self.path, content_type).encode("utf-8"))  # type: ignore
 
-    def log_message(self, *args):
+    def log_message(self, *args):  # type: ignore
         # Don't log messages.
         pass
 
@@ -176,7 +176,7 @@ class Geetest:
         """
         if not self.test_generated():
             raise GeetestException("未生成过测试。请调用 `generate_test`")
-        return self.test_type
+        return self.test_type  # type: ignore
 
     def test_generated(self) -> bool:
         """
@@ -302,12 +302,12 @@ class Geetest:
             str: 链接
         """
         if not self.thread:
-            return GeetestException("未创建验证码服务。请调用 `start_geetest_server`")
-        return self.thread.url
+            raise GeetestException("未创建验证码服务。请调用 `start_geetest_server`")
+        return self.thread.url  # type: ignore
 
     def close_geetest_server(self) -> None:
         """
         关闭本地极验验证码服务
         """
-        self.thread.stop()
+        self.thread.stop()  # type: ignore
         self.thread = None

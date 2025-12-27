@@ -87,7 +87,7 @@ class Opus:
         """
         return dynamic.Dynamic(dynamic_id=self.__id, credential=self.credential)
 
-    async def get_info(self) -> None:
+    async def get_info(self) -> dict:
         """
         获取图文基本信息
 

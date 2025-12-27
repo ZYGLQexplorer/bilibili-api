@@ -104,7 +104,7 @@ class AsyncEvent:
             kwargs (Any): 要传递给函数的参数。 **kwargs 传递。
         """
         if len(args) == 0 and len(kwargs.keys()) == 0:
-            args = [{}]
+            args = [{}]  # type: ignore
         if name.upper() in self.__ignore_events:
             return
 

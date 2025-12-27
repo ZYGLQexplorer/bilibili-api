@@ -47,7 +47,7 @@ class Tag:
         """
         if not self.__tag_id:
             await self.get_tag_info()
-        return self.__tag_id
+        return self.__tag_id  # type: ignore
 
     async def get_tag_name(self) -> str:
         """
@@ -58,7 +58,7 @@ class Tag:
         """
         if not self.__tag_name:
             await self.get_tag_info()
-        return self.__tag_name
+        return self.__tag_name  # type: ignore
 
     async def get_tag_info(self) -> dict:
         """

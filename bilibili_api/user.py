@@ -209,13 +209,15 @@ class OpusType(Enum):
     DYNAMIC = "dynamic"
 
 
-async def name2uid(names: str | list[str], credential: Credential = None) -> dict:
+async def name2uid(
+    names: str | list[str], credential: Credential | None = None
+) -> dict:
     """
     将用户名转为 uid
 
     Args:
         names (str/List[str]): 用户名
-        credential (Credential, optional): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
