@@ -256,6 +256,8 @@ API 基类异常。
 | - | - | - |
 | `event_name` | `str` | 事件名。 |
 
+**Returns:** `dict`:  传入函数的参数字典
+
 
 
 
@@ -725,6 +727,8 @@ Cookies 刷新错误。
 包含 SESSDATA, bili_jct, sid, DedeUserID, ac_time_value
 
 
+
+**Returns:** `dict`:  核心 cookies
 
 
 

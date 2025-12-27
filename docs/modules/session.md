@@ -130,6 +130,8 @@ from bilibili_api import session
 | - | - | - |
 | `event_type` | `EventType` | 事件类型 |
 
+**Returns:** `Callable`:  装饰后的函数
+
 
 
 

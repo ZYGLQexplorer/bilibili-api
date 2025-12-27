@@ -226,6 +226,8 @@ from bilibili_api import channel_series
 | `status` | `bool` | 是否订阅状态. Defaults to True. |
 | `credential` | `Credential \| None` | 凭据类。 Defaults to None. |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 

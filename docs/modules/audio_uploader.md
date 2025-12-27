@@ -75,6 +75,8 @@ from bilibili_api import audio_uploader
 
 
 
+**Returns:** `int | None`:  歌曲 auid
+
 
 
 
@@ -448,6 +450,8 @@ lrc (Optional[str]): 歌词
 | `param` | `Union[int, str]` | UP 主 ID 或者用户名 |
 | `credential` | `Credential` | 凭据 |
 
+**Returns:** `list[dict]`:  调用 API 获得的结果
+
 
 
 
@@ -480,6 +484,8 @@ lrc (Optional[str]): 歌词
 | `lrc` | `str` | 歌词 |
 | `song_id` | `int` | 音频 id |
 | `credential` | `Credential` | 凭据 |
+
+**Returns:** `str`:  调用 API 获得的结果
 
 
 

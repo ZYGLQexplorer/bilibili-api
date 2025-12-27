@@ -384,6 +384,8 @@ https://www.bilibili.com/v/popular/drama/
 | `status` | `bool` | 关注状态. Defaults to True. |
 | `credential` | `Credential \| None` | 凭据类. Defaults to None. |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 

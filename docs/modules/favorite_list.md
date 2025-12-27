@@ -330,6 +330,8 @@ from bilibili_api import favorite_list
 | `ps` | `int, optional` | 每页数据大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | Credential. Defaults to None. |
 
+**Returns:** `dict`:  调用 API 返回的结果。
+
 
 
 

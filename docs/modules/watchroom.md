@@ -121,7 +121,7 @@ from bilibili_api import watchroom
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential` | 凭据类 (大部分用户操作都需要与之匹配的 buvid3 值，务必在 credential 传入) |
+| `credential` | `Credential \| None` | 凭据类 (大部分用户操作都需要与之匹配的 buvid3 值，务必在 credential 传入) |
 | `room_id` | `int` | 放映室 id |
 
 
@@ -289,7 +289,7 @@ from bilibili_api import watchroom
 | `season_id` | `int` | 每季度的 ID |
 | `episode_id` | `int` | 剧集 ID |
 | `is_open` | `bool` | 是否公开 |
-| `credential` | `Credential` | 凭据 |
+| `credential` | `Credential \| None` | 凭据 |
 
 **Returns:** `Watchroom`:  放映室
 
@@ -307,7 +307,7 @@ from bilibili_api import watchroom
 | - | - | - |
 | `season_id` | `int` | 季度 ID |
 | `season_type` | `SeasonType` | 季度类型 |
-| `credential` | `Credential` | 凭据类 |
+| `credential` | `Credential \| None` | 凭据类 |
 
 **Returns:** `Watchroom`:  放映室
 

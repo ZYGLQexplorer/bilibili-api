@@ -363,6 +363,8 @@ from bilibili_api import creative_center
 | `dmids` | `List[int], int` | 弹幕 id，可以传入列表和 int |
 | `credential` | `Credential` | 凭据类。 |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 

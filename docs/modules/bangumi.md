@@ -136,6 +136,8 @@ from bilibili_api import bangumi
 
 
 
+**Returns:** `list[Episode]`:  剧集类列表
+
 
 
 
@@ -447,6 +449,8 @@ from bilibili_api import bangumi
 获取 epid
 
 
+
+**Returns:** `int`:  epid
 
 
 
@@ -1227,6 +1231,8 @@ Variety Meta
 | `type_` | `BangumiType` | 番剧类型 |
 | `before` | `int` | 几天前开始(0~7), defaults to 7 |
 | `after` | `int` | 几天后结束(0~7), defaults to 0 |
+
+**Returns:** `dict`:  调用 API 返回的结果
 
 
 

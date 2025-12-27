@@ -274,6 +274,8 @@ from bilibili_api import black_room
 | `pn` | `int` | 页数. Defaults to 1. |
 | `credential` | `Credential \| None` | 凭据. Defaults to None. |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 

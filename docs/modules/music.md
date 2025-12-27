@@ -183,6 +183,8 @@ from bilibili_api import music
 | `page_num` | `int` | 页码. Defaults to 1. |
 | `page_size` | `int` | 每页的数据大小. Defaults to 10. |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 

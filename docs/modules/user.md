@@ -955,6 +955,8 @@ medialist排序顺序。
 | `usersign` | `str` | 个性签名 |
 | `credential` | `Credential` | Credential |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 
@@ -970,6 +972,8 @@ medialist排序顺序。
 | `credential` | `Credential` | 凭据类 |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页数据大小. Defaults to 50. |
+
+**Returns:** `dict`:  调用 API 返回的结果
 
 
 
@@ -1016,6 +1020,8 @@ medialist排序顺序。
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | 凭据类 |
+
+**Returns:** `dict`:  调用 API 返回的结果
 
 
 
@@ -1073,6 +1079,8 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | Credential |
+
+**Returns:** `dict`:  调用 API 返回的结果
 
 
 
@@ -1174,6 +1182,8 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页数据大小. Defaults to 50. |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 
@@ -1189,6 +1199,8 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 | `credential` | `Credential` | 凭据类 |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页数据大小. Defaults to 50. |
+
+**Returns:** `dict`:  调用 API 返回的结果
 
 
 
@@ -1219,7 +1231,7 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 | name | type | description |
 | - | - | - |
 | `names` | `str/List[str]` | 用户名 |
-| `credential` | `Credential, optional` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

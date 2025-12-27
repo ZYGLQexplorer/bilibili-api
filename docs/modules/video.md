@@ -975,6 +975,8 @@ page_index 和 cid 至少提供其中一个，其中 cid 优先级最高
 | - | - | - |
 | `bvid` | `str` | 撞车对象 |
 
+**Returns:** `dict`:  传入函数的参数字典
+
 
 
 
@@ -988,6 +990,8 @@ page_index 和 cid 至少提供其中一个，其中 cid 优先级最高
 | name | type | description |
 | - | - | - |
 | `source` | `str` | 原创视频出处 |
+
+**Returns:** `dict`:  传入函数的参数字典
 
 
 

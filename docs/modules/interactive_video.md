@@ -406,6 +406,8 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
+**Returns:** `int`:  子节点跳转方式
+
 
 
 
@@ -590,6 +592,8 @@ o----|xxx| (TEXT_RIGHT)
 获取稿件 cid
 
 
+
+**Returns:** `int`:  cid
 
 
 

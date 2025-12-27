@@ -127,6 +127,8 @@ from bilibili_api import vote
 | `desc` | `str` | 选项描述 |
 | `image` | `str, Picture, optional` | 选项的图片链接，用于图片投票。支持 Picture 类. Defaults to None. |
 
+**Returns:** `VoteChoices`:  `self`
+
 
 
 
@@ -149,6 +151,8 @@ from bilibili_api import vote
 | name | type | description |
 | - | - | - |
 | `index` | `int` | 选项索引 |
+
+**Returns:** `VoteChoices`:  `self`
 
 
 

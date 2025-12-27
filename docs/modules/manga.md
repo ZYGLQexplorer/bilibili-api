@@ -233,6 +233,8 @@ from bilibili_api import manga
 | `status` | `bool` | 设置是否追漫。是为 True，否为 False。Defaults to True. |
 | `credential` | `Credential \| None` | 凭据类。 |
 
+**Returns:** `dict`:  调用 API 返回的结果
+
 
 
 

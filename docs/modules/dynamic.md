@@ -102,6 +102,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | `uid` | `int` | 用户ID |
 | `uname` | `str` | 用户名称. Defaults to "". |
 
+**Returns:** `BuildDynamic`:  `self`
+
 
 
 
@@ -113,6 +115,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | name | type | description |
 | - | - | - |
 | `emoji` | `str` | 表情文字 |
+
+**Returns:** `BuildDynamic`:  `self`
 
 
 
@@ -126,6 +130,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | - | - | - |
 | `image` | `Picture \| List[Picture]` | 图片类 |
 
+**Returns:** `BuildDynamic`:  `self`
+
 
 
 
@@ -137,6 +143,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | name | type | description |
 | - | - | - |
 | `text` | `str` | 文本内容 |
+
+**Returns:** `BuildDynamic`:  `self`
 
 
 
@@ -150,6 +158,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | - | - | - |
 | `text` | `str` | 文本内容 |
 
+**Returns:** `BuildDynamic`:  `self`
+
 
 
 
@@ -161,6 +171,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | name | type | description |
 | - | - | - |
 | `vote_id` | `int` | 投票对象 |
+
+**Returns:** `BuildDynamic`:  `self`
 
 
 
@@ -181,6 +193,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | `live_reserve_id` | `int, optional` | 直播预约 oid. 通过 `live.create_live_reserve` 获取. Defaults to -1. |
 | `send_time` | `datetime \| None, optional` | 发送时间. Defaults to None. |
 
+**Returns:** `BuildDynamic`:  `self`
+
 
 
 
@@ -191,6 +205,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 新建空的动态以链式逐步构建
 
 
+
+**Returns:** `BuildDynamic`:  `self`
 
 
 
@@ -275,6 +291,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | - | - | - |
 | `oid` | `int` | 卡片oid |
 
+**Returns:** `BuildDynamic`:  `self`
+
 
 
 
@@ -288,6 +306,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | `up_choose_comment` | `bool` | 精选评论flag |
 | `close_comment` | `bool` | 关闭评论flag |
 
+**Returns:** `BuildDynamic`:  `self`
+
 
 
 
@@ -300,6 +320,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | - | - | - |
 | `time` | `datetime` | 发送时间 |
 
+**Returns:** `BuildDynamic`:  `self`
+
 
 
 
@@ -311,6 +333,8 @@ BuildDynamic.create_by_args(text="114514", topic_id=114514)
 | name | type | description |
 | - | - | - |
 | `topic_id` | `int` | 话题ID |
+
+**Returns:** `BuildDynamic`:  `self`
 
 
 
