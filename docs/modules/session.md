@@ -99,7 +99,7 @@ from bilibili_api import session
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | 凭据类。 |
-| `debug` | `bool, optional` | 调试模式，将输出更多信息。Defaults to False. |
+| `debug` | `bool, optional` | 调试模式，将输出更多信息. Defaults to False. |
 
 
 ### def close()
@@ -143,7 +143,7 @@ from bilibili_api import session
 
 | name | type | description |
 | - | - | - |
-| `event` | `Event` | 要回复的消息 |
+| `event` | `session.Event` | 要回复的消息 |
 | `content` | `str \| Picture` | 要回复的文字内容 |
 
 **Returns:** `dict`:  调用接口返回的内容。
@@ -158,7 +158,7 @@ from bilibili_api import session
 
 | name | type | description |
 | - | - | - |
-| `exclude_self` | `bool` | 是否排除自己发出的消息，默认排除 |
+| `exclude_self` | `bool, optional` | 是否排除自己发出的消息，默认排除. Defaults to True. |
 
 
 
@@ -170,7 +170,7 @@ from bilibili_api import session
 
 | name | type | description |
 | - | - | - |
-| `exclude_self` | `bool` | 是否排除自己发出的消息，默认排除 |
+| `exclude_self` | `bool, optional` | 是否排除自己发出的消息，默认排除. Defaults to True. |
 
 
 
@@ -186,8 +186,8 @@ from bilibili_api import session
 | - | - | - |
 | `talker_id` | `int` | 用户 UID |
 | `credential` | `Credential` | Credential |
-| `session_type` | `int` | 会话类型 1 私聊 2 应援团 |
-| `begin_seqno` | `int` | 起始 Seqno |
+| `session_type` | `int, optional` | 会话类型 1 私聊 2 应援团. Defaults to 1. |
+| `begin_seqno` | `int, optional` | 起始 Seqno. Defaults to 0. |
 
 **Returns:** `dict`:  调用 API 返回结果
 
@@ -204,8 +204,8 @@ from bilibili_api import session
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | 凭据类. |
-| `last_id` | `Optional, int` | 最后一个 ID. 用于翻页。Defaults to None. |
-| `at_time` | `Optional, int` | 最后一个点赞发送时间. 用于翻页。Defaults to None. |
+| `last_id` | `int \| None, optional` | 最后一个 ID. 用于翻页. Defaults to None. |
+| `at_time` | `int \| None, optional` | 最后一个点赞发送时间. 用于翻页. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -222,8 +222,8 @@ from bilibili_api import session
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | 凭据类. |
-| `last_id` | `Optional, int` | 最后一个 ID. 用于翻页。Defaults to None. |
-| `like_time` | `Optional, int` | 最后一个点赞发送时间. 用于翻页。Defaults to None. |
+| `last_id` | `int \| None, optional` | 最后一个 ID. 用于翻页. Defaults to None. |
+| `like_time` | `int \| None, optional` | 最后一个点赞发送时间. 用于翻页. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -240,8 +240,8 @@ from bilibili_api import session
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | 凭据类. |
-| `last_reply_id` | `Optional, int` | 最后一个评论的 ID. 用于翻页。Defaults to None. |
-| `reply_time` | `Optional, int` | 最后一个评论发送时间. 用于翻页。Defaults to None. |
+| `last_reply_id` | `int \| None, optional` | 最后一个评论的 ID. 用于翻页. Defaults to None. |
+| `reply_time` | `int \| None, optional` | 最后一个评论发送时间. 用于翻页. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -258,8 +258,8 @@ from bilibili_api import session
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | Credential |
-| `session_type` | `int` | 会话类型 |
 | `talker_id` | `int` | 会话对象的UID |
+| `session_type` | `int, optional` | 会话类型. Defaults to 1. |
 
 **Returns:** `dict`:  调用 API 返回结果
 
@@ -292,7 +292,7 @@ from bilibili_api import session
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | Credential |
-| `session_type` | `int` | 会话类型 1 |
+| `session_type` | `int, optional` | 会话类型 1. Defaults to 4. |
 
 **Returns:** `dict`:  调用 API 返回结果
 
@@ -341,7 +341,7 @@ from bilibili_api import session
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | Credential |
-| `begin_ts` | `int` | 起始时间戳 |
+| `begin_ts` | `int, optional` | 起始时间戳. Defaults to 1766892400572730. |
 
 **Returns:** `dict`:  调用 API 返回结果
 

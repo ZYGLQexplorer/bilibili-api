@@ -117,9 +117,8 @@ class LiveRoom:
     ) -> None:
         """
         Args:
-            room_display_id (int)                 : 房间展示 ID（即 URL 中的 ID）
-
-            credential      (Credential | None, optional): 凭据. Defaults to None.
+            room_display_id (int): 房间展示 ID（即 URL 中的 ID）
+            credential (Credential | None, optional): 凭据. Defaults to None.
         """
         self.room_display_id = room_display_id
 
@@ -274,11 +273,9 @@ class LiveRoom:
         如果带有主播 id ，就返回主播的粉丝牌，没有就返回 null
 
         Args:
-            roomId    (int, optional)       : 指定房间，查询是否拥有此房间的粉丝牌
-
-            target_id (int | None, optional): 指定返回一个主播的粉丝牌，留空就不返回
-
-            page_num  (int | None, optional): 粉丝牌列表，默认 1
+            page_num (int, optional): 粉丝牌列表，默认 1. Defaults to 1.
+            target_id (int | None, optional): 指定返回一个主播的粉丝牌，留空就不返回. Defaults to None.
+            roomId (int | None, optional): 指定房间，查询是否拥有此房间的粉丝牌. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -376,7 +373,7 @@ class LiveRoom:
         获取高能榜列表
 
         Args:
-            page (int, optional): 页码. Defaults to 1
+            page (int, optional): 页码. Defaults to 1.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -426,7 +423,7 @@ class LiveRoom:
         获取黑名单列表
 
         Args:
-            page (int): 页码. Defaults to 1.
+            page (int, optional): 页码. Defaults to 1.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -445,7 +442,7 @@ class LiveRoom:
         获取房间直播流列表
 
         Args:
-            screen_resolution (ScreenResolution, optional): 清晰度. Defaults to ScreenResolution.ORIGINAL
+            screen_resolution (ScreenResolution, optional): 清晰度. ORIGINAL. Defaults to <ScreenResolution.ORIGINAL: 10000>.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -473,13 +470,10 @@ class LiveRoom:
         获取房间信息及可用清晰度列表
 
         Args:
-            live_protocol (LiveProtocol, optional)    : 直播源流协议. Defaults to LiveProtocol.DEFAULT.
-
-            live_format   (LiveFormat, optional)      : 直播源容器格式. Defaults to LiveFormat.DEFAULT.
-
-            live_codec    (LiveCodec, optional)       : 直播源视频编码. Defaults to LiveCodec.DEFAULT.
-
-            live_qn       (ScreenResolution, optional): 直播源清晰度. Defaults to ScreenResolution.ORIGINAL.
+            live_protocol (LiveProtocol, optional): 直播源流协议. Defaults to <LiveProtocol.DEFAULT: '0,1'>.
+            live_format (LiveFormat, optional): 直播源容器格式. Defaults to <LiveFormat.DEFAULT: '0,1,2'>.
+            live_codec (LiveCodec, optional): 直播源视频编码. Defaults to <LiveCodec.DEFAULT: '0,1'>.
+            live_qn (ScreenResolution, optional): 直播源清晰度. Defaults to <ScreenResolution.ORIGINAL: 10000>.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -504,7 +498,7 @@ class LiveRoom:
 
         Args:
             uid (int): 用户 UID
-            hour (int): 禁言时长，-1为永久，0为直到本场结束
+            hour (int, optional): 禁言时长，-1为永久，0为直到本场结束. Defaults to -1.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -548,8 +542,7 @@ class LiveRoom:
 
         Args:
             danmaku (Danmaku): 弹幕类
-
-            reply_mid (int, optional): @的 UID. Defaults to None.
+            reply_mid (int | None, optional): @的 UID. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -605,7 +598,7 @@ class LiveRoom:
         大航海签到
 
         Args:
-            task_id (int, optional): 签到任务 ID. Defaults to 1447
+            task_id (int, optional): 签到任务 ID. Defaults to 1447.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -633,17 +626,12 @@ class LiveRoom:
         赠送包裹中的礼物，获取包裹信息可以使用 get_self_bag 方法
 
         Args:
-            uid (int)                       : 赠送用户的 UID
-
-            bag_id (int)                    : 礼物背包 ID
-
-            gift_id (int)                   : 礼物 ID
-
-            gift_num (int)                  : 礼物数量
-
-            storm_beat_id (int, optional)   : 未知， Defaults to 0
-
-            price (int, optional)           : 礼物单价，Defaults to 0
+            uid (int): 赠送用户的 UID
+            bag_id (int): 礼物背包 ID
+            gift_id (int): 礼物 ID
+            gift_num (int): 礼物数量
+            storm_beat_id (int, optional): 未知，. Defaults to 0.
+            price (int, optional): 礼物单价，. Defaults to 0.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -672,7 +660,7 @@ class LiveRoom:
         领取自己在某个直播间的航海日志奖励
 
         Args:
-            receive_type (int) : 领取类型，Defaults to 2.
+            receive_type (int, optional): 领取类型，. Defaults to 2.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -691,7 +679,7 @@ class LiveRoom:
         获取自己在该房间的大航海信息, 比如是否开通, 等级等
 
         Args:
-            act_id (int, optional) : 未知，Defaults to 100061
+            act_id (int, optional): 未知，. Defaults to 100061.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -770,7 +758,7 @@ class LiveRoom:
         获取当前直播间内的特殊礼物列表
 
         Args:
-            tab_id (int) : 2：特权礼物，3：定制礼物
+            tab_id (int): 2：特权礼物，3：定制礼物
 
         Returns:
             dict: 调用 API 返回的结果
@@ -811,15 +799,11 @@ class LiveRoom:
         赠送金瓜子礼物
 
         Args:
-            uid           (int)          : 赠送用户的 UID
-
-            gift_id       (int)          : 礼物 ID (可以通过 get_gift_common 或 get_gift_special 或 get_gift_config 获取)
-
-            gift_num      (int)          : 赠送礼物数量
-
-            price         (int)          : 礼物单价
-
-            storm_beat_id (int, Optional): 未知，Defaults to 0
+            uid (int): 赠送用户的 UID
+            gift_id (int): 礼物 ID (可以通过 get_gift_common 或 get_gift_special 或 get_gift_config 获取)
+            gift_num (int): 赠送礼物数量
+            price (int): 礼物单价
+            storm_beat_id (int, optional): 未知，. Defaults to 0.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -858,15 +842,11 @@ class LiveRoom:
         赠送银瓜子礼物
 
         Args:
-            uid           (int)          : 赠送用户的 UID
-
-            gift_id       (int)          : 礼物 ID (可以通过 get_gift_common 或 get_gift_special 或 get_gift_config 获取)
-
-            gift_num      (int)          : 赠送礼物数量
-
-            price         (int)          : 礼物单价
-
-            storm_beat_id (int, Optional): 未知, Defaults to 0
+            uid (int): 赠送用户的 UID
+            gift_id (int): 礼物 ID (可以通过 get_gift_common 或 get_gift_special 或 get_gift_config 获取)
+            gift_num (int): 赠送礼物数量
+            price (int): 礼物单价
+            storm_beat_id (int, optional): 未知,. Defaults to 0.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1364,12 +1344,12 @@ class LiveDanmaku(AsyncEvent):
     ) -> None:
         """
         Args:
-            room_display_id (int)                        : 房间展示 ID
-            debug           (bool, optional)             : 调试模式，将输出更多信息。Defaults to False.
-            credential      (Credential | None, optional): 凭据. Defaults to None.
-            max_retry       (int, optional)              : 连接出错后最大重试次数. Defaults to 5
-            retry_after     (int, optional)              : 连接出错后重试间隔时间（秒）. Defaults to 1
-            max_retry_for_credential (int, optional)     : 获取用户信息最大重试次数. Defaults to 5
+            room_display_id (int): 房间展示 ID
+            debug (bool, optional): 调试模式，将输出更多信息. Defaults to False.
+            credential (Credential | None, optional): 凭据. Defaults to None.
+            max_retry (int, optional): 连接出错后最大重试次数. Defaults to 5.
+            retry_after (float, optional): 连接出错后重试间隔时间（秒）. Defaults to 1.
+            max_retry_for_credential (int, optional): 获取用户信息最大重试次数. Defaults to 5.
         """
         super().__init__()
 
@@ -1410,7 +1390,7 @@ class LiveDanmaku(AsyncEvent):
         获取对应直播间对象
 
         Returns:
-            LiveRoom: 直播间对象
+            live.LiveRoom: 直播间对象
         """
         return self.room
 
@@ -1864,10 +1844,8 @@ async def get_self_dahanghai_info(
     获取自己开通的大航海信息
 
     Args:
-        page      (int, optional): 页数. Defaults to 1.
-
+        page (int, optional): 页数. Defaults to 1.
         page_size (int, optional): 每页数量. Defaults to 10.
-
         credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
@@ -1922,9 +1900,9 @@ async def get_gift_config(
     但即使限定了三个条件，仍然会返回约 1.5w 行的 json。不加限定则是 2.8w 行。
 
     Args:
-        room_id (int, optional)         : 房间显示 ID. Defaults to None.
-        area_id (int, optional)         : 子分区 ID. Defaults to None.
-        area_parent_id (int, optional)  : 父分区 ID. Defaults to None.
+        room_id (int | None, optional): 房间显示 ID. Defaults to None.
+        area_id (int | None, optional): 子分区 ID. Defaults to None.
+        area_parent_id (int | None, optional): 父分区 ID. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -1958,8 +1936,7 @@ async def get_live_followers_info(
     获取关注列表中正在直播的直播间信息，包括房间直播热度，房间名称及标题，清晰度，是否官方认证等信息。
 
     Args:
-        need_recommend (bool, optional): 是否接受推荐直播间，Defaults to True
-
+        need_recommend (bool, optional): 是否接受推荐直播间，. Defaults to True.
         credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
@@ -1982,10 +1959,8 @@ async def get_unlive_followers_info(
     获取关注列表中未在直播的直播间信息，包括上次开播时间，上次开播的类别，直播间公告，是否有录播等。
 
     Args:
-        page      (int, optional): 页码, Defaults to 1.
-
-        page_size (int, optional): 每页数量 Defaults to 30.
-
+        page (int, optional): 页码,. Defaults to 1.
+        page_size (int, optional): 每页数量. Defaults to 30.
         credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
@@ -2011,10 +1986,8 @@ async def create_live_reserve(
     创建直播预约
 
     Args:
-        title (str)         : 直播间标题
-
-        start_time (int)    : 开播时间戳
-
+        title (str): 直播间标题
+        start_time (int): 开播时间戳
         credential (Credential): 凭据类
 
     Returns:

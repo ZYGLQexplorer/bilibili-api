@@ -136,7 +136,7 @@ from bilibili_api import bangumi
 
 
 
-**Returns:** `list[Episode]`:  剧集类列表
+**Returns:** `list['Episode']`:  剧集类列表
 
 
 
@@ -148,8 +148,8 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `order` | `BangumiCommentOrder, optional` | 排序方式。Defaults to BangumiCommentOrder.DEFAULT |
-| `next` | `str \| None, optional` | 调用返回结果中的 next 键值，用于获取下一页数据。Defaults to None |
+| `order` | `BangumiCommentOrder, optional` | 排序方式。DEFAULT. Defaults to <BangumiCommentOrder.DEFAULT |
+| `next` | `str \| None, optional` | 调用返回结果中的 next 键值，用于获取下一页数据. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -195,7 +195,7 @@ from bilibili_api import bangumi
 
 
 
-**Returns:** `dict`:  Api 相关字段
+**Returns:** `tuple[dict, bool]`:  Api 相关字段
 
 
 
@@ -218,8 +218,8 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `order` | `BangumiCommentOrder, optional` | 排序方式。Defaults to BangumiCommentOrder.DEFAULT |
-| `next` | `str \| None, optional` | 调用返回结果中的 next 键值，用于获取下一页数据。Defaults to None |
+| `order` | `BangumiCommentOrder, optional` | 排序方式。DEFAULT. Defaults to <BangumiCommentOrder.DEFAULT |
+| `next` | `str \| None, optional` | 调用返回结果中的 next 键值，用于获取下一页数据. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -323,7 +323,7 @@ from bilibili_api import bangumi
 | name | type | description |
 | - | - | - |
 | `epid` | `int` | 番剧 epid |
-| `credential` | `Credential, optional` | 凭据. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 
 
 ### async def get_ai_conclusion()
@@ -333,7 +333,7 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `up_mid` | `Optional, int` | up 主的 mid。 |
+| `up_mid` | `int \| None, optional` | up 主的 mid. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果。
 
@@ -346,7 +346,7 @@ from bilibili_api import bangumi
 
 
 
-**Returns:** `str`:  AID。
+**Returns:** `int`:  AID。
 
 
 
@@ -424,11 +424,11 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `date` | `datetime.date \| None, optional` | 指定某一天查询弹幕. Defaults to None. (不指定某一天) |
-| `from_seg` | `int, optional` | 从第几段开始(0 开始编号，None 为从第一段开始，一段 6 分钟). Defaults to None. |
-| `to_seg` | `int, optional` | 到第几段结束(0 开始编号，None 为到最后一段，包含编号的段，一段 6 分钟). Defaults to None. |
+| `date` | `datetime.date \| None, optional` | 指定某一天查询弹幕.  (不指定某一天). Defaults to None. |
+| `from_seg` | `int \| None, optional` | 从第几段开始(0 开始编号，None 为从第一段开始，一段 6 分钟). Defaults to None. |
+| `to_seg` | `int \| None, optional` | 到第几段结束(0 开始编号，None 为到最后一段，包含编号的段，一段 6 分钟). Defaults to None. |
 
-**Returns:** `dict[Danmaku]`:  弹幕列表
+**Returns:** `list['Danmaku']`:  弹幕列表
 
 
 
@@ -461,7 +461,7 @@ from bilibili_api import bangumi
 
 
 
-**Returns:** `Tuple[dict, InitialDataType]`:  前半部分为数据，后半部分为数据类型（__INITIAL_STATE__ 或 __NEXT_DATA）
+**Returns:** `tuple[dict, utils.initial_state.InitialDataType]`:  前半部分为数据，后半部分为数据类型（__INITIAL_STATE__ 或 __NEXT_DATA）
 
 
 
@@ -473,9 +473,9 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `date` | `datetime.date \| None, optional` | 精确到年月. Defaults to None。 |
+| `date` | `datetime.date \| None, optional` | 精确到年月. Defaults to None. |
 
-**Returns:** `None | List[str]`:  调用 API 返回的结果。不存在时为 None。
+**Returns:** `None | list[str]`:  调用 API 返回的结果。不存在时为 None。
 
 
 
@@ -534,7 +534,7 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `danmaku` | `Danmaku \| None` | Danmaku 类。 |
+| `danmaku` | `Danmaku` | Danmaku 类。 |
 
 **Returns:** `dict`:  调用 API 返回的结果。
 
@@ -611,7 +611,7 @@ from bilibili_api import bangumi
 
 
 
-**Returns:** `Video`:  视频对象
+**Returns:** `video.Video`:  视频对象
 
 
 
@@ -1057,10 +1057,10 @@ start 或 end 为 None 时则表示不设置开始或结尾
 
 | name | type | description |
 | - | - | - |
-| `start` | `datetime, str, int` | 开始时间. 如果是 None 则不设置开头. |
-| `end` | `datetime, str, int` | 结束时间. 如果是 None 则不设置结尾. |
-| `include_start` | `bool` | 是否包含开始时间. Defaults to True. |
-| `include_end` | `bool` | 是否包含结束时间. Defaults to False. |
+| `start` | `datetime.datetime \| str \| int \| None, optional` | 开始时间. 如果是 None 则不设置开头. Defaults to None. |
+| `end` | `datetime.datetime \| str \| int \| None, optional` | 结束时间. 如果是 None 则不设置结尾. Defaults to None. |
+| `include_start` | `bool, optional` | 是否包含开始时间. Defaults to True. |
+| `include_end` | `bool, optional` | 是否包含结束时间. Defaults to False. |
 
 **Returns:** `str`:  年代条件
 
@@ -1089,17 +1089,18 @@ IndexFilter 元数据
 
 Anime Meta
 
+
 | name | type | description |
 | - | - | - |
-| `version` | `Index_Filter.Version` | 类型，如正片、电影等 |
-| `spoken_language` | `Index_Filter.Spoken_Language` | 配音 |
-| `area` | `Index_Filter.Area` | 地区 |
-| `finish_status` | `Index_Filter.Finish_Status` | 是否完结 |
-| `copyright` | `Index_Filter.Copryright` | 版权 |
-| `payment` | `Index_Filter.Payment` | 付费门槛 |
-| `season` | `Index_Filter.Season` | 季度 |
-| `year` | `str` | 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取 |
-| `style` | `Index_Filter.Style.Anime` | 风格 |
+| `version` | `Version, optional` | 类型，如正片、电影等. Defaults to <Version.ALL |
+| `spoken_language` | `Spoken_Language, optional` | 配音. Defaults to <Spoken_Language.ALL |
+| `area` | `Area, optional` | 地区. Defaults to <Area.ALL |
+| `finish_status` | `Finish_Status, optional` | 是否完结. Defaults to <Finish_Status.ALL |
+| `copyright` | `Copyright, optional` | 版权. Defaults to <Copyright.ALL |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
+| `season` | `Season, optional` | 季度. Defaults to <Season.ALL |
+| `year` | `str, optional` | 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取. Defaults to '-1'. |
+| `style` | `Anime, optional` | 风格. Defaults to <Anime.ALL |
 
 
 ### class Documentary()
@@ -1113,12 +1114,13 @@ Anime Meta
 
 Documentary Meta
 
+
 | name | type | description |
 | - | - | - |
-| `release_date` | `str` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取 |
-| `style` | `Index_Filter.Style.Documentary` | 风格 |
-| `payment` | `Index_Filter.Payment.ALL` | 观看条件 |
-| `producer` | `Index_Filter.Producer` | 制作方 |
+| `release_date` | `str, optional` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'. |
+| `style` | `Documentary, optional` | 风格. Defaults to <Documentary.ALL |
+| `payment` | `Payment, optional` | 观看条件. Defaults to <Payment.ALL |
+| `producer` | `Producer, optional` | 制作方. Defaults to <Producer.ALL |
 
 
 ### class GuoChuang()
@@ -1132,14 +1134,15 @@ Documentary Meta
 
 Guochuang Meta
 
+
 | name | type | description |
 | - | - | - |
-| `version` | `Index_Filter.VERSION` | 类型，如正片、电影等 |
-| `finish_status` | `Index_Filter.Finish_Status` | 是否完结 |
-| `copyright` | `Index_Filter.Copyright` | 版权 |
-| `payment` | `Index_Filter.Payment` | 付费门槛 |
-| `year` | `str` | 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取 |
-| `style` | `Index_Filter.Style.GuoChuang` | 风格 |
+| `version` | `Version, optional` | 类型，如正片、电影等. Defaults to <Version.ALL |
+| `finish_status` | `Finish_Status, optional` | 是否完结. Defaults to <Finish_Status.ALL |
+| `copyright` | `Copyright, optional` | 版权. Defaults to <Copyright.ALL |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
+| `year` | `str, optional` | 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取. Defaults to '-1'. |
+| `style` | `GuoChuang, optional` | 风格. Defaults to <GuoChuang.ALL |
 
 
 ### class Movie()
@@ -1153,12 +1156,13 @@ Guochuang Meta
 
 Movie Meta
 
+
 | name | type | description |
 | - | - | - |
-| `area` | `Index_Filter.Area` | 地区 |
-| `payment` | `Index_Filter.Payment` | 付费门槛 |
-| `release_date` | `str` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取 |
-| `style` | `Index_Filter.Style.Movie` | 风格 |
+| `area` | `Area, optional` | 地区. Defaults to <Area.ALL |
+| `release_date` | `str, optional` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'. |
+| `style` | `Movie, optional` | 风格. Defaults to <Movie.ALL |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
 
 
 ### class TV()
@@ -1172,12 +1176,13 @@ TV
 
 TV Meta
 
+
 | name | type | description |
 | - | - | - |
-| `area` | `Index_Filter.Area` | 地区 |
-| `payment` | `Index_Filter.Payment` | 付费门槛 |
-| `release_date` | `str` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取 |
-| `style` | `Index_Filter.Style.TV` | 风格 |
+| `area` | `Area, optional` | 地区. Defaults to <Area.ALL |
+| `release_date` | `str, optional` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'. |
+| `style` | `TV, optional` | 风格. Defaults to <TV.ALL |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
 
 
 ### class Variety()
@@ -1191,10 +1196,11 @@ TV Meta
 
 Variety Meta
 
+
 | name | type | description |
 | - | - | - |
-| `payment` | `Index_Filter.Payment` | 付费门槛 |
-| `style` | `Index_Filter.Style.Variety` | 风格 |
+| `style` | `Variety, optional` | 风格. Defaults to <Variety.ALL |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
 
 
 ---
@@ -1208,9 +1214,9 @@ Variety Meta
 
 | name | type | description |
 | - | - | - |
-| `filters` | `object, optional` | 筛选条件元数据. Defaults to Anime. |
-| `order` | `BANGUMI_INDEX.ORDER, optional` | 排序字段. Defaults to SCORE. |
-| `sort` | `BANGUMI_INDEX.SORT, optional` | 排序方式. Defaults to DESC. |
+| `filters` | `object, optional` | 筛选条件元数据. Defaults to <bilibili_api.bangumi.IndexFilterMeta.Anime object at 0x105571160>. |
+| `order` | `Order, optional` | 排序字段. Defaults to <Order.SCORE |
+| `sort` | `Sort, optional` | 排序方式. Defaults to <Sort.DESC |
 | `pn` | `int, optional` | 页数. Defaults to 1. |
 | `ps` | `int, optional` | 每页数量. Defaults to 20. |
 
@@ -1229,8 +1235,8 @@ Variety Meta
 | name | type | description |
 | - | - | - |
 | `type_` | `BangumiType` | 番剧类型 |
-| `before` | `int` | 几天前开始(0~7), defaults to 7 |
-| `after` | `int` | 几天后结束(0~7), defaults to 0 |
+| `before` | `int, optional` | 几天前开始(0~7),. Defaults to 7. |
+| `after` | `int, optional` | 几天后结束(0~7),. Defaults to 0. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -1246,7 +1252,7 @@ Variety Meta
 
 | name | type | description |
 | - | - | - |
-| `bangumi` | `Bangumi` | 番剧类 |
+| `bangumi` | `bangumi.Bangumi` | 番剧类 |
 | `status` | `bool, optional` | 追番状态. Defaults to True. |
 | `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 
@@ -1264,9 +1270,9 @@ Variety Meta
 
 | name | type | description |
 | - | - | - |
-| `bangumi` | `Bangumi` | 番剧类 |
-| `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
+| `bangumi` | `bangumi.Bangumi` | 番剧类 |
 | `status` | `int` | 追番状态 1 想看 2 在看 3 已看 |
+| `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

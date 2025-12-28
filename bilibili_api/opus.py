@@ -189,7 +189,7 @@ class Opus:
         获取图文所有图片原始信息
 
         Returns:
-            list: 图片信息
+            list[dict]: 图片信息
         """
         await self.get_info()
 
@@ -212,7 +212,7 @@ class Opus:
         获取图文所有图片并转为 Picture 类
 
         Returns:
-            list: 图片信息
+            list['Picture']: 图片信息
         """
         result = []
         images_raw_info = await self.get_images_raw_info()
@@ -225,7 +225,7 @@ class Opus:
         设置图文点赞状态
 
         Args:
-            status (bool, optional): 点赞状态. Defaults to True.
+            status (bool): 点赞状态.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -237,7 +237,7 @@ class Opus:
         设置图文收藏状态
 
         Args:
-            status (bool, optional): 收藏状态. Defaults to True
+            status (bool, optional): 收藏状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -258,7 +258,7 @@ class Opus:
         获取点赞、转发
 
         Args:
-            offset (str, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to ""
+            offset (str, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to ''.
 
         Returns:
             dict: 调用 API 返回的结果

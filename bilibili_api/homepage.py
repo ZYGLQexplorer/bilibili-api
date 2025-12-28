@@ -29,7 +29,7 @@ async def get_links(credential: Credential | None = None) -> dict:
     可能和个人喜好有关。
 
     Args:
-        credential (Credential | None): 凭据类
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -46,7 +46,7 @@ async def get_popularize(credential: Credential | None = None) -> dict:
     (有视频有广告)
 
     Args:
-        credential(Credential | None): 凭据类
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -62,7 +62,7 @@ async def get_videos(credential: Credential | None = None) -> dict:
     获取首页推荐的视频。
 
     Args:
-        credential (Credential | None): 凭据类
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -98,8 +98,8 @@ async def get_favorite_list_content(
     稍后再看具体内容在 `get_favorite_list_and_toview` 接口
 
     Args:
-        media_id   (int)       : 收藏夹 id
-        credential (Credential | None): 凭据类
+        media_id (int): 收藏夹 id
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果

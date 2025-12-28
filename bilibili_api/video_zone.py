@@ -33,7 +33,7 @@ def get_zone_info_by_tid(tid: int) -> tuple[dict | None, dict | None]:
         tid (int): 频道的 tid。
 
     Returns:
-        Tuple[dict | None, dict | None]: 第一个是主分区，第二个是子分区，没有时返回 None。
+        tuple[dict | None, dict | None]: 第一个是主分区，第二个是子分区，没有时返回 None。
     """
     channel = get_zone_list_sub()
 
@@ -62,7 +62,7 @@ def get_zone_info_by_name(name: str) -> tuple[dict | None, dict | None]:
         name (str): 频道的名称。
 
     Returns:
-        Tuple[dict | None, dict | None]: 第一个是主分区，第二个是子分区，没有时返回 None。
+        tuple[dict | None, dict | None]: 第一个是主分区，第二个是子分区，没有时返回 None。
     """
     channel = get_zone_list_sub()
 
@@ -84,14 +84,12 @@ async def get_zone_top10(
     获取分区前十排行榜。
 
     Args:
-        tid        (int)                        : 频道的 tid。
-
-        day        (int, optional)              : 3 天排行还是 7 天排行。 Defaults to 7.
-
-        credential (Credential | None, optional): Credential 类。Defaults to None.
+        tid (int): 频道的 tid。
+        day (int, optional): 3 天排行还是 7 天排行. Defaults to 7.
+        credential (Credential | None, optional): Credential 类. Defaults to None.
 
     Returns:
-        list: 前 10 的视频信息。
+        dict: 前 10 的视频信息。
     """
     if credential is None:
         credential = Credential()
@@ -108,7 +106,7 @@ def get_zone_list() -> list[dict]:
     获取所有分区的数据
 
     Returns:
-        List[dict]: 所有分区的数据
+        list[dict]: 所有分区的数据
     """
     channel = get_zone_list_sub()
     channel_list = []
@@ -131,7 +129,7 @@ async def get_zone_videos_count_today(
     获取每个分区当日最新投稿数量
 
     Args:
-        credential (Credential | None): 凭据类
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -146,11 +144,9 @@ async def get_zone_new_videos(tid: int, page_num: int = 1, page_size: int = 10) 
     获取分区最新投稿
 
     Args:
-        tid        (int)              : 分区 id
-
-        page_num   (int)              : 第几页. Defaults to 1.
-
-        page_size  (int)              : 每页的数据大小. Defaults to 10.
+        tid (int): 分区 id
+        page_num (int, optional): 第几页. Defaults to 1.
+        page_size (int, optional): 每页的数据大小. Defaults to 10.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -165,10 +161,10 @@ async def get_zone_hot_tags(tid: int) -> list[dict]:
     获取分区热门标签
 
     Args:
-        tid        (int)              : 分区 id
+        tid (int): 分区 id
 
     Returns:
-        List[dict]: 热门标签
+        list[dict]: 热门标签
     """
 
     api = API["get_hot_tags"]

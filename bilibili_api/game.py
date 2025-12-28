@@ -25,9 +25,8 @@ class Game:
     def __init__(self, game_id: int, credential: None | Credential = None) -> None:
         """
         Args:
-            game_id    (int)       : 游戏 id
-
-            credential (Credential): 凭据类. Defaults to None.
+            game_id (int): 游戏 id
+            credential (None | Credential, optional): 凭据类. Defaults to None.
         """
         self.__game_id = game_id
         self.credential: Credential = credential if credential else Credential()

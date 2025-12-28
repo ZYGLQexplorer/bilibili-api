@@ -145,9 +145,8 @@ class Manga:
     def __init__(self, manga_id: int, credential: Credential | None = None) -> None:
         """
         Args:
-            manga_id   (int)              : 漫画 id
-
-            credential (Credential | None): 凭据类. Defaults to None.
+            manga_id (int): 漫画 id
+            credential (Credential | None, optional): 凭据类. Defaults to None.
         """
         credential = credential if credential else Credential()
         self.__manga_id = manga_id
@@ -374,11 +373,9 @@ async def set_follow_manga(
     设置追漫
 
     Args:
-        manga      (Manga)     : 漫画类。
-
-        status     (bool)      : 设置是否追漫。是为 True，否为 False。Defaults to True.
-
-        credential (Credential | None): 凭据类。
+        manga (manga.Manga): 漫画类。
+        status (bool, optional): 设置是否追漫。是为 True，否为 False. Defaults to True.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -415,13 +412,13 @@ async def get_followed_manga(
     获取追漫列表
 
     Args:
-        pn         (int)           : 页码。Defaults to 1.
-        ps         (int)           : 每页数量。Defaults to 18.
-        order      (MangaOrderType): 排序方式。Defaults to MangaOrderType.FOLLOW.
-        credential (Credential | None): 凭据类.
+        pn (int, optional): 页码. Defaults to 1.
+        ps (int, optional): 每页数量. Defaults to 15.
+        order (MangaOrderType, optional): 排序方式. Defaults to <MangaOrderType.FOLLOW: (1, 0)>.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
-        List[Manga]: 追漫列表
+        list[manga.Manga]: 追漫列表
     """
     credential = credential if credential else Credential()
     credential.raise_for_no_sessdata()
@@ -546,16 +543,13 @@ async def get_manga_update(
     获取更新推荐的漫画
 
     Args:
-        date (Union[str, datetime.datetime]): 日期。Defaults to datetime.datetime.now()
-
-        pn   (int)                          : 页码。Defaults to 1.
-
-        ps   (int)                          : 每页数量。Defaults to 8.
-
-        credential (Credential | None)      : 凭据类. Defaults to None.
+        date (str | datetime.datetime, optional): 日期。Defaults to datetime.datetime.now()
+        pn (int, optional): 页码. Defaults to 1.
+        ps (int, optional): 每页数量. Defaults to 8.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
-        List[Manga]: 漫画列表
+        list[manga.Manga]: 漫画列表
     """
     credential = credential if credential else Credential()
     api = API["info"]["update"]
@@ -579,14 +573,12 @@ async def get_manga_home_recommend(
     获取首页推荐的漫画
 
     Args:
-        pn   (int)                          : 页码。Defaults to 1.
-
-        seed (Optional, str)                : Unknown param，无需传入.
-
-        credential (Credential | None)      : 凭据类. Defaults to None.
+        pn (int, optional): 页码. Defaults to 1.
+        seed (str | None, optional): Unknown param，无需传入. Defaults to '0'.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
-        List[Manga]: 漫画列表
+        list[manga.Manga]: 漫画列表
     """
     credential = credential if credential else Credential()
     api = API["info"]["home_recommend"]

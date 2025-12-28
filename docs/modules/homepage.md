@@ -47,7 +47,7 @@ from bilibili_api import homepage
 | name | type | description |
 | - | - | - |
 | `media_id` | `int` | 收藏夹 id |
-| `credential` | `Credential \| None` | 凭据类 |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -64,7 +64,7 @@ from bilibili_api import homepage
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential \| None` | 凭据类 |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -81,7 +81,7 @@ from bilibili_api import homepage
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential \| None` | 凭据类 |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -111,7 +111,7 @@ from bilibili_api import homepage
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential \| None` | 凭据类 |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

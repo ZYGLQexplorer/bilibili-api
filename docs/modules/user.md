@@ -311,9 +311,9 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `biz` | `AlbumType, optional` | 排序方式. Defaults to AlbumType.ALL. |
-| `page_num` | `int, optional` | 页码数，从 1 开始。 Defaults to 1. |
-| `page_size` | `int` | 每一页的相簿条目. Defaults to 30. |
+| `biz` | `AlbumType, optional` | 排序方式. Defaults to <AlbumType.ALL |
+| `page_num` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
+| `page_size` | `int, optional` | 每一页的相簿条目. Defaults to 30. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -326,7 +326,7 @@ medialist排序顺序。
 
 
 
-**Returns:** `list`:  关注列表
+**Returns:** `dict`:  关注列表
 
 
 
@@ -338,7 +338,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `order` | `ArticleListOrder, optional` | 排序方式. Defaults to ArticleListOrder.LATEST |
+| `order` | `ArticleListOrder, optional` | 排序方式. LATEST. Defaults to <ArticleListOrder.LATEST |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -352,8 +352,8 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `order` | `ArticleOrder, optional` | 排序方式. Defaults to ArticleOrder.PUBDATE. |
-| `pn` | `int, optional` | 页码数，从 1 开始。 Defaults to 1. |
+| `pn` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
+| `order` | `ArticleOrder, optional` | 排序方式. Defaults to <ArticleOrder.PUBDATE |
 | `ps` | `int, optional` | 每一页的视频数. Defaults to 30. |
 
 **Returns:** `dict`:  调用接口返回的内容。
@@ -368,8 +368,8 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `order` | `AudioOrder, optional` | 排序方式. Defaults to AudioOrder.PUBDATE. |
-| `pn` | `int, optional` | 页码数，从 1 开始。 Defaults to 1. |
+| `order` | `AudioOrder, optional` | 排序方式. Defaults to <AudioOrder.PUBDATE |
+| `pn` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每一页的视频数. Defaults to 30. |
 
 **Returns:** `dict`:  调用接口返回的内容。
@@ -388,8 +388,8 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 每页大小. Defaults to 20 (max). |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 每页大小. Defaults to 20. |
 
 **Returns:** `dict`:  调用接口返回的结果
 
@@ -404,9 +404,9 @@ medialist排序顺序。
 | name | type | description |
 | - | - | - |
 | `sid` | `int` | 频道的 season_id |
-| `sort` | `ChannelOrder` | 排序方式 |
-| `pn` | `int` | 页数. Defaults to 1. |
-| `ps` | `int` | 每一页显示的视频数量. Defaults to 100. |
+| `sort` | `ChannelOrder, optional` | 排序方式. Defaults to <ChannelOrder.DEFAULT |
+| `pn` | `int, optional` | 页数. Defaults to 1. |
+| `ps` | `int, optional` | 每一页显示的视频数量. Defaults to 100. |
 
 **Returns:** `dict`:  调用接口返回的内容
 
@@ -421,9 +421,9 @@ medialist排序顺序。
 | name | type | description |
 | - | - | - |
 | `sid` | `int` | 频道的 series_id |
-| `sort` | `ChannelOrder` | 排序方式. Defaults to ChannelOrder.DEFAULT. |
-| `pn` | `int` | 页数. Defaults to 1. |
-| `ps` | `int` | 每一页显示的视频数量. Defaults to 100. |
+| `sort` | `ChannelOrder, optional` | 排序方式. Defaults to <ChannelOrder.DEFAULT |
+| `pn` | `int, optional` | 页数. Defaults to 1. |
+| `ps` | `int, optional` | 每一页显示的视频数量. Defaults to 100. |
 
 **Returns:** `dict`:  调用接口返回的内容
 
@@ -436,7 +436,7 @@ medialist排序顺序。
 
 
 
-**Returns:** `List[ChannelSeries]`:  合集与列表类的列表
+**Returns:** `list['ChannelSeries']`:  合集与列表类的列表
 
 
 
@@ -461,7 +461,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `offset` | `int, optional` | 该值为第一次调用本方法时，数据中会有个 next_offset 字段，指向下一动态列表第一条动态（类似单向链表）。根据上一次获取结果中的 next_offset 字段值，循环填充该值即可获取到全部动态。0 为从头开始。Defaults to 0. |
+| `offset` | `int, optional` | 该值为第一次调用本方法时，数据中会有个 next_offset 字段，指向下一动态列表第一条动态（类似单向链表）。根据上一次获取结果中的 next_offset 字段值，循环填充该值即可获取到全部动态。0 为从头开始. Defaults to 0. |
 | `need_top` | `bool, optional` | 显示置顶动态. Defaults to False. |
 
 **Returns:** `dict`:  调用接口返回的内容。
@@ -476,7 +476,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `offset` | `str, optional` | 该值为第一次调用本方法时，数据中会有个 offset 字段，指向下一动态列表第一条动态（类似单向链表）。根据上一次获取结果中的 next_offset 字段值，循环填充该值即可获取到全部动态。空字符串为从头开始。Defaults to "". |
+| `offset` | `str, optional` | 该值为第一次调用本方法时，数据中会有个 offset 字段，指向下一动态列表第一条动态（类似单向链表）。根据上一次获取结果中的 next_offset 字段值，循环填充该值即可获取到全部动态。空字符串为从头开始. Defaults to ''. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -520,7 +520,7 @@ medialist排序顺序。
 | `pn` | `int, optional` | 页码，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每页的数据量. Defaults to 100. |
 | `attention` | `bool, optional` | 是否采用“最常访问”排序，否则为“关注顺序”排序. Defaults to False. |
-| `order` | `OrderType, optional` | 排序方式. Defaults to OrderType.desc. |
+| `order` | `OrderType, optional` | 排序方式. Defaults to <OrderType.desc |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -556,13 +556,13 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `oid` | `int, optional` | 起始视频 aid， 默认为列表开头 |
-| `ps` | `int, optional` | 每一页的视频数. Defaults to 20. Max 100 |
-| `direction` | `bool, optional` | 相对于给定oid的查询方向 True 向列表末尾方向 False 向列表开头方向 Defaults to False. |
+| `oid` | `int \| None, optional` | 起始视频 aid， 默认为列表开头. Defaults to None. |
+| `ps` | `int, optional` | 每一页的视频数.  Max 100. Defaults to 20. |
+| `direction` | `bool, optional` | 相对于给定oid的查询方向 True 向列表末尾方向 False 向列表开头方向. Defaults to False. |
 | `desc` | `bool, optional` | 倒序排序. Defaults to True. |
-| `sort_field` | `int, optional` | 用于排序的栏  1 发布时间，2 播放量，3 收藏量 |
-| `tid` | `int, optional` | 分区 ID. Defaults to 0（全部）. 1 部分（未知） |
-| `with_current` | `bool, optional` | 返回的列表中是否包含给定oid自身 Defaults to False. |
+| `sort_field` | `MediaListOrder, optional` | 用于排序的栏  1 发布时间，2 播放量，3 收藏量. Defaults to <MedialistOrder.PUBDATE |
+| `tid` | `int, optional` | 分区 ID.  1 部分（未知）. Defaults to 0. |
+| `with_current` | `bool, optional` | 返回的列表中是否包含给定oid自身. Defaults to False. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -576,8 +576,8 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `type_` | `OpusType, optional` | 获取的图文类型. Defaults to OpusType.ALL. |
-| `offset` | `str, optional` | 偏移量。每次请求可获取下次请求对应的偏移量，类似单向链表。对应返回结果的 `["offset"]` Defaults to "". |
+| `type_` | `OpusType, optional` | 获取的图文类型. Defaults to <OpusType.ALL |
+| `offset` | `str, optional` | 偏移量。每次请求可获取下次请求对应的偏移量，类似单向链表。对应返回结果的 `["offset"]`. Defaults to ''. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -635,8 +635,8 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 单页数据量. Defaults to 50. |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 单页数据量. Defaults to 50. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -661,10 +661,10 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `pn` | `int, optional` | 页码数，从 1 开始。 Defaults to 1. |
+| `type_` | `BangumiType, optional` | 资源类型. BANGUMI. Defaults to <BangumiType.BANGUMI |
+| `follow_status` | `BangumiFollowStatus, optional` | 追番状态. ALL. Defaults to <BangumiFollowStatus.ALL |
+| `pn` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每一页的番剧数. Defaults to 15. |
-| `type_` | `BangumiType, optional` | 资源类型. Defaults to BangumiType.BANGUMI |
-| `follow_status` | `BangumiFollowStatus, optional` | 追番状态. Defaults to BangumiFollowStatus.ALL |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -738,7 +738,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `anchor` | `int, optional` | 该值为第一次调用本方法时，数据中会有个 anchor 字段，指向下一动态列表第一条动态（类似单向链表）。根据上一次获取结果中的 anchor 字段值，循环填充该值即可获取到全部动态 |
+| `anchor` | `int, optional` | 该值为第一次调用本方法时，数据中会有个 anchor 字段，指向下一动态列表第一条动态（类似单向链表）。根据上一次获取结果中的 anchor 字段值，循环填充该值即可获取到全部动态. Defaults to 0. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -791,11 +791,11 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `tid` | `int, optional` | 分区 ID. Defaults to 0（全部）. |
+| `tid` | `int, optional` | 分区 ID. Defaults to 0. |
 | `pn` | `int, optional` | 页码，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每一页的视频数. Defaults to 30. |
-| `keyword` | `str, optional` | 搜索关键词. Defaults to "". |
-| `order` | `VideoOrder, optional` | 排序方式. Defaults to VideoOrder.PUBDATE |
+| `keyword` | `str, optional` | 搜索关键词. Defaults to ''. |
+| `order` | `VideoOrder, optional` | 排序方式. PUBDATE. Defaults to <VideoOrder.PUBDATE |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -823,7 +823,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `content` | `str` | 需要修改的内容 |
+| `content` | `str, optional` | 需要修改的内容. Defaults to ''. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -834,9 +834,10 @@ medialist排序顺序。
 
 获取用户粉丝排行
 
+
 | name | type | description |
 | - | - | - |
-| `since` | `int, optional` | 开始时间(msec) |
+| `since` | `int \| None, optional` | 开始时间(msec). Defaults to None. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -869,7 +870,7 @@ medialist排序顺序。
 | - | - | - |
 | `nick_name` | `str` | 昵称 |
 
-**Returns:** `List[bool, str]`:  昵称是否可用 + 不可用原因
+**Returns:** `tuple[bool, str]`:  昵称是否可用 + 不可用原因
 
 
 
@@ -1035,11 +1036,11 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `page_num` | `int` | 页码数 |
-| `per_page_item` | `int` | 每页多少条历史记录 |
-| `credential` | `Credential` | Credential |
+| `page_num` | `int, optional` | 页码数. Defaults to 1. |
+| `per_page_item` | `int, optional` | 每页多少条历史记录. Defaults to 100. |
+| `credential` | `Credential \| None, optional` | Credential. Defaults to None. |
 
-**Returns:** `list(dict)`:  返回当前页的指定历史记录列表
+**Returns:** `dict`:  返回当前页的指定历史记录列表
 
 
 
@@ -1058,11 +1059,11 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | Credential |
-| `_type` | `HistroyType` | 历史记录分类. Defaults to HistroyType.ALL. |
-| `ps` | `int` | 每页多少条历史记录. Defaults to 20. |
-| `view_at` | `int` | 时间戳，获取此时间戳之前的历史记录 |
-| `max` | `int` | 历史记录截止目标 oid |
-| `business` | `HistoryBusinessType \| None` | 历史记录分类. Defaults to None. |
+| `_type` | `HistoryType, optional` | 历史记录分类. Defaults to <HistoryType.ALL |
+| `ps` | `int, optional` | 每页多少条历史记录. Defaults to 20. |
+| `view_at` | `int \| None, optional` | 时间戳，获取此时间戳之前的历史记录. Defaults to None. |
+| `max` | `int \| None, optional` | 历史记录截止目标 oid. Defaults to None. |
+| `business` | `user.HistoryBusinessType \| None, optional` | 历史记录分类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -1230,7 +1231,7 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 
 | name | type | description |
 | - | - | - |
-| `names` | `str/List[str]` | 用户名 |
+| `names` | `str \| List[str]` | 用户名 |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果

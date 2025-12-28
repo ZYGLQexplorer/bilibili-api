@@ -45,8 +45,7 @@ class VoteChoices:
 
         Args:
             desc (str): 选项描述
-
-            image (str, Picture, optional): 选项的图片链接，用于图片投票。支持 Picture 类. Defaults to None.
+            image (str | Picture | None, optional): 选项的图片链接，用于图片投票。支持 Picture 类. Defaults to None.
 
         Returns:
             VoteChoices: `self`
@@ -97,9 +96,8 @@ class Vote:
     def __init__(self, vote_id: int, credential: Credential | None = None) -> None:
         """
         Args:
-            vote_id (int): vote_id, 获取：https://nemo2011.github.io/bilibili-api/#/vote_id
-
-            credential (Credential): 凭据类，非必要.
+            vote_id (int): vote_id, 获取：https
+            credential (Credential | None, optional): 凭据类，非必要. Defaults to None.
         """
         self.__vote_id = vote_id
         self.credential: Credential = credential if credential else Credential()
@@ -151,21 +149,12 @@ class Vote:
         更新投票内容
 
         Args:
-            vote_id (int): vote_id
-
             title (str): 投票标题
-
             _type (VoteType): 投票类型
-
             choice_cnt (int): 最多几项
-
-            duration (int): 投票持续秒数 常用: 三天:259200 七天:604800 三十天:2592000
-
-            choices (VoteChoices): 投票选项
-
-            credential (Credential): Credential 枚举类
-
-            desc (Optional[str], optional): 投票描述. Defaults to None.
+            duration (int): 投票持续秒数 常用
+            choices (vote.VoteChoices): 投票选项
+            desc (str | None, optional): 投票描述. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -200,21 +189,15 @@ async def create_vote(
 
     Args:
         title (str): 投票标题
-
         _type (VoteType): 投票类型
-
         choice_cnt (int): 最多几项
-
-        duration (int): 投票持续秒数 常用: 三天:259200 七天:604800 三十天:2592000
-
-        choices (VoteChoices): 投票选项
-
+        duration (int): 投票持续秒数 常用
+        choices (vote.VoteChoices): 投票选项
         credential (Credential): Credential
-
-        desc (Optional[str], optional): 投票描述. Defaults to None.
+        desc (str | None, optional): 投票描述. Defaults to None.
 
     Returns:
-        Vote: Vote 类
+        vote.Vote: Vote 类
     """
     api = API["operate"]["create"]
     data = {

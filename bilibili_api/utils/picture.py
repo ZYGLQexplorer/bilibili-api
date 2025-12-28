@@ -136,9 +136,8 @@ class Picture:
         加载字节数据
 
         Args:
-            content (str): 图片内容
-
-            format  (str): 图片后缀名，如 `webp`, `jpg`, `ico`
+            content (bytes): 图片内容
+            format (str): 图片后缀名，如 `webp`, `jpg`, `ico`
 
         Returns:
             Picture: 加载后的图片对象
@@ -217,7 +216,7 @@ class Picture:
         调整大小
 
         Args:
-            width  (int): 宽度
+            width (int): 宽度
             height (int): 高度
 
         Returns:

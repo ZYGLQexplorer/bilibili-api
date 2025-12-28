@@ -21,9 +21,8 @@ class Audio:
     def __init__(self, auid: int, credential: Credential | None = None) -> None:
         """
         Args:
-            auid       (int)                        : 音频 AU 号
-
-            credential (Credential | None, optional): 凭据. Defaults to None
+            auid (int): 音频 AU 号
+            credential (Credential | None, optional): 凭据. Defaults to None.
         """
         self.credential: Credential = (
             credential if credential is not None else Credential()
@@ -84,7 +83,7 @@ class Audio:
         投币
 
         Args:
-            num (int, optional): 投币数量。Defaults to 2.
+            num (int, optional): 投币数量. Defaults to 2.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -110,8 +109,7 @@ class AudioList:
     def __init__(self, amid: int, credential: Credential | None = None) -> None:
         """
         Args:
-            amid       (int)                        : 歌单 ID
-
+            amid (int): 歌单 ID
             credential (Credential | None, optional): 凭据. Defaults to None.
         """
         self.__amid = amid
@@ -161,7 +159,7 @@ class AudioList:
         获取歌单歌曲列表
 
         Args:
-            pn (int, optional): 页码. Defaults to 1
+            pn (int, optional): 页码. Defaults to 1.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -181,9 +179,8 @@ async def get_user_stat(uid: int, credential: Credential | None = None) -> dict:
     获取用户数据（收听数，粉丝数等）
 
     Args:
-        uid        (int)                        : 用户 UID
-
-        credential (Credential | None, optional): 凭据. Defaults to None
+        uid (int): 用户 UID
+        credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -199,9 +196,8 @@ async def get_hot_song_list(pn: int = 1, credential: Credential | None = None) -
     获取热门歌单
 
     Args:
-        pn(int, optional)                       : 页数. Defaults to 1
-
-        credential (Credential | None, optional): 凭据. Defaults to None
+        pn (int, optional): 页数. Defaults to 1.
+        credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果

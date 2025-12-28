@@ -41,13 +41,11 @@ async def login_with_password(
 
     Args:
         username (str): 用户手机号、邮箱
-
         password (str): 密码
-
-        geetest  (Geetest): 极验验证码实例，须完成。验证码类型应为 `GeetestType.LOGIN`
+        geetest (Geetest): 极验验证码实例，须完成。验证码类型应为 `GeetestType.LOGIN`
 
     Returns:
-        Union[Credential, LoginCheck]: 如果需要验证，会返回 `LoginCheck` 类，否则返回 `Credential` 类。
+        Union[Credential, ForwardRef('LoginCheck')]: 如果需要验证，会返回 `LoginCheck` 类，否则返回 `Credential` 类。
     """
     if geetest.get_test_type() != GeetestType.LOGIN:
         raise GeetestException("验证码类型错误。请使用 GeetestType.LOGIN")
@@ -107,7 +105,7 @@ def get_countries_list() -> list[dict]:
     获取国际地区代码列表
 
     Returns:
-        List[dict]: 地区列表
+        list[dict]: 地区列表
     """
     codes_list = get_data("countries_codes.json")
     countries = []
@@ -127,7 +125,7 @@ def search_countries(keyword: str) -> list[dict]:
         keyword (str): 关键词
 
     Returns:
-        List[dict]: 地区列表
+        list[dict]: 地区列表
     """
     list_ = get_countries_list()
     countries = []
@@ -159,7 +157,7 @@ def have_code(code: str | int) -> bool:
     是否存在地区代码
 
     Args:
-        code(Union[str, int]): 代码
+        code (str | int): 代码
 
     Returns:
         bool: 是否存在
@@ -186,7 +184,7 @@ def get_code_by_country(country: str) -> int:
     获取地区对应代码
 
     Args:
-        country(str): 地区名
+        country (str): 地区名
 
     Returns:
         int: 对应的代码，没有返回 -1
@@ -203,7 +201,7 @@ def get_id_by_code(code: int) -> int:
     获取地区码对应的地区 id
 
     Args:
-        code(int): 地区吗
+        code (int): 地区吗
 
     Returns:
         int: 对应的代码，没有返回 -1
@@ -223,9 +221,8 @@ class PhoneNumber:
     def __init__(self, number: str, country: str | int = "+86") -> None:
         """
         Args:
-            number(str): 手机号
-
-            country(str): 地区/地区码，如 +86
+            number (str): 手机号
+            country (str | int, optional): 地区/地区码，如 +86. Defaults to '+86'.
         """
         number = number.replace("-", "")
         if not have_country(country):  # type: ignore
@@ -248,8 +245,8 @@ async def send_sms(phonenumber: PhoneNumber, geetest: Geetest) -> str:
     发送验证码
 
     Args:
-        phonenumber (PhoneNumber): 手机号类
-        geetest     (Geetest)    : 极验验证码实例，须完成。验证码类型应为 `GeetestType.LOGIN`
+        phonenumber (login_v2.PhoneNumber): 手机号类
+        geetest (Geetest): 极验验证码实例，须完成。验证码类型应为 `GeetestType.LOGIN`
 
     Returns:
         str: captcha_id，需传入 `login_with_sms`
@@ -297,12 +294,12 @@ async def login_with_sms(
     验证码登录
 
     Args:
-        phonenumber (str): 手机号类
-        code        (str): 验证码
-        captcha_id  (str): captcha_id，为 `send_sms` 调用返回结果
+        phonenumber (login_v2.PhoneNumber): 手机号类
+        code (str): 验证码
+        captcha_id (str): captcha_id，为 `send_sms` 调用返回结果
 
     Returns:
-        Union[Credential, LoginCheck]: 如果需要验证，会返回 `LoginCheck` 类，否则返回 `Credential` 类。
+        Union[Credential, ForwardRef('LoginCheck')]: 如果需要验证，会返回 `LoginCheck` 类，否则返回 `Credential` 类。
     """
     api = API["sms"]["login"]
     data = {
@@ -380,7 +377,7 @@ class QrCodeLogin:
     def __init__(self, platform: QrCodeLoginChannel = QrCodeLoginChannel.WEB) -> None:
         """
         Args:
-            platform (QrCodeLoginChannel, optional): 平台. (web/tv) Defaults to QrCodeLoginChannel.WEB.
+            platform (QrCodeLoginChannel, optional): 平台. (web/tv). Defaults to <QrCodeLoginChannel.WEB: 'web'>.
         """
         self.__platform: QrCodeLoginChannel = platform
         self.__qr_link: str | None = None
@@ -558,7 +555,7 @@ class LoginCheck:
         发送验证码
 
         Args:
-            geetest  (Geetest): 极验验证码实例，须完成。验证码类型应为 `GeetestType.VERIFY`
+            geetest (Geetest): 极验验证码实例，须完成。验证码类型应为 `GeetestType.VERIFY`
         """
         if geetest.get_test_type() != GeetestType.VERIFY:
             raise GeetestException("验证码类型错误。请使用 GeetestType.LOGIN")

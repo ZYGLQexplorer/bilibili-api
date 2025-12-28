@@ -516,9 +516,7 @@ class AudioUploader(AsyncEvent):
 
         Args:
             path (str): 文件路径
-
-            meta (SongMeta): 元数据
-
+            meta (audio_uploader.SongMeta): 元数据
             credential (Credential): 账号信息
         """
         super().__init__()
@@ -806,9 +804,7 @@ async def upload_lrc(lrc: str, song_id: int, credential: Credential) -> str:
 
     Args:
         lrc (str): 歌词
-
         song_id (int): 音频 id
-
         credential (Credential): 凭据
 
     Returns:
@@ -824,8 +820,7 @@ async def get_upinfo(param: int | str, credential: Credential) -> list[dict]:
     获取 UP 信息
 
     Args:
-        param (Union[int, str]): UP 主 ID 或者用户名
-
+        param (int | str): UP 主 ID 或者用户名
         credential (Credential): 凭据
 
     Returns:

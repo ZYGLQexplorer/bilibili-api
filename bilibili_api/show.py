@@ -133,7 +133,7 @@ async def get_available_sessions(project_id: int) -> list[Session]:
         project_id (int): 项目id
 
     Returns:
-        list[Session]: 存放场次对象的list
+        list[show.Session]: 存放场次对象的list
     """
     rtn_list = []
     project_info = await get_project_info(project_id)
@@ -178,7 +178,7 @@ async def get_all_buyer_info_obj(credential: Credential) -> list[BuyerInfo]:
         credential (Credential): 登录凭证
 
     Returns:
-        list[BuyerInfo]: BuyerInfo对象列表
+        list[show.BuyerInfo]: BuyerInfo对象列表
     """
     res = await get_all_buyer_info(credential)
     return [BuyerInfo(**v) for v in res["list"]]

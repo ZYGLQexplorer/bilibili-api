@@ -29,7 +29,7 @@ async def upload_image(img: Picture, credential: Credential) -> dict:
     上传笔记图片
 
     Args:
-        img        (Picture)   : 图片
+        img (Picture): 图片
         credential (Credential): 凭据类
 
     Returns:
@@ -66,15 +66,11 @@ class Note:
     ) -> None:
         """
         Args:
-            cvid       (int)                  : 公开笔记 ID (对应专栏的 cvid) (公开笔记必要)
-
-            aid        (int)                  : 稿件 ID（oid_type 为 0 时是 avid） (私有笔记必要)
-
-            note_id    (int)                  : 私有笔记 ID (私有笔记必要)
-
-            note_type  (str)                  : 笔记类型 (private, public)
-
-            credential (Credential, optional) : Credential. Defaults to None.
+            cvid (int | None, optional): 公开笔记 ID (对应专栏的 cvid) (公开笔记必要). Defaults to None.
+            aid (int | None, optional): 稿件 ID（oid_type 为 0 时是 avid） (私有笔记必要). Defaults to None.
+            note_id (int | None, optional): 私有笔记 ID (私有笔记必要). Defaults to None.
+            note_type (NoteType, optional): 笔记类型 (private, public). Defaults to <NoteType.PUBLIC: 'public'>.
+            credential (Credential | None, optional): Credential. Defaults to None.
         """
         self.__oid = -1
         self.__note_id = -1
@@ -140,7 +136,7 @@ class Note:
         将笔记类转为专栏类。需要保证笔记是公开笔记。
 
         Returns:
-            Note: 专栏类
+            article.Article: 专栏类
         """
         raise_for_statement(self.__type == NoteType.PUBLIC)
         return article.Article(cvid=self.get_cvid(), credential=self.credential)
@@ -212,7 +208,7 @@ class Note:
         获取笔记所有图片原始信息
 
         Returns:
-            list: 图片信息
+            list['dict']: 图片信息
         """
 
         result = []
@@ -229,7 +225,7 @@ class Note:
         获取笔记所有图片并转为 Picture 类
 
         Returns:
-            list: 图片信息
+            list['Picture']: 图片信息
         """
 
         result = []
@@ -259,7 +255,7 @@ class Note:
         设置专栏点赞状态
 
         Args:
-            status (bool, optional): 点赞状态. Defaults to True
+            status (bool, optional): 点赞状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -279,7 +275,7 @@ class Note:
         设置专栏收藏状态
 
         Args:
-            status (bool, optional): 收藏状态. Defaults to True
+            status (bool, optional): 收藏状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果

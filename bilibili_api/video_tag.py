@@ -25,13 +25,9 @@ class Tag:
     ) -> None:
         """
         Args:
-            tag_name   (str | None): 标签名. Defaults to None.
-
-            tag_id     (int | None): 标签 id. Defaults to None.
-
-            credential (Credential): 凭据类. Defaults to None.
-
-        注意：tag_name 和 tag_id 任选一个传入即可。tag_id 优先。
+            tag_name (str | None, optional): 标签名. Defaults to None.
+            tag_id (int | None, optional): 标签 id. Defaults to None.
+            credential (Credential | None, optional): 凭据类. Defaults to None.
         """
         self.__tag_id = tag_id
         self.__tag_name = tag_name

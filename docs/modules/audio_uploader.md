@@ -56,7 +56,7 @@ from bilibili_api import audio_uploader
 | name | type | description |
 | - | - | - |
 | `path` | `str` | 文件路径 |
-| `meta` | `SongMeta` | 元数据 |
+| `meta` | `audio_uploader.SongMeta` | 元数据 |
 | `credential` | `Credential` | 账号信息 |
 
 
@@ -447,7 +447,7 @@ lrc (Optional[str]): 歌词
 
 | name | type | description |
 | - | - | - |
-| `param` | `Union[int, str]` | UP 主 ID 或者用户名 |
+| `param` | `int \| str` | UP 主 ID 或者用户名 |
 | `credential` | `Credential` | 凭据 |
 
 **Returns:** `list[dict]`:  调用 API 获得的结果

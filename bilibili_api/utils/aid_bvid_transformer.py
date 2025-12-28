@@ -79,8 +79,10 @@ PREFIX = "BV1"
 def bvid2aid(bvid: str) -> int:
     """
     BV 号转 AV 号。
+
     Args:
-        bvid (str):  BV 号。
+        bvid (str): BV 号。
+
     Returns:
         int: AV 号。
     """
@@ -98,8 +100,10 @@ def bvid2aid(bvid: str) -> int:
 def aid2bvid(aid: int) -> str:
     """
     AV 号转 BV 号。
+
     Args:
-        aid (int):  AV 号。
+        aid (int): AV 号。
+
     Returns:
         str: BV 号。
     """

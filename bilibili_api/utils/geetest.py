@@ -150,7 +150,7 @@ class Geetest:
         创建验证码
 
         Args:
-            type_ (GeetestType): 极验验证码类型。登录为 LOGIN，登录验证为 VERIFY. Defaults to GeetestType.LOGIN.
+            type_ (GeetestType, optional): 极验验证码类型。登录为 LOGIN，登录验证为 VERIFY. Defaults to <GeetestType.LOGIN: 'password'>.
         """
         api = API[type_.value]["captcha"]
         json_data = await Api(**api, no_csrf=True).result
@@ -231,7 +231,7 @@ class Geetest:
 
         Args:
             validate (str): 作答结果的 validate
-            seccode  (str): 作答结果的 seccode
+            seccode (str): 作答结果的 seccode
         """
         self.validate = validate
         self.seccode = seccode

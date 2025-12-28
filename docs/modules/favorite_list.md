@@ -54,9 +54,9 @@ from bilibili_api import favorite_list
 
 | name | type | description |
 | - | - | - |
-| `type_` | `FavoriteListType, optional` | 收藏夹类型. Defaults to FavoriteListType.VIDEO. |
+| `type_` | `FavoriteListType, optional` | 收藏夹类型. Defaults to <FavoriteListType.VIDEO |
 | `media_id` | `int \| None, optional` | 收藏夹号（仅为视频收藏夹时提供）. Defaults to None. |
-| `credential` | `Credential \| None, optional` | 凭据类. Defaults to Credential(). |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 
 ### async def get_content()
@@ -95,8 +95,8 @@ from bilibili_api import favorite_list
 | - | - | - |
 | `page` | `int, optional` | 页码. Defaults to 1. |
 | `keyword` | `str \| None, optional` | 搜索关键词. Defaults to None. |
-| `order` | `FavoriteListContentOrder, optional` | 排序方式. Defaults to FavoriteListContentOrder.MTIME. |
-| `mode` | `SearchFavoriteListMode, optional` | 搜索模式，默认仅当前收藏夹. |
+| `order` | `FavoriteListContentOrder, optional` | 排序方式. Defaults to <FavoriteListContentOrder.MTIME |
+| `mode` | `SearchFavoriteListMode, optional` | 搜索模式，默认仅当前收藏夹. Defaults to <SearchFavoriteListMode.ONLY |
 | `tid` | `int, optional` | 分区 ID. Defaults to 0. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -132,7 +132,7 @@ from bilibili_api import favorite_list
 
 
 
-**Returns:** `Union[int, None]`:  media_id
+**Returns:** `int | None`:  media_id
 
 
 
@@ -240,7 +240,7 @@ from bilibili_api import favorite_list
 | `title` | `str` | 收藏夹名。 |
 | `introduction` | `str, optional` | 收藏夹简介. Defaults to ''. |
 | `private` | `bool, optional` | 是否为私有. Defaults to False. |
-| `credential` | `Credential, optional` | 凭据. Defaults to None. |
+| `credential` | `None \| Credential, optional` | 凭据. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -292,7 +292,7 @@ from bilibili_api import favorite_list
 | name | type | description |
 | - | - | - |
 | `page` | `int, optional` | 页码. Defaults to 1. |
-| `credential` | `Credential \| None, optional` | Credential. Defaults to None. |
+| `credential` | `None \| Credential, optional` | Credential. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -309,7 +309,7 @@ from bilibili_api import favorite_list
 | name | type | description |
 | - | - | - |
 | `page` | `int, optional` | 页码. Defaults to 1. |
-| `credential` | `Credential \| None, optional` | Credential. Defaults to None. |
+| `credential` | `None \| Credential, optional` | Credential. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -345,7 +345,7 @@ from bilibili_api import favorite_list
 | name | type | description |
 | - | - | - |
 | `page` | `int, optional` | 页码. Defaults to 1. |
-| `credential` | `Credential \| None, optional` | Credential. Defaults to None. |
+| `credential` | `None \| Credential, optional` | Credential. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -362,7 +362,7 @@ from bilibili_api import favorite_list
 | name | type | description |
 | - | - | - |
 | `page` | `int, optional` | 页码. Defaults to 1. |
-| `credential` | `Credential \| None, optional` | Credential |
+| `credential` | `None \| Credential, optional` | Credential. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -379,7 +379,7 @@ from bilibili_api import favorite_list
 | name | type | description |
 | - | - | - |
 | `uid` | `int` | 用户 UID。 |
-| `video` | `Video \| None, optional` | 视频类。若提供该参数则结果会附带该收藏夹是否存在该视频。Defaults to None. |
+| `video` | `video.Video \| None, optional` | 视频类。若提供该参数则结果会附带该收藏夹是否存在该视频. Defaults to None. |
 | `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -401,9 +401,9 @@ mode 参数见 SearchFavoriteListMode 枚举。
 | `media_id` | `int` | 收藏夹 ID。 |
 | `page` | `int, optional` | 页码. Defaults to 1. |
 | `keyword` | `str \| None, optional` | 搜索关键词. Defaults to None. |
-| `order` | `FavoriteListContentOrder, optional` | 排序方式. Defaults to FavoriteListContentOrder.MTIME. |
+| `order` | `FavoriteListContentOrder, optional` | 排序方式. Defaults to <FavoriteListContentOrder.MTIME |
 | `tid` | `int, optional` | 分区 ID. Defaults to 0. |
-| `mode` | `SearchFavoriteListMode, optional` | 搜索模式，默认仅当前收藏夹. |
+| `mode` | `SearchFavoriteListMode, optional` | 搜索模式，默认仅当前收藏夹. Defaults to <SearchFavoriteListMode.ONLY |
 | `credential` | `Credential \| None, optional` | Credential. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -424,7 +424,7 @@ mode 参数见 SearchFavoriteListMode 枚举。
 | `title` | `str` | 收藏夹名。 |
 | `introduction` | `str, optional` | 收藏夹简介. Defaults to ''. |
 | `private` | `bool, optional` | 是否为私有. Defaults to False. |
-| `credential` | `Credential, optional` | Credential. Defaults to None. |
+| `credential` | `None \| Credential, optional` | Credential. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

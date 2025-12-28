@@ -164,13 +164,10 @@ async def get_blocked_list(
     获取小黑屋中的违规列表
 
     Args:
-        from_      (BlackFrom)        : 违规来源. Defaults to BlackFrom.ALL.
-
-        type_      (int)              : 违规类型. Defaults to BlackType.ALL.
-
-        pn         (int)              : 页数. Defaults to 1.
-
-        credential (Credential | None): 凭据. Defaults to None.
+        from_ (BlackFrom, optional): 违规来源. Defaults to <BlackFrom.ALL: None>.
+        type_ (BlackType, optional): 违规类型. Defaults to <BlackType.ALL: 0>.
+        pn (int, optional): 页数. Defaults to 1.
+        credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -196,9 +193,8 @@ class BlackRoom:
     ) -> None:
         """
         Args:
-            black_room_id (int)                        : 小黑屋 id
-
-            credential    (Credential | None, optional): 凭据类. Defaults to None.
+            black_room_id (int): 小黑屋 id
+            credential (Credential | None, optional): 凭据类. Defaults to None.
         """
         self.__id = black_room_id
         self.credential: Credential = credential if credential else Credential()
@@ -252,9 +248,8 @@ class JuryCase:
     def __init__(self, case_id: str, credential: Credential) -> None:
         """
         Args:
-            case_id (str)                              : 案件 id
-
-            credential (Credential)                    : 凭据类
+            case_id (str): 案件 id
+            credential (Credential): 凭据类
         """
         self.case_id = case_id
         self.credential: Credential = credential
@@ -278,7 +273,6 @@ class JuryCase:
 
         Args:
             pn (int, optional): 页数. Defaults to 1.
-
             ps (int, optional): 每页数量. Defaults to 20.
 
         Returns:
@@ -302,12 +296,9 @@ class JuryCase:
 
         Args:
             opinion (JuryVoteOpinion): 投票选项类型
-
             is_insider (bool): 是否观看此类视频
-
             is_anonymous (bool): 是否匿名投票
-
-            reason (str, optional): 投票理由. Defaults to None.
+            reason (str | None, optional): 投票理由. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -330,10 +321,10 @@ async def get_next_jury_case(credential: Credential) -> JuryCase:
     获取下一个待审理的案件
 
     Args:
-        credential (Credential | None, optional): 凭据类. Defaults to None.
+        credential (Credential): 凭据类.
 
     Returns:
-        JuryCase: 案件类
+        black_room.JuryCase: 案件类
     """
     credential.raise_for_no_sessdata()
     api = API["jury"]["next_case"]
@@ -348,9 +339,7 @@ async def get_jury_case_raw(credential: Credential, pn: int = 1, ps: int = 20) -
 
     Args:
         credential (Credential): 凭据类
-
         pn (int, optional): 页数. Defaults to 1.
-
         ps (int, optional): 每页数量. Defaults to 20.
 
     Returns:
@@ -369,13 +358,11 @@ async def get_jury_case_list(
 
     Args:
         credential (Credential): 凭据类
-
         pn (int, optional): 页数. Defaults to 1.
-
         ps (int, optional): 每页数量. Defaults to 20.
 
     Returns:
-        List[JuryCase]: 仲裁案件列表
+        list[black_room.JuryCase]: 仲裁案件列表
     """
     api = API["jury"]["case_list"]
     params = {"pn": pn, "ps": ps}

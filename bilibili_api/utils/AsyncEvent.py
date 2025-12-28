@@ -29,8 +29,8 @@ class AsyncEvent:
         注册事件监听器。
 
         Args:
-            name    (str)              :            事件名。
-            handler (Union[Callable, Coroutine]):   回调函数。
+            name (str): 事件名。
+            handler (Callable | Coroutine): 回调函数。
         """
         name = name.upper()
         if name not in self.__handlers:
@@ -45,7 +45,7 @@ class AsyncEvent:
             event_name (str): 事件名。
 
         Returns:
-            dict: 传入函数的参数字典
+            Callable: 传入函数的参数字典
         """
 
         def decorator(func: Callable | Coroutine):
@@ -65,8 +65,8 @@ class AsyncEvent:
         移除事件监听函数。
 
         Args:
-            name                  (str):            事件名。
-            handler (Union[Callable, Coroutine]):   要移除的函数。
+            name (str): 事件名。
+            handler (Callable | Coroutine): 要移除的函数。
 
         Returns:
             bool: 是否移除成功。
@@ -99,8 +99,8 @@ class AsyncEvent:
         异步发布事件。
 
         Args:
-            name (str):       事件名。
-            args (Any):  要传递给函数的参数。 *args 传递。
+            name (str): 事件名。
+            args (Any): 要传递给函数的参数。 *args 传递。
             kwargs (Any): 要传递给函数的参数。 **kwargs 传递。
         """
         if len(args) == 0 and len(kwargs.keys()) == 0:

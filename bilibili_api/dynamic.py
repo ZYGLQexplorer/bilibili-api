@@ -175,11 +175,10 @@ async def upload_image(
     上传动态图片
 
     Args:
-        image (Picture)   : 图片流. 有格式要求.
-
+        image (Picture): 图片流. 有格式要求.
         credential (Credential): 凭据
+        data (dict | None, optional): 自定义请求体. Defaults to None.
 
-        data (dict): 自定义请求体
     Returns:
         dict: 调用 API 返回的结果
     """
@@ -252,17 +251,12 @@ class BuildDynamic:
         通过参数构建动态
 
         Args:
-            text            (str            , optional): 动态文字. Defaults to "".
-
-            pics            (List[Picture]  , optional): 动态图片列表. Defaults to [].
-
-            topic_id        (int            , optional): 动态话题 id. Defaults to -1.
-
-            vote_id         (int            , optional): 动态中的投票的 id. 将放在整个动态的最后面. Defaults to -1.
-
-            live_reserve_id (int            , optional): 直播预约 oid. 通过 `live.create_live_reserve` 获取. Defaults to -1.
-
-            send_time       (datetime | None, optional): 发送时间. Defaults to None.
+            text (str, optional): 动态文字. Defaults to ''.
+            pics (list[Picture], optional): 动态图片列表. Defaults to [].
+            topic_id (int, optional): 动态话题 id. Defaults to -1.
+            vote_id (int, optional): 动态中的投票的 id. 将放在整个动态的最后面. Defaults to -1.
+            live_reserve_id (int, optional): 直播预约 oid. 通过 `live.create_live_reserve` 获取. Defaults to -1.
+            send_time (datetime.datetime | None, optional): 发送时间. Defaults to None.
 
         Returns:
             BuildDynamic: `self`
@@ -300,8 +294,8 @@ class BuildDynamic:
         添加@用户，支持传入 用户名或 UID
 
         Args:
-            uid   (int): 用户ID
-            uname (str): 用户名称. Defaults to "".
+            uid (int, optional): 用户ID. Defaults to 0.
+            uname (str, optional): 用户名称. Defaults to ''.
 
         Returns:
             BuildDynamic: `self`
@@ -358,7 +352,7 @@ class BuildDynamic:
         添加图片
 
         Args:
-            image (Picture | List[Picture]): 图片类
+            image (list[Picture] | Picture): 图片类
 
         Returns:
             BuildDynamic: `self`
@@ -518,9 +512,8 @@ class BuildDynamic:
         设置选项
 
         Args:
-            up_choose_comment    (bool):     精选评论flag
-
-            close_comment        (bool):     关闭评论flag
+            up_choose_comment (bool, optional): 精选评论flag. Defaults to False.
+            close_comment (bool, optional): 关闭评论flag. Defaults to False.
 
         Returns:
             BuildDynamic: `self`
@@ -536,7 +529,7 @@ class BuildDynamic:
         设置发送时间
 
         Args:
-            time (datetime): 发送时间
+            time (datetime.datetime): 发送时间
 
         Returns:
             BuildDynamic: `self`
@@ -611,7 +604,7 @@ class BuildDynamic:
         获取动态预约
 
         Returns:
-            Optional[dict]: 动态预约
+            dict | None: 动态预约
         """
         return self.attach_card
 
@@ -620,7 +613,7 @@ class BuildDynamic:
         获取动态话题
 
         Returns:
-            Optional[dict]: 动态话题
+            dict | None: 动态话题
         """
         return self.topic
 
@@ -641,11 +634,9 @@ async def send_dynamic(
     发送动态
 
     Args:
-        info (BuildDynamic): 动态内容
-
-        web_repost_src (str | None): 动态转发源. Defaults to None.
-
+        info (dynamic.BuildDynamic): 动态内容
         credential (Credential): 凭据
+        web_repost_src (str | None, optional): 动态转发源. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -706,7 +697,7 @@ async def get_schedules_list(credential: Credential) -> dict:
     获取待发送定时动态列表
 
     Args:
-        credential  (Credential): 凭据
+        credential (Credential): 凭据
 
     Returns:
         dict: 调用 API 返回的结果
@@ -723,8 +714,7 @@ async def send_schedule_now(draft_id: int, credential: Credential) -> dict:
 
     Args:
         draft_id (int): 定时动态 ID
-
-        credential  (Credential): 凭据
+        credential (Credential): 凭据
 
     Returns:
         dict: 调用 API 返回的结果
@@ -742,8 +732,7 @@ async def delete_schedule(draft_id: int, credential: Credential) -> dict:
 
     Args:
         draft_id (int): 定时动态 ID
-
-        credential  (Credential): 凭据
+        credential (Credential): 凭据
 
     Returns:
         dict: 调用 API 返回的结果
@@ -766,7 +755,7 @@ class Dynamic:
     def __init__(self, dynamic_id: int, credential: Credential | None = None) -> None:
         """
         Args:
-            dynamic_id (int)                        : 动态 ID
+            dynamic_id (int): 动态 ID
             credential (Credential | None, optional): 凭据类. Defaults to None.
         """
         self.__dynamic_id = dynamic_id
@@ -980,7 +969,7 @@ class Dynamic:
         获取点赞、转发
 
         Args:
-            offset (str, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to ""
+            offset (str, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to ''.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -997,7 +986,7 @@ class Dynamic:
         获取动态转发列表
 
         Args:
-            offset (str, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to "0"
+            offset (str, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to '0'.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1024,9 +1013,8 @@ class Dynamic:
         获取动态点赞列表
 
         Args:
-            pn (int, optional): 页码，defaults to 1
-
-            ps (int, optional): 每页大小，defaults to 30
+            pn (int, optional): 页码，. Defaults to 1.
+            ps (int, optional): 每页大小，. Defaults to 30.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1080,7 +1068,7 @@ class Dynamic:
         转发动态
 
         Args:
-            text (str, optional): 转发动态时的文本内容. Defaults to "转发动态"
+            text (str, optional): 转发动态时的文本内容. Defaults to '转发动态'.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1097,7 +1085,7 @@ class Dynamic:
         设置动态（图文）收藏状态
 
         Args:
-            status (bool, optional): 收藏状态. Defaults to True
+            status (bool, optional): 收藏状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1201,7 +1189,7 @@ async def get_new_dynamic_users(credential: Credential | None = None) -> dict:
     获取更新动态的关注者
 
     Args:
-        credential (Credential | None): 凭据类. Defaults to None.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -1217,9 +1205,8 @@ async def get_live_users(size: int = 10, credential: Credential | None = None) -
     获取正在直播的关注者
 
     Args:
-        size       (int)       : 获取的数据数量. Defaults to 10.
-
-        credential (Credential | None): 凭据类. Defaults to None.
+        size (int, optional): 获取的数据数量. Defaults to 10.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -1262,16 +1249,11 @@ async def get_dynamic_page_info(
 
     Args:
         credential (Credential): 凭据类.
-
-        _type      (DynamicType, optional): 动态类型. Defaults to DynamicType.ALL.
-
-        host_mid   (int, optional): 获取对应 UP 主动态的 mid. Defaults to None.
-
-        features   (str, optional): 默认 itemOpusStyle.
-
-        pn         (int, optional): 页码. Defaults to 1.
-
-        offset     (int, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to None.
+        _type (dynamic.DynamicType | None, optional): 动态类型. Defaults to None.
+        host_mid (int | None, optional): 获取对应 UP 主动态的 mid. Defaults to None.
+        features (str, optional): 默认 itemOpusStyle. Defaults to 'itemOpusStyle'.
+        pn (int, optional): 页码. Defaults to 1.
+        offset (int | None, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -1313,19 +1295,14 @@ async def get_dynamic_page_list(
 
     Args:
         credential (Credential): 凭据类.
-
-        _type      (DynamicType, optional): 动态类型. Defaults to DynamicType.ALL.
-
-        host_mid   (int, optional): 获取对应 UP 主动态的 mid. Defaults to None.
-
-        features   (str, optional): 默认 itemOpusStyle.
-
-        pn         (int, optional): 页码. Defaults to 1.
-
-        offset     (int, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to None.
+        _type (dynamic.DynamicType | None, optional): 动态类型. Defaults to None.
+        host_mid (int | None, optional): 获取对应 UP 主动态的 mid. Defaults to None.
+        features (str, optional): 默认 itemOpusStyle. Defaults to 'itemOpusStyle'.
+        pn (int, optional): 页码. Defaults to 1.
+        offset (int | None, optional): 偏移值（下一页的第一个动态 ID，为该请求结果中的 offset 键对应的值），类似单向链表. Defaults to None.
 
     Returns:
-        list[Dynamic]: 动态类列表
+        list[dynamic.Dynamic]: 动态类列表
     """
 
     api = API["info"]["dynamic_page_info"]

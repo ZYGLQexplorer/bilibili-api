@@ -83,7 +83,7 @@ async def get_article_rank(
     获取专栏排行榜
 
     Args:
-        rank_type (ArticleRankingType): 排行榜类别. Defaults to ArticleRankingType.YESTERDAY.
+        rank_type (ArticleRankingType, optional): 排行榜类别. Defaults to <ArticleRankingType.YESTERDAY: 3>.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -104,8 +104,7 @@ class ArticleList:
     def __init__(self, rlid: int, credential: Credential | None = None) -> None:
         """
         Args:
-            rlid       (int)                        : 文集 id
-
+            rlid (int): 文集 id
             credential (Credential | None, optional): 凭据类. Defaults to None.
         """
         self.__rlid = rlid
@@ -145,8 +144,7 @@ class Article:
     def __init__(self, cvid: int, credential: Credential | None = None) -> None:
         """
         Args:
-            cvid       (int)                        : cv 号
-
+            cvid (int): cv 号
             credential (Credential | None, optional): 凭据. Defaults to None.
         """
         self.__children: list[Node] = []
@@ -167,7 +165,7 @@ class Article:
         转换后可查看“赞和转发”列表。
 
         Returns:
-            Dynamic: 动态实例
+            dynamic.Dynamic: 动态实例
         """
         if cache_pool.article2dynamic.get(self.get_cvid()) is None:
             await self.get_all()
@@ -185,7 +183,7 @@ class Article:
         转换后可查看“赞和转发”列表。
 
         Returns:
-            Opus: 动态实例
+            opus.Opus: 动态实例
         """
         if cache_pool.article2dynamic.get(self.get_cvid()) is None:
             await self.get_all()
@@ -615,7 +613,7 @@ class Article:
         设置专栏点赞状态
 
         Args:
-            status (bool, optional): 点赞状态. Defaults to True
+            status (bool, optional): 点赞状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -631,7 +629,7 @@ class Article:
         设置专栏收藏状态
 
         Args:
-            status (bool, optional): 收藏状态. Defaults to True
+            status (bool, optional): 收藏状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果

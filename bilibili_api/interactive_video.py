@@ -92,15 +92,11 @@ class InteractiveVariable:
     ) -> None:
         """
         Args:
-            name      (str)  : 变量名
-
-            var_id    (str)  : 变量 id
-
-            var_value (int)  : 变量的值
-
-            show      (bool) : 是否显示
-
-            random    (bool) : 是否为随机值(1-100)
+            name (str): 变量名
+            var_id (str): 变量 id
+            var_value (int): 变量的值
+            show (bool, optional): 是否显示. Defaults to False.
+            random (bool, optional): 是否为随机值(1-100). Defaults to False.
         """
         self.__var_id = var_id
         self.__var_value = var_value
@@ -178,13 +174,10 @@ class InteractiveButton:
     ) -> None:
         """
         Args:
-            text  (str)                         : 文字
-
-            x     (int)                         : x 轴
-
-            y     (int)                         : y 轴
-
-            align (InteractiveButtonAlign | int): 按钮的文字在按钮中的位置
+            text (str): 文字
+            x (int): x 轴
+            y (int): y 轴
+            align (interactive_video.InteractiveButtonAlign | int, optional): 按钮的文字在按钮中的位置. Defaults to <InteractiveButtonAlign.DEFAULT: 0>.
         """
         self.__text = text
         self.__pos = (x, y)
@@ -215,7 +208,7 @@ class InteractiveButton:
         获取按钮位置
 
         Returns:
-            Tuple[int, int]: 按钮位置
+            tuple[int, int]: 按钮位置
         """
         return self.__pos
 
@@ -233,9 +226,8 @@ class InteractiveJumpingCondition:
     ) -> None:
         """
         Args:
-            var       (List[InteractiveVariable]): 所有变量
-
-            condition (str)                      : 公式
+            var (list[interactive_video.InteractiveVariable], optional): 所有变量. Defaults to [].
+            condition (str, optional): 公式. Defaults to 'True'.
         """
         self.__vars = var
         self.__command = condition
@@ -245,7 +237,7 @@ class InteractiveJumpingCondition:
         获取公式中的变量
 
         Returns:
-            List[InteractiveVariable]: 变量
+            list[interactive_video.InteractiveVariable]: 变量
         """
         return self.__vars
 
@@ -293,9 +285,8 @@ class InteractiveJumpingCommand:
     def __init__(self, var: list[InteractiveVariable] = [], command: str = "") -> None:
         """
         Args:
-            var       (List[InteractiveVariable]): 所有变量
-
-            command   (str)                      : 公式
+            var (list[interactive_video.InteractiveVariable], optional): 所有变量. Defaults to [].
+            command (str, optional): 公式. Defaults to ''.
         """
         self.__vars = var
         self.__command = command
@@ -305,7 +296,7 @@ class InteractiveJumpingCommand:
         获取公式中的变量
 
         Returns:
-            List[InteractiveVariable]: 变量
+            list[interactive_video.InteractiveVariable]: 变量
         """
         return self.__vars
 
@@ -323,7 +314,7 @@ class InteractiveJumpingCommand:
         执行操作
 
         Returns:
-            List[InteractiveVariable]: 所有变量的最终值
+            list['InteractiveVariable']: 所有变量的最终值
         """
         if self.__command == "":
             return self.__vars
@@ -365,21 +356,14 @@ class InteractiveNode:
     ) -> None:
         """
         Args:
-            video          (InteractiveVideo)           : 视频类
-
-            node_id        (int)                        : 节点 id
-
-            cid            (int)                        : CID
-
-            vars           (List[InteractiveVariable])  : 变量
-
-            button         (InteractiveButton)          : 对应的按钮
-
-            condition      (InteractiveJumpingCondition): 跳转公式
-
-            native_command (InteractiveJumpingCommand)  : 跳转时变量操作
-
-            is_default     (bool)                       : 是不是默认的跳转的节点
+            video (InteractiveVideo): 视频类
+            node_id (int): 节点 id
+            cid (int): CID
+            vars (list[interactive_video.InteractiveVariable]): 变量
+            button (interactive_video.InteractiveButton | None, optional): 对应的按钮. Defaults to None.
+            condition (interactive_video.InteractiveJumpingCondition, optional): 跳转公式. Defaults to <bilibili_api.interactive_video.InteractiveJumpingCondition object at 0x1055e34d0>.
+            native_command (interactive_video.InteractiveJumpingCommand, optional): 跳转时变量操作. Defaults to <bilibili_api.interactive_video.InteractiveJumpingCommand object at 0x1055e3770>.
+            is_default (bool, optional): 是不是默认的跳转的节点. Defaults to False.
         """
         self.__parent = video
         self.__id = node_id
@@ -402,7 +386,7 @@ class InteractiveNode:
         获取跳转时执行的语句，已自动执行，无需手动调用
 
         Returns:
-            InteractiveJumpingCommand: 执行的语句
+            interactive_video.InteractiveJumpingCommand: 执行的语句
         """
         return self.__command
 
@@ -411,7 +395,7 @@ class InteractiveNode:
         获取节点的所有变量
 
         Returns:
-            List[InteractiveVariable]: 节点的所有变量
+            list[interactive_video.InteractiveVariable]: 节点的所有变量
         """
         return self.__vars
 
@@ -420,7 +404,7 @@ class InteractiveNode:
         获取节点的所有子节点
 
         Returns:
-            List[InteractiveNode]: 所有子节点
+            list['InteractiveNode']: 所有子节点
         """
         edge_info = await self.__get_cached_edge_info()
         nodes = []
@@ -551,9 +535,9 @@ class InteractiveGraph:
     def __init__(self, video: "InteractiveVideo", skin: dict, root_cid: int) -> None:
         """
         Args:
-            video    (InteractiveVideo): 互动视频类
-            skin     (dict)            : 样式
-            root_cid (int)             : 根节点 CID
+            video (InteractiveVideo): 互动视频类
+            skin (dict): 样式
+            root_cid (int): 根节点 CID
         """
         self.__parent = video
         self.__skin = skin
@@ -618,7 +602,7 @@ class InteractiveGraph:
         获取子节点
 
         Returns:
-            List[InteractiveNode]: 子节点
+            list['InteractiveNode']: 子节点
         """
         return await self.__node.get_children()
 
@@ -718,7 +702,7 @@ class InteractiveVideo(Video):
         获取剧情图节点信息
 
         Args:
-            edge_id       (int, optional)       : 节点 ID，为 None 时获取根节点信息. Defaults to None.
+            edge_id (int | None, optional): 节点 ID，为 None 时获取根节点信息. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -756,10 +740,10 @@ class InteractiveVideo(Video):
         为互动视频打分
 
         Args:
-            score (int): 互动视频分数. Defaults to 5.
+            score (int, optional): 互动视频分数. Defaults to 5.
 
         Returns:
-            dict: 调用 API 返回的结果
+            int: 调用 API 返回的结果
         """
         self.credential.raise_for_no_sessdata()
         self.credential.raise_for_no_bili_jct()
@@ -781,7 +765,7 @@ class InteractiveVideo(Video):
         获取稿件情节树
 
         Returns:
-            InteractiveGraph: 情节树
+            interactive_video.InteractiveGraph: 情节树
         """
         if not self.__graph:
             edge_info = await self.get_edge_info(None)
@@ -851,19 +835,12 @@ class InteractiveVideoDownloader(AsyncEvent):
     ) -> None:
         """
         Args:
-            video              (InteractiveVideo)              : 互动视频类
-
-            out                (str)                           : 输出文件地址 (如果模式为 NODE_VIDEOS/NO_PACKAGING 则此参数表示所有节点视频的存放目录)
-
-            self_download_func (Coroutine)                     : 自定义下载函数（需 async 函数）. Defaults to None.
-
-            downloader_mode    (InteractiveVideoDownloaderMode): 下载模式
-
-            stream_detecting_params (dict)                     : `VideoDownloadURLDataDetecter` 提取最佳流时传入的参数，可控制视频及音频品质
-
-            fetching_nodes_retry_times (int)                   : 获取节点时的最大重试次数
-
-        `self_download_func` 函数应接受两个参数（第一个是下载 URL，第二个是输出地址（精确至文件名））
+            video (interactive_video.InteractiveVideo): 互动视频类
+            out (str): 输出文件地址 (如果模式为 NODE_VIDEOS/NO_PACKAGING 则此参数表示所有节点视频的存放目录)
+            self_download_func (Coroutine | None, optional): 自定义下载函数（需 async 函数）. Defaults to None.
+            downloader_mode (InteractiveVideoDownloaderMode, optional): 下载模式. Defaults to <InteractiveVideoDownloaderMode.IVI: 'ivi'>.
+            stream_detecting_params (dict, optional): `VideoDownloadURLDataDetecter` 提取最佳流时传入的参数，可控制视频及音频品质. Defaults to {}.
+            fetching_nodes_retry_times (int, optional): 获取节点时的最大重试次数. Defaults to 3.
 
         为保证视频能被成功下载，请在自定义下载函数请求的时候加入 `bilibili_api.get_bili_headers()` 头部。
         """

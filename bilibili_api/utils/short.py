@@ -13,8 +13,7 @@ async def get_real_url(short_url: str, credential: Credential | None = None) -> 
 
     Args:
         short_url (str): 短链接。
-
-        credential (Credential | None): 凭据类。
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         str: 目标链接（如果不是有效的链接会报错）

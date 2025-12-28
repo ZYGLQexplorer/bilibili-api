@@ -110,12 +110,11 @@ async def parse_link(
     调用 yarl 解析 bilibili url 的函数。
 
     Args:
-        url(str)              : 链接
-
-        credential(Credential): 凭据类
+        url (str): 链接
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
-        Tuple[obj, ResourceType]: (对象，类型) 或 -1,-1 表示出错
+        tuple[object, ResourceType]: (对象，类型) 或 -1,-1 表示出错
     """
     credential = credential if credential else Credential()
     url = url.replace("\\", "/")  # 说多了都是泪

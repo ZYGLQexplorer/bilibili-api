@@ -216,7 +216,7 @@ API 基类异常。
 | name | type | description |
 | - | - | - |
 | `name` | `str` | 事件名。 |
-| `handler` | `Union[Callable, Coroutine]` | 回调函数。 |
+| `handler` | `Callable \| Coroutine` | 回调函数。 |
 
 
 
@@ -256,7 +256,7 @@ API 基类异常。
 | - | - | - |
 | `event_name` | `str` | 事件名。 |
 
-**Returns:** `dict`:  传入函数的参数字典
+**Returns:** `Callable`:  传入函数的参数字典
 
 
 
@@ -278,7 +278,7 @@ API 基类异常。
 | name | type | description |
 | - | - | - |
 | `name` | `str` | 事件名。 |
-| `handler` | `Union[Callable, Coroutine]` | 要移除的函数。 |
+| `handler` | `Callable \| Coroutine` | 要移除的函数。 |
 
 **Returns:** `bool`:  是否移除成功。
 
@@ -568,7 +568,7 @@ class BiliAPIClient(ABC):
 
 
 
-**Returns:** `object`:  解析后的 json
+**Returns:** `dict[str, Any]`:  解析后的 json
 
 
 
@@ -684,7 +684,7 @@ Cookies 刷新错误。
 | `dedeuserid_ckmd5` | `str \| None, optional` | 浏览器 Cookies 中的 DedeUserID__ckMd5 字段值. Defaults to None. |
 | `sid` | `str \| None, optional` | 浏览器 Cookies 中的 sid 字段值. Defaults to None. |
 | `ac_time_value` | `str \| None, optional` | 浏览器 localStorage 中的 ac_time_value 字段值. Defaults to None. |
-| `kwargs` | `Any, optional` | 其他用户可自行添加的 cookies。通过 **kwargs 传入。 |
+| `kwargs` | `Any` | 其他用户可自行添加的 cookies。通过 **kwargs 传入。 |
 
 
 ### async def check_refresh()
@@ -715,7 +715,7 @@ Cookies 刷新错误。
 
 
 
-**Returns:** `dict`:  请求 Cookies 字典
+**Returns:** `dict[str, str]`:  请求 Cookies 字典
 
 
 
@@ -947,20 +947,20 @@ Credential 类未提供 sessdata 时的异常。
 | name | type | description |
 | - | - | - |
 | `text` | `str` | 弹幕文本。 |
-| `dm_time` | `float, optional` | 弹幕在视频中的位置，单位为秒。Defaults to 0.0. |
-| `send_time` | `float, optional` | 弹幕发送的时间。Defaults to time.time(). |
-| `crc32_id` | `str, optional` | 弹幕发送者 UID 经 CRC32 算法取摘要后的值。Defaults to "". |
-| `color` | `str, optional` | 弹幕十六进制颜色。Defaults to "ffffff" (如果为大会员专属的颜色则为"special"). |
-| `weight` | `int, optional` | 弹幕在弹幕列表显示的权重。Defaults to -1. |
-| `id_` | `int, optional` | 弹幕 ID。Defaults to -1. |
-| `id_str` | `str, optional` | 弹幕字符串 ID。Defaults to "". |
-| `action` | `str, optional` | 暂不清楚。Defaults to "". |
-| `mode` | `Union[DmMode, int], optional` | 弹幕模式。Defaults to Mode.FLY. |
-| `font_size` | `Union[DmFontSize, int], optional` | 弹幕字体大小。Defaults to FontSize.NORMAL. |
-| `is_sub` | `bool, optional` | 是否为字幕弹幕。Defaults to False. |
-| `pool` | `int, optional` | 池。Defaults to 0. |
-| `attr` | `int, optional` | 暂不清楚。 Defaults to -1. |
-| `uid` | `int, optional` | 弹幕发送者 UID。Defaults to -1. |
+| `dm_time` | `float, optional` | 弹幕在视频中的位置，单位为秒. Defaults to 0.0. |
+| `send_time` | `float, optional` | 弹幕发送的时间. Defaults to 1766892400.431226. |
+| `crc32_id` | `str, optional` | 弹幕发送者 UID 经 CRC32 算法取摘要后的值. Defaults to ''. |
+| `color` | `str, optional` | 弹幕十六进制颜色. Defaults to 'ffffff'. |
+| `weight` | `int, optional` | 弹幕在弹幕列表显示的权重. Defaults to -1. |
+| `id_` | `int, optional` | 弹幕 ID. Defaults to -1. |
+| `id_str` | `str, optional` | 弹幕字符串 ID. Defaults to ''. |
+| `action` | `str, optional` | 暂不清楚. Defaults to ''. |
+| `mode` | `DmMode \| int, optional` | 弹幕模式. Defaults to <DmMode.FLY |
+| `font_size` | `DmFontSize \| int, optional` | 弹幕字体大小. Defaults to <DmFontSize.NORMAL |
+| `is_sub` | `bool, optional` | 是否为字幕弹幕. Defaults to False. |
+| `pool` | `int, optional` | 池. Defaults to 0. |
+| `attr` | `int, optional` | 暂不清楚. Defaults to -1. |
+| `uid` | `int, optional` | 弹幕发送者 UID. Defaults to -1. |
 
 
 **@staticmethod** 
@@ -1109,7 +1109,7 @@ ExClimbWuzhi 失败异常
 
 | name | type | description |
 | - | - | - |
-| `type_` | `GeetestType` | 极验验证码类型。登录为 LOGIN，登录验证为 VERIFY. Defaults to GeetestType.LOGIN. |
+| `type_` | `GeetestType, optional` | 极验验证码类型。登录为 LOGIN，登录验证为 VERIFY. Defaults to <GeetestType.LOGIN |
 
 
 
@@ -1331,7 +1331,7 @@ NOTE: `gt`, `challenge`, `token` 为验证码基本字段。`seccode`, `validate
 
 | name | type | description |
 | - | - | - |
-| `content` | `str` | 图片内容 |
+| `content` | `bytes` | 图片内容 |
 | `format` | `str` | 图片后缀名，如 `webp`, `jpg`, `ico` |
 
 **Returns:** `Picture`:  加载后的图片对象
@@ -1524,10 +1524,10 @@ API 响应异常。
 | name | type | description |
 | - | - | - |
 | `content` | `str` | 弹幕内容 |
-| `id_` | `int` | 弹幕 id. Defaults to -1. |
-| `id_str` | `str` | 弹幕 id (string 类型). Defaults to "". |
-| `mode` | `Union[DmMode, int]` | 弹幕类型. Defaults to DmMode.SPECIAL. |
-| `pool` | `int` | 弹幕池. Defaults to 2. |
+| `id_` | `int, optional` | 弹幕 id. Defaults to -1. |
+| `id_str` | `str, optional` | 弹幕 id (string 类型). Defaults to ''. |
+| `mode` | `DmMode \| int, optional` | 弹幕类型. Defaults to <DmMode.SPECIAL |
+| `pool` | `int, optional` | 弹幕池. Defaults to 2. |
 
 
 ---
@@ -1569,6 +1569,7 @@ Wbi 重试达到最大次数
 
 AV 号转 BV 号。
 
+
 | name | type | description |
 | - | - | - |
 | `aid` | `int` | AV 号。 |
@@ -1593,7 +1594,7 @@ AV 号转 BV 号。
 | - | - | - |
 | `url` | `str` | 链接 |
 | `out` | `str` | 输出地址 |
-| `intro` | `str` | 下载简述 |
+| `intro` | `str, optional` | 下载简述. Defaults to 'bili-simple-download'. |
 
 
 
@@ -1603,6 +1604,7 @@ AV 号转 BV 号。
 ## def bvid2aid()
 
 BV 号转 AV 号。
+
 
 | name | type | description |
 | - | - | - |
@@ -1638,9 +1640,9 @@ BV 号转 AV 号。
 
 | name | type | description |
 | - | - | - |
-| `in_priority` | `bool` | 是否排序. Defaults to True. |
+| `in_priority` | `bool, optional` | 是否排序. Defaults to True. |
 
-**Returns:** `List[dict]`:  已注册的后置过滤器
+**Returns:** `list[dict]`:  已注册的后置过滤器
 
 
 
@@ -1654,9 +1656,9 @@ BV 号转 AV 号。
 
 | name | type | description |
 | - | - | - |
-| `in_priority` | `bool` | 是否排序. Defaults to True. |
+| `in_priority` | `bool, optional` | 是否排序. Defaults to True. |
 
-**Returns:** `List[dict]`:  已注册的前置过滤器
+**Returns:** `list[dict]`:  已注册的前置过滤器
 
 
 
@@ -1669,7 +1671,7 @@ BV 号转 AV 号。
 
 
 
-**Returns:** `List[str]`:  支持的设置项名称
+**Returns:** `list[str]`:  支持的设置项名称
 
 
 
@@ -1685,7 +1687,7 @@ BV 号转 AV 号。
 
 | name | type | description |
 | - | - | - |
-| `fpgen_fp` | `bool` | 是否使用 fpgen 生成的浏览器指纹信息。Defaults to True. |
+| `fpgen_fp` | `bool, optional` | 是否使用 fpgen 生成的浏览器指纹信息. Defaults to True. |
 
 **Returns:** `dict`:  请求头
 
@@ -1701,9 +1703,9 @@ BV 号转 AV 号。
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential, optional` | 凭据. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 
-**Returns:** `Tuple[str, str]`:  bili_ticket, bili_ticket_expires
+**Returns:** `tuple[str, str] | None`:  bili_ticket, bili_ticket_expires
 
 
 
@@ -1717,9 +1719,9 @@ BV 号转 AV 号。
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential, optional` | 凭据. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 
-**Returns:** `Tuple[str, str, str]`:  第 0 项为 buvid3，第 1 项为 buvid4，第 2 项为 buvid_fp。
+**Returns:** `tuple[str, str, str]`:  第 0 项为 buvid3，第 1 项为 buvid4，第 2 项为 buvid_fp。
 
 
 
@@ -1747,7 +1749,7 @@ BV 号转 AV 号。
 | name | type | description |
 | - | - | - |
 | `short_url` | `str` | 短链接。 |
-| `credential` | `Credential \| None` | 凭据类。 |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `str`:  目标链接（如果不是有效的链接会报错）
 
@@ -1762,7 +1764,7 @@ BV 号转 AV 号。
 
 
 
-**Returns:** `Dict[str, List[str]]`:  所有注册过的 BiliAPIClient 所支持的设置项
+**Returns:** `dict[str, list[str]]`:  所有注册过的 BiliAPIClient 所支持的设置项
 
 
 
@@ -1775,7 +1777,7 @@ BV 号转 AV 号。
 
 
 
-**Returns:** `Dict[str, Type[BiliAPIClient]]`:  注册过的 BiliAPIClient
+**Returns:** `dict[str, type[BiliAPIClient]]`:  注册过的 BiliAPIClient
 
 
 
@@ -1791,9 +1793,9 @@ BV 号转 AV 号。
 | - | - | - |
 | `client` | `str` | 请求客户端. |
 | `func` | `str` | 执行函数名. |
-| `in_priority` | `bool` | 是否排序. Defaults to True. |
+| `in_priority` | `bool, optional` | 是否排序. Defaults to True. |
 
-**Returns:** `List[dict]`:  已注册的后置过滤器
+**Returns:** `list[dict]`:  已注册的后置过滤器
 
 
 
@@ -1809,9 +1811,9 @@ BV 号转 AV 号。
 | - | - | - |
 | `client` | `str` | 请求客户端. |
 | `func` | `str` | 执行函数名. |
-| `in_priority` | `bool` | 是否排序. Defaults to True. |
+| `in_priority` | `bool, optional` | 是否排序. Defaults to True. |
 
-**Returns:** `List[dict]`:  已注册的前置过滤器
+**Returns:** `list[dict]`:  已注册的前置过滤器
 
 
 
@@ -1824,7 +1826,7 @@ BV 号转 AV 号。
 
 
 
-**Returns:** `Tuple[str, Type[BiliAPIClient]]`:  第 0 项为客户端名称，第 1 项为对应的类
+**Returns:** `tuple[str, type[BiliAPIClient]]`:  第 0 项为客户端名称，第 1 项为对应的类
 
 
 
@@ -1852,9 +1854,9 @@ BV 号转 AV 号。
 | name | type | description |
 | - | - | - |
 | `url` | `str` | 链接 |
-| `credential` | `Credential` | 凭据类 |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
-**Returns:** `Tuple[obj, ResourceType]`:  (对象，类型) 或 -1,-1 表示出错
+**Returns:** `tuple[object, ResourceType]`:  (对象，类型) 或 -1,-1 表示出错
 
 
 
@@ -1881,7 +1883,7 @@ BV 号转 AV 号。
 | - | - | - |
 | `name` | `str` | 请求客户端类型名称，用户自定义命名。 |
 | `cls` | `type` | 基于 BiliAPIClient 重写后的请求客户端类。 |
-| `settings` | `Dict` | 请求客户端在基础设置外的其他设置，键为设置名称，值为设置默认值。Defaults to {}. |
+| `settings` | `Dict, optional` | 请求客户端在基础设置外的其他设置，键为设置名称，值为设置默认值. Defaults to {}. |
 
 
 
@@ -1905,13 +1907,13 @@ BiliAPIClient 对象存在 `data` 字段，可用于过滤器间数据传递，�
 | name | type | description |
 | - | - | - |
 | `name` | `str` | 名称，若重复则为修改对应过滤器。 |
-| `func` | `Callable, optional` | 执行的函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)` |
-| `async_func` | `Callable[..., Coroutine], optional` | 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)` |
-| `clients` | `List[str], optional` | 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。 |
-| `on` | `List[str], optional` | 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。 |
-| `trigger` | `Callable, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
-| `async_trigger` | `Callable[..., Coroutine], optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
-| `priority` | `int, optional` | 优先级，数字越小越优先执行。Defaults to 0. |
+| `func` | `Callable \| None, optional` | 执行的函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`. Defaults to None. |
+| `async_func` | `Callable[..., Coroutine] \| None, optional` | 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`. Defaults to None. |
+| `clients` | `List[str] \| None, optional` | 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用. Defaults to None. |
+| `on` | `List[str] \| None, optional` | 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用. Defaults to None. |
+| `trigger` | `Callable \| None, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None. |
+| `async_trigger` | `Callable[..., Coroutine] \| None, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None. |
+| `priority` | `int, optional` | 优先级，数字越小越优先执行. Defaults to 0. |
 
 
 
@@ -1935,13 +1937,13 @@ BiliAPIClient 对象存在 `data` 字段，可用于过滤器间数据传递，�
 | name | type | description |
 | - | - | - |
 | `name` | `str` | 名称，若重复则为修改对应过滤器。 |
-| `func` | `Callable, optional` | 执行的函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)` |
-| `async_func` | `Callable[..., Coroutine], optional` | 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)` |
-| `clients` | `List[str], optional` | 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。 |
-| `on` | `List[str], optional` | 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。 |
-| `trigger` | `Callable, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
-| `async_trigger` | `Callable[..., Coroutine], optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。 |
-| `priority` | `int, optional` | 优先级，数字越小越优先执行。Defaults to 0. |
+| `func` | `Callable \| None, optional` | 执行的函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`. Defaults to None. |
+| `async_func` | `Callable[..., Coroutine] \| None, optional` | 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`. Defaults to None. |
+| `clients` | `List[str] \| None, optional` | 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用. Defaults to None. |
+| `on` | `List[str] \| None, optional` | 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用. Defaults to None. |
+| `trigger` | `Callable \| None, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None. |
+| `async_trigger` | `Callable[..., Coroutine] \| None, optional` | 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None. |
+| `priority` | `int, optional` | 优先级，数字越小越优先执行. Defaults to 0. |
 
 
 
@@ -2001,7 +2003,7 @@ async def handle(desc: str, data: dict) -> None:
 
 
 
-**Returns:** `List[str]`:  日志输出排除的事件类型
+**Returns:** `list[str]`:  日志输出排除的事件类型
 
 
 
@@ -2012,7 +2014,7 @@ async def handle(desc: str, data: dict) -> None:
 
 
 
-**Returns:** `List[str]`:  日志输出支持的事件类型
+**Returns:** `list[str]`:  日志输出支持的事件类型
 
 
 
@@ -2175,7 +2177,7 @@ async def handle(desc: str, data: dict) -> None:
 
 
 
-**Returns:** `Optional[Credential]`:  全局凭据类
+**Returns:** `Credential | None`:  全局凭据类
 
 
 
@@ -2247,7 +2249,7 @@ async def handle(desc: str, data: dict) -> None:
 | name | type | description |
 | - | - | - |
 | `name` | `str` | 设置名称 |
-| `value` | `str` | 设置的值 |
+| `value` | `Any` | 设置的值 |
 
 
 
@@ -2331,7 +2333,7 @@ async def handle(desc: str, data: dict) -> None:
 
 | name | type | description |
 | - | - | - |
-| `global_credential` | `Optional[Credential]` | 全局凭据类 |
+| `global_credential` | `Credential \| None` | 全局凭据类 |
 
 
 
@@ -2433,9 +2435,9 @@ async def handle(desc: str, data: dict) -> None:
 
 | name | type | description |
 | - | - | - |
-| `coroutine` | `Coroutine \| Future` | 异步函数 |
+| `coroutine` | `Coroutine[Any, Any, ~T] \| _asyncio.Future \| concurrent.futures._base.Future` | 异步函数 |
 
-**Returns:** `Any`:  该异步函数的返回值
+**Returns:** `~T`:  该异步函数的返回值
 
 
 

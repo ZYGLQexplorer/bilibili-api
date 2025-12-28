@@ -47,7 +47,7 @@ async def get_cid_info(cid: int) -> dict:
         cid (int): CID
 
     Returns:
-        dict: 调用 https://hd.biliplus.com 的 API 返回的结果
+        dict: 调用 https//hd.biliplus.com 的 API 返回的结果
     """
     api = API["info"]["cid_info"]
     params = {"cid": cid}
@@ -210,11 +210,9 @@ class Video:
     ) -> None:
         """
         Args:
-            bvid       (str | None, optional)       : BV 号. bvid 和 aid 必须提供其中之一。
-
-            aid        (int | None, optional)       : AV 号. bvid 和 aid 必须提供其中之一。
-
-            credential (Credential | None, optional): Credential 类. Defaults to None.
+            bvid (None | str, optional): BV 号. bvid 和 aid 必须提供其中之一. Defaults to None.
+            aid (None | int, optional): AV 号. bvid 和 aid 必须提供其中之一. Defaults to None.
+            credential (None | Credential, optional): Credential 类. Defaults to None.
         """
         # ID 检查
         if bvid is not None:
@@ -236,7 +234,7 @@ class Video:
         设置 bvid。
 
         Args:
-            bvid (str):   要设置的 bvid。
+            bvid (str): 要设置的 bvid。
         """
         # 检查 bvid 是否有效
         if not re.search("^BV[a-zA-Z0-9]{10}$", bvid):
@@ -326,7 +324,7 @@ class Video:
         将视频转换为番剧
 
         Returns:
-            Episode: 番剧对象
+            bangumi.Episode: 番剧对象
         """
         from . import bangumi
 
@@ -395,12 +393,11 @@ class Video:
         获取视频标签。
 
         Args:
-            page_index (int | None): 分 P 序号. Defaults to 0.
-
-            cid        (int | None): 分 P 编码. Defaults to None.
+            page_index (int | None, optional): 分 P 序号. Defaults to 0.
+            cid (int | None, optional): 分 P 编码. Defaults to None.
 
         Returns:
-            List[dict]: 调用 API 返回的结果。
+            list[dict]: 调用 API 返回的结果。
         """
         if cid is None:
             if page_index is None:
@@ -441,7 +438,7 @@ class Video:
         获取分 P 信息。
 
         Returns:
-            dict: 调用 API 返回的结果。
+            list[dict]: 调用 API 返回的结果。
         """
         api = API["info"]["pages"]
         params = {"aid": await self.__get_aid(), "bvid": await self.__get_bvid()}
@@ -482,11 +479,9 @@ class Video:
         获取视频快照(视频各个时间段的截图拼图)
 
         Args:
-            cid(int): 分 P CID(可选)
-
-            json_index(bool): json 数组截取时间表 True 为需要，False 不需要
-
-            pvideo(bool): 是否只获取预览
+            cid (int | None, optional): 分 P CID(可选). Defaults to None.
+            json_index (bool, optional): json 数组截取时间表 True 为需要，False 不需要. Defaults to False.
+            pvideo (bool, optional): 是否只获取预览. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果,数据中 Url 没有 http 头
@@ -510,7 +505,7 @@ class Video:
         获取稿件 cid
 
         Args:
-            page_index(int): 分 P
+            page_index (int): 分 P
 
         Returns:
             int: cid
@@ -531,11 +526,9 @@ class Video:
         page_index 和 cid 至少提供其中一个，其中 cid 优先级最高
 
         Args:
-            page_index (int | None, optional) : 分 P 号，从 0 开始。Defaults to None
-
-            cid        (int | None, optional) : 分 P 的 ID。Defaults to None
-
-            html5      (bool, optional)       : 是否选择移动端 HTML5 播放流（仅支持 MP4 格式）此时获得的媒体流访问无需鉴权。
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
+            html5 (bool, optional): 是否选择移动端 HTML5 播放流（仅支持 MP4 格式）此时获得的媒体流访问无需鉴权. Defaults to False.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -674,7 +667,6 @@ class Video:
 
         Args:
             pn (int): 页码
-
             ps (int): 每页项数
 
         Returns:
@@ -699,11 +691,9 @@ class Video:
         cid 和 page_index 至少提供其中一个，其中 cid 优先级最高
 
         Args:
-            cid (Optional, int): 分 P 的 cid。
-
-            page_index (Optional, int): 分 P 号，从 0 开始。
-
-            up_mid (Optional, int): up 主的 mid。
+            cid (int | None, optional): 分 P 的 cid. Defaults to None.
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            up_mid (int | None, optional): up 主的 mid. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -733,9 +723,8 @@ class Video:
         获取弹幕设置、特殊弹幕、弹幕数量、弹幕分段等信息。
 
         Args:
-            page_index (int, optional): 分 P 号，从 0 开始。Defaults to None
-
-            cid        (int, optional): 分 P 的 ID。Defaults to None
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -951,18 +940,14 @@ class Video:
         获取弹幕。
 
         Args:
-            page_index (int, optional): 分 P 号，从 0 开始。Defaults to None
-
-            date       (datetime.Date | None, optional): 指定日期后为获取历史弹幕，精确到年月日。Defaults to None.
-
-            cid        (int | None, optional): 分 P 的 ID。Defaults to None
-
-            from_seg (int, optional): 从第几段开始(0 开始编号，None 为从第一段开始，一段 6 分钟). Defaults to None.
-
-            to_seg (int, optional): 到第几段结束(0 开始编号，None 为到最后一段，包含编号的段，一段 6 分钟). Defaults to None.
+            page_index (int, optional): 分 P 号，从 0 开始. Defaults to 0.
+            date (datetime.date | None, optional): 指定日期后为获取历史弹幕，精确到年月日. Defaults to None.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
+            from_seg (int | None, optional): 从第几段开始(0 开始编号，None 为从第一段开始，一段 6 分钟). Defaults to None.
+            to_seg (int | None, optional): 到第几段结束(0 开始编号，None 为到最后一段，包含编号的段，一段 6 分钟). Defaults to None.
 
         Returns:
-            List[Danmaku]: Danmaku 类的列表。
+            list[Danmaku]: Danmaku 类的列表。
 
         注意：
             - 1. 段数可以通过视频时长计算。6分钟为一段。
@@ -1101,12 +1086,11 @@ class Video:
         获取特殊弹幕
 
         Args:
-            page_index (int, optional)       : 分 P 号. Defaults to 0.
-
-            cid        (int | None, optional): 分 P id. Defaults to None.
+            page_index (int, optional): 分 P 号. Defaults to 0.
+            cid (int | None, optional): 分 P id. Defaults to None.
 
         Returns:
-            List[SpecialDanmaku]: 调用接口解析后的结果
+            list[SpecialDanmaku]: 调用接口解析后的结果
         """
         if cid is None:
             if page_index is None:
@@ -1165,14 +1149,12 @@ class Video:
         获取特定月份存在历史弹幕的日期。
 
         Args:
-            page_index (int | None, optional): 分 P 号，从 0 开始。Defaults to None
-
-            date       (datetime.date | None): 精确到年月. Defaults to None。
-
-            cid        (int | None, optional): 分 P 的 ID。Defaults to None
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            date (datetime.date | None, optional): 精确到年月. Defaults to None.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
 
         Returns:
-            None | List[str]: 调用 API 返回的结果。不存在时为 None。
+            None | list[str]: 调用 API 返回的结果。不存在时为 None。
         """
         if date is None:
             raise ArgsException("请提供 date 参数")
@@ -1201,11 +1183,9 @@ class Video:
         是否已点赞弹幕。
 
         Args:
-            page_index (int | None, optional): 分 P 号，从 0 开始。Defaults to None
-
-            ids        (List[int] | None): 要查询的弹幕 ID 列表。
-
-            cid        (int | None, optional): 分 P 的 ID。Defaults to None
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            ids (list[int] | None, optional): 要查询的弹幕 ID 列表. Defaults to None.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -1237,11 +1217,9 @@ class Video:
         发送弹幕。
 
         Args:
-            page_index (int | None, optional): 分 P 号，从 0 开始。Defaults to None
-
-            danmaku    (Danmaku | None)      : Danmaku 类。
-
-            cid        (int | None, optional): 分 P 的 ID。Defaults to None
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            danmaku (Danmaku | None, optional): Danmaku 类. Defaults to None.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -1287,11 +1265,10 @@ class Video:
         获取所有弹幕的 xml 源文件（非装填）
 
         Args:
-            page_index (int, optional)       : 分 P 序号. Defaults to 0.
+            page_index (int | None, optional): 分 P 序号. Defaults to None.
+            cid (int | None, optional): cid. Defaults to None.
 
-            cid        (int | None, optional): cid. Defaults to None.
-
-        Return:
+        Returns:
             str: xml 文件源
         """
         if cid is None:
@@ -1313,13 +1290,10 @@ class Video:
         点赞弹幕。
 
         Args:
-            page_index (int | None, optional) : 分 P 号，从 0 开始。Defaults to None
-
-            dmid       (int | None)           : 弹幕 ID。
-
-            status     (bool | None, optional): 点赞状态。Defaults to True
-
-            cid        (int | None, optional) : 分 P 的 ID。Defaults to None
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            dmid (int | None, optional): 弹幕 ID. Defaults to None.
+            status (bool | None, optional): 点赞状态. Defaults to True.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -1353,9 +1327,8 @@ class Video:
         获取实时在线人数
 
         Args:
-            page_index (int | None, optional)      : 分 P 号，从 0 开始。Defaults to None
-
-            cid        (int | None, optional)      : 分 P 的 ID。Defaults to None
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to 0.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -1383,13 +1356,10 @@ class Video:
         操作弹幕
 
         Args:
-            page_index (int | None, optional)      : 分 P 号，从 0 开始。Defaults to None
-
-            dmids      (List[int] | None)          : 弹幕 ID 列表。
-
-            cid        (int | None, optional)      : 分 P 的 ID。Defaults to None
-
-            type_      (DanmakuOperatorType | None): 操作类型
+            page_index (int | None, optional): 分 P 号，从 0 开始. Defaults to None.
+            dmids (list[int] | None, optional): 弹幕 ID 列表. Defaults to None.
+            cid (int | None, optional): 分 P 的 ID. Defaults to None.
+            type_ (video.DanmakuOperatorType | None, optional): 操作类型. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -1426,7 +1396,7 @@ class Video:
         点赞视频。
 
         Args:
-            status (bool, optional): 点赞状态。Defaults to True.
+            status (bool, optional): 点赞状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -1443,9 +1413,8 @@ class Video:
         投币。
 
         Args:
-            num  (int, optional) : 硬币数量，为 1 ~ 2 个。Defaults to 1.
-
-            like (bool, optional): 是否同时点赞。Defaults to False.
+            num (int, optional): 硬币数量，为 1 ~ 2 个. Defaults to 1.
+            like (bool, optional): 是否同时点赞. Defaults to False.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -1540,7 +1509,6 @@ class Video:
 
         Args:
             reason (Any): 投诉类型。传入 VideoAppealReasonType 中的项目即可。
-
             detail (str): 详情信息。
 
         Returns:
@@ -1565,9 +1533,8 @@ class Video:
         **如果视频是番剧 `await is_bangumi()`，请转为 `Episode` 类收藏**
 
         Args:
-            add_media_ids (List[int], optional): 要添加到的收藏夹 ID. Defaults to [].
-
-            del_media_ids (List[int], optional): 要移出的收藏夹 ID. Defaults to [].
+            add_media_ids (list[int], optional): 要添加到的收藏夹 ID. Defaults to [].
+            del_media_ids (list[int], optional): 要移出的收藏夹 ID. Defaults to [].
 
         Returns:
             dict: 调用 API 返回结果。
@@ -1597,7 +1564,7 @@ class Video:
         获取字幕信息
 
         Args:
-            cid (int | None): 分 P ID,从视频信息中获取
+            cid (int | None, optional): 分 P ID,从视频信息中获取. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1616,9 +1583,8 @@ class Video:
         获取视频上一次播放的记录，字幕和地区信息。需要分集的 cid, 返回数据中含有json字幕的链接
 
         Args:
-            cid (int | None): 分 P ID,从视频信息中获取
-
-            epid (int | None): 番剧分集 ID,从番剧信息中获取
+            cid (int | None, optional): 分 P ID,从视频信息中获取. Defaults to None.
+            epid (int | None, optional): 番剧分集 ID,从番剧信息中获取. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1674,21 +1640,15 @@ class Video:
         ```
 
         Args:
-            lan        (str)                 : 字幕语言代码，参考 https://s1.hdslb.com/bfs/subtitle/subtitle_lan.json
-
-            data       (dict)                : 字幕数据
-
-            submit     (bool)                : 是否提交，不提交为草稿
-
-            sign       (bool)                : 是否署名
-
+            lan (str): 字幕语言代码，参考 https
+            data (dict): 字幕数据
+            submit (bool): 是否提交，不提交为草稿
+            sign (bool): 是否署名
             page_index (int | None, optional): 分 P 索引. Defaults to None.
-
-            cid        (int | None, optional): 分 P id. Defaults to None.
+            cid (int | None, optional): 分 P id. Defaults to None.
 
         Returns:
             dict: API 调用返回结果
-
         """
         if cid is None:
             if page_index is None:
@@ -1754,11 +1714,10 @@ class Video:
         撤回弹幕
 
         Args:
-            page_index(int | None, optional): 分 P 号
+            page_index (int | None, optional): 分 P 号. Defaults to None.
+            dmid (int, optional): 弹幕 id. Defaults to 0.
+            cid (int | None, optional): 分 P 编码. Defaults to None.
 
-            dmid(int)      : 弹幕 id
-
-            cid(int | None, optional)       : 分 P 编码
         Returns:
             dict: 调用 API 返回的结果
         """
@@ -1783,9 +1742,8 @@ class Video:
         获取高能进度条
 
         Args:
-            page_index(int | None): 分 P 号
-
-            cid(int | None)       : 分 P 编码
+            page_index (int | None, optional): 分 P 号. Defaults to None.
+            cid (int | None, optional): 分 P 编码. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1840,10 +1798,11 @@ class Video:
     ) -> dict:
         """
         上报观看历史
+
         Args:
-            progress        (int):          观看进度 (单位 秒)
-            page_index      (int | None):   分 P 序号
-            cid             (int | None):   分 P ID,从视频信息中获取
+            progress (int, optional): 观看进度 (单位 秒). Defaults to 0.
+            page_index (int | None, optional): 分 P 序号. Defaults to 0.
+            cid (int | None, optional): 分 P ID,从视频信息中获取. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1873,8 +1832,9 @@ class Video:
         上报开始观看
         该接口亦被用于计算播放量, 播放量更新不是实时的
         该接口使用似乎存在 200 播放限制, 请勿滥用!
+
         Args:
-            page_index      (int | None):   分 P 序号
+            page_index (int | None, optional): 分 P 序号. Defaults to 0.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -1970,15 +1930,11 @@ class VideoOnlineMonitor(AsyncEvent):
     ) -> None:
         """
         Args:
-            bvid       (str | None, optional)       : BVID. Defaults to None.
-
-            aid        (int | None, optional)       : AID. Defaults to None.
-
-            page_index (int, optional)              : 分 P 序号. Defaults to 0.
-
+            bvid (str | None, optional): BVID. Defaults to None.
+            aid (int | None, optional): AID. Defaults to None.
+            page_index (int, optional): 分 P 序号. Defaults to 0.
             credential (Credential | None, optional): Credential 类. Defaults to None.
-
-            debug      (bool, optional)             : 调试模式，将输出更详细信息. Defaults to False.
+            debug (bool, optional): 调试模式，将输出更详细信息. Defaults to False.
         """
         super().__init__()
         self.credential: Credential = credential if credential else Credential()
@@ -2405,7 +2361,7 @@ class VideoDownloadURLDataDetecter:
         解析并返回所有数据
 
         Returns:
-            List[VideoStreamDownloadURL | AudioStreamDownloadURL | FLVStreamDownloadURL | HTML5MP4DownloadURL | EpisodeTryMP4DownloadURL]: 所有的视频/音频流
+            list[video.XXXStreamDownloadURL]: 所有的视频/音频流
         """
         return self.detect()
 
@@ -2440,30 +2396,20 @@ class VideoDownloadURLDataDetecter:
         解析数据
 
         Args:
-            video_max_quality       (VideoQuality, optional)      : 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._8K.
-
-            audio_max_quality       (AudioQuality, optional)      : 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._192K.
-
-            video_min_quality       (VideoQuality, optional)      : 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._360P.
-
-            audio_min_quality       (AudioQuality, optional)      : 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._64K.
-
-            video_accepted_qualities(List[VideoQuality], optional): 设置允许的所有视频流清晰度. Defaults to ALL.
-
-            audio_accepted_qualities(List[AudioQuality], optional): 设置允许的所有音频清晰度. Defaults to ALL.
-
-            codecs                  (List[VideoCodecs], optional) : 设置所有允许提取出来的视频编码. 此项不会忽略 HDR/杜比. Defaults to ALL codecs.
-
-            no_dolby_video          (bool, optional)              : 是否禁止提取杜比视界视频流. Defaults to False.
-
-            no_dolby_audio          (bool, optional)              : 是否禁止提取杜比全景声音频流. Defaults to False.
-
-            no_hdr                  (bool, optional)              : 是否禁止提取 HDR 视频流. Defaults to False.
-
-            no_hires                (bool, optional)              : 是否禁止提取 Hi-Res 音频流. Defaults to False.
+            video_max_quality (VideoQuality, optional): 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._8K: 127>.
+            audio_max_quality (AudioQuality, optional): 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._192K: 30280>.
+            video_min_quality (VideoQuality, optional): 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._360P: 16>.
+            audio_min_quality (AudioQuality, optional): 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._64K: 30216>.
+            video_accepted_qualities (list[video.VideoQuality], optional): 设置允许的所有视频流清晰度. Defaults to ALL.
+            audio_accepted_qualities (list[video.AudioQuality], optional): 设置允许的所有音频清晰度. Defaults to ALL.
+            codecs (list[video.VideoCodecs], optional): 设置所有允许提取出来的视频编码. 此项不会忽略 HDR/杜比. Defaults to ALL.
+            no_dolby_video (bool, optional): 是否禁止提取杜比视界视频流. Defaults to False.
+            no_dolby_audio (bool, optional): 是否禁止提取杜比全景声音频流. Defaults to False.
+            no_hdr (bool, optional): 是否禁止提取 HDR 视频流. Defaults to False.
+            no_hires (bool, optional): 是否禁止提取 Hi-Res 音频流. Defaults to False.
 
         Returns:
-            List[VideoStreamDownloadURL | AudioStreamDownloadURL | FLVStreamDownloadURL | HTML5MP4DownloadURL | EpisodeTryMP4DownloadURL]: 提取出来的视频/音频流
+            list[video.XXXStreamDownloadURL]: 提取出来的视频/音频流
 
         **参数仅能在音视频流分离的情况下产生作用，flv / mp4 流下以下参数均没有作用**
         """
@@ -2591,30 +2537,20 @@ class VideoDownloadURLDataDetecter:
         提取出分辨率、音质等信息最好的音视频流。
 
         Args:
-            video_max_quality       (VideoQuality)                : 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._8K.
-
-            audio_max_quality       (AudioQuality)                : 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._192K.
-
-            video_min_quality       (VideoQuality, optional)      : 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._360P.
-
-            audio_min_quality       (AudioQuality, optional)      : 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._64K.
-
-            video_accepted_qualities(List[VideoQuality], optional): 设置允许的所有视频流清晰度. Defaults to ALL.
-
-            audio_accepted_qualities(List[AudioQuality], optional): 设置允许的所有音频清晰度. Defaults to ALL.
-
-            codecs                  (List[VideoCodecs])           : 设置所有允许提取出来的视频编码. 在数组中越靠前的编码选择优先级越高. 此项不会忽略 HDR/杜比. Defaults to [VideoCodecs.AV1, VideoCodecs.AVC, VideoCodecs.HEV].
-
-            no_dolby_video          (bool)                        : 是否禁止提取杜比视界视频流. Defaults to False.
-
-            no_dolby_audio          (bool)                        : 是否禁止提取杜比全景声音频流. Defaults to False.
-
-            no_hdr                  (bool)                        : 是否禁止提取 HDR 视频流. Defaults to False.
-
-            no_hires                (bool)                        : 是否禁止提取 Hi-Res 音频流. Defaults to False.
+            video_max_quality (VideoQuality, optional): 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._8K: 127>.
+            audio_max_quality (AudioQuality, optional): 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._192K: 30280>.
+            video_min_quality (VideoQuality, optional): 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._360P: 16>.
+            audio_min_quality (AudioQuality, optional): 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._64K: 30216>.
+            video_accepted_qualities (list[video.VideoQuality], optional): 设置允许的所有视频流清晰度. Defaults to [<VideoQuality._360P: 16>, <VideoQuality._480P: 32>, <VideoQuality._720P: 64>, <VideoQuality._1080P: 80>, <VideoQuality.AI_REPAIR: 100>, <VideoQuality._1080P_PLUS: 112>, <VideoQuality._1080P_60: 116>, <VideoQuality._4K: 120>, <VideoQuality.HDR: 125>, <VideoQuality.DOLBY: 126>, <VideoQuality._8K: 127>].
+            audio_accepted_qualities (list[video.AudioQuality], optional): 设置允许的所有音频清晰度. Defaults to [<AudioQuality._64K: 30216>, <AudioQuality._132K: 30232>, <AudioQuality.DOLBY: 30255>, <AudioQuality.HI_RES: 30251>, <AudioQuality._192K: 30280>].
+            codecs (list[video.VideoCodecs], optional): 设置所有允许提取出来的视频编码. 在数组中越靠前的编码选择优先级越高. 此项不会忽略 HDR/杜比. Defaults to [<VideoCodecs.AV1: 'av01'>, <VideoCodecs.AVC: 'avc'>, <VideoCodecs.HEV: 'hev'>].
+            no_dolby_video (bool, optional): 是否禁止提取杜比视界视频流. Defaults to False.
+            no_dolby_audio (bool, optional): 是否禁止提取杜比全景声音频流. Defaults to False.
+            no_hdr (bool, optional): 是否禁止提取 HDR 视频流. Defaults to False.
+            no_hires (bool, optional): 是否禁止提取 Hi-Res 音频流. Defaults to False.
 
         Returns:
-            List[VideoStreamDownloadURL | AudioStreamDownloadURL | FLVStreamDownloadURL | HTML5MP4DownloadURL | None]: FLV 视频流 / HTML5 MP4 视频流 / 番剧或课程试看 MP4 视频流返回 `[FLVStreamDownloadURL | HTML5MP4StreamDownloadURL | EpisodeTryMP4DownloadURL]`, 否则为 `[VideoStreamDownloadURL, AudioStreamDownloadURL]`, 如果未匹配上任何合适的流则对应的位置位 `None`
+            list[video.XXXStreamDownloadURL | None]: FLV 视频流 / HTML5 MP4 视频流 / 番剧或课程试看 MP4 视频流返回 `[FLVStreamDownloadURL | HTML5MP4StreamDownloadURL | EpisodeTryMP4DownloadURL]`, 否则为 `[VideoStreamDownloadURL, AudioStreamDownloadURL]`, 如果未匹配上任何合适的流则对应的位置位 `None`
 
         **以上参数仅能在音视频流分离的情况下产生作用，flv / mp4 试看流 / html5 mp4 流下以下参数均没有作用**
         """

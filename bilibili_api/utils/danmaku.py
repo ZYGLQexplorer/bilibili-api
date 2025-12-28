@@ -83,35 +83,21 @@ class Danmaku:
         大会员专属颜色背景填充：http://i0.hdslb.com/bfs/dm/ba8e32ae03a0a3f70f4e51975a965a9ddce39d50.png
 
         Args:
-            text      (str)                             : 弹幕文本。
-
-            dm_time   (float, optional)                 : 弹幕在视频中的位置，单位为秒。Defaults to 0.0.
-
-            send_time (float, optional)                 : 弹幕发送的时间。Defaults to time.time().
-
-            crc32_id  (str, optional)                   : 弹幕发送者 UID 经 CRC32 算法取摘要后的值。Defaults to "".
-
-            color     (str, optional)                   : 弹幕十六进制颜色。Defaults to "ffffff" (如果为大会员专属的颜色则为"special").
-
-            weight    (int, optional)                   : 弹幕在弹幕列表显示的权重。Defaults to -1.
-
-            id_       (int, optional)                   : 弹幕 ID。Defaults to -1.
-
-            id_str    (str, optional)                   : 弹幕字符串 ID。Defaults to "".
-
-            action    (str, optional)                   : 暂不清楚。Defaults to "".
-
-            mode      (Union[DmMode, int], optional)    : 弹幕模式。Defaults to Mode.FLY.
-
-            font_size (Union[DmFontSize, int], optional): 弹幕字体大小。Defaults to FontSize.NORMAL.
-
-            is_sub    (bool, optional)                  : 是否为字幕弹幕。Defaults to False.
-
-            pool      (int, optional)                   : 池。Defaults to 0.
-
-            attr      (int, optional)                   : 暂不清楚。 Defaults to -1.
-
-            uid       (int, optional)                   : 弹幕发送者 UID。Defaults to -1.
+            text (str): 弹幕文本。
+            dm_time (float, optional): 弹幕在视频中的位置，单位为秒. Defaults to 0.0.
+            send_time (float, optional): 弹幕发送的时间. Defaults to 1766892400.431226.
+            crc32_id (str, optional): 弹幕发送者 UID 经 CRC32 算法取摘要后的值. Defaults to ''.
+            color (str, optional): 弹幕十六进制颜色. Defaults to 'ffffff'.
+            weight (int, optional): 弹幕在弹幕列表显示的权重. Defaults to -1.
+            id_ (int, optional): 弹幕 ID. Defaults to -1.
+            id_str (str, optional): 弹幕字符串 ID. Defaults to ''.
+            action (str, optional): 暂不清楚. Defaults to ''.
+            mode (DmMode | int, optional): 弹幕模式. Defaults to <DmMode.FLY: 1>.
+            font_size (DmFontSize | int, optional): 弹幕字体大小. Defaults to <DmFontSize.NORMAL: 25>.
+            is_sub (bool, optional): 是否为字幕弹幕. Defaults to False.
+            pool (int, optional): 池. Defaults to 0.
+            attr (int, optional): 暂不清楚. Defaults to -1.
+            uid (int, optional): 弹幕发送者 UID. Defaults to -1.
         """
         self.text = text
         self.dm_time = dm_time
@@ -182,15 +168,11 @@ class SpecialDanmaku:
     ) -> None:
         """
         Args:
-            content (str)               : 弹幕内容
-
-            id_     (int)               : 弹幕 id. Defaults to -1.
-
-            id_str  (str)               : 弹幕 id (string 类型). Defaults to "".
-
-            mode    (Union[DmMode, int]): 弹幕类型. Defaults to DmMode.SPECIAL.
-
-            pool    (int)               : 弹幕池. Defaults to 2.
+            content (str): 弹幕内容
+            id_ (int, optional): 弹幕 id. Defaults to -1.
+            id_str (str, optional): 弹幕 id (string 类型). Defaults to ''.
+            mode (DmMode | int, optional): 弹幕类型. Defaults to <DmMode.SPECIAL: 9>.
+            pool (int, optional): 弹幕池. Defaults to 2.
         """
         self.content = content
         self.id_ = id_

@@ -271,9 +271,8 @@ async def get_rank(
     获取视频排行榜
 
     Args:
-        type_ (RankType): 排行榜类型. Defaults to RankType.All
-
-        day (RankDayType): 排行榜时间. Defaults to RankDayType.THREE_DAY. 仅对 api_type 为 RankAPIType.PGC 有效
+        type_ (RankType, optional): 排行榜类型. All. Defaults to <RankType.All: frozendict.frozendict({'api_type': 'x', 'rid': 0, 'type': 'all'})>.
+        day (RankDayType, optional): 排行榜时间. PGC 有效. Defaults to <RankDayType.THREE_DAY: 3>.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -311,7 +310,7 @@ async def get_music_rank_weekly_detail(week: int = 1) -> dict:
     获取全站音乐榜一周的详细信息(不包括具体的音频列表)
 
     Args:
-        week(int): 第几周. Defaults to 1.
+        week (int, optional): 第几周. Defaults to 1.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -326,7 +325,7 @@ async def get_music_rank_weekly_musics(week: int = 1) -> dict:
     获取全站音乐榜一周的音频列表(返回的音乐的 id 对应了 music.Music 类创建实例传入的 id)
 
     Args:
-        week(int): 第几周. Defaults to 1.
+        week (int, optional): 第几周. Defaults to 1.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -341,7 +340,7 @@ async def get_vip_rank(type_: VIPRankType = VIPRankType.VIP) -> dict:
     获取大会员中心的排行榜
 
     Args:
-        type_ (VIPRankType): 排行榜类型. Defaults to VIPRankType.VIP
+        type_ (VIPRankType, optional): 排行榜类型. VIP. Defaults to <VIPRankType.VIP: 279>.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -358,8 +357,8 @@ async def get_manga_rank(
     获取漫画专属排行榜
 
     Args:
-        type_ (MangaRankType): 排行榜类型
-        credential (Credential | None): 凭据类
+        type_ (MangeRankType, optional): 排行榜类型. Defaults to <MangeRankType.NEW: 7>.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -407,11 +406,9 @@ async def get_live_energy_user_rank(
     获取直播超能用户榜
 
     Args:
-        date (LiveEnergyRankType): 月份. Defaults to LiveEnergyRankType.MONTH
-
-        pn (int): 页码. Defaults to 1
-
-        ps (int): 每页数量. Defaults to 20
+        date (LiveEnergyRankType, optional): 月份. MONTH. Defaults to <LiveEnergyRankType.MONTH: 'month'>.
+        pn (int, optional): 页码. Defaults to 1.
+        ps (int, optional): 每页数量. Defaults to 20.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -428,11 +425,9 @@ async def get_live_rank(
     获取直播通用榜单
 
     Args:
-        _type (LiveRankType): 榜单类型. Defaults to LiveRankType.VALUE
-
-        pn (int): 页码. Defaults to 1
-
-        ps (int): 每页数量. Defaults to 20
+        _type (LiveRankType, optional): 榜单类型. VALUE. Defaults to <LiveRankType.SAIL_BOAT_VALUE: 'sail_boat_value'>.
+        pn (int, optional): 页码. Defaults to 1.
+        ps (int, optional): 每页数量. Defaults to 20.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -453,9 +448,8 @@ async def get_live_user_medal_rank(pn: int = 1, ps: int = 20) -> dict:
     获取直播用户勋章榜
 
     Args:
-        pn (int): 页码. Defaults to 1
-
-        ps (int): 每页数量. Defaults to 20
+        pn (int, optional): 页码. Defaults to 1.
+        ps (int, optional): 每页数量. Defaults to 20.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -472,9 +466,8 @@ async def subscribe_music_rank(
     设置关注全站音乐榜
 
     Args:
-        status     (bool)      : 关注状态. Defaults to True.
-
-        credential (Credential | None): 凭据类. Defaults to None.
+        status (bool, optional): 关注状态. Defaults to True.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果

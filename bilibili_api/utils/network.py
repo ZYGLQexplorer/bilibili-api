@@ -93,7 +93,7 @@ class RequestLog(AsyncEvent):
         获取日志输出支持的事件类型
 
         Returns:
-            List[str]: 日志输出支持的事件类型
+            list[str]: 日志输出支持的事件类型
         """
         return self.__on_events
 
@@ -102,7 +102,7 @@ class RequestLog(AsyncEvent):
         设置日志输出支持的事件类型
 
         Args:
-            events (List[str]): 日志输出支持的事件类型
+            events (list[str]): 日志输出支持的事件类型
         """
         self.__on_events = events
 
@@ -111,7 +111,7 @@ class RequestLog(AsyncEvent):
         获取日志输出排除的事件类型
 
         Returns:
-            List[str]: 日志输出排除的事件类型
+            list[str]: 日志输出排除的事件类型
         """
         return self.__ignore_events
 
@@ -120,7 +120,7 @@ class RequestLog(AsyncEvent):
         设置日志输出排除的事件类型
 
         Args:
-            events (List[str]): 日志输出排除的事件类型
+            events (list[str]): 日志输出排除的事件类型
         """
         self.__ignore_events = events
 
@@ -317,8 +317,8 @@ class RequestSettings:
         默认设置名称：`proxy` `timeout` `verify_ssl` `trust_env`
 
         Args:
-            name  (str): 设置名称
-            value (str): 设置的值
+            name (str): 设置名称
+            value (Any): 设置的值
         """
         if value == self.__settings.get(name):
             return
@@ -537,7 +537,7 @@ class RequestSettings:
         获取全局凭据类
 
         Returns:
-            Optional[Credential]: 全局凭据类
+            Credential | None: 全局凭据类
         """
         return self.__global_credential
 
@@ -546,7 +546,7 @@ class RequestSettings:
         设置全局凭据类
 
         Args:
-            global_credential (Optional[Credential]): 全局凭据类
+            global_credential (Credential | None): 全局凭据类
         """
         self.__global_credential = global_credential
 
@@ -602,7 +602,7 @@ class BiliAPIResponse:
         解析 json
 
         Returns:
-            object: 解析后的 json
+            dict[str, Any]: 解析后的 json
         """
         return json.loads(self.utf8_text())
 
@@ -1339,9 +1339,9 @@ def register_client(name: str, cls: type, settings: dict = {}) -> None:
     注册请求客户端并切换，可用于用户自定义请求客户端。
 
     Args:
-        name     (str): 请求客户端类型名称，用户自定义命名。
-        cls      (type): 基于 BiliAPIClient 重写后的请求客户端类。
-        settings (dict): 请求客户端在基础设置外的其他设置，键为设置名称，值为设置默认值。Defaults to {}.
+        name (str): 请求客户端类型名称，用户自定义命名。
+        cls (type): 基于 BiliAPIClient 重写后的请求客户端类。
+        settings (dict, optional): 请求客户端在基础设置外的其他设置，键为设置名称，值为设置默认值. Defaults to {}.
     """
     global sessions, session_pool, lazy_settings
     raise_for_statement(
@@ -1390,7 +1390,7 @@ def get_selected_client() -> tuple[str, type[BiliAPIClient]]:
     获取用户选择的请求客户端名称和对应的类
 
     Returns:
-        Tuple[str, Type[BiliAPIClient]]: 第 0 项为客户端名称，第 1 项为对应的类
+        tuple[str, type[BiliAPIClient]]: 第 0 项为客户端名称，第 1 项为对应的类
     """
     if selected_client == "":
         raise ArgsException(
@@ -1404,7 +1404,7 @@ def get_available_settings() -> list[str]:
     获取当前支持的设置项
 
     Returns:
-        List[str]: 支持的设置项名称
+        list[str]: 支持的设置项名称
     """
     if selected_client == "":
         raise ArgsException(
@@ -1418,7 +1418,7 @@ def get_registered_clients() -> dict[str, type[BiliAPIClient]]:
     获取所有注册过的 BiliAPIClient
 
     Returns:
-        Dict[str, Type[BiliAPIClient]]: 注册过的 BiliAPIClient
+        dict[str, type[BiliAPIClient]]: 注册过的 BiliAPIClient
     """
     return sessions
 
@@ -1428,7 +1428,7 @@ def get_registered_available_settings() -> dict[str, list[str]]:
     获取所有注册过的 BiliAPIClient 所支持的设置项
 
     Returns:
-        Dict[str, List[str]]: 所有注册过的 BiliAPIClient 所支持的设置项
+        dict[str, list[str]]: 所有注册过的 BiliAPIClient 所支持的设置项
     """
     return client_settings
 
@@ -1524,14 +1524,14 @@ def register_pre_filter(
     所有当前函数执行的过滤器为 `ins.data[cnt]["pre_filters"]`。
 
     Args:
-        name          (str)                : 名称，若重复则为修改对应过滤器。
-        func          (Callable, optional) : 执行的函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`
-        async_func    (Callable[..., Coroutine], optional): 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`
-        clients       (List[str], optional): 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。
-        on            (List[str], optional): 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。
-        trigger       (Callable, optional) : 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
-        async_trigger (Callable[..., Coroutine], optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
-        priority      (int, optional)      : 优先级，数字越小越优先执行。Defaults to 0.
+        name (str): 名称，若重复则为修改对应过滤器。
+        func (Callable | None, optional): 执行的函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`. Defaults to None.
+        async_func (Callable[..., Coroutine] | None, optional): 执行的异步函数，提供 5 个参数 `(cnt, BiliAPIClient, client, on, 传入参数字典)` `(cnt, ins, client, on, params)`. Defaults to None.
+        clients (list[str] | None, optional): 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用. Defaults to None.
+        on (list[str] | None, optional): 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用. Defaults to None.
+        trigger (Callable | None, optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None.
+        async_trigger (Callable[..., Coroutine] | None, optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None.
+        priority (int, optional): 优先级，数字越小越优先执行. Defaults to 0.
     """
     global __registered_pre
     raise_for_statement(
@@ -1578,14 +1578,14 @@ def register_post_filter(
     所有当前函数执行的过滤器为 `ins.data[cnt]["post_filters"]`。
 
     Args:
-        name          (str)                : 名称，若重复则为修改对应过滤器。
-        func          (Callable, optional) : 执行的函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`
-        async_func    (Callable[..., Coroutine], optional): 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`
-        clients       (List[str], optional): 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用。
-        on            (List[str], optional): 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用。
-        trigger       (Callable, optional) : 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
-        async_trigger (Callable[..., Coroutine], optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器。
-        priority      (int, optional)      : 优先级，数字越小越优先执行。Defaults to 0.
+        name (str): 名称，若重复则为修改对应过滤器。
+        func (Callable | None, optional): 执行的函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`. Defaults to None.
+        async_func (Callable[..., Coroutine] | None, optional): 执行的异步函数，提供 6 个参数 `(cnt, BiliAPIClient, client, on, 返回值, 传入参数字典)` `(cnt, ins, client, on, ret, params)`. Defaults to None.
+        clients (list[str] | None, optional): 当请求客户端设置值在此列表中将触发过滤器。与 `on` 配合使用. Defaults to None.
+        on (list[str] | None, optional): 当客户端执行函数名称在此列表中将触发过滤器。与 `client` 配合使用. Defaults to None.
+        trigger (Callable | None, optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None.
+        async_trigger (Callable[..., Coroutine] | None, optional): 接受两个参数 `(请求客户端设置值, 执行函数名称)`。若返回 `True` 则触发过滤器. Defaults to None.
+        priority (int, optional): 优先级，数字越小越优先执行. Defaults to 0.
     """
     global __registered_post
     raise_for_statement(
@@ -1614,10 +1614,10 @@ def get_all_registered_pre_filters(in_priority: bool = True) -> list[dict]:
     获取所有已注册的前置过滤器
 
     Args:
-        in_priority (bool): 是否排序. Defaults to True.
+        in_priority (bool, optional): 是否排序. Defaults to True.
 
     Returns:
-        List[dict]: 已注册的前置过滤器
+        list[dict]: 已注册的前置过滤器
     """
     if in_priority:
         return sorted(__registered_pre, key=lambda pre: pre["priority"])
@@ -1629,10 +1629,10 @@ def get_all_registered_post_filters(in_priority: bool = True) -> list[dict]:
     获取所有已注册的后置过滤器
 
     Args:
-        in_priority (bool): 是否排序. Defaults to True.
+        in_priority (bool, optional): 是否排序. Defaults to True.
 
     Returns:
-        List[dict]: 已注册的后置过滤器
+        list[dict]: 已注册的后置过滤器
     """
     if in_priority:
         return sorted(__registered_post, key=lambda post: post["priority"])
@@ -1648,12 +1648,12 @@ def get_registered_pre_filters(
     通过请求客户端及其函数筛选已注册的前置过滤器
 
     Args:
-        client      (str) : 请求客户端.
-        func        (str) : 执行函数名.
-        in_priority (bool): 是否排序. Defaults to True.
+        client (str): 请求客户端.
+        func (str): 执行函数名.
+        in_priority (bool, optional): 是否排序. Defaults to True.
 
     Returns:
-        List[dict]: 已注册的前置过滤器
+        list[dict]: 已注册的前置过滤器
     """
     pres = get_all_registered_pre_filters(in_priority=in_priority)
     ret = []
@@ -1678,12 +1678,12 @@ def get_registered_post_filters(
     通过请求客户端及其函数筛选已注册的后置过滤器
 
     Args:
-        client      (str) : 请求客户端.
-        func        (str) : 执行函数名.
-        in_priority (bool): 是否排序. Defaults to True.
+        client (str): 请求客户端.
+        func (str): 执行函数名.
+        in_priority (bool, optional): 是否排序. Defaults to True.
 
     Returns:
-        List[dict]: 已注册的后置过滤器
+        list[dict]: 已注册的后置过滤器
     """
     posts = get_all_registered_post_filters(in_priority=in_priority)
     ret = []
@@ -1895,23 +1895,15 @@ class Credential:
         各字段获取方式查看：https://nemo2011.github.io/bilibili-api/#/get-credential.md
 
         Args:
-            sessdata   (str | None, optional)      : 浏览器 Cookies 中的 SESSDATA 字段值. Defaults to None.
-
-            bili_jct   (str | None, optional)      : 浏览器 Cookies 中的 bili_jct 字段值. Defaults to None.
-
-            buvid3     (str | None, optional)      : 浏览器 Cookies 中的 buvid3 字段值. Defaults to None.
-
-            buvid4     (str | None, optional)      : 浏览器 Cookies 中的 buvid4 字段值. Defaults to None.
-
-            dedeuserid (str | None, optional)      : 浏览器 Cookies 中的 DedeUserID 字段值. Defaults to None.
-
+            sessdata (str | None, optional): 浏览器 Cookies 中的 SESSDATA 字段值. Defaults to None.
+            bili_jct (str | None, optional): 浏览器 Cookies 中的 bili_jct 字段值. Defaults to None.
+            buvid3 (str | None, optional): 浏览器 Cookies 中的 buvid3 字段值. Defaults to None.
+            buvid4 (str | None, optional): 浏览器 Cookies 中的 buvid4 字段值. Defaults to None.
+            dedeuserid (str | None, optional): 浏览器 Cookies 中的 DedeUserID 字段值. Defaults to None.
             dedeuserid_ckmd5 (str | None, optional): 浏览器 Cookies 中的 DedeUserID__ckMd5 字段值. Defaults to None.
-
-            sid (str | None, optional)             : 浏览器 Cookies 中的 sid 字段值. Defaults to None.
-
-            ac_time_value (str | None, optional)   : 浏览器 localStorage 中的 ac_time_value 字段值. Defaults to None.
-
-            kwargs (Any, optional): 其他用户可自行添加的 cookies。通过 **kwargs 传入。
+            sid (str | None, optional): 浏览器 Cookies 中的 sid 字段值. Defaults to None.
+            ac_time_value (str | None, optional): 浏览器 localStorage 中的 ac_time_value 字段值. Defaults to None.
+            kwargs (Any): 其他用户可自行添加的 cookies。通过 **kwargs 传入。
         """
         if (buvid3 or buvid4) and not (buvid3 and buvid4):
             raise ValueError("Buvid3 and buvid4 should be provided at the same time.")
@@ -1959,7 +1951,7 @@ class Credential:
         获取请求 Cookies 字典
 
         Returns:
-            dict: 请求 Cookies 字典
+            dict[str, str]: 请求 Cookies 字典
         """
         if self.__blank:
             if request_settings.get_enable_auto_buvid():
@@ -2372,7 +2364,7 @@ def get_bili_headers(fpgen_fp: bool = True) -> dict:
     部分请求头取自 fpgen 生成的浏览器指纹信息。
 
     Args:
-        fpgen_fp (bool): 是否使用 fpgen 生成的浏览器指纹信息。Defaults to True.
+        fpgen_fp (bool, optional): 是否使用 fpgen 生成的浏览器指纹信息. Defaults to True.
 
     Returns:
         dict: 请求头
@@ -3089,10 +3081,10 @@ async def get_buvid(credential: Credential | None = None) -> tuple[str, str, str
     获取 buvid3 和 buvid4，若提供凭据类将自动在 credential 中设置相关字段
 
     Args:
-        credential (Credential, optional): 凭据. Defaults to None.
+        credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:
-        Tuple[str, str, str]: 第 0 项为 buvid3，第 1 项为 buvid4，第 2 项为 buvid_fp。
+        tuple[str, str, str]: 第 0 项为 buvid3，第 1 项为 buvid4，第 2 项为 buvid_fp。
     """
     global _credential
     if (
@@ -3154,10 +3146,10 @@ async def get_bili_ticket(
     获取 bili_ticket，若提供凭据类将自动在 credential 中设置相关字段
 
     Args:
-        credential (Credential, optional): 凭据. Defaults to None.
+        credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:
-        Tuple[str, str]: bili_ticket, bili_ticket_expires
+        tuple[str, str] | None: bili_ticket, bili_ticket_expires
     """
     global _credential
     if (
@@ -3514,9 +3506,9 @@ async def bili_simple_download(
     用途举例：下载 video.get_download_url 返回结果中的链接
 
     Args:
-        url   (str): 链接
-        out   (str): 输出地址
-        intro (str): 下载简述
+        url (str): 链接
+        out (str): 输出地址
+        intro (str, optional): 下载简述. Defaults to 'bili-simple-download'.
     """
     client = get_client()
     dwn_id = await client.download_create(url=url, headers=get_bili_headers())

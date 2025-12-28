@@ -169,7 +169,7 @@ sale_end (str): 开售结束时间
 | - | - | - |
 | `credential` | `Credential` | 登录凭证 |
 
-**Returns:** `list[BuyerInfo]`:  BuyerInfo对象列表
+**Returns:** `list[show.BuyerInfo]`:  BuyerInfo对象列表
 
 
 
@@ -185,7 +185,7 @@ sale_end (str): 开售结束时间
 | - | - | - |
 | `project_id` | `int` | 项目id |
 
-**Returns:** `list[Session]`:  存放场次对象的list
+**Returns:** `list[show.Session]`:  存放场次对象的list
 
 
 

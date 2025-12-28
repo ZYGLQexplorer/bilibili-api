@@ -45,7 +45,7 @@ from bilibili_api import vote
 | name | type | description |
 | - | - | - |
 | `vote_id` | `int` | vote_id, 获取：https |
-| `credential` | `Credential` | 凭据类，非必要. |
+| `credential` | `Credential \| None, optional` | 凭据类，非必要. Defaults to None. |
 
 
 ### async def get_info()
@@ -88,14 +88,12 @@ from bilibili_api import vote
 
 | name | type | description |
 | - | - | - |
-| `vote_id` | `int` | vote_id |
 | `title` | `str` | 投票标题 |
 | `_type` | `VoteType` | 投票类型 |
 | `choice_cnt` | `int` | 最多几项 |
 | `duration` | `int` | 投票持续秒数 常用 |
-| `choices` | `VoteChoices` | 投票选项 |
-| `credential` | `Credential` | Credential 枚举类 |
-| `desc` | `Optional[str], optional` | 投票描述. Defaults to None. |
+| `choices` | `vote.VoteChoices` | 投票选项 |
+| `desc` | `str \| None, optional` | 投票描述. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -125,7 +123,7 @@ from bilibili_api import vote
 | name | type | description |
 | - | - | - |
 | `desc` | `str` | 选项描述 |
-| `image` | `str, Picture, optional` | 选项的图片链接，用于图片投票。支持 Picture 类. Defaults to None. |
+| `image` | `str \| Picture \| None, optional` | 选项的图片链接，用于图片投票。支持 Picture 类. Defaults to None. |
 
 **Returns:** `VoteChoices`:  `self`
 
@@ -184,11 +182,11 @@ from bilibili_api import vote
 | `_type` | `VoteType` | 投票类型 |
 | `choice_cnt` | `int` | 最多几项 |
 | `duration` | `int` | 投票持续秒数 常用 |
-| `choices` | `VoteChoices` | 投票选项 |
+| `choices` | `vote.VoteChoices` | 投票选项 |
 | `credential` | `Credential` | Credential |
-| `desc` | `Optional[str], optional` | 投票描述. Defaults to None. |
+| `desc` | `str \| None, optional` | 投票描述. Defaults to None. |
 
-**Returns:** `Vote`:  Vote 类
+**Returns:** `vote.Vote`:  Vote 类
 
 
 

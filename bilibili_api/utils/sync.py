@@ -29,10 +29,10 @@ def sync(
     同步执行异步函数，使用可参考 [同步执行异步代码](https://nemo2011.github.io/bilibili-api/#/sync-executor)
 
     Args:
-        coroutine (Coroutine | Future): 异步函数
+        coroutine (Coroutine[Any, Any, ~T] | _asyncio.Future | concurrent.futures._base.Future): 异步函数
 
     Returns:
-        Any: 该异步函数的返回值
+        ~T: 该异步函数的返回值
     """
     try:
         asyncio.get_running_loop()

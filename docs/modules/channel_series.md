@@ -59,10 +59,10 @@ from bilibili_api import channel_series
 
 | name | type | description |
 | - | - | - |
-| `uid` | `int` | 用户 uid. Defaults to -1. |
-| `type_` | `ChannelSeriesType]` | 合集与列表类型. Defaults to ChannelSeriesType.SERIES. |
-| `id_` | `int` | season_id 或 series_id. Defaults to -1. |
-| `credential` | `Credential \| None` | 凭证. Defaults to None. |
+| `uid` | `int, optional` | 用户 uid. Defaults to -1. |
+| `type_` | `ChannelSeriesType, optional` | 合集与列表类型. Defaults to <ChannelSeriesType.SERIES |
+| `id_` | `int, optional` | season_id 或 series_id. Defaults to -1. |
+| `credential` | `Credential \| None, optional` | 凭证. Defaults to None. |
 
 
 ### def get_id()
@@ -113,11 +113,12 @@ from bilibili_api import channel_series
 
 获取合集视频
 
+
 | name | type | description |
 | - | - | - |
-| `sort` | `ChannelOrder` | 排序方式 |
-| `pn` | `int` | 页数. Defaults to 1. |
-| `ps` | `int` | 每一页显示的视频数量. Defaults to 100. |
+| `sort` | `ChannelOrder, optional` | 排序方式. Defaults to <ChannelOrder.DEFAULT |
+| `pn` | `int, optional` | 页数. Defaults to 1. |
+| `ps` | `int, optional` | 每一页显示的视频数量. Defaults to 100. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -168,10 +169,10 @@ from bilibili_api import channel_series
 | name | type | description |
 | - | - | - |
 | `name` | `str` | 列表名称。 |
-| `aids` | `List[int]` | 要加入列表的视频的 aid 列表。 |
-| `keywords` | `List[str]` | 列表的关键词。 |
-| `description` | `str` | 列表的描述。 |
-| `credential` | `Credential \| None` | 凭据类。 |
+| `aids` | `List[int], optional` | 要加入列表的视频的 aid 列表. Defaults to []. |
+| `keywords` | `List[str], optional` | 列表的关键词. Defaults to []. |
+| `description` | `str, optional` | 列表的描述. Defaults to ''. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -223,8 +224,8 @@ from bilibili_api import channel_series
 | name | type | description |
 | - | - | - |
 | `season_id` | `int` | 合集 id |
-| `status` | `bool` | 是否订阅状态. Defaults to True. |
-| `credential` | `Credential \| None` | 凭据类。 Defaults to None. |
+| `status` | `bool, optional` | 是否订阅状态. Defaults to True. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

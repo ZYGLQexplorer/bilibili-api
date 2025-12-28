@@ -49,7 +49,7 @@ from bilibili_api import garb
 | name | type | description |
 | - | - | - |
 | `act_id` | `int` | 收藏集的 act_id。 (链接中 blackboard/activity-Mz9T5bO5Q3.html?id={act_id}... 即为 act_id) |
-| `credential` | `Credential \| None, optional` | 凭据类。Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 
 ### def get_act_id()
@@ -126,7 +126,7 @@ from bilibili_api import garb
 | name | type | description |
 | - | - | - |
 | `item_id` | `int` | 装扮的 item_id。(可通过 garb.search_garb_dlc_raw 获取) |
-| `credential` | `Credential \| None, optional` | 凭据类。Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 
 ### async def get_detail()
@@ -202,13 +202,13 @@ from bilibili_api import garb
 
 | name | type | description |
 | - | - | - |
-| `type_` | `GarbType` | 装扮/收藏集类型 |
-| `sort` | `GarbSortType` | 装扮/收藏集排序方式 |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 每页大小. Defaults to 20. |
+| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to <GarbType.GARB |
+| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
-**Returns:** `List[Tuple[dict, DLC | Garb]]`:  装扮/收藏集信息与装扮/收藏集对象列表
+**Returns:** `list[tuple[dict, garb.DLC | garb.Garb]]`:  装扮/收藏集信息与装扮/收藏集对象列表
 
 
 
@@ -222,13 +222,13 @@ from bilibili_api import garb
 
 | name | type | description |
 | - | - | - |
-| `type_` | `GarbType` | 装扮/收藏集类型 |
-| `sort` | `GarbSortType` | 装扮/收藏集排序方式 |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 每页大小. Defaults to 20. |
+| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to <GarbType.GARB |
+| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
-**Returns:** `List[DLC | Garb]`:  装扮/收藏集对象列表
+**Returns:** `list[garb.DLC | garb.Garb]`:  装扮/收藏集对象列表
 
 
 
@@ -242,10 +242,10 @@ from bilibili_api import garb
 
 | name | type | description |
 | - | - | - |
-| `type_` | `GarbType` | 装扮/收藏集类型 |
-| `sort` | `GarbSortType` | 装扮/收藏集排序方式 |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 每页大小. Defaults to 20. |
+| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to <GarbType.GARB |
+| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -263,11 +263,11 @@ from bilibili_api import garb
 | name | type | description |
 | - | - | - |
 | `keyword` | `str` | 关键词 |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 每页大小. Defaults to 20. |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
-**Returns:** `List[Tuple[dict, DLC | Garb]]`:  装扮/收藏集信息与装扮/收藏集对象列表
+**Returns:** `list[tuple[dict, garb.DLC | garb.Garb]]`:  装扮/收藏集信息与装扮/收藏集对象列表
 
 
 
@@ -282,11 +282,11 @@ from bilibili_api import garb
 | name | type | description |
 | - | - | - |
 | `keyword` | `str` | 关键词 |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 每页大小. Defaults to 20. |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
-**Returns:** `List[DLC | Garb]`:  装扮/收藏集对象列表
+**Returns:** `list[garb.DLC | garb.Garb]`:  装扮/收藏集对象列表
 
 
 
@@ -301,8 +301,8 @@ from bilibili_api import garb
 | name | type | description |
 | - | - | - |
 | `keyword` | `str` | 关键词 |
-| `pn` | `int` | 页码. Defaults to 1. |
-| `ps` | `int` | 每页大小. Defaults to 20. |
+| `pn` | `int, optional` | 页码. Defaults to 1. |
+| `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果。

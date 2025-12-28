@@ -46,13 +46,10 @@ class CheeseList:
     ) -> None:
         """
         Args:
-            season_id  (int)              : ssid
+            season_id (int, optional): ssid. Defaults to -1.
+            ep_id (int, optional): 单集 ep_id. Defaults to -1.
+            credential (Credential | None, optional): 凭据类. Defaults to None.
 
-            ep_id      (int)              : 单集 ep_id
-
-            credential (Credential | None): 凭据类
-
-        注意：season_id 和 ep_id 任选一个即可，两个都选的话
         以 season_id 为主
         """
         if (season_id == -1) and (ep_id == -1):
@@ -131,7 +128,7 @@ class CheeseList:
         获取教程所有视频
 
         Returns:
-            List[CheeseVideo]: 课程视频列表
+            list['CheeseVideo']: 课程视频列表
         """
         global cheese_video_meta_cache
         api = API["info"]["list"]
@@ -161,9 +158,8 @@ class CheeseVideo:
     def __init__(self, epid: int, credential: Credential | None = None) -> None:
         """
         Args:
-            epid      (int)               : 单集 ep_id
-
-            credential (Credential | None): 凭据类
+            epid (int): 单集 ep_id
+            credential (Credential | None, optional): 凭据类. Defaults to None.
         """
         global cheese_video_meta_cache
         self.__epid = epid
@@ -506,14 +502,12 @@ class CheeseVideo:
         获取弹幕。
 
         Args:
-            date       (datetime.Date | None, optional): 指定日期后为获取历史弹幕，精确到年月日。Defaults to None.
-
-            from_seg (int, optional): 从第几段开始(0 开始编号，None 为从第一段开始，一段 6 分钟). Defaults to None.
-
-            to_seg (int, optional): 到第几段结束(0 开始编号，None 为到最后一段，包含编号的段，一段 6 分钟). Defaults to None.
+            date (datetime.date | None, optional): 指定日期后为获取历史弹幕，精确到年月日. Defaults to None.
+            from_seg (int | None, optional): 从第几段开始(0 开始编号，None 为从第一段开始，一段 6 分钟). Defaults to None.
+            to_seg (int | None, optional): 到第几段结束(0 开始编号，None 为到最后一段，包含编号的段，一段 6 分钟). Defaults to None.
 
         Returns:
-            List[Danmaku]: Danmaku 类的列表。
+            list[Danmaku]: Danmaku 类的列表。
 
         注意：
             - 1. 段数可以通过视频时长计算。6分钟为一段。
@@ -655,7 +649,7 @@ class CheeseVideo:
         发送弹幕。
 
         Args:
-            danmaku (Danmaku | None): Danmaku 类。Defaults to None.
+            danmaku (Danmaku | None, optional): Danmaku 类. Defaults to None.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -737,7 +731,7 @@ class CheeseVideo:
         点赞视频。
 
         Args:
-            status (bool, optional): 点赞状态。Defaults to True.
+            status (bool, optional): 点赞状态. Defaults to True.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -754,9 +748,8 @@ class CheeseVideo:
         投币。
 
         Args:
-            num  (int, optional) : 硬币数量，为 1 ~ 2 个。Defaults to 1.
-
-            like (bool, optional): 是否同时点赞。Defaults to False.
+            num (int, optional): 硬币数量，为 1 ~ 2 个. Defaults to 1.
+            like (bool, optional): 是否同时点赞. Defaults to False.
 
         Returns:
             dict: 调用 API 返回的结果。
@@ -782,9 +775,8 @@ class CheeseVideo:
         设置视频收藏状况。
 
         Args:
-            add_media_ids (List[int], optional): 要添加到的收藏夹 ID. Defaults to [].
-
-            del_media_ids (List[int], optional): 要移出的收藏夹 ID. Defaults to [].
+            add_media_ids (list[int], optional): 要添加到的收藏夹 ID. Defaults to [].
+            del_media_ids (list[int], optional): 要移出的收藏夹 ID. Defaults to [].
 
         Returns:
             dict: 调用 API 返回结果。

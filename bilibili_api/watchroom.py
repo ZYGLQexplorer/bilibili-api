@@ -84,7 +84,7 @@ class Message:
     def __init__(self, *messages: MessageSegment | str) -> None:
         """
         Args:
-            messages (MessageSegment | str): 消息片段。请按 *args 传入。
+            messages (watchroom.MessageSegment | str): 消息片段。请按 *args 传入。
         """
         self.msg_list: list[MessageSegment] = []
         for msg in messages:
@@ -115,10 +115,8 @@ class WatchRoom:
     def __init__(self, room_id: int, credential: Credential | None = None) -> None:
         """
         Args:
-
-            credential      (Credential | None): 凭据类 (大部分用户操作都需要与之匹配的 buvid3 值，务必在 credential 传入)
-
-            room_id         (int)       : 放映室 id
+            room_id (int): 放映室 id
+            credential (Credential | None, optional): 凭据类 (大部分用户操作都需要与之匹配的 buvid3 值，务必在 credential 传入). Defaults to None.
         """
         credential = credential if credential else Credential()
         self.__room_id = room_id
@@ -242,10 +240,8 @@ class WatchRoom:
         设置播放状态，包括暂停与进度条
 
         Args:
-
-            progress (int, None): 进度，单位为秒
-
-            status (bool, None): 播放状态 1 播放中 0 暂停中 2 已结束
+            progress (int | None, optional): 进度，单位为秒. Defaults to None.
+            status (int, optional): 播放状态 1 播放中 0 暂停中 2 已结束. Defaults to 1.
         """
         api = API["operate"]["progress"]
         data = {
@@ -266,8 +262,7 @@ class WatchRoom:
         加入放映室
 
         Args:
-
-            token (str, Optional): 邀请 Token
+            token (str, optional): 邀请 Token. Defaults to ''.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -293,8 +288,7 @@ class WatchRoom:
         发送消息
 
         Args:
-
-            msg (Message): 消息
+            msg (watchroom.Message): 消息
 
         Returns:
             dict: 调用 API 返回的结果
@@ -319,7 +313,6 @@ class WatchRoom:
         踢出放映室
 
         Args:
-
             uid (int): 用户 uid
 
         Returns:
@@ -371,17 +364,13 @@ async def create(
     创建放映室
 
     Args:
-
         season_id (int): 每季度的 ID
-
         episode_id (int): 剧集 ID
-
-        is_open (bool): 是否公开
-
-        credential (Credential | None): 凭据
+        is_open (bool, optional): 是否公开. Defaults to False.
+        credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:
-        Watchroom: 放映室
+        watchroom.WatchRoom: 放映室
     """
     global watch_room_bangumi_cache
 
@@ -412,15 +401,12 @@ async def match(
     匹配放映室
 
     Args:
-
         season_id (int): 季度 ID
-
-        season_type (SeasonType): 季度类型
-
-        credential (Credential | None): 凭据类
+        season_type (SeasonType, optional): 季度类型. Defaults to <SeasonType.ANIME: 1>.
+        credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
-        Watchroom: 放映室
+        watchroom.WatchRoom: 放映室
     """
     if credential is None:
         credential = Credential()

@@ -160,7 +160,7 @@ from bilibili_api import music
 
 | name | type | description |
 | - | - | - |
-| `credential` | `Credential \| None` | 凭据类. Defaults to None. |
+| `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -176,12 +176,12 @@ from bilibili_api import music
 
 | name | type | description |
 | - | - | - |
-| `keyword` | `str` | 关键词. Defaults to None. |
-| `lang` | `MusicIndexTags.Lang` | 语言. Defaults to MusicIndexTags.Lang.ALL |
-| `genre` | `MusicIndexTags.Genre` | 类型. Defaults to MusicIndexTags.Genre.ALL |
-| `order` | `MusicOrder` | 排序方式. Defaults to OrderAudio.NEW |
-| `page_num` | `int` | 页码. Defaults to 1. |
-| `page_size` | `int` | 每页的数据大小. Defaults to 10. |
+| `keyword` | `str, optional` | 关键词. Defaults to ''. |
+| `lang` | `Lang, optional` | 语言. ALL. Defaults to <Lang.ALL |
+| `genre` | `Genre, optional` | 类型. ALL. Defaults to <Genre.ALL |
+| `order` | `MusicOrder, optional` | 排序方式. NEW. Defaults to <MusicOrder.NEW |
+| `page_num` | `int, optional` | 页码. Defaults to 1. |
+| `page_size` | `int, optional` | 每页的数据大小. Defaults to 10. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

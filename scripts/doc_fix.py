@@ -350,6 +350,7 @@ def handle_annotation(ty: type):
     ret = ret.replace("bilibili_api.utils.picture.", "")
     ret = ret.replace("bilibili_api.", "")
     ret = ret.replace("typing.", "")
+    ret = ret.replace("collections.abc.", "")
     return ret
 
 
@@ -396,6 +397,7 @@ def handle_doc(doc: str, isp: inspect.Signature):
         retdesc = "".join(ret.split(":")[1:])
     else:
         retdesc = ""
+    retdesc = retdesc.strip()
     info = info.strip("\n")
     info = info.strip()
     note = note.strip("\n")
@@ -438,7 +440,7 @@ def handle_doc(doc: str, isp: inspect.Signature):
     if note:
         new_doc += "\n\n"
         new_doc += note
-    new_doc = new_doc.rstrip("\n")
+    new_doc = new_doc.strip("\n")
     return new_doc
 
 
@@ -538,6 +540,8 @@ for module in all_funcs:
             print("------------------------------")
             new_doc = '"""\n' + new_doc + '\n"""'
             new_doc_lines = new_doc.split("\n")
+            for i in range(len(new_doc_lines)):
+                new_doc_lines[i] = "    " * indent + new_doc_lines[i]
             lines = open_file_lines(path)
             write_file_lines(
                 path, replace_lines(lines, start - 1, end - 1, new_doc_lines)

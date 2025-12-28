@@ -17,8 +17,8 @@ async def get_emoji_list(
     获取表情包列表
 
     Args:
-        business   (str): 使用场景, reply / dynamic
-        credential (Credential | None): 登录凭证. Defaults to None.
+        business (str, optional): 使用场景, reply / dynamic. Defaults to 'reply'.
+        credential (Credential | None, optional): 登录凭证. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -34,8 +34,8 @@ async def get_emoji_detail(id: int | list[int], business: str = "reply") -> dict
     获取表情包详情
 
     Args:
-        id       (Union[int, List[int]]): 表情包 id，可通过 `get_emoji_list` 或 `get_all_emoji` 查询。
-        business (str): 使用场景, reply / dynamic
+        id (int | list[int]): 表情包 id，可通过 `get_emoji_list` 或 `get_all_emoji` 查询。
+        business (str, optional): 使用场景, reply / dynamic. Defaults to 'reply'.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -55,8 +55,8 @@ async def get_all_emoji(
     获取所有表情包
 
     Args:
-        business   (str): 使用场景, reply / dynamic
-        credential (Credential | None): 登录凭证. Defaults to None.
+        business (str, optional): 使用场景, reply / dynamic. Defaults to 'reply'.
+        credential (Credential | None, optional): 登录凭证. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -73,8 +73,8 @@ async def add_emoji(package_id: int, credential: Credential | None = None) -> di
     添加表情包
 
     Args:
-        package_id (Union[int, List[int]]): 表情包 id，可通过 `get_emoji_list` 或 `get_all_emoji` 查询。
-        credential    (Credential | None): 登录凭证. Defaults to None.
+        package_id (int): 表情包 id，可通过 `get_emoji_list` 或 `get_all_emoji` 查询。
+        credential (Credential | None, optional): 登录凭证. Defaults to None.
 
     Returns:
         dict: 调用 API 返回的结果

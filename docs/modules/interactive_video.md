@@ -88,7 +88,7 @@ from bilibili_api import interactive_video
 | `text` | `str` | 文字 |
 | `x` | `int` | x 轴 |
 | `y` | `int` | y 轴 |
-| `align` | `InteractiveButtonAlign \| int` | 按钮的文字在按钮中的位置 |
+| `align` | `interactive_video.InteractiveButtonAlign \| int, optional` | 按钮的文字在按钮中的位置. Defaults to <InteractiveButtonAlign.DEFAULT |
 
 
 ### def get_align()
@@ -108,7 +108,7 @@ from bilibili_api import interactive_video
 
 
 
-**Returns:** `Tuple[int, int]`:  按钮位置
+**Returns:** `tuple[int, int]`:  按钮位置
 
 
 
@@ -181,7 +181,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `List[InteractiveNode]`:  子节点
+**Returns:** `list['InteractiveNode']`:  子节点
 
 
 
@@ -233,8 +233,8 @@ o----|xxx| (TEXT_RIGHT)
 
 | name | type | description |
 | - | - | - |
-| `var` | `List[InteractiveVariable]` | 所有变量 |
-| `command` | `str` | 公式 |
+| `var` | `List[interactive_video.InteractiveVariable], optional` | 所有变量. Defaults to []. |
+| `command` | `str, optional` | 公式. Defaults to ''. |
 
 
 ### def get_command()
@@ -254,7 +254,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `List[InteractiveVariable]`:  变量
+**Returns:** `list[interactive_video.InteractiveVariable]`:  变量
 
 
 
@@ -265,7 +265,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `List[InteractiveVariable]`:  所有变量的最终值
+**Returns:** `list['InteractiveVariable']`:  所有变量的最终值
 
 
 
@@ -284,8 +284,8 @@ o----|xxx| (TEXT_RIGHT)
 
 | name | type | description |
 | - | - | - |
-| `var` | `List[InteractiveVariable]` | 所有变量 |
-| `condition` | `str` | 公式 |
+| `var` | `List[interactive_video.InteractiveVariable], optional` | 所有变量. Defaults to []. |
+| `condition` | `str, optional` | 公式. Defaults to 'True'. |
 
 
 ### def get_condition()
@@ -316,7 +316,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `List[InteractiveVariable]`:  变量
+**Returns:** `list[interactive_video.InteractiveVariable]`:  变量
 
 
 
@@ -338,11 +338,11 @@ o----|xxx| (TEXT_RIGHT)
 | `video` | `InteractiveVideo` | 视频类 |
 | `node_id` | `int` | 节点 id |
 | `cid` | `int` | CID |
-| `vars` | `List[InteractiveVariable]` | 变量 |
-| `button` | `InteractiveButton` | 对应的按钮 |
-| `condition` | `InteractiveJumpingCondition` | 跳转公式 |
-| `native_command` | `InteractiveJumpingCommand` | 跳转时变量操作 |
-| `is_default` | `bool` | 是不是默认的跳转的节点 |
+| `vars` | `List[interactive_video.InteractiveVariable]` | 变量 |
+| `button` | `interactive_video.InteractiveButton \| None, optional` | 对应的按钮. Defaults to None. |
+| `condition` | `interactive_video.InteractiveJumpingCondition, optional` | 跳转公式. Defaults to <bilibili_api.interactive_video.InteractiveJumpingCondition object at 0x1055e34d0>. |
+| `native_command` | `interactive_video.InteractiveJumpingCommand, optional` | 跳转时变量操作. Defaults to <bilibili_api.interactive_video.InteractiveJumpingCommand object at 0x1055e3770>. |
+| `is_default` | `bool, optional` | 是不是默认的跳转的节点. Defaults to False. |
 
 
 ### async def get_children()
@@ -351,7 +351,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `List[InteractiveNode]`:  所有子节点
+**Returns:** `list['InteractiveNode']`:  所有子节点
 
 
 
@@ -384,7 +384,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `InteractiveJumpingCommand`:  执行的语句
+**Returns:** `interactive_video.InteractiveJumpingCommand`:  执行的语句
 
 
 
@@ -439,7 +439,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `List[InteractiveVariable]`:  节点的所有变量
+**Returns:** `list[interactive_video.InteractiveVariable]`:  节点的所有变量
 
 
 
@@ -498,8 +498,8 @@ o----|xxx| (TEXT_RIGHT)
 | `name` | `str` | 变量名 |
 | `var_id` | `str` | 变量 id |
 | `var_value` | `int` | 变量的值 |
-| `show` | `bool` | 是否显示 |
-| `random` | `bool` | 是否为随机值(1-100) |
+| `show` | `bool, optional` | 是否显示. Defaults to False. |
+| `random` | `bool, optional` | 是否为随机值(1-100). Defaults to False. |
 
 
 ### def get_id()
@@ -605,7 +605,7 @@ o----|xxx| (TEXT_RIGHT)
 
 | name | type | description |
 | - | - | - |
-| `edge_id` | `int, optional` | 节点 ID，为 None 时获取根节点信息. Defaults to None. |
+| `edge_id` | `int \| None, optional` | 节点 ID，为 None 时获取根节点信息. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -618,7 +618,7 @@ o----|xxx| (TEXT_RIGHT)
 
 
 
-**Returns:** `InteractiveGraph`:  情节树
+**Returns:** `interactive_video.InteractiveGraph`:  情节树
 
 
 
@@ -641,9 +641,9 @@ o----|xxx| (TEXT_RIGHT)
 
 | name | type | description |
 | - | - | - |
-| `score` | `int` | 互动视频分数. Defaults to 5. |
+| `score` | `int, optional` | 互动视频分数. Defaults to 5. |
 
-**Returns:** `dict`:  调用 API 返回的结果
+**Returns:** `int`:  调用 API 返回的结果
 
 
 
@@ -686,19 +686,17 @@ o----|xxx| (TEXT_RIGHT)
 
 ### def \_\_init\_\_()
 
-`self_download_func` 函数应接受两个参数（第一个是下载 URL，第二个是输出地址（精确至文件名））
-
 为保证视频能被成功下载，请在自定义下载函数请求的时候加入 `bilibili_api.get_bili_headers()` 头部。
 
 
 | name | type | description |
 | - | - | - |
-| `video` | `InteractiveVideo` | 互动视频类 |
+| `video` | `interactive_video.InteractiveVideo` | 互动视频类 |
 | `out` | `str` | 输出文件地址 (如果模式为 NODE_VIDEOS/NO_PACKAGING 则此参数表示所有节点视频的存放目录) |
-| `self_download_func` | `Coroutine` | 自定义下载函数（需 async 函数）. Defaults to None. |
-| `downloader_mode` | `InteractiveVideoDownloaderMode` | 下载模式 |
-| `stream_detecting_params` | `Dict` | `VideoDownloadURLDataDetecter` 提取最佳流时传入的参数，可控制视频及音频品质 |
-| `fetching_nodes_retry_times` | `int` | 获取节点时的最大重试次数 |
+| `self_download_func` | `Coroutine \| None, optional` | 自定义下载函数（需 async 函数）. Defaults to None. |
+| `downloader_mode` | `InteractiveVideoDownloaderMode, optional` | 下载模式. Defaults to <InteractiveVideoDownloaderMode.IVI |
+| `stream_detecting_params` | `Dict, optional` | `VideoDownloadURLDataDetecter` 提取最佳流时传入的参数，可控制视频及音频品质. Defaults to {}. |
+| `fetching_nodes_retry_times` | `int, optional` | 获取节点时的最大重试次数. Defaults to 3. |
 
 
 ### async def abort()
