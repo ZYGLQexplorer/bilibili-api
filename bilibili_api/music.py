@@ -134,9 +134,9 @@ async def get_music_index_info(
 
     Args:
         keyword (str, optional): 关键词. Defaults to ''.
-        lang (Lang, optional): 语言. ALL. Defaults to <Lang.ALL: ''>.
-        genre (Genre, optional): 类型. ALL. Defaults to <Genre.ALL: ''>.
-        order (MusicOrder, optional): 排序方式. NEW. Defaults to <MusicOrder.NEW: 1>.
+        lang (Lang, optional): 语言. Defaults to Lang.ALL.
+        genre (Genre, optional): 类型. Defaults to Genre.ALL.
+        order (MusicOrder, optional): 排序方式. Defaults to MusicOrder.NEW.
         page_num (int, optional): 页码. Defaults to 1.
         page_size (int, optional): 每页的数据大小. Defaults to 10.
 

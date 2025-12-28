@@ -1067,10 +1067,10 @@ page_index 和 cid 至少提供其中一个，其中 cid 优先级最高
 
 | name | type | description |
 | - | - | - |
-| `video_max_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._8K |
-| `audio_max_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._192K |
-| `video_min_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._360P |
-| `audio_min_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._64K |
+| `video_max_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._8K. |
+| `audio_max_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._192K. |
+| `video_min_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._360P. |
+| `audio_min_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._64K. |
 | `video_accepted_qualities` | `List[video.VideoQuality], optional` | 设置允许的所有视频流清晰度. Defaults to ALL. |
 | `audio_accepted_qualities` | `List[video.AudioQuality], optional` | 设置允许的所有音频清晰度. Defaults to ALL. |
 | `codecs` | `List[video.VideoCodecs], optional` | 设置所有允许提取出来的视频编码. 此项不会忽略 HDR/杜比. Defaults to ALL. |
@@ -1104,13 +1104,13 @@ page_index 和 cid 至少提供其中一个，其中 cid 优先级最高
 
 | name | type | description |
 | - | - | - |
-| `video_max_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._8K |
-| `audio_max_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._192K |
-| `video_min_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to <VideoQuality._360P |
-| `audio_min_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to <AudioQuality._64K |
-| `video_accepted_qualities` | `List[video.VideoQuality], optional` | 设置允许的所有视频流清晰度. Defaults to [<VideoQuality._360P |
-| `audio_accepted_qualities` | `List[video.AudioQuality], optional` | 设置允许的所有音频清晰度. Defaults to [<AudioQuality._64K |
-| `codecs` | `List[video.VideoCodecs], optional` | 设置所有允许提取出来的视频编码. 在数组中越靠前的编码选择优先级越高. 此项不会忽略 HDR/杜比. Defaults to [<VideoCodecs.AV1 |
+| `video_max_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最大值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._8K. |
+| `audio_max_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最大值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._192K. |
+| `video_min_quality` | `VideoQuality, optional` | 设置提取的视频流清晰度最小值，设置此参数绝对不会禁止 HDR/杜比. Defaults to VideoQuality._360P. |
+| `audio_min_quality` | `AudioQuality, optional` | 设置提取的音频流清晰度最小值. 设置此参数绝对不会禁止 Hi-Res/杜比. Defaults to AudioQuality._64K. |
+| `video_accepted_qualities` | `List[video.VideoQuality], optional` | 设置允许的所有视频流清晰度. Defaults to [VideoQuality._360P |
+| `audio_accepted_qualities` | `List[video.AudioQuality], optional` | 设置允许的所有音频清晰度. Defaults to [AudioQuality._64K |
+| `codecs` | `List[video.VideoCodecs], optional` | 设置所有允许提取出来的视频编码. 在数组中越靠前的编码选择优先级越高. 此项不会忽略 HDR/杜比. Defaults to [VideoCodecs.AV1 |
 | `no_dolby_video` | `bool, optional` | 是否禁止提取杜比视界视频流. Defaults to False. |
 | `no_dolby_audio` | `bool, optional` | 是否禁止提取杜比全景声音频流. Defaults to False. |
 | `no_hdr` | `bool, optional` | 是否禁止提取 HDR 视频流. Defaults to False. |

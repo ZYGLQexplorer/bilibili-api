@@ -442,7 +442,7 @@ class LiveRoom:
         获取房间直播流列表
 
         Args:
-            screen_resolution (ScreenResolution, optional): 清晰度. ORIGINAL. Defaults to <ScreenResolution.ORIGINAL: 10000>.
+            screen_resolution (ScreenResolution, optional): 清晰度. Defaults to ScreenResolution.ORIGINAL.
 
         Returns:
             dict: 调用 API 返回的结果
@@ -470,10 +470,10 @@ class LiveRoom:
         获取房间信息及可用清晰度列表
 
         Args:
-            live_protocol (LiveProtocol, optional): 直播源流协议. Defaults to <LiveProtocol.DEFAULT: '0,1'>.
-            live_format (LiveFormat, optional): 直播源容器格式. Defaults to <LiveFormat.DEFAULT: '0,1,2'>.
-            live_codec (LiveCodec, optional): 直播源视频编码. Defaults to <LiveCodec.DEFAULT: '0,1'>.
-            live_qn (ScreenResolution, optional): 直播源清晰度. Defaults to <ScreenResolution.ORIGINAL: 10000>.
+            live_protocol (LiveProtocol, optional): 直播源流协议. Defaults to LiveProtocol.DEFAULT.
+            live_format (LiveFormat, optional): 直播源容器格式. Defaults to LiveFormat.DEFAULT.
+            live_codec (LiveCodec, optional): 直播源视频编码. Defaults to LiveCodec.DEFAULT.
+            live_qn (ScreenResolution, optional): 直播源清晰度. Defaults to ScreenResolution.ORIGINAL.
 
         Returns:
             dict: 调用 API 返回的结果

@@ -176,7 +176,7 @@ RankAPIType.PGC 排行榜时间类型
 
 | name | type | description |
 | - | - | - |
-| `date` | `LiveEnergyRankType, optional` | 月份. MONTH. Defaults to <LiveEnergyRankType.MONTH |
+| `date` | `LiveEnergyRankType, optional` | 月份. Defaults to LiveEnergyRankType.MONTH. |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页数量. Defaults to 20. |
 
@@ -207,7 +207,7 @@ RankAPIType.PGC 排行榜时间类型
 
 | name | type | description |
 | - | - | - |
-| `_type` | `LiveRankType, optional` | 榜单类型. VALUE. Defaults to <LiveRankType.SAIL_BOAT_VALUE |
+| `_type` | `LiveRankType, optional` | 榜单类型. Defaults to LiveRankType.SAIL_BOAT_VALUE. |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页数量. Defaults to 20. |
 
@@ -255,7 +255,7 @@ RankAPIType.PGC 排行榜时间类型
 
 | name | type | description |
 | - | - | - |
-| `type_` | `MangeRankType, optional` | 排行榜类型. Defaults to <MangeRankType.NEW |
+| `type_` | `MangeRankType, optional` | 排行榜类型. Defaults to MangeRankType.NEW. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -348,8 +348,8 @@ https://www.bilibili.com/v/popular/drama/
 
 | name | type | description |
 | - | - | - |
-| `type_` | `RankType, optional` | 排行榜类型. All. Defaults to <RankType.All |
-| `day` | `RankDayType, optional` | 排行榜时间. PGC 有效. Defaults to <RankDayType.THREE_DAY |
+| `type_` | `RankType, optional` | 排行榜类型. Defaults to RankType.All |
+| `day` | `RankDayType, optional` | 排行榜时间. PGC 有效. Defaults to RankDayType.THREE_DAY. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 
@@ -365,7 +365,7 @@ https://www.bilibili.com/v/popular/drama/
 
 | name | type | description |
 | - | - | - |
-| `type_` | `VIPRankType, optional` | 排行榜类型. VIP. Defaults to <VIPRankType.VIP |
+| `type_` | `VIPRankType, optional` | 排行榜类型. Defaults to VIPRankType.VIP. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

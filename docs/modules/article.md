@@ -294,7 +294,7 @@ from bilibili_api import article
 
 | name | type | description |
 | - | - | - |
-| `rank_type` | `ArticleRankingType, optional` | 排行榜类别. Defaults to <ArticleRankingType.YESTERDAY |
+| `rank_type` | `ArticleRankingType, optional` | 排行榜类别. Defaults to ArticleRankingType.YESTERDAY. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

@@ -333,7 +333,7 @@ class VideoPorderMeta:
     ) -> None:
         """
         Args:
-            porder_type (VideoPorderType, optional): 商业平台类型. Defaults to <VideoPorderType.FIREWORK: frozendict.frozendict({'flow_id': 1})>.
+            porder_type (VideoPorderType, optional): 商业平台类型. Defaults to VideoPorderType.FIREWORK: frozendict.frozendict({'flow_id'.
             industry_type (video_uploader.VideoPorderIndustry | None, optional): 商单行业，非花火填写. Defaults to None.
             brand_name (str | None, optional): 品牌名，非花火填写. Defaults to None.
             show_types (list[video_uploader.VideoPorderShowType], optional): 商单形式，非花火填写. Defaults to [].

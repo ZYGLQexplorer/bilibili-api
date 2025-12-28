@@ -148,7 +148,7 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `order` | `BangumiCommentOrder, optional` | 排序方式。DEFAULT. Defaults to <BangumiCommentOrder.DEFAULT |
+| `order` | `BangumiCommentOrder, optional` | 排序方式。Defaults to BangumiCommentOrder.DEFAULT. |
 | `next` | `str \| None, optional` | 调用返回结果中的 next 键值，用于获取下一页数据. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -218,7 +218,7 @@ from bilibili_api import bangumi
 
 | name | type | description |
 | - | - | - |
-| `order` | `BangumiCommentOrder, optional` | 排序方式。DEFAULT. Defaults to <BangumiCommentOrder.DEFAULT |
+| `order` | `BangumiCommentOrder, optional` | 排序方式。Defaults to BangumiCommentOrder.DEFAULT. |
 | `next` | `str \| None, optional` | 调用返回结果中的 next 键值，用于获取下一页数据. Defaults to None. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -1092,15 +1092,15 @@ Anime Meta
 
 | name | type | description |
 | - | - | - |
-| `version` | `Version, optional` | 类型，如正片、电影等. Defaults to <Version.ALL |
-| `spoken_language` | `Spoken_Language, optional` | 配音. Defaults to <Spoken_Language.ALL |
-| `area` | `Area, optional` | 地区. Defaults to <Area.ALL |
-| `finish_status` | `Finish_Status, optional` | 是否完结. Defaults to <Finish_Status.ALL |
-| `copyright` | `Copyright, optional` | 版权. Defaults to <Copyright.ALL |
-| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
-| `season` | `Season, optional` | 季度. Defaults to <Season.ALL |
+| `version` | `Version, optional` | 类型，如正片、电影等. Defaults to Version.ALL. |
+| `spoken_language` | `Spoken_Language, optional` | 配音. Defaults to Spoken_Language.ALL. |
+| `area` | `Area, optional` | 地区. Defaults to Area.ALL. |
+| `finish_status` | `Finish_Status, optional` | 是否完结. Defaults to Finish_Status.ALL. |
+| `copyright` | `Copyright, optional` | 版权. Defaults to Copyright.ALL. |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to Payment.ALL. |
+| `season` | `Season, optional` | 季度. Defaults to Season.ALL. |
 | `year` | `str, optional` | 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取. Defaults to '-1'. |
-| `style` | `Anime, optional` | 风格. Defaults to <Anime.ALL |
+| `style` | `Anime, optional` | 风格. Defaults to Anime.ALL. |
 
 
 ### class Documentary()
@@ -1118,9 +1118,9 @@ Documentary Meta
 | name | type | description |
 | - | - | - |
 | `release_date` | `str, optional` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'. |
-| `style` | `Documentary, optional` | 风格. Defaults to <Documentary.ALL |
-| `payment` | `Payment, optional` | 观看条件. Defaults to <Payment.ALL |
-| `producer` | `Producer, optional` | 制作方. Defaults to <Producer.ALL |
+| `style` | `Documentary, optional` | 风格. Defaults to Documentary.ALL. |
+| `payment` | `Payment, optional` | 观看条件. Defaults to Payment.ALL. |
+| `producer` | `Producer, optional` | 制作方. Defaults to Producer.ALL. |
 
 
 ### class GuoChuang()
@@ -1137,12 +1137,12 @@ Guochuang Meta
 
 | name | type | description |
 | - | - | - |
-| `version` | `Version, optional` | 类型，如正片、电影等. Defaults to <Version.ALL |
-| `finish_status` | `Finish_Status, optional` | 是否完结. Defaults to <Finish_Status.ALL |
-| `copyright` | `Copyright, optional` | 版权. Defaults to <Copyright.ALL |
-| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
+| `version` | `Version, optional` | 类型，如正片、电影等. Defaults to Version.ALL. |
+| `finish_status` | `Finish_Status, optional` | 是否完结. Defaults to Finish_Status.ALL. |
+| `copyright` | `Copyright, optional` | 版权. Defaults to Copyright.ALL. |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to Payment.ALL. |
 | `year` | `str, optional` | 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取. Defaults to '-1'. |
-| `style` | `GuoChuang, optional` | 风格. Defaults to <GuoChuang.ALL |
+| `style` | `GuoChuang, optional` | 风格. Defaults to GuoChuang.ALL. |
 
 
 ### class Movie()
@@ -1159,10 +1159,10 @@ Movie Meta
 
 | name | type | description |
 | - | - | - |
-| `area` | `Area, optional` | 地区. Defaults to <Area.ALL |
+| `area` | `Area, optional` | 地区. Defaults to Area.ALL. |
 | `release_date` | `str, optional` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'. |
-| `style` | `Movie, optional` | 风格. Defaults to <Movie.ALL |
-| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
+| `style` | `Movie, optional` | 风格. Defaults to Movie.ALL. |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to Payment.ALL. |
 
 
 ### class TV()
@@ -1179,10 +1179,10 @@ TV Meta
 
 | name | type | description |
 | - | - | - |
-| `area` | `Area, optional` | 地区. Defaults to <Area.ALL |
+| `area` | `Area, optional` | 地区. Defaults to Area.ALL. |
 | `release_date` | `str, optional` | 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'. |
-| `style` | `TV, optional` | 风格. Defaults to <TV.ALL |
-| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
+| `style` | `TV, optional` | 风格. Defaults to TV.ALL. |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to Payment.ALL. |
 
 
 ### class Variety()
@@ -1199,8 +1199,8 @@ Variety Meta
 
 | name | type | description |
 | - | - | - |
-| `style` | `Variety, optional` | 风格. Defaults to <Variety.ALL |
-| `payment` | `Payment, optional` | 付费门槛. Defaults to <Payment.ALL |
+| `style` | `Variety, optional` | 风格. Defaults to Variety.ALL. |
+| `payment` | `Payment, optional` | 付费门槛. Defaults to Payment.ALL. |
 
 
 ---
@@ -1215,8 +1215,8 @@ Variety Meta
 | name | type | description |
 | - | - | - |
 | `filters` | `object, optional` | 筛选条件元数据. Defaults to <bilibili_api.bangumi.IndexFilterMeta.Anime object at 0x105571160>. |
-| `order` | `Order, optional` | 排序字段. Defaults to <Order.SCORE |
-| `sort` | `Sort, optional` | 排序方式. Defaults to <Sort.DESC |
+| `order` | `Order, optional` | 排序字段. Defaults to Order.SCORE. |
+| `sort` | `Sort, optional` | 排序方式. Defaults to Sort.DESC. |
 | `pn` | `int, optional` | 页数. Defaults to 1. |
 | `ps` | `int, optional` | 每页数量. Defaults to 20. |
 

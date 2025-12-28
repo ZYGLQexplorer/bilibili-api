@@ -306,7 +306,7 @@ from bilibili_api import watchroom
 | name | type | description |
 | - | - | - |
 | `season_id` | `int` | 季度 ID |
-| `season_type` | `SeasonType, optional` | 季度类型. Defaults to <SeasonType.ANIME |
+| `season_type` | `SeasonType, optional` | 季度类型. Defaults to SeasonType.ANIME. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `watchroom.WatchRoom`:  放映室

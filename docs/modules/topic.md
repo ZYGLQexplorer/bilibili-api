@@ -53,7 +53,7 @@ from bilibili_api import topic
 | - | - | - |
 | `ps` | `int, optional` | 数据数量. Defaults to 100. |
 | `offset` | `str \| None, optional` | 偏移量. 生成格式为 f'{页码}_{页码*数据量]}' 如'2_40'. Defaults to None. |
-| `sort_by` | `TopicCardsSortBy, optional` | 排序方式. Defaults to <TopicCardsSortBy.HOT |
+| `sort_by` | `TopicCardsSortBy, optional` | 排序方式. Defaults to TopicCardsSortBy.HOT. |
 
 **Returns:** `dict`:  调用 API 返回的结果
 

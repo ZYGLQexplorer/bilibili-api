@@ -377,7 +377,7 @@ class QrCodeLogin:
     def __init__(self, platform: QrCodeLoginChannel = QrCodeLoginChannel.WEB) -> None:
         """
         Args:
-            platform (QrCodeLoginChannel, optional): 平台. (web/tv). Defaults to <QrCodeLoginChannel.WEB: 'web'>.
+            platform (QrCodeLoginChannel, optional): 平台. (web/tv). Defaults to QrCodeLoginChannel.WEB.
         """
         self.__platform: QrCodeLoginChannel = platform
         self.__qr_link: str | None = None

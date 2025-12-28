@@ -63,7 +63,7 @@ class ChannelSeries:
         """
         Args:
             uid (int, optional): 用户 uid. Defaults to -1.
-            type_ (ChannelSeriesType, optional): 合集与列表类型. Defaults to <ChannelSeriesType.SERIES: 0>.
+            type_ (ChannelSeriesType, optional): 合集与列表类型. Defaults to ChannelSeriesType.SERIES.
             id_ (int, optional): season_id 或 series_id. Defaults to -1.
             credential (Credential | None, optional): 凭证. Defaults to None.
         """
@@ -148,7 +148,7 @@ class ChannelSeries:
         获取合集视频
 
         Args:
-            sort (ChannelOrder, optional): 排序方式. Defaults to <ChannelOrder.DEFAULT: 'false'>.
+            sort (ChannelOrder, optional): 排序方式. Defaults to ChannelOrder.DEFAULT.
             pn (int, optional): 页数. Defaults to 1.
             ps (int, optional): 每一页显示的视频数量. Defaults to 100.
 

@@ -269,8 +269,8 @@ from bilibili_api import black_room
 
 | name | type | description |
 | - | - | - |
-| `from_` | `BlackFrom, optional` | 违规来源. Defaults to <BlackFrom.ALL |
-| `type_` | `BlackType, optional` | 违规类型. Defaults to <BlackType.ALL |
+| `from_` | `BlackFrom, optional` | 违规来源. Defaults to BlackFrom.ALL. |
+| `type_` | `BlackType, optional` | 违规类型. Defaults to BlackType.ALL. |
 | `pn` | `int, optional` | 页数. Defaults to 1. |
 | `credential` | `Credential \| None, optional` | 凭据. Defaults to None. |
 

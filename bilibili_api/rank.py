@@ -271,8 +271,8 @@ async def get_rank(
     获取视频排行榜
 
     Args:
-        type_ (RankType, optional): 排行榜类型. All. Defaults to <RankType.All: frozendict.frozendict({'api_type': 'x', 'rid': 0, 'type': 'all'})>.
-        day (RankDayType, optional): 排行榜时间. PGC 有效. Defaults to <RankDayType.THREE_DAY: 3>.
+        type_ (RankType, optional): 排行榜类型. Defaults to RankType.All: frozendict.frozendict({'api_type': 'x', 'rid': 0, 'type'.
+        day (RankDayType, optional): 排行榜时间. PGC 有效. Defaults to RankDayType.THREE_DAY.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -340,7 +340,7 @@ async def get_vip_rank(type_: VIPRankType = VIPRankType.VIP) -> dict:
     获取大会员中心的排行榜
 
     Args:
-        type_ (VIPRankType, optional): 排行榜类型. VIP. Defaults to <VIPRankType.VIP: 279>.
+        type_ (VIPRankType, optional): 排行榜类型. Defaults to VIPRankType.VIP.
 
     Returns:
         dict: 调用 API 返回的结果
@@ -357,7 +357,7 @@ async def get_manga_rank(
     获取漫画专属排行榜
 
     Args:
-        type_ (MangeRankType, optional): 排行榜类型. Defaults to <MangeRankType.NEW: 7>.
+        type_ (MangeRankType, optional): 排行榜类型. Defaults to MangeRankType.NEW.
         credential (Credential | None, optional): 凭据类. Defaults to None.
 
     Returns:
@@ -406,7 +406,7 @@ async def get_live_energy_user_rank(
     获取直播超能用户榜
 
     Args:
-        date (LiveEnergyRankType, optional): 月份. MONTH. Defaults to <LiveEnergyRankType.MONTH: 'month'>.
+        date (LiveEnergyRankType, optional): 月份. Defaults to LiveEnergyRankType.MONTH.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页数量. Defaults to 20.
 
@@ -425,7 +425,7 @@ async def get_live_rank(
     获取直播通用榜单
 
     Args:
-        _type (LiveRankType, optional): 榜单类型. VALUE. Defaults to <LiveRankType.SAIL_BOAT_VALUE: 'sail_boat_value'>.
+        _type (LiveRankType, optional): 榜单类型. Defaults to LiveRankType.SAIL_BOAT_VALUE.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页数量. Defaults to 20.
 

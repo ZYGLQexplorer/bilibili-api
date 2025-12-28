@@ -311,7 +311,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `biz` | `AlbumType, optional` | 排序方式. Defaults to <AlbumType.ALL |
+| `biz` | `AlbumType, optional` | 排序方式. Defaults to AlbumType.ALL. |
 | `page_num` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
 | `page_size` | `int, optional` | 每一页的相簿条目. Defaults to 30. |
 
@@ -338,7 +338,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `order` | `ArticleListOrder, optional` | 排序方式. LATEST. Defaults to <ArticleListOrder.LATEST |
+| `order` | `ArticleListOrder, optional` | 排序方式. Defaults to ArticleListOrder.LATEST. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -353,7 +353,7 @@ medialist排序顺序。
 | name | type | description |
 | - | - | - |
 | `pn` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
-| `order` | `ArticleOrder, optional` | 排序方式. Defaults to <ArticleOrder.PUBDATE |
+| `order` | `ArticleOrder, optional` | 排序方式. Defaults to ArticleOrder.PUBDATE. |
 | `ps` | `int, optional` | 每一页的视频数. Defaults to 30. |
 
 **Returns:** `dict`:  调用接口返回的内容。
@@ -368,7 +368,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `order` | `AudioOrder, optional` | 排序方式. Defaults to <AudioOrder.PUBDATE |
+| `order` | `AudioOrder, optional` | 排序方式. Defaults to AudioOrder.PUBDATE. |
 | `pn` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每一页的视频数. Defaults to 30. |
 
@@ -404,7 +404,7 @@ medialist排序顺序。
 | name | type | description |
 | - | - | - |
 | `sid` | `int` | 频道的 season_id |
-| `sort` | `ChannelOrder, optional` | 排序方式. Defaults to <ChannelOrder.DEFAULT |
+| `sort` | `ChannelOrder, optional` | 排序方式. Defaults to ChannelOrder.DEFAULT. |
 | `pn` | `int, optional` | 页数. Defaults to 1. |
 | `ps` | `int, optional` | 每一页显示的视频数量. Defaults to 100. |
 
@@ -421,7 +421,7 @@ medialist排序顺序。
 | name | type | description |
 | - | - | - |
 | `sid` | `int` | 频道的 series_id |
-| `sort` | `ChannelOrder, optional` | 排序方式. Defaults to <ChannelOrder.DEFAULT |
+| `sort` | `ChannelOrder, optional` | 排序方式. Defaults to ChannelOrder.DEFAULT. |
 | `pn` | `int, optional` | 页数. Defaults to 1. |
 | `ps` | `int, optional` | 每一页显示的视频数量. Defaults to 100. |
 
@@ -520,7 +520,7 @@ medialist排序顺序。
 | `pn` | `int, optional` | 页码，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每页的数据量. Defaults to 100. |
 | `attention` | `bool, optional` | 是否采用“最常访问”排序，否则为“关注顺序”排序. Defaults to False. |
-| `order` | `OrderType, optional` | 排序方式. Defaults to <OrderType.desc |
+| `order` | `OrderType, optional` | 排序方式. Defaults to OrderType.desc. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -560,7 +560,7 @@ medialist排序顺序。
 | `ps` | `int, optional` | 每一页的视频数.  Max 100. Defaults to 20. |
 | `direction` | `bool, optional` | 相对于给定oid的查询方向 True 向列表末尾方向 False 向列表开头方向. Defaults to False. |
 | `desc` | `bool, optional` | 倒序排序. Defaults to True. |
-| `sort_field` | `MediaListOrder, optional` | 用于排序的栏  1 发布时间，2 播放量，3 收藏量. Defaults to <MedialistOrder.PUBDATE |
+| `sort_field` | `MediaListOrder, optional` | 用于排序的栏  1 发布时间，2 播放量，3 收藏量. Defaults to MedialistOrder.PUBDATE. |
 | `tid` | `int, optional` | 分区 ID.  1 部分（未知）. Defaults to 0. |
 | `with_current` | `bool, optional` | 返回的列表中是否包含给定oid自身. Defaults to False. |
 
@@ -576,7 +576,7 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `type_` | `OpusType, optional` | 获取的图文类型. Defaults to <OpusType.ALL |
+| `type_` | `OpusType, optional` | 获取的图文类型. Defaults to OpusType.ALL. |
 | `offset` | `str, optional` | 偏移量。每次请求可获取下次请求对应的偏移量，类似单向链表。对应返回结果的 `["offset"]`. Defaults to ''. |
 
 **Returns:** `dict`:  调用 API 返回的结果
@@ -661,8 +661,8 @@ medialist排序顺序。
 
 | name | type | description |
 | - | - | - |
-| `type_` | `BangumiType, optional` | 资源类型. BANGUMI. Defaults to <BangumiType.BANGUMI |
-| `follow_status` | `BangumiFollowStatus, optional` | 追番状态. ALL. Defaults to <BangumiFollowStatus.ALL |
+| `type_` | `BangumiType, optional` | 资源类型. Defaults to BangumiType.BANGUMI. |
+| `follow_status` | `BangumiFollowStatus, optional` | 追番状态. Defaults to BangumiFollowStatus.ALL. |
 | `pn` | `int, optional` | 页码数，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每一页的番剧数. Defaults to 15. |
 
@@ -795,7 +795,7 @@ medialist排序顺序。
 | `pn` | `int, optional` | 页码，从 1 开始. Defaults to 1. |
 | `ps` | `int, optional` | 每一页的视频数. Defaults to 30. |
 | `keyword` | `str, optional` | 搜索关键词. Defaults to ''. |
-| `order` | `VideoOrder, optional` | 排序方式. PUBDATE. Defaults to <VideoOrder.PUBDATE |
+| `order` | `VideoOrder, optional` | 排序方式. Defaults to VideoOrder.PUBDATE. |
 
 **Returns:** `dict`:  调用接口返回的内容。
 
@@ -1059,7 +1059,7 @@ max、business、view_at 参数用于历史记录列表的 IFS (无限滚动)，
 | name | type | description |
 | - | - | - |
 | `credential` | `Credential` | Credential |
-| `_type` | `HistoryType, optional` | 历史记录分类. Defaults to <HistoryType.ALL |
+| `_type` | `HistoryType, optional` | 历史记录分类. Defaults to HistoryType.ALL. |
 | `ps` | `int, optional` | 每页多少条历史记录. Defaults to 20. |
 | `view_at` | `int \| None, optional` | 时间戳，获取此时间戳之前的历史记录. Defaults to None. |
 | `max` | `int \| None, optional` | 历史记录截止目标 oid. Defaults to None. |

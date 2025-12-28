@@ -435,7 +435,7 @@ async def get_comments(
         oid (int): 资源 ID。
         type_ (CommentResourceType): 资源类枚举。
         page_index (int, optional): 页码. Defaults to 1.
-        order (OrderType, optional): 排序方式枚举. Defaults to <OrderType.TIME: 0>.
+        order (OrderType, optional): 排序方式枚举. Defaults to OrderType.TIME.
         credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:
@@ -466,7 +466,7 @@ async def get_comments_lazy(
         oid (int): 资源 ID。
         type_ (CommentResourceType): 资源类枚举。
         offset (str, optional): 偏移量。每次请求可获取下次请求对应的偏移量，类似单向链表。对应返回结果的 `["cursor"]["pagination_reply"]["next_offset"]`. Defaults to ''.
-        order (OrderType, optional): 排序方式枚举. Defaults to <OrderType.TIME: 0>.
+        order (OrderType, optional): 排序方式枚举. Defaults to OrderType.TIME.
         credential (Credential | None, optional): 凭据. Defaults to None.
 
     Returns:

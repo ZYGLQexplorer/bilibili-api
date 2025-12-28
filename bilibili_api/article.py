@@ -83,7 +83,7 @@ async def get_article_rank(
     获取专栏排行榜
 
     Args:
-        rank_type (ArticleRankingType, optional): 排行榜类别. Defaults to <ArticleRankingType.YESTERDAY: 3>.
+        rank_type (ArticleRankingType, optional): 排行榜类别. Defaults to ArticleRankingType.YESTERDAY.
 
     Returns:
         dict: 调用 API 返回的结果

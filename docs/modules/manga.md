@@ -175,7 +175,7 @@ from bilibili_api import manga
 | - | - | - |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页数量. Defaults to 15. |
-| `order` | `MangaOrderType, optional` | 排序方式. Defaults to <MangaOrderType.FOLLOW |
+| `order` | `MangaOrderType, optional` | 排序方式. Defaults to MangaOrderType.FOLLOW. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
 
 **Returns:** `list[manga.Manga]`:  追漫列表

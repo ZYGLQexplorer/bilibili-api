@@ -281,8 +281,8 @@ async def get_garb_dlc_items_raw(
     装扮/收藏集列表
 
     Args:
-        type_ (GarbType, optional): 装扮/收藏集类型. Defaults to <GarbType.GARB: (0, 6)>.
-        sort (GarbSortType, optional): 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT: 0>.
+        type_ (GarbType, optional): 装扮/收藏集类型. Defaults to GarbType.GARB.
+        sort (GarbSortType, optional): 装扮/收藏集排序方式. Defaults to GarbSortType.DEFAULT.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页大小. Defaults to 20.
         credential (Credential | None, optional): 凭据类. Defaults to None.
@@ -314,8 +314,8 @@ async def get_garb_dlc_items_obj(
     装扮/收藏集列表
 
     Args:
-        type_ (GarbType, optional): 装扮/收藏集类型. Defaults to <GarbType.GARB: (0, 6)>.
-        sort (GarbSortType, optional): 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT: 0>.
+        type_ (GarbType, optional): 装扮/收藏集类型. Defaults to GarbType.GARB.
+        sort (GarbSortType, optional): 装扮/收藏集排序方式. Defaults to GarbSortType.DEFAULT.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页大小. Defaults to 20.
         credential (Credential | None, optional): 凭据类. Defaults to None.
@@ -349,8 +349,8 @@ async def get_garb_dlc_items(
     装扮/收藏集列表
 
     Args:
-        type_ (GarbType, optional): 装扮/收藏集类型. Defaults to <GarbType.GARB: (0, 6)>.
-        sort (GarbSortType, optional): 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT: 0>.
+        type_ (GarbType, optional): 装扮/收藏集类型. Defaults to GarbType.GARB.
+        sort (GarbSortType, optional): 装扮/收藏集排序方式. Defaults to GarbSortType.DEFAULT.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页大小. Defaults to 20.
         credential (Credential | None, optional): 凭据类. Defaults to None.

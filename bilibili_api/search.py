@@ -347,7 +347,7 @@ async def search_cheese(
         keyword (str): 搜索关键词
         page_num (int, optional): 页码. Defaults to 1.
         page_size (int, optional): 每一页的数据大小. Defaults to 30.
-        order (OrderCheese, optional): 排序方式. RECOMMEND. Defaults to <OrderCheese.RECOMMEND: -1>.
+        order (OrderCheese, optional): 排序方式. Defaults to OrderCheese.RECOMMEND.
 
     Returns:
         dict: 调用 API 返回的结果

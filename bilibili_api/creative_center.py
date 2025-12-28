@@ -322,8 +322,8 @@ async def get_graph(
 
     Args:
         credential (Credential): Credential 凭据。
-        period (GraphPeriod, optional): 时间段. Defaults to <GraphPeriod.WEEK: 0>.
-        graph_type (GraphType, optional): 图表类型. Defaults to <GraphType.PLAY: 'play'>.
+        period (GraphPeriod, optional): 时间段. Defaults to GraphPeriod.WEEK.
+        graph_type (GraphType, optional): 图表类型. Defaults to GraphType.PLAY.
 
     Returns:
         dict: 视频统计图表数据。
@@ -345,7 +345,7 @@ async def get_overview(
 
     Args:
         credential (Credential): Credential 凭据。
-        period (GraphPeriod, optional): 时间段. Defaults to <GraphPeriod.WEEK: 0>.
+        period (GraphPeriod, optional): 时间段. Defaults to GraphPeriod.WEEK.
 
     Returns:
         dict: 视频概览数据。
@@ -379,7 +379,7 @@ async def get_video_playanalysis(
 
     Args:
         credential (Credential): Credential 凭据。
-        copyright (Copyright, optional): 版权类型. Defaults to <Copyright.ALL: 0>.
+        copyright (Copyright, optional): 版权类型. Defaults to Copyright.ALL.
 
     Returns:
         dict: 稿件播放完成率对比数据。
@@ -412,7 +412,7 @@ async def get_fan_overview(
 
     Args:
         credential (Credential): Credential 凭据。
-        period (FanGraphPeriod, optional): 时间段. Defaults to <FanGraphPeriod.WEEK: 0>.
+        period (FanGraphPeriod, optional): 时间段. Defaults to FanGraphPeriod.WEEK.
 
     Returns:
         dict: 粉丝概览数据。
@@ -432,8 +432,8 @@ async def get_fan_graph(
 
     Args:
         credential (Credential): Credential 凭据。
-        period (FanGraphPeriod, optional): 时间段. Defaults to <FanGraphPeriod.WEEK: 0>.
-        graph_type (FanGraphType, optional): 图表类型. Defaults to <FanGraphType.ALL_FANS: 'all_fans'>.
+        period (FanGraphPeriod, optional): 时间段. Defaults to FanGraphPeriod.WEEK.
+        graph_type (FanGraphType, optional): 图表类型. Defaults to FanGraphType.ALL_FANS.
 
     Returns:
         dict: 粉丝图表数据。
@@ -465,7 +465,7 @@ async def get_article_graph(
 
     Args:
         credential (Credential): Credential 凭据。
-        graph_type (ArticleInfoType, optional): 图表类型. Defaults to <ArticleInfoType.READ: 1>.
+        graph_type (ArticleInfoType, optional): 图表类型. Defaults to ArticleInfoType.READ.
 
     Returns:
         dict: 文章图表数据。
@@ -484,7 +484,7 @@ async def get_article_rank(
 
     Args:
         credential (Credential): Credential 凭据。
-        rank_type (ArticleInfoType, optional): 排行依据. Defaults to <ArticleInfoType.READ: 1>.
+        rank_type (ArticleInfoType, optional): 排行依据. Defaults to ArticleInfoType.READ.
 
     Returns:
         dict: 文章排行数据。
@@ -549,9 +549,9 @@ async def get_video_upload_manager_info(
         is_interative (bool, optional): 是否为互动视频. Defaults to False.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页项数. Defaults to 10.
-        order (UploadManagerOrder, optional): 稿件排序. Defaults to <UploadManagerOrder.CLICK: 'click'>.
+        order (UploadManagerOrder, optional): 稿件排序. Defaults to UploadManagerOrder.CLICK.
         tid (video_zone.VideoZoneTypes | None | int, optional): 分区. Defaults to None.
-        status (UploadManagerStatus, optional): 稿件状态. Defaults to <UploadManagerStatus.ALL: 'is_pubing,pubed,not_pubed'>.
+        status (UploadManagerStatus, optional): 稿件状态. Defaults to UploadManagerStatus.ALL.
 
     Returns:
         dict: 内容管理视频信息。
@@ -580,8 +580,8 @@ async def get_article_upload_manager_info(
 
     Args:
         credential (Credential): Credential 凭据。
-        status (UploadManagerArticleStatus, optional): 稿件状态. Defaults to <UploadManagerArticleStatus.ALL: 0>.
-        sort (UploadManagerSort, optional): 稿件排序. Defaults to <UploadManagerSort.CREATED_TIME: 1>.
+        status (UploadManagerArticleStatus, optional): 稿件状态. Defaults to UploadManagerArticleStatus.ALL.
+        sort (UploadManagerSort, optional): 稿件排序. Defaults to UploadManagerSort.CREATED_TIME.
         pn (int, optional): 页码. Defaults to 1.
 
     Returns:
@@ -633,8 +633,8 @@ async def get_comments(
         credential (Credential): Credential 凭据。
         oid (int | None, optional): 指定稿件. Defaults to None.
         keyword (str | None, optional): 关键词. Defaults to None.
-        archive_type (ArchiveType, optional): 稿件类型. Defaults to <ArchiveType.VIDEO: 1>.
-        order (CommentManagerOrder, optional): 排序字段. Defaults to <CommentManagerOrder.RECENTLY: 1>.
+        archive_type (ArchiveType, optional): 稿件类型. Defaults to ArchiveType.VIDEO.
+        order (CommentManagerOrder, optional): 排序字段. Defaults to CommentManagerOrder.RECENTLY.
         filter (int, optional): 筛选器，作用未知. Defaults to -1.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页项数. Defaults to 10.
@@ -677,7 +677,7 @@ async def del_comments(
         credential (Credential): Credential 凭据。
         oid (int | list[int]): 指定稿件
         rpid (int | list[int]): 指定评论
-        archive_type (ArchiveType, optional): 稿件类型. Defaults to <ArchiveType.VIDEO: 1>.
+        archive_type (ArchiveType, optional): 稿件类型. Defaults to ArchiveType.VIDEO.
     """
     data = {
         "oid": ",".join([str(x) for x in oid]) if isinstance(oid, list) else oid,
@@ -745,8 +745,8 @@ async def get_danmakus(
     Args:
         credential (Credential): Credential 凭据
         oid (int): 稿件oid，用逗号分隔
-        select_type (DanmakuType, optional): 弹幕类型. Defaults to <DanmakuType.ALL: 0>.
-        archive_type (ArchiveType, optional): 稿件类型. Defaults to <ArchiveType.VIDEO: 1>.
+        select_type (DanmakuType, optional): 弹幕类型. Defaults to DanmakuType.ALL.
+        archive_type (ArchiveType, optional): 稿件类型. Defaults to ArchiveType.VIDEO.
         mids (int | list[int] | None, optional): 用户mids，用逗号分隔或者直接 int. Defaults to None.
         keyword (str | None, optional): 关键词. Defaults to None.
         progress_from (int | None, optional): 进度开始. Defaults to None.
@@ -756,8 +756,8 @@ async def get_danmakus(
         modes (creative_center.DanmakuMode | list[creative_center.DanmakuMode] | None, optional): 弹幕模式. Defaults to None.
         pools (creative_center.DanmakuPool | list[creative_center.DanmakuPool] | None, optional): 弹幕池. Defaults to None.
         attrs (Any, optional): 弹幕属性，未知参数. Defaults to None.
-        order (DanmakuOrder, optional): 排序字段. Defaults to <DanmakuOrder.CTIME: 'ctime'>.
-        sort (DanmakuSort, optional): 排序方式. Defaults to <DanmakuSort.DESC: 'desc'>.
+        order (DanmakuOrder, optional): 排序字段. Defaults to DanmakuOrder.CTIME.
+        sort (DanmakuSort, optional): 排序方式. Defaults to DanmakuSort.DESC.
         pn (int, optional): 页码. Defaults to 1.
         ps (int, optional): 每页项数. Defaults to 50.
         cp_filter (bool, optional): 是否过滤CP弹幕。未知参数. Defaults to False.

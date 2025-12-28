@@ -48,7 +48,7 @@ from bilibili_api import note
 | `cvid` | `int \| None, optional` | 公开笔记 ID (对应专栏的 cvid) (公开笔记必要). Defaults to None. |
 | `aid` | `int \| None, optional` | 稿件 ID（oid_type 为 0 时是 avid） (私有笔记必要). Defaults to None. |
 | `note_id` | `int \| None, optional` | 私有笔记 ID (私有笔记必要). Defaults to None. |
-| `note_type` | `NoteType, optional` | 笔记类型 (private, public). Defaults to <NoteType.PUBLIC |
+| `note_type` | `NoteType, optional` | 笔记类型 (private, public). Defaults to NoteType.PUBLIC. |
 | `credential` | `Credential \| None, optional` | Credential. Defaults to None. |
 
 

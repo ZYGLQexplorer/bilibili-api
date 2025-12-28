@@ -92,8 +92,8 @@ class Danmaku:
             id_ (int, optional): 弹幕 ID. Defaults to -1.
             id_str (str, optional): 弹幕字符串 ID. Defaults to ''.
             action (str, optional): 暂不清楚. Defaults to ''.
-            mode (DmMode | int, optional): 弹幕模式. Defaults to <DmMode.FLY: 1>.
-            font_size (DmFontSize | int, optional): 弹幕字体大小. Defaults to <DmFontSize.NORMAL: 25>.
+            mode (DmMode | int, optional): 弹幕模式. Defaults to DmMode.FLY.
+            font_size (DmFontSize | int, optional): 弹幕字体大小. Defaults to DmFontSize.NORMAL.
             is_sub (bool, optional): 是否为字幕弹幕. Defaults to False.
             pool (int, optional): 池. Defaults to 0.
             attr (int, optional): 暂不清楚. Defaults to -1.
@@ -171,7 +171,7 @@ class SpecialDanmaku:
             content (str): 弹幕内容
             id_ (int, optional): 弹幕 id. Defaults to -1.
             id_str (str, optional): 弹幕 id (string 类型). Defaults to ''.
-            mode (DmMode | int, optional): 弹幕类型. Defaults to <DmMode.SPECIAL: 9>.
+            mode (DmMode | int, optional): 弹幕类型. Defaults to DmMode.SPECIAL.
             pool (int, optional): 弹幕池. Defaults to 2.
         """
         self.content = content

@@ -438,7 +438,7 @@ class User:
             pn (int, optional): 页码，从 1 开始. Defaults to 1.
             ps (int, optional): 每一页的视频数. Defaults to 30.
             keyword (str, optional): 搜索关键词. Defaults to ''.
-            order (VideoOrder, optional): 排序方式. PUBDATE. Defaults to <VideoOrder.PUBDATE: 'pubdate'>.
+            order (VideoOrder, optional): 排序方式. Defaults to VideoOrder.PUBDATE.
 
         Returns:
             dict: 调用接口返回的内容。
@@ -477,7 +477,7 @@ class User:
             ps (int, optional): 每一页的视频数.  Max 100. Defaults to 20.
             direction (bool, optional): 相对于给定oid的查询方向 True 向列表末尾方向 False 向列表开头方向. Defaults to False.
             desc (bool, optional): 倒序排序. Defaults to True.
-            sort_field (MedialistOrder, optional): 用于排序的栏  1 发布时间，2 播放量，3 收藏量. Defaults to <MedialistOrder.PUBDATE: 1>.
+            sort_field (MedialistOrder, optional): 用于排序的栏  1 发布时间，2 播放量，3 收藏量. Defaults to MedialistOrder.PUBDATE.
             tid (int, optional): 分区 ID.  1 部分（未知）. Defaults to 0.
             with_current (bool, optional): 返回的列表中是否包含给定oid自身. Defaults to False.
 
@@ -509,7 +509,7 @@ class User:
         获取用户投稿音频。
 
         Args:
-            order (AudioOrder, optional): 排序方式. Defaults to <AudioOrder.PUBDATE: 1>.
+            order (AudioOrder, optional): 排序方式. Defaults to AudioOrder.PUBDATE.
             pn (int, optional): 页码数，从 1 开始. Defaults to 1.
             ps (int, optional): 每一页的视频数. Defaults to 30.
 
@@ -529,7 +529,7 @@ class User:
         获取用户投稿相簿。
 
         Args:
-            biz (AlbumType, optional): 排序方式. Defaults to <AlbumType.ALL: 'all'>.
+            biz (AlbumType, optional): 排序方式. Defaults to AlbumType.ALL.
             page_num (int, optional): 页码数，从 1 开始. Defaults to 1.
             page_size (int, optional): 每一页的相簿条目. Defaults to 30.
 
@@ -555,7 +555,7 @@ class User:
 
         Args:
             pn (int, optional): 页码数，从 1 开始. Defaults to 1.
-            order (ArticleOrder, optional): 排序方式. Defaults to <ArticleOrder.PUBDATE: 'publish_time'>.
+            order (ArticleOrder, optional): 排序方式. Defaults to ArticleOrder.PUBDATE.
             ps (int, optional): 每一页的视频数. Defaults to 30.
 
         Returns:
@@ -576,7 +576,7 @@ class User:
         获取用户专栏文集。
 
         Args:
-            order (ArticleListOrder, optional): 排序方式. LATEST. Defaults to <ArticleListOrder.LATEST: 0>.
+            order (ArticleListOrder, optional): 排序方式. Defaults to ArticleListOrder.LATEST.
 
         Returns:
             dict: 调用接口返回的内容。
@@ -700,8 +700,8 @@ class User:
         获取用户追番/追剧列表。
 
         Args:
-            type_ (BangumiType, optional): 资源类型. BANGUMI. Defaults to <BangumiType.BANGUMI: 1>.
-            follow_status (BangumiFollowStatus, optional): 追番状态. ALL. Defaults to <BangumiFollowStatus.ALL: 0>.
+            type_ (BangumiType, optional): 资源类型. Defaults to BangumiType.BANGUMI.
+            follow_status (BangumiFollowStatus, optional): 追番状态. Defaults to BangumiFollowStatus.ALL.
             pn (int, optional): 页码数，从 1 开始. Defaults to 1.
             ps (int, optional): 每一页的番剧数. Defaults to 15.
 
@@ -734,7 +734,7 @@ class User:
             pn (int, optional): 页码，从 1 开始. Defaults to 1.
             ps (int, optional): 每页的数据量. Defaults to 100.
             attention (bool, optional): 是否采用“最常访问”排序，否则为“关注顺序”排序. Defaults to False.
-            order (OrderType, optional): 排序方式. Defaults to <OrderType.desc: 'desc'>.
+            order (OrderType, optional): 排序方式. Defaults to OrderType.desc.
 
         Returns:
             dict: 调用接口返回的内容。
@@ -886,7 +886,7 @@ class User:
 
         Args:
             sid (int): 频道的 series_id
-            sort (ChannelOrder, optional): 排序方式. Defaults to <ChannelOrder.DEFAULT: 'false'>.
+            sort (ChannelOrder, optional): 排序方式. Defaults to ChannelOrder.DEFAULT.
             pn (int, optional): 页数. Defaults to 1.
             ps (int, optional): 每一页显示的视频数量. Defaults to 100.
 
@@ -919,7 +919,7 @@ class User:
 
         Args:
             sid (int): 频道的 season_id
-            sort (ChannelOrder, optional): 排序方式. Defaults to <ChannelOrder.DEFAULT: 'false'>.
+            sort (ChannelOrder, optional): 排序方式. Defaults to ChannelOrder.DEFAULT.
             pn (int, optional): 页数. Defaults to 1.
             ps (int, optional): 每一页显示的视频数量. Defaults to 100.
 
@@ -1072,7 +1072,7 @@ class User:
         获取用户发布过的图文
 
         Args:
-            type_ (OpusType, optional): 获取的图文类型. Defaults to <OpusType.ALL: 'all'>.
+            type_ (OpusType, optional): 获取的图文类型. Defaults to OpusType.ALL.
             offset (str, optional): 偏移量。每次请求可获取下次请求对应的偏移量，类似单向链表。对应返回结果的 `["offset"]`. Defaults to ''.
 
         Returns:
@@ -1272,7 +1272,7 @@ async def get_self_history_new(
 
     Args:
         credential (Credential): Credential
-        _type (HistoryType, optional): 历史记录分类. Defaults to <HistoryType.ALL: 'all'>.
+        _type (HistoryType, optional): 历史记录分类. Defaults to HistoryType.ALL.
         ps (int, optional): 每页多少条历史记录. Defaults to 20.
         view_at (int | None, optional): 时间戳，获取此时间戳之前的历史记录. Defaults to None.
         max (int | None, optional): 历史记录截止目标 oid. Defaults to None.

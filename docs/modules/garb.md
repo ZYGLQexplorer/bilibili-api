@@ -202,8 +202,8 @@ from bilibili_api import garb
 
 | name | type | description |
 | - | - | - |
-| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to <GarbType.GARB |
-| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT |
+| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to GarbType.GARB. |
+| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to GarbSortType.DEFAULT. |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
@@ -222,8 +222,8 @@ from bilibili_api import garb
 
 | name | type | description |
 | - | - | - |
-| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to <GarbType.GARB |
-| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT |
+| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to GarbType.GARB. |
+| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to GarbSortType.DEFAULT. |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |
@@ -242,8 +242,8 @@ from bilibili_api import garb
 
 | name | type | description |
 | - | - | - |
-| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to <GarbType.GARB |
-| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to <GarbSortType.DEFAULT |
+| `type_` | `GarbType, optional` | 装扮/收藏集类型. Defaults to GarbType.GARB. |
+| `sort` | `GarbSortType, optional` | 装扮/收藏集排序方式. Defaults to GarbSortType.DEFAULT. |
 | `pn` | `int, optional` | 页码. Defaults to 1. |
 | `ps` | `int, optional` | 每页大小. Defaults to 20. |
 | `credential` | `Credential \| None, optional` | 凭据类. Defaults to None. |

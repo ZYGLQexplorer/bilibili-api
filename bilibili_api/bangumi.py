@@ -761,15 +761,15 @@ class IndexFilterMeta:
             Anime Meta
 
             Args:
-                version (Version, optional): 类型，如正片、电影等. Defaults to <Version.ALL: -1>.
-                spoken_language (Spoken_Language, optional): 配音. Defaults to <Spoken_Language.ALL: -1>.
-                area (Area, optional): 地区. Defaults to <Area.ALL: '-1'>.
-                finish_status (Finish_Status, optional): 是否完结. Defaults to <Finish_Status.ALL: -1>.
-                copyright (Copyright, optional): 版权. Defaults to <Copyright.ALL: -1>.
-                payment (Payment, optional): 付费门槛. Defaults to <Payment.ALL: -1>.
-                season (Season, optional): 季度. Defaults to <Season.ALL: -1>.
+                version (Version, optional): 类型，如正片、电影等. Defaults to Version.ALL.
+                spoken_language (Spoken_Language, optional): 配音. Defaults to Spoken_Language.ALL.
+                area (Area, optional): 地区. Defaults to Area.ALL.
+                finish_status (Finish_Status, optional): 是否完结. Defaults to Finish_Status.ALL.
+                copyright (Copyright, optional): 版权. Defaults to Copyright.ALL.
+                payment (Payment, optional): 付费门槛. Defaults to Payment.ALL.
+                season (Season, optional): 季度. Defaults to Season.ALL.
                 year (str, optional): 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取. Defaults to '-1'.
-                style (Anime, optional): 风格. Defaults to <Anime.ALL: -1>.
+                style (Anime, optional): 风格. Defaults to Anime.ALL.
             """
             self.season_type = IndexFilter.Type.ANIME
             self.season_version = version
@@ -798,10 +798,10 @@ class IndexFilterMeta:
             Movie Meta
 
             Args:
-                area (Area, optional): 地区. Defaults to <Area.ALL: '-1'>.
+                area (Area, optional): 地区. Defaults to Area.ALL.
                 release_date (str, optional): 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'.
-                style (Movie, optional): 风格. Defaults to <Movie.ALL: -1>.
-                payment (Payment, optional): 付费门槛. Defaults to <Payment.ALL: -1>.
+                style (Movie, optional): 风格. Defaults to Movie.ALL.
+                payment (Payment, optional): 付费门槛. Defaults to Payment.ALL.
             """
             self.season_type = IndexFilter.Type.MOVIE
             self.area = area
@@ -826,9 +826,9 @@ class IndexFilterMeta:
 
             Args:
                 release_date (str, optional): 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'.
-                style (Documentary, optional): 风格. Defaults to <Documentary.ALL: -1>.
-                payment (Payment, optional): 观看条件. Defaults to <Payment.ALL: -1>.
-                producer (Producer, optional): 制作方. Defaults to <Producer.ALL: -1>.
+                style (Documentary, optional): 风格. Defaults to Documentary.ALL.
+                payment (Payment, optional): 观看条件. Defaults to Payment.ALL.
+                producer (Producer, optional): 制作方. Defaults to Producer.ALL.
             """
             self.season_type = IndexFilter.Type.DOCUMENTARY
             self.release_date = release_date
@@ -852,10 +852,10 @@ class IndexFilterMeta:
             TV Meta
 
             Args:
-                area (Area, optional): 地区. Defaults to <Area.ALL: '-1'>.
+                area (Area, optional): 地区. Defaults to Area.ALL.
                 release_date (str, optional): 上映时间，调用 Index_Filter.make_time_filter() 传入年份 (datetime.datetime) 获取. Defaults to '-1'.
-                style (TV, optional): 风格. Defaults to <TV.ALL: -1>.
-                payment (Payment, optional): 付费门槛. Defaults to <Payment.ALL: -1>.
+                style (TV, optional): 风格. Defaults to TV.ALL.
+                payment (Payment, optional): 付费门槛. Defaults to Payment.ALL.
             """
             self.season_type = IndexFilter.Type.TV
             self.area = area
@@ -881,12 +881,12 @@ class IndexFilterMeta:
             Guochuang Meta
 
             Args:
-                version (Version, optional): 类型，如正片、电影等. Defaults to <Version.ALL: -1>.
-                finish_status (Finish_Status, optional): 是否完结. Defaults to <Finish_Status.ALL: -1>.
-                copyright (Copyright, optional): 版权. Defaults to <Copyright.ALL: -1>.
-                payment (Payment, optional): 付费门槛. Defaults to <Payment.ALL: -1>.
+                version (Version, optional): 类型，如正片、电影等. Defaults to Version.ALL.
+                finish_status (Finish_Status, optional): 是否完结. Defaults to Finish_Status.ALL.
+                copyright (Copyright, optional): 版权. Defaults to Copyright.ALL.
+                payment (Payment, optional): 付费门槛. Defaults to Payment.ALL.
                 year (str, optional): 年份，调用 Index_Filter.make_time_filter() 传入年份 (int, str) 获取. Defaults to '-1'.
-                style (GuoChuang, optional): 风格. Defaults to <GuoChuang.ALL: -1>.
+                style (GuoChuang, optional): 风格. Defaults to GuoChuang.ALL.
             """
             self.season_type = IndexFilter.Type.GUOCHUANG
             self.season_version = version
@@ -910,8 +910,8 @@ class IndexFilterMeta:
             Variety Meta
 
             Args:
-                style (Variety, optional): 风格. Defaults to <Variety.ALL: -1>.
-                payment (Payment, optional): 付费门槛. Defaults to <Payment.ALL: -1>.
+                style (Variety, optional): 风格. Defaults to Variety.ALL.
+                payment (Payment, optional): 付费门槛. Defaults to Payment.ALL.
             """
             self.season_type = IndexFilter.Type.VARIETY
             self.season_status = payment
@@ -932,8 +932,8 @@ async def get_index_info(
 
     Args:
         filters (object, optional): 筛选条件元数据. Defaults to <bilibili_api.bangumi.IndexFilterMeta.Anime object at 0x105571160>.
-        order (Order, optional): 排序字段. Defaults to <Order.SCORE: '4'>.
-        sort (Sort, optional): 排序方式. Defaults to <Sort.DESC: '0'>.
+        order (Order, optional): 排序字段. Defaults to Order.SCORE.
+        sort (Sort, optional): 排序方式. Defaults to Sort.DESC.
         pn (int, optional): 页数. Defaults to 1.
         ps (int, optional): 每页数量. Defaults to 20.
 
@@ -1150,7 +1150,7 @@ class Bangumi:
         获取短评列表
 
         Args:
-            order (BangumiCommentOrder, optional): 排序方式。DEFAULT. Defaults to <BangumiCommentOrder.DEFAULT: 0>.
+            order (BangumiCommentOrder, optional): 排序方式。Defaults to BangumiCommentOrder.DEFAULT.
             next (str | None, optional): 调用返回结果中的 next 键值，用于获取下一页数据. Defaults to None.
 
         Returns:
@@ -1178,7 +1178,7 @@ class Bangumi:
         获取长评列表
 
         Args:
-            order (BangumiCommentOrder, optional): 排序方式。DEFAULT. Defaults to <BangumiCommentOrder.DEFAULT: 0>.
+            order (BangumiCommentOrder, optional): 排序方式。Defaults to BangumiCommentOrder.DEFAULT.
             next (str | None, optional): 调用返回结果中的 next 键值，用于获取下一页数据. Defaults to None.
 
         Returns:
