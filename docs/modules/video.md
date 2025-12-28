@@ -874,10 +874,10 @@ page_index 和 cid 至少提供其中一个，其中 cid 优先级最高
 ```json
 {
   "font_size": "float: 字体大小，默认 0.4",
-  "font_color": "str: 字体颜色，默认 "#FFFFFF"",
+  "font_color": "str: 字体颜色，默认 #FFFFFF",
   "background_alpha": "float: 背景不透明度，默认 0.5",
-  "background_color": "str: 背景颜色，默认 "#9C27B0"",
-  "Stroke": "str: 描边，目前作用未知，默认为 "none"",
+  "background_color": "str: 背景颜色，默认 #9C27B0",
+  "Stroke": "str: 描边，目前作用未知，默认为 none",
   "body": [
 {
   "from": "int: 字幕开始时间（秒）",

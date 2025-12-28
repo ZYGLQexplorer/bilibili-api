@@ -31,14 +31,14 @@ class ArticleOrder(Enum):
     FAVORITES = 4
 
 
-def get_categories_list_sub() -> dict:
+def get_categories_list_sub() -> list[dict]:
     """
     获取所有分区的数据
 
     含父子关系（即一层次只有主分区）
 
     Returns:
-        dict: 所有分区的数据
+        list[dict]: 所有分区的数据
     """
     return get_data("article_category.json")  # type: ignore
 

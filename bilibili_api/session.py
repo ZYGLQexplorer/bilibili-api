@@ -620,7 +620,9 @@ class Session(AsyncEvent):
             return await send_msg(self.credential, event.sender_uid, msg_type, content)
 
     def close(self) -> None:
-        """结束轮询"""
+        """
+        结束轮询
+        """
 
         self.sched.remove_job("query")
         self.__status = 2

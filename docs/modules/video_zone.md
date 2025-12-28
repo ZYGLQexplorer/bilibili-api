@@ -242,7 +242,7 @@ from bilibili_api import video_zone
 
 
 
-**Returns:** `dict`:  所有分区的数据
+**Returns:** `list[dict]`:  所有分区的数据
 
 
 

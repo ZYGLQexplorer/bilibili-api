@@ -14,13 +14,13 @@ from .utils.utils import get_api, get_data
 API = get_api("video_zone")
 
 
-def get_zone_list_sub() -> dict:
+def get_zone_list_sub() -> list[dict]:
     """
     获取所有分区的数据
     含父子关系（即一层次只有主分区）
 
     Returns:
-        dict: 所有分区的数据
+        list[dict]: 所有分区的数据
     """
     return get_data("video_zone.json")  # type: ignore
 

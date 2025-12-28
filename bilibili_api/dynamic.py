@@ -518,9 +518,9 @@ class BuildDynamic:
         设置选项
 
         Args:
-            up_choose_comment	(bool): 	精选评论flag
+            up_choose_comment    (bool):     精选评论flag
 
-            close_comment	    (bool): 	关闭评论flag
+            close_comment        (bool):     关闭评论flag
 
         Returns:
             BuildDynamic: `self`
