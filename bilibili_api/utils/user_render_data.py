@@ -23,6 +23,13 @@ last_timestamp = {}
 async def get_webid(url: str, credential: Credential) -> str:
     """
     获取页面加载静态渲染数据
+
+    Args:
+        url (str): 链接
+        credential (Credential): 凭据类
+
+    Returns:
+        str: web_id
     """
     if access_ids.get(url) and last_timestamp[url] > int(time.time()):
         return access_ids[url]

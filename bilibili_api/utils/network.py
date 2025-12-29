@@ -2348,8 +2348,13 @@ def get_browser_fingerprint() -> dict:
             browser_fingerprint = fpgen.generate(**request_settings.get_fpgen_args())
         else:
             with open(
-                os.path.join(
-                    os.path.dirname(__file__), "../data/browser_fingerprint.json"
+                os.path.abspath(
+                    os.path.join(
+                        os.path.dirname(__file__),
+                        "..",
+                        "data",
+                        "browser_fingerprint.json",
+                    )
                 ),
                 encoding="utf-8",
             ) as f:

@@ -56,7 +56,7 @@ async def get_initial_state(
 
         credential (Credential, optional): 用户凭证. Defaults to Credential().
 
-        strict (bool): 无结果时报错。Defaults to True.
+        strict (bool, optional): 无结果时报错。Defaults to True.
     """
     try:
         resp = await Api(

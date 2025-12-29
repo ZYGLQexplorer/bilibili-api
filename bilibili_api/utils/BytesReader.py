@@ -37,7 +37,7 @@ class BytesReader:
         读 double。
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             float。
@@ -53,7 +53,7 @@ class BytesReader:
         读 float。
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             float。
@@ -90,7 +90,7 @@ class BytesReader:
         读 string。
 
         Args:
-            encoding (str):  编码方式。
+            encoding (str, optional):  编码方式。Defaults to 'utf-8'.
 
         Returns:
             str。
@@ -128,7 +128,7 @@ class BytesReader:
         读 Fixed int16。
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             int。
@@ -144,7 +144,7 @@ class BytesReader:
         读 Fixed int32.
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             int。
@@ -160,7 +160,7 @@ class BytesReader:
         读 Fixed int64。
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             int。
@@ -176,7 +176,7 @@ class BytesReader:
         读 Unsigned fixed Int16。
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             int。
@@ -192,7 +192,7 @@ class BytesReader:
         读 Unsigned fixed Int32。
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             int。
@@ -208,7 +208,7 @@ class BytesReader:
         读 Unsigned fixed Int64。
 
         Args:
-            LE (bool): 为小端。
+            LE (bool, optional): 为小端。Defaults to False.
 
         Returns:
             int。

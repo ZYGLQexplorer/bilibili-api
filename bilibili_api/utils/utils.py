@@ -230,6 +230,18 @@ def get_deviceid(separator: str = "-", is_lowercase: bool = False) -> str:
 
 
 def raise_for_statement(statement: bool, msg: str = "未满足条件") -> None:
+    """
+    判断条件，不符合则抛出异常
+
+    极其类似 assert
+
+    Args:
+        statement (bool): 条件
+        msg (str, optional): 异常. Defaults to "未满足条件".
+
+    Raises:
+        StatementException: 条件未满足异常
+    """
     if not statement:
         raise StatementException(msg=msg)
 

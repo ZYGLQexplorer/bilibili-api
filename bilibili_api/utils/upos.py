@@ -123,11 +123,8 @@ class UposFileUploader:
 
         Args:
             offset (int): 分块起始位置
-
             chunk_number (int): 分块编号
-
             total_chunk_count (int): 总分块数
-
 
         Returns:
             dict: 上传结果和分块信息。
