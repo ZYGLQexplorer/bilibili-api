@@ -122,6 +122,12 @@ from bilibili_api import video
 | - | - | - |
 | `url` | `str` | 音频流 url |
 | `audio_quality` | `AudioQuality` | 音频流清晰度 |
+| `backup_url` | `List[str]` | 备用链接 |
+| `bandwidth` | `int` | 码率 |
+| `codecs` | `str` | 视频流详细编码 |
+| `mime_type` | `str` | MIME 类型 |
+| `segment_base_initialization` | `str` | SegmentBase.Initialization |
+| `segment_base_index_range` | `str` | SegmentBase.indexRange |
 
 
 ---
@@ -1228,6 +1234,15 @@ CONNECTED:  成功连接。 CallbackData: None。
 | `url` | `str` | 视频流 url |
 | `video_quality` | `VideoQuality` | 视频流清晰度 |
 | `video_codecs` | `VideoCodecs` | 视频流编码 |
+| `backup_url` | `List[str]` | 备用链接 |
+| `bandwidth` | `int` | 码率 |
+| `codecs` | `str` | 视频流详细编码 |
+| `frame_rate` | `float` | 帧率 |
+| `scale` | `Tuple[int, int]` | 画面尺寸 |
+| `sar` | `Tuple[int, int]` | 采样纵横比 |
+| `mime_type` | `str` | MIME 类型 |
+| `segment_base_initialization` | `str` | SegmentBase.Initialization |
+| `segment_base_index_range` | `str` | SegmentBase.indexRange |
 
 
 ---

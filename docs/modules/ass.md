@@ -42,9 +42,9 @@ from bilibili_api import ass
 
 | name | type | description |
 | - | - | - |
-| `json_lan_list` | `json` | 字幕可选语言 |
-| `obj` | `Union[Video,Episode]` | 对象 |
-| `lan_set` | `str` | 设置默认字幕语言,如果为None,则自动获取可获取语言 |
+| `json_lan_list` | `List[Dict]` | 字幕可选语言 |
+| `obj` | `Video \| Episode` | 对象 |
+| `lan_set` | `str \| None` | 设置默认字幕语言,如果为None,则自动获取可获取语言 |
 
 
 ### def get_lan_list()
@@ -53,7 +53,7 @@ from bilibili_api import ass
 
 
 
-**Returns:** `Tuple[List[str], List[Optional[str]]]`:  字幕名,字幕语言代码
+**Returns:** `tuple[list[str], list[str | None]]`:  字幕名,字幕语言代码 # XXX
 
 
 
@@ -65,7 +65,7 @@ from bilibili_api import ass
 
 | name | type | description |
 | - | - | - |
-| `lan_set` | `str` | 如果为None，则获取默认字幕语言 |
+| `lan_set` | `str \| None` | 如果为None，则获取默认字幕语言 |
 
 **Returns:** `json`:  字幕数据
 
@@ -77,6 +77,10 @@ from bilibili_api import ass
 获取ass格式的字幕
 
 
+| name | type | description |
+| - | - | - |
+| `font` | `str` | 字体. Defaults to Simsun. |
+| `font_size` | `float` | 字体大小. Defaults to 25.0 |
 
 **Returns:** `str`:  ass字幕
 
@@ -100,7 +104,7 @@ from bilibili_api import ass
 
 
 
-**Returns:** `json`:  字幕数据
+**Returns:** `List[dict]`:  字幕数据
 
 
 
@@ -197,6 +201,8 @@ from bilibili_api import ass
 | `out` | `str, optional` | 输出位置. Defaults to "test.ass". |
 | `lan_name` | `str, optional` | 字幕名，如”中文（自动生成）“,是简介的 subtitle 项的'list'项中的弹幕的'lan_doc'属性。Defaults to "中文（自动生成）". |
 | `lan_code` | `str, optional` | 字幕语言代码，如 ”中文（自动翻译）” 和 ”中文（自动生成）“ 为 "ai-zh" |
+| `font` | `str, optional` | 字体. Defaults to Simsun. |
+| `font_size` | `float, optional` | 字体大小. Defaults to 65. |
 | `credential` | `Credential, optional` | Credential 类. 必须在此处或传入的视频 obj 中传入凭据，两者均存在则优先此处 |
 
 
