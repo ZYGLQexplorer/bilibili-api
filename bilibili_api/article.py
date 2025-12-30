@@ -18,7 +18,6 @@ from yarl import URL
 from .exceptions.NetworkException import ApiException
 from .note import Note, NoteType
 from .utils import cache_pool
-from .utils.initial_state import get_initial_state
 from .utils.network import Api, Credential
 from .utils.utils import get_api
 

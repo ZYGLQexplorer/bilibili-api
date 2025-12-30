@@ -71,6 +71,7 @@ readme = { file = ["README.md"], content-type = "text/markdown" }
 [tool.ruff]
 line-length = 88
 target-version = "py310"
+exclude = ["bilibili_api/utils/danmaku2ass.py"]
 
 [tool.ruff.format]
 line-ending = "cr-lf"
@@ -111,6 +112,7 @@ known-first-party = ["bilibili_api"]
 pythonVersion = "3.10"
 pythonPlatform = "All"
 executionEnvironments = [{ root = "./" }]
+exclude = ["bilibili_api/utils/danmaku2ass.py"]
 
 typeCheckingMode = "standard"
 reportMissingImports = false

@@ -11,6 +11,7 @@
     + [app.py - 应用程序](/examples/app.md)
     + [article_category.py - 专栏分类](/examples/article_category.md)
     + [article.py - 专栏](/examples/article.md)
+    + [ass.py - ASS 字幕](/examples/ass.md)
     + [audio_uploader.py - 音频上传](/examples/audio_uploader.md)
     + [audio.py - 音频](/examples/audio.md)
     + [bangumi.py - 番剧](/examples/bangumi.md)
@@ -50,8 +51,9 @@
     + [watchroom.py - 放映室](/examples/watchroom.md)
 + API 文档
   + [根模块](/modules/bilibili_api.md)
-    + [activity.py - 活动](/modules/activity.md)
+  + [activity.py - 活动](/modules/activity.md)
   + [app.py - 应用程序](/modules/app.md)
+  + [ass.py - ASS 字幕](/modules/ass.md)
   + [article_category.py - 专栏分类](/modules/article_category.md)
   + [article.py - 专栏](/modules/article.md)
   + [audio_uploader.py - 音频上传](/modules/audio_uploader.md)
