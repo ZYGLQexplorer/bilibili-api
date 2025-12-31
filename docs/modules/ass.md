@@ -85,7 +85,10 @@ from bilibili_api import ass
 | name | type | description |
 | - | - | - |
 | `font` | `str, optional` | 字体. Defaults to 'Simsun'. |
-| `font_size` | `float, optional` | 字体大小. 0. Defaults to 65.0. |
+| `font_size` | `float, optional` | 字体大小. Defaults to 65.0. |
+| `text_colour` | `str, optional` | 文字颜色. Defaults to 'FFFFFF'. |
+| `outline_colour` | `str, optional` | 文字边框颜色. Defaults to '000000'. |
+| `alpha` | `float, optional` | 透明度. Defaults to 0. |
 
 **Returns:** `str`:  ass字幕
 
@@ -208,6 +211,9 @@ from bilibili_api import ass
 | `lan_code` | `str, optional` | 字幕语言代码，如 ”中文（自动翻译）” 和 ”中文（自动生成）“ 为 "ai-zh". Defaults to 'ai-zh'. |
 | `font` | `str, optional` | 字体. Defaults to 'Simsun'. |
 | `font_size` | `float, optional` | 字体大小. Defaults to 65.0. |
+| `text_colour` | `str, optional` | 文字颜色. Defaults to 'FFFFFF'. |
+| `outline_colour` | `str, optional` | 文字边框颜色. Defaults to '000000'. |
+| `alpha` | `float, optional` | 透明度. Defaults to 0. |
 | `credential` | `Credential \| None, optional` | Credential 类. 必须在此处或传入的视频 obj 中传入凭据，两者均存在则优先此处. Defaults to None. |
 
 
