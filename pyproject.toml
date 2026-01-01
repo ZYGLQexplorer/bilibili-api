@@ -1,5 +1,5 @@
 [project]
-name = "bilibili-api-python"
+name = "bilibili-api-dev"
 authors = [{ name = "Nemo2011", email = "yimoxia@outlook.com" }]
 maintainers = [{ name = "MoyuScript" }, { name = "Nemo2011" }]
 dynamic = ["version"]
@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 keywords = ["bilibili", "api", "spider"]
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
+  "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
   "Natural Language :: Chinese (Simplified)",
   "Programming Language :: Python :: 3.10",
