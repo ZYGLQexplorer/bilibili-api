@@ -216,6 +216,8 @@ class CurlCFFIClient(BiliAPIClient):
                 return (b"", BiliWsMsgType.CLOSED)
             else:
                 raise e
+        if not msg:
+            msg = b""
         if flags & curl_cffi.CurlWsFlag.CLOSE:
             return (b"", BiliWsMsgType.CLOSE)
         if flags & curl_cffi.CurlWsFlag.TEXT:
