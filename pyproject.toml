@@ -34,6 +34,7 @@ dependencies = [
   "PyJWT",
   "anyio",
   "frozendict",
+  "chompjs",
 ]
 
 [project.optional-dependencies]
