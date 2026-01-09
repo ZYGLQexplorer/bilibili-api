@@ -30,7 +30,7 @@ Github 仓库：[https://github.com/nemo2011/bilibili-api](https://github.com/ne
 # 简介
 
 这是一个用 Python 写的调用 [Bilibili](https://www.bilibili.com) 各种 API 的库，
-范围涵盖视频、音频、直播、动态、专栏、用户、番剧等[[1]](#脚注)。
+范围涵盖视频、音频、直播、动态、专栏、用户、番剧等[^1]。
 
 ## 特色
 
@@ -38,10 +38,10 @@ Github 仓库：[https://github.com/nemo2011/bilibili-api](https://github.com/ne
 - 可使用代理，绕过 b 站风控策略。
 - 全面支持 BV 号（bvid），同时也兼容 AV 号（aid）。
 - 调用简便，函数命名易懂，代码注释详细。
-- 不仅仅是官方提供的 API！还附加：AV 号与 BV 号互转[[2]](#脚注)、连接直播弹幕 Websocket 服务器、视频弹幕反查、下载弹幕、字幕文件[[3]](#脚注)、专栏内容爬取、cookies 刷新等[[4]](#脚注)。
+- 不仅仅是官方提供的 API！还附加：AV 号与 BV 号互转[^2]、连接直播弹幕 Websocket 服务器、视频弹幕反查、下载弹幕、字幕文件[^3]、专栏内容爬取、cookies 刷新等[^4]。
 - **全部是异步操作**。
 - 默认支持 [`aiohttp`][aiohttp] / [`httpx`][httpx] / [`curl_cffi`][curl_cffi] 等异步网络请求库接入。
-- 支持采用各种手段避免触发反爬虫风控。包括通过 [`curl_cffi`][curl_cffi] 和 [`fpgen`][fpgen] 进行浏览器指纹信息模拟。[[4]](#脚注)
+- 支持采用各种手段避免触发反爬虫风控。[^4]可通过 [`curl_cffi`][curl_cffi] 和 [`fpgen`][fpgen] 进行浏览器指纹信息模拟。
 
 # 快速上手
 
@@ -225,12 +225,10 @@ A: 请先 clone 本仓库一份，然后从 main 分支新建一个分支，在�
 
 A: 由于该模块比较特殊，是爬虫模块，如果 b 站的接口变更，可能会马上失效。因此请始终保证是最新版本。如果发现问题可以提 [Issues][issues-new]。
 
-# 脚注
-
-- \[1\] 这里只列出一部分，请以实际 API 为准。
-- \[2\] 代码来源：<https://www.zhihu.com/question/381784377/answer/1099438784> (WTFPL)
-- \[3\] 弹幕 ASS 生成由 Danmaku2ASS <https://github.com/m13253/danmaku2ass> 支持 (GPLv3)。
-- \[4\] 此部分功能实现离不开 BAC Project <https://github.com/socialsisteryi/bilibili-API-collect> 社区对相关接口的不懈探索。感谢所有参与其中的贡献者对本模块的间接支持。
+[^1]: 这里只列出一部分，请以实际 API 为准。
+[^2]: 代码来源：<https://www.zhihu.com/question/381784377/answer/1099438784> (WTFPL)
+[^3]: 弹幕 ASS 生成由 Danmaku2ASS <https://github.com/m13253/danmaku2ass> 支持 (GPLv3)。
+[^4]: 此部分功能实现离不开 BAC Project <https://github.com/socialsisteryi/bilibili-API-collect> 社区对相关接口的不懈探索。感谢所有参与其中的贡献者对本模块的间接支持。
 
 [docs]: https://nemo2011.github.io/bilibili-api
 [docs-github]: https://github.com/nemo2011/bilibili-api/tree/main/docs
