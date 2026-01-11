@@ -80,13 +80,8 @@ recalculate_wbi() # 重新计算 wbi 参数
 
 > `buvid` 是访问 B 站时可能需要提供的 cookie 系列，分为 `buvid3` 和 `buvid4` 字段。如果不提供部分接口可能受限。模块在用户未提供 credential 或 credential 中无 `buvid3` 或 `buvid4` 字段时，会自动生成一组 `buvid`，但过程中需要进行网络请求，此功能可通过这项设置关闭。
 
-> 自动生成的 `buvid` 若有必要，**需要用户手动刷新**，使用 `refresh_buvid`
-
 ```python
 request_settings.set_enable_auto_buvid(False)
-
-from bilibili_api import refresh_buvid
-refresh_buvid() # 刷新 buvid
 ```
 
 ## 设置 `bili_ticket` 自动生成
