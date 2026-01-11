@@ -1844,7 +1844,7 @@ class Credential:
     """
     凭据类，用于各种请求操作的验证。
 
-    以下字段获取方式见 https://nemo2011.github.io/bilibili-api/#/get-credential.md
+    以下字段获取方式见 https://nemo2011.github.io/bilibili-api/#/common/credential?id=获取-credential-类所需信息
 
     重要 cookies:
      - `SESSDATA` (`sessdata`);
@@ -1856,12 +1856,12 @@ class Credential:
     本地生成 cookies:
      - `b_nut`;
      - `b_lsid`;
-     - `uuid_infoc`;
-     - `buvid_fp`
+     - `uuid_infoc`
 
     网络请求生成反爬 cookies:
      - `buvid3`;
      - `buvid4`;
+     - `buvid_fp`;
      - `bili_ticket`;
      - `bili_ticket_expires`
 
@@ -1892,7 +1892,7 @@ class Credential:
         **kwargs: Any,
     ) -> None:
         """
-        各字段获取方式查看：https://nemo2011.github.io/bilibili-api/#/get-credential.md
+        各字段获取方式查看：https://nemo2011.github.io/bilibili-api/#/common/credential?id=获取-credential-类所需信息
 
         Args:
             sessdata (str | None, optional): 浏览器 Cookies 中的 SESSDATA 字段值. Defaults to None.
@@ -1939,7 +1939,7 @@ class Credential:
         else:
             self.__blank = False
 
-        self.extra_cookies = {k: str(v) for k, v in kwargs}
+        self.extra_cookies = {k: str(v) for k, v in kwargs.items()}
 
     def _gen_local_cookies(self) -> None:
         self.b_nut = str(int(time.time()))

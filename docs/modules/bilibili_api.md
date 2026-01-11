@@ -642,7 +642,7 @@ Cookies 刷新错误。
 
 凭据类，用于各种请求操作的验证。
 
-以下字段获取方式见 https://nemo2011.github.io/bilibili-api/#/get-credential.md
+以下字段获取方式见 https://nemo2011.github.io/bilibili-api/#/common/credential?id=获取-credential-类所需信息
 
 重要 cookies:
  - `SESSDATA` (`sessdata`);
@@ -654,12 +654,12 @@ Cookies 刷新错误。
 本地生成 cookies:
  - `b_nut`;
  - `b_lsid`;
- - `uuid_infoc`;
- - `buvid_fp`
+ - `uuid_infoc`
 
 网络请求生成反爬 cookies:
  - `buvid3`;
  - `buvid4`;
+ - `buvid_fp`;
  - `bili_ticket`;
  - `bili_ticket_expires`
 
@@ -671,7 +671,7 @@ Cookies 刷新错误。
 
 ### def \_\_init\_\_()
 
-各字段获取方式查看：https://nemo2011.github.io/bilibili-api/#/get-credential.md
+各字段获取方式查看：https://nemo2011.github.io/bilibili-api/#/common/credential?id=获取-credential-类所需信息
 
 
 | name | type | description |

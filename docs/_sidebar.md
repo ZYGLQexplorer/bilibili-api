@@ -3,16 +3,19 @@
   + [`Credential` 类](common/credential.md)
   + [同步执行异步代码](common/sync-executor.md)
   + [`BiliAPIClient` 类](common/bapiclient.md)
-  + [过滤器](common/filter.md)
+  + [`Picture` 类](common/picture.md)
   + [配置](common/configuration.md)
 + 使用技巧
   + [API 查找](trick/search.md)
   + [函数传参](trick/args.md)
+  + [反爬虫](trick/anti-spider.md)
+  + [根模块函数](trick/root-functions.md)
 + 子模块相关
   + [获取 vote_id](sub/vote_id.md)
   + [`.ivi` 文件和 `ivitools` 相关](sub/ivifile.md)
-+ 模块开发
++ 模块二次开发
   + [模块请求库相关](dev/request_client.md)
+  + [过滤器](dev/filter.md)
 + API 示例
     + [activity.py - 活动](examples/activity.md)
     + [app.py - 应用程序](examples/app.md)

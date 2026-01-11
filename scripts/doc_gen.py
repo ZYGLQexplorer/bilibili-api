@@ -464,9 +464,10 @@ for module in all_funcs:
             or func[0].startswith("request_")
         ):
             last_data_class = idx
+        npy313 = func[0].replace('_', '\\_')
         file.write(
             "  " * (func[4] - 2)
-            + f"- [{func[2]} {func[0].replace('_', '\\_')}{['()', ''][func[2] == 'var']}](#{func[2].replace(' ', '-')}-{func[0].replace('_', '\\_')})\n"
+            + f"- [{func[2]} {npy313}{['()', ''][func[2] == 'var']}](#{func[2].replace(' ', '-')}-{npy313})\n"
         )
     file.write("\n")
     last_data_class = -114514
@@ -494,20 +495,24 @@ for module in all_funcs:
         )
         if func[0] == "HEADERS":
             continue
+        doc = eval(f"{func[1]}.__doc__")
+        if doc == " ":
+            doc = ""
         if func[2] == "class" or func[2] == "var":
             if not func[3].startswith("@") and func[3] != "builtins.object":
                 file.write(f"**Extend: {func[3]}**\n\n")
             if func[0] in ["request_log", "BiliAPIClient"]:
-                doc = eval(f"{func[1]}.__doc__")
                 for line in doc.split("\n"):
+                    if doc.startswith("\n    "):
+                        line = line[4:]
                     file.write(line + "\n")
                 file.write("\n\n")
             else:
-                file.write(parse_docstring1(eval(f"{func[1]}.__doc__")))
+                file.write(parse_docstring1(doc))
         else:
             if func[0] == "\\_\\_init\\_\\_":
-                file.write(parse_docstring1(eval(f"{func[1]}.__doc__")))
+                file.write(parse_docstring1(doc))
             else:
-                file.write(parse_docstring(eval(f"{func[1]}.__doc__")))
+                file.write(parse_docstring(doc))
     file.close()
     print("DONE", docs_dir)
