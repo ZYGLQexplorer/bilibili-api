@@ -36,10 +36,26 @@ $ pip3 install "aiohttp[speedups]" # faster
 
 # httpx
 $ pip3 install httpx
-$ pip3 install httpx[http2] # http2 support
+$ pip3 install "httpx[http2]" # http2 support
 
 # curl_cffi
 $ pip3 install "curl_cffi"
 ```
 
+## 指纹伪装
+
+模块支持 [`curl_cffi`](https://github.com/lexiforest/curl_cffi) + [`fpgen`](https://github.com/scrapfly/fingerprint-generator) 指纹伪装。当然，两个模块都需要单独安装。
+
+``` zsh
+$ pip3 install "curl_cffi"
+$ pip3 install fpgen
+
+# 不过也可以
+$ pip3 install "bilibili-api-python[fingerprint]"
+```
+
 ## 快速上手
+
+## 配置项
+
+## 常见问题

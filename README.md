@@ -41,7 +41,7 @@ Github 仓库：[https://github.com/nemo2011/bilibili-api](https://github.com/ne
 - 不仅仅是官方提供的 API！还附加：AV 号与 BV 号互转[^2]、连接直播弹幕 Websocket 服务器、视频弹幕反查、下载弹幕、字幕文件[^3]、专栏内容爬取、cookies 刷新等[^4]。
 - **全部是异步操作**。
 - 默认支持 [`aiohttp`][aiohttp] / [`httpx`][httpx] / [`curl_cffi`][curl_cffi] 等异步网络请求库接入。
-- 支持采用各种手段避免触发反爬虫风控。[^4]可通过 [`curl_cffi`][curl_cffi] 和 [`fpgen`][fpgen] 进行浏览器指纹信息模拟。
+- 支持采用各种手段避免触发反爬虫风控。[^4]可通过 [`curl_cffi`][curl_cffi] 和 [`fpgen`][fpgen] 进行浏览器指纹信息模拟。[^5]
 
 # 快速上手
 
@@ -229,6 +229,7 @@ A: 由于该模块比较特殊，是爬虫模块，如果 b 站的接口变更�
 [^2]: 代码来源：<https://www.zhihu.com/question/381784377/answer/1099438784> (WTFPL)
 [^3]: 弹幕 ASS 生成由 Danmaku2ASS <https://github.com/m13253/danmaku2ass> 支持 (GPLv3)。
 [^4]: 此部分功能实现离不开 BAC Project <https://github.com/socialsisteryi/bilibili-API-collect> 社区对相关接口的不懈探索。感谢所有参与其中的贡献者对本模块的间接支持。
+[^5]: 更多可见 https://nemo2011.github.io/bilibili-api/#/README?id=fingerprint
 
 [docs]: https://nemo2011.github.io/bilibili-api
 [docs-github]: https://github.com/nemo2011/bilibili-api/tree/main/docs

@@ -1,9 +1,12 @@
 + [主页](README.md)
++ [快速上手](QUICKSTART.md)
++ [FAQ](FAQ.md)
 + 通用
   + [`Credential` 类](common/credential.md)
   + [同步执行异步代码](common/sync-executor.md)
   + [`BiliAPIClient` 类](common/bapiclient.md)
   + [`Picture` 类](common/picture.md)
+  + [`Geetest` 类](common/geetest.md)
   + [配置](common/configuration.md)
 + 使用技巧
   + [API 查找](trick/search.md)
@@ -13,9 +16,13 @@
 + 子模块相关
   + [获取 vote_id](sub/vote_id.md)
   + [`.ivi` 文件和 `ivitools` 相关](sub/ivifile.md)
+  + [专栏动态图文不分家](sub/opus.md)
 + 模块二次开发
   + [模块请求库相关](dev/request_client.md)
   + [过滤器](dev/filter.md)
+  + [`AsyncEvent`](dev/async-event.md)
+  + [`BytesReader`](dev/bytes-reader.md)
+  + [`initial_state`](dev/initial-state.md)
 + API 示例
     + [activity.py - 活动](examples/activity.md)
     + [app.py - 应用程序](examples/app.md)
