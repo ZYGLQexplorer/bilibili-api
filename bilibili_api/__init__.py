@@ -79,22 +79,18 @@ from .utils.AsyncEvent import AsyncEvent
 from .utils.danmaku import Danmaku, DmFontSize, DmMode, SpecialDanmaku
 from .utils.geetest import Geetest, GeetestMeta, GeetestType
 from .utils.network import (
-    # api
     BiliAPIClient,
     BiliAPIFile,
-    # session
     BiliAPIResponse,
-    # filter
     BiliFilterFlags,
     BiliWsMsgType,
-    # credential
     Credential,
     bili_simple_download,
+    bili_simple_fetch,
     configure_dynamic_fingerprint,
     get_all_registered_post_filters,
     get_all_registered_pre_filters,
     get_available_settings,
-    # anti spider
     get_bili_headers,
     get_bili_ticket,
     get_buvid,
@@ -109,9 +105,7 @@ from .utils.network import (
     register_client,
     register_post_filter,
     register_pre_filter,
-    # log
     request_log,
-    # settings
     request_settings,
     select_client,
     set_session,
@@ -196,6 +190,7 @@ __all__ = [
     "audio_uploader",
     "bangumi",
     "bili_simple_download",
+    "bili_simple_fetch",
     "black_room",
     "bvid2aid",
     "channel_series",

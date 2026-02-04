@@ -808,3 +808,19 @@ class CheeseVideo:
         cid = await self.get_cid()
         url = f"https://comment.bilibili.com/{cid}.xml"
         return (await Api(url=url, method="GET").request(byte=True)).decode("utf-8")
+
+    async def get_video_snapshot(self) -> dict:
+        """
+        获取视频快照(视频各个时间段的截图拼图)
+
+        Returns:
+            dict: 调用 API 返回的结果,数据中 Url 没有 http 头
+        """
+        params: dict[str, Any] = {
+            "aid": await self.get_aid(),
+            "cid": await self.get_cid(),
+        }
+        api = API_video["info"]["video_snapshot"]
+        return (
+            await Api(**api, credential=self.credential).update_params(**params).result
+        )

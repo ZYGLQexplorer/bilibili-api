@@ -41,6 +41,7 @@ from bilibili_api import cheese
   - [async def get\_pay\_coins()](#async-def-get\_pay\_coins)
   - [async def get\_pbp()](#async-def-get\_pbp)
   - [async def get\_stat()](#async-def-get\_stat)
+  - [async def get\_video\_snapshot()](#async-def-get\_video\_snapshot)
   - [async def has\_favoured()](#async-def-has\_favoured)
   - [async def has\_liked()](#async-def-has\_liked)
   - [async def like()](#async-def-like)
@@ -313,6 +314,17 @@ from bilibili_api import cheese
 
 
 **Returns:** `dict`:  调用 API 返回的结果。
+
+
+
+
+### async def get_video_snapshot()
+
+获取视频快照(视频各个时间段的截图拼图)
+
+
+
+**Returns:** `dict`:  调用 API 返回的结果,数据中 Url 没有 http 头
 
 
 

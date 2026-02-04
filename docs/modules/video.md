@@ -128,6 +128,7 @@ from bilibili_api import video
 | `mime_type` | `str` | MIME 类型 |
 | `segment_base_initialization` | `str` | SegmentBase.Initialization |
 | `segment_base_index_range` | `str` | SegmentBase.indexRange |
+| `hls` | `bool` | 是否为 hls. Defaults to False. |
 
 
 ---
@@ -1252,6 +1253,7 @@ CONNECTED:  成功连接。 CallbackData: None。
 | `mime_type` | `str` | MIME 类型 |
 | `segment_base_initialization` | `str` | SegmentBase.Initialization |
 | `segment_base_index_range` | `str` | SegmentBase.indexRange |
+| `hls` | `bool` | 是否为 hls. Defaults to False. |
 
 
 ---

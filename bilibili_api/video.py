@@ -2262,6 +2262,7 @@ class VideoStreamDownloadURL:
         mime_type (str): MIME 类型
         segment_base_initialization (str): SegmentBase.Initialization
         segment_base_index_range (str): SegmentBase.indexRange
+        hls (bool): 是否为 hls. Defaults to False.
     """
 
     url: str
@@ -2276,6 +2277,7 @@ class VideoStreamDownloadURL:
     mime_type: str
     segment_base_initialization: str
     segment_base_index_range: str
+    hls: bool = False
 
 
 @dataclass
@@ -2294,6 +2296,7 @@ class AudioStreamDownloadURL:
         mime_type (str): MIME 类型
         segment_base_initialization (str): SegmentBase.Initialization
         segment_base_index_range (str): SegmentBase.indexRange
+        hls (bool): 是否为 hls. Defaults to False.
     """
 
     url: str
@@ -2304,6 +2307,7 @@ class AudioStreamDownloadURL:
     mime_type: str
     segment_base_initialization: str
     segment_base_index_range: str
+    hls: bool = False
 
 
 @dataclass
@@ -2457,6 +2461,7 @@ class VideoDownloadURLDataDetecter:
             audios_data = self.__data["dash"].get("audio")
             flac_data = self.__data["dash"].get("flac")
             dolby_data = self.__data["dash"].get("dolby")
+            hls2norm = {100008: 30216, 100009: 30232, 100010: 30280}
             for video_data in videos_data:
                 video_stream_url = video_data["base_url"]
                 video_stream_quality = VideoQuality(video_data["id"])
@@ -2499,7 +2504,12 @@ class VideoDownloadURLDataDetecter:
                     codecs=video_data["codecs"],
                     frame_rate=float(video_data["frame_rate"]),
                     scale=(video_data["width"], video_data["height"]),
-                    sar=tuple([int(x) for x in video_data["sar"].split(":")]), # type: ignore
+                    sar=tuple(
+                        [
+                            0 if x == "N/A" else int(x)
+                            for x in video_data["sar"].split(":")
+                        ]
+                    ),  # type: ignore
                     mime_type=video_data["mime_type"],
                     segment_base_initialization=video_data["segment_base"][
                         "initialization"
@@ -2510,11 +2520,14 @@ class VideoDownloadURLDataDetecter:
             if audios_data:
                 for audio_data in audios_data:
                     audio_stream_url = audio_data["base_url"]
-                    audio_stream_quality = AudioQuality(audio_data["id"])
-                    if audio_stream_quality.value > audio_max_quality.value:
+                    value = audio_data["id"]
+                    if value in hls2norm.keys():
+                        value = hls2norm[value]
+                    if value > audio_max_quality.value:
                         continue
-                    if audio_stream_quality.value < audio_min_quality.value:
+                    if value < audio_min_quality.value:
                         continue
+                    audio_stream_quality = AudioQuality(value)
                     if audio_stream_quality not in audio_accepted_qualities:
                         continue
                     audio_stream = AudioStreamDownloadURL(
@@ -2532,6 +2545,24 @@ class VideoDownloadURLDataDetecter:
                         ],
                     )
                     streams.append(audio_stream)
+            if self.__data.get("hls"):
+                v_hls = self.__data["hls"]["video"]
+                a_hls = self.__data["hls"]["audio"]
+                v_id2link = {}
+                a_id2link = {}
+                for v_hls_info in v_hls:
+                    v_id2link[v_hls_info["id"]] = v_hls_info["stream_url"]
+                for a_hls_info in a_hls:
+                    a_id2link[hls2norm[a_hls_info["id"]]] = a_hls_info["stream_url"]
+                for i in range(len(streams)):
+                    if isinstance(streams[i], VideoStreamDownloadURL) and v_id2link.get(streams[i].video_quality.value):
+                        streams[i].url = v_id2link[streams[i].video_quality.value]
+                        streams[i].backup_url = []
+                        streams[i].hls = True
+                    if isinstance(streams[i], AudioStreamDownloadURL) and a_id2link.get(streams[i].audio_quality.value):
+                        streams[i].url = a_id2link[streams[i].audio_quality.value]
+                        streams[i].backup_url = []
+                        streams[i].hls = True
             if flac_data and (not no_hires):
                 if flac_data["audio"]:
                     flac_stream_url = flac_data["audio"]["base_url"]
