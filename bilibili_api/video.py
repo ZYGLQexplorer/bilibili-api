@@ -2404,17 +2404,24 @@ class VideoDownloadURLDataDetecter:
             audios_data = self.__data["dash"].get("audio")
             flac_data = self.__data["dash"].get("flac")
             dolby_data = self.__data["dash"].get("dolby")
+            
             for video_data in videos_data:
-                # if base url contains akamai then use backup
-                # if not,use base
-                if video_data.get("backupUrl") and video_data.get("baseUrl") and "akamaized" in video_data["baseUrl"]:
-                    video_stream_url = video_data["backupUrl"]
-                elif video_data.get("backup_url"):
-                    video_stream_url = video_data["backup_url"]
-                elif video_data.get("baseUrl"): 
-                    video_stream_url = video_data["baseUrl"]
-                else:
-                    video_stream_url = video_data["base_url"]
+                candidates = []
+
+                base = video_data.get("baseUrl") or video_data.get("base_url")
+                if base:
+                    candidates.append(base)
+
+                for key in ["backupUrl", "backup_url"]:
+                    backups = video_data.get(key)
+                    if isinstance(backups, list) and backups:
+                        candidates.extend(backups)
+                    elif isinstance(backups, str):
+                        candidates.append(backups)
+                video_stream_url = next(
+                    (url for url in candidates if "akamaized" not in url), 
+                    candidates[0] if candidates else None
+                )
                     
                 video_stream_quality = VideoQuality(video_data["id"])
                 if video_stream_quality == VideoQuality.HDR and no_hdr:
@@ -2454,16 +2461,24 @@ class VideoDownloadURLDataDetecter:
                 )
                 streams.append(video_stream)
             if audios_data:
+                
                 for audio_data in audios_data:
-                    
-                    if audio_data.get("backupUrl") and audio_data.get("baseUrl") and "akamaized" in audio_data["baseUrl"]:
-                        audio_stream_url = audio_data["backupUrl"]
-                    elif audio_data.get("backup_url"):
-                        audio_stream_url = audio_data["backup_url"]
-                    elif audio_data.get("baseUrl"):
-                        audio_stream_url = audio_data["baseUrl"]
-                    elif audio_data.get("base_url"):
-                        audio_stream_url = audio_data["base_url"]
+                    candidates = []
+    
+                    base = audio_data.get("baseUrl") or audio_data.get("base_url")
+                    if base:
+                        candidates.append(base)
+    
+                    for key in ["backupUrl", "backup_url"]:
+                        backups = audio_data.get(key)
+                        if isinstance(backups, list) and backups:
+                            candidates.extend(backups)
+                        elif isinstance(backups, str):
+                            candidates.append(backups)
+                    audio_stream_url = next(
+                        (url for url in candidates if "akamaized" not in url), 
+                        candidates[0] if candidates else None
+                    )
                         
                     audio_stream_quality = AudioQuality(audio_data["id"])
                     if audio_stream_quality.value > audio_max_quality.value:
